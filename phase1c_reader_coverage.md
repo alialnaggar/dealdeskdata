@@ -1,0 +1,36 @@
+# Phase 1C data reading layer
+
+`read_run(connection, run_id)` reads a submitted deal, its frozen catalogue and applied commercial profile, and operational evidence available at `deal_runs.as_of_at`. It returns source rows with IDs plus derived numeric facts. It does not approve a deal or create reservations. Call it inside a PostgreSQL `REPEATABLE READ READ ONLY` transaction to prevent a mix of database states. Install `psycopg[binary]>=3.2,<4` to use it.
+
+Source of truth: the current numbered `02-Deal-Desk-Orchestrator-Phase1C.md` on Drive and its `Phase1C-row-fixture-coverage-map.md`. The 11 KB attachment supplied to the coding chat is stale. The reader is a first data layer, not the full agent rule engine.
+
+| Reference case | Selected evidence | Finding checked |
+|---|---|---|
+| Stock then confirmed receipt | Latest stock and binding PO receipt at one location; shipping lane | 8 free stock + 3 receipt units cover 10; arrival by request |
+| Assembly later workday | Active matching BOM, components, dated receipt, labor need and daily capacity | Build 8, need 16 components and 5 hours; first fitting day September 2 |
+| Offer without supplier commitment | Active supplier offer, no binding receipt | 10 day lead estimate; no confirmed shipping promise |
+| Digital exact binding pool | Matching product, configuration, region, unit and 12 month pool; optional trusted provider proof | 5 concurrent demand, 6 free; candidate without proof, confirmed by date only with exact full-term proof and lead time |
+| Digital provisional offer | Same scope, provisional capacity | 6 free, conditional, no confirmed entitlement |
+| Digital stale pool | Same scope, older snapshot | Binding state exists, but unknown with stale evidence |
+| Friday after cutoff | Stock snapshot and Berlin local lane clock | Monday dispatch, Wednesday arrival |
+| Installation rule missing | No matching installation rule; separate stock/lane evidence | Eligibility unknown; shipment still feasible |
+| Installation explicitly ineligible | Matching rule and separate stock/lane evidence | Installation ineligible; shipment still feasible |
+| Inventory snapshot expired | Latest stock snapshot | 7 numeric free, but stale and cannot confirm |
+| Credit exception within cap | Credit profile, latest invoice snapshot, deal total, test runtime rules | Exposure 110,000 EUR, 10% over limit, Finance Director review |
+| Discount profile replay | One immutable deal, three run profile codes, product list price, test runtime rules | Derived discount 10%; routine in baseline and lenient, Sales Director in strict |
+| Assembled cost rollup | Product cost, matching BOM component cost and work hours; explicit cost parameters | 1,100 EUR material + 150 labor + 125 overhead = 1,375 EUR |
+| Two lines share component | Both lines, one BOM, component stock and receipt | Aggregate demand 14, supply 13; no fitting day |
+
+`test_phase1c_reader.py` loads the fixture rows and separate test-only commercial rule rows into a disposable database after the existing rollback-only fixture check. It compares selections and findings for all 14 cases, including the two policy routes and the controlled `phase1c_provider_evidence_fixture.json` record. Run it only against a fresh test database; its loader inserts rows and must never point at production. It does not use the SQL fixture's expected-answer assertions to compute its Python expectations. PostgreSQL Actions passed on the draft branch on 29 September 2026. This proves the tested reader contract, not a full agent decision engine or rule compiler.
+
+## Decisions to review before calibration is frozen
+
+- **Freshness:** 24 hours is a provisional maximum age for inventory, digital pool and capacity snapshots, and credit commitments. Configure per source and business profile before generating a large dataset. A stale number is retained as evidence but cannot confirm capacity.
+- **Digital quantity and proof:** `quantity` is billed units over the contract, while `configuration_json.units_per_period` is concurrent entitlement demand. The reader requires `quantity = contract_months × units_per_period` and exact product, edition, country, term and unit. `load_provider_evidence(path)` reads a controlled manifest outside salesperson deal input, keyed by `evidence_ref`; exact provider fields, full-term dates and verification within seven days are required before a binding candidate becomes `confirmed_by_date`. A reference string alone does not. The fixture manifest is an invented provider commitment for testing, not a real provider attestation. The thesis generator can create analogous synthetic records, independently of deal inputs, and retain their provenance. A live provider connection is needed only if the system is used for real commercial promises.
+- **Shipping:** A receipt expected on a given date is conservatively available for dispatch the *next* allowed workday. Workdays currently follow the lane's weekday list; holidays and supplier calendars are not yet evaluated.
+- **Assembly:** The reader checks all resources at one operation sequence on the same day, advances later steps to a later workday, and aggregates shared components within the deal. For this date-level synthetic model, a confirmed component receipt is usable for production on its `expected_date`; the finding names that convention. Capacity is tentative and consumed only in memory. There is no intra-day receipt or workshop schedule, so this is a planning convention rather than a clock-time promise. Holiday calendars, substitutions and cross-location allocation remain outside this version; do not treat a feasible day as a reservation.
+- **Commercial rules:** `phase1c_rule_rows.sql` contains test-only runtime rows for director discount and credit exception thresholds. The reader interprets this narrow JSON grammar and returns `unconfigured` for unsupported or missing rules. `calibration_config.yaml` contains the accepted synthetic profile numbers; `compile_phase1c_policy.py` validates monotonic boundaries and produces 96 versioned pricing, policy and approval rows. These rows describe the wider rule contract and pass a separate database load check. The reader does not yet evaluate that wider grammar; finish that interpretation and agent decisions before using it to score generated deals.
+- **Cost:** The rollup uses explicit caller-supplied labor rate and overhead fraction and checks the 5% tolerance. Decide the versioned source of those parameters; the example uses 30 EUR/hour and 10% overhead from the calibration scenario.
+- **Snapshot completeness:** Invoice snapshots are selected per invoice at or before the run date. A missing invoice or source-wide completeness marker cannot be detected with the current schema. Review that limit for credit conclusions.
+
+The old narrative also describes 30–50 independent adversarial evaluation deals. These 14 database reference cases are implementation checks and do not replace that evaluation set.
