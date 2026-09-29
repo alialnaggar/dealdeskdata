@@ -10,6 +10,9 @@ on:
       - test_phase1c_reader.py
       - phase1c_rule_rows.sql
       - phase1c_provider_evidence_fixture.json
+      - calibration_config.yaml
+      - compile_phase1c_policy.py
+      - test_phase1c_policy_compiler.py
       - .github/workflows/phase1c-postgres.yml
   pull_request:
     paths:
@@ -20,6 +23,9 @@ on:
       - test_phase1c_reader.py
       - phase1c_rule_rows.sql
       - phase1c_provider_evidence_fixture.json
+      - calibration_config.yaml
+      - compile_phase1c_policy.py
+      - test_phase1c_policy_compiler.py
       - .github/workflows/phase1c-postgres.yml
   workflow_dispatch:
 
@@ -64,6 +70,12 @@ jobs:
       - name: Check 14 isolated row scenarios
         run: psql -X -v ON_ERROR_STOP=1 -f phase1c_row_fixtures.sql
       - name: Install read layer dependency
-        run: python -m pip install 'psycopg[binary]>=3.2,<4'
+        run: python -m pip install 'psycopg[binary]>=3.2,<4' 'PyYAML>=6,<7'
       - name: Compare reader results with 14 reference scenarios
         run: python -m unittest -v test_phase1c_reader
+      - name: Validate and compile synthetic policy profiles
+        run: |
+          python -m unittest -v test_phase1c_policy_compiler
+          python compile_phase1c_policy.py --output /tmp/phase1c_compiled_rules.sql
+          psql -X -v ON_ERROR_STOP=1 -f /tmp/phase1c_compiled_rules.sql
+          psql -X -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF (SELECT count(*) FROM deal_desk.pricing_rules) <> 33 OR (SELECT count(*) FROM deal_desk.policy_rules) <> 42 OR (SELECT count(*) FROM deal_desk.approval_rules) <> 21 THEN RAISE EXCEPTION 'Incomplete compiled policy rows'; END IF; END \$\$;"
