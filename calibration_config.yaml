@@ -1,0 +1,1579 @@
+# Phase 1C V2 design configuration; revised operational numeric calibration remains pending.
+version: 2.1-design
+status: schema_v2_24_table_design_operational_calibration_pending_no_rows_generated
+scope: phase_1c_24_table_preorder_fulfillment_and_six_independent_agents
+currency: EUR
+random_seed: 22495
+evidence_boundary:
+  commercial_supply: &id001
+    microsoft_samples:
+      repository: https://github.com/microsoft/sql-server-samples
+      commit: beaab06ef72831089ca80e5355d65e661fd19b26
+      role: schema_calculation_and_workflow_validation
+      numeric_status: illustrative_fictional_sample_data
+    public_integrator_financials:
+      cdw_2025_gross_margin_percent: 21.7
+      insight_2025_gross_margin_percent: 21.4
+      role: blended_realized_margin_sanity_check
+    synthetic_assumptions:
+      role: confidential_or_unavailable_customer_credit_and_operating_parameters
+      labeling_required: true
+  governance_thresholds: fictional_business_policy_assumptions_for_controlled_experiments_not_empirical_market_statistics
+  catalogue: official_catalogue_archetypes_and_price_anchors_not_product_rows
+dataset:
+  customers: 80
+  historical_deals: 400
+  evaluation_deals_target: null # determine after independently authored scenario coverage matrix
+  policy_set_codes:
+  - BASELINE_2026
+  - LENIENT_EXPERIMENT
+  - STRICT_EXPERIMENT
+  dataset_types:
+  - historical
+  - generated_test
+  - evaluation
+  customer_segments:
+  - SMB
+  - Mid-Market
+  - Enterprise
+  credit_statuses:
+  - Active
+  - Review
+  - On-Hold
+  credit_risk_levels:
+  - Low
+  - Medium
+  - High
+  inbound_supply_statuses:
+  - Confirmed
+  - Planned
+  - Delayed
+  - Cancelled
+  policy_rule_types:
+  - discount_limit
+  - margin_floor
+  - payment_terms
+  - credit_exception
+  - delivery_exception
+  - contract_exception
+  rule_severities:
+  - info
+  - warning
+  - approval_required
+  - blocker
+  approval_roles:
+  - Regional_Manager
+  - Sales_Director
+  - Sales_VP
+  - Finance_Director
+  - Legal_Compliance
+  approval_outcomes:
+  - not_required
+  - pending
+  - approved
+  - rejected
+  deal_statuses:
+  - Draft
+  - Submitted
+  - Under Review
+  - Approved
+  - Rejected
+  - Cancelled
+  catalog_version: CATALOGUE_2026_V1
+  generated_test_deals: 100
+  historical_policy_set_code: BASELINE_2026
+  customer_segment_counts:
+    SMB: 36
+    Mid-Market: 28
+    Enterprise: 16
+  historical_lines_per_deal_target: 3
+  product_popularity:
+    top_product_share: 0.2
+    target_historical_line_share_range:
+    - 0.6
+    - 0.7
+    minimum_occurrences_per_product: 3
+    applies_to: sellable_product_deal_lines_only
+  historical_approval_outcomes: derive_from_baseline_rules_and_documented_decisions_only
+  contract_clause_codes:
+  - standard
+  - preapproved_variant
+  - legal_review
+  - prohibited
+  payment_terms_days:
+  - 15
+  - 30
+  - 45
+  - 60
+  - 90
+  pricing_rule_types:
+  - volume_discount
+  - segment_discount
+  - category_margin_floor
+  scope_types:
+  - global
+  - product
+  - category
+  - segment
+  - region
+  compatibility_rule_types:
+  - requires_product
+  - excludes_product
+  - attribute_constraint
+  - required_deal_field
+  - installation_eligibility
+  compatibility_severities:
+  - warning
+  - blocker
+  policy_areas:
+  - pricing
+  - margin
+  - payment
+  - contract
+  - credit
+  - delivery
+  required_actions:
+  - continue
+  - request_exception
+  - escalate
+  - reject
+  historical_decisions:
+  - Approved
+  - Rejected
+  account_statuses:
+  - Active
+  - Inactive
+  - Suspended
+  - Blocked
+  ar_statuses:
+  - Open
+  - Partially Paid
+  - Overdue
+  - Paid
+  execution_statuses:
+  - Running
+  - Success
+  - Failed
+  - Retried
+  - Skipped
+  agent_names:
+  - Configuration
+  - Pricing
+  - Availability
+  - Credit
+  - Policy
+  - Approval
+  - Orchestrator
+  allowed_currency_codes:
+  - EUR
+  product_type_values:
+  - physical
+  - software
+  - subscription
+  - service
+  - component
+  bom_statuses:
+  - active
+  - inactive
+  supplier_statuses:
+  - active
+  - inactive
+  production_requirement_statuses:
+  - active
+  - inactive
+  production_capacity_statuses:
+  - active
+  - unavailable
+  digital_commitment_statuses:
+  - binding
+  - provisional
+  - unknown
+  digital_capacity_units:
+  - user
+  - licence
+  - instance
+  - protected_tb
+  shipping_service_codes:
+  - standard
+  - express
+  time_model:
+    evaluation_as_of_date: '2026-09-01'
+    historical_deal_date_rule: before_evaluation_as_of_date
+    generated_test_and_evaluation_submission_rule: on_evaluation_as_of_date
+    accounts_receivable_as_of_date: '2026-09-01'
+    historical_decision_rule: generate_with_transient_contemporaneous_facts_then_record_baseline_decision_and_role_route
+    current_snapshot_limit: do_not_replay_past_deal_credit_checks_using_current_ar_or_current_credit_profile
+    historic_limitations: no_persisted_historical_ar_or_credit_limit_snapshots; do_not_claim_historical_credit_decisions_are_reconstructible_from_current_tables
+    credit_exposure_at_current_snapshot: sum(open_ar_outstanding_as_of_date) + sum(other_under_review_deal_commitments)
+      + proposed_deal_commitment
+    exclude_from_open_deal_exposure:
+    - current_deal
+    - historically_approved_or_rejected_deals
+    - cancelled_deals
+    - evaluation_fixtures
+    no_double_count_rule: historical_approved_deals_represented_in_ar_are_not_added_again_as_open_deals
+  commercial_unit_contract:
+    line_quantity_semantics: total_billable_units_over_the_full_quoted_commitment
+    unit_price_semantics: list_price_standard_cost_and_quoted_unit_price_refer_to_same_product_unit_of_measure
+    line_commitment_eur: quoted_unit_price * quantity
+    deal_commitment_eur: sum(line_commitment_eur)
+    recurring_terms_json_field: contract_months
+    recurring_configuration_json_field: units_per_period
+    monthly_units: quantity == units_per_period * contract_months_for_month_based_units
+    annual_units: quantity == units_per_period * (contract_months / 12)_for_year_based_units
+    annual_term_constraint: contract_months_must_be_positive_multiple_of_12_for_year_based_units
+    one_time_units: quantity_is_number_of_devices_or_service_packages; do_not_multiply_by_contract_months
+    usage_based_units: quantity_is_explicit_quoted_committed_or_estimated_billable_usage_for_full_term; flag_estimate_in_terms_json
+    credit_and_approval_value_basis: full_deal_commitment_eur
+    disallow_unpriced_unbounded_usage_in_mvp: true
+  allowed_billing_models:
+  - one_time
+  - recurring
+  - usage_based
+  - fixed_service_fee
+  - not_applicable
+  billing_model_rule: category catalogue mix labels such as one_time_or_recurring are generation instructions, never
+    stored as product billing_model values
+  allowed_unit_of_measure:
+  - device
+  - device_year
+  - user_year
+  - licence_year
+  - instance_month
+  - protected_tb_month
+  - service_month
+  - service_package
+  - coverage_year
+  - each
+  - component_unit
+  sellable_products: 120
+  component_products_target: null
+  total_product_rows_target: null
+  product_count_interpretation: 120 sellable products plus a separately calibrated non-sellable component set
+  historical_deals_target_status: earlier_scope_target_to_recheck_with_aggregate_capacity
+  generated_test_deals_target_status: earlier_scope_target_to_recheck_for_expanded_fulfillment_scenarios
+  required_quote_fields_v2:
+  - customer_id
+  - salesperson_id
+  - submitted_at
+  - catalog_version
+  - policy_set_code
+  - requested_delivery_date_if_physical
+  - destination_country_code_if_delivery_or_installation
+  - destination_region_if_delivery_or_installation
+  - shipping_service_code_if_physical
+  - payment_terms_days
+  - contract_months_if_recurring
+  - contract_clause_codes
+  - allow_partial_delivery
+  - deal_lines.product_id
+  - deal_lines.quantity
+  - deal_lines.quoted_unit_price
+  - deal_lines.configuration_json
+  - deal_lines.fulfillment_group_code_if_indivisible
+  - deal_lines.requested_activation_date_if_digital_date_requested
+  - deal_lines.installation_requested
+  optional_structured_deal_fields_v2:
+  - supersedes_deal_id_for_resubmission
+  - exception_justification_if_exception_requested
+  - requirements_json_when_checkable
+  - evidence_refs_json
+  - supplementary_comments
+  deal_type: deferred_until_workflow_or_evaluation_rule_uses_it
+  milestone_payments: deferred
+  installation_scope: product_and_destination_eligibility_only_no_date_or_crew_scheduler
+  fulfillment_modes:
+  - stocked_finished
+  - supplier_finished
+  - make_to_order
+  - digital_activation
+  - scheduled_service
+  - component
+  fulfillment_commitment_levels:
+  - available_now
+  - confirmed_by_date
+  - feasible_uncommitted
+  - conditional
+  - unknown
+  - infeasible
+  purchase_order_statuses:
+  - Draft
+  - Placed
+  - Confirmed
+  - Delayed
+  - Cancelled
+  - Received
+  production_resource_types:
+  - equipment
+  - workforce
+  billing_model_rule_v2: not_applicable is permitted only for non-sellable components
+  stock_uom_values_v2:
+  - each
+  - component_unit
+  - not_applicable
+  stock_uom_rule_v2: not_applicable only for digital and service offerings; physical BOM units must be explicitly
+    convertible
+product_catalogue:
+  metadata:
+    project: Deal Desk Orchestrator
+    calibrated_on: 2026-09-24
+    currency: EUR
+    catalogue_version: CATALOGUE_2026_V1
+    total_products: 120
+    source_role: taxonomy_and_price_anchors_only
+    usd_normalization:
+      eur_1_equals_usd: 1.1377
+      reference_date: 2026-07-24
+      source: European Central Bank reference rate
+    total_products_scope: sellable_products_only
+  naming:
+    code_template: CATEGORY-SUBCATEGORY-NNN
+    hardware_template: '[Family] [Form/Tier] [Capacity or Performance]'
+    infrastructure_template: '[Family] [Role/Form] [Scale]'
+    software_cloud_template: '[Capability] [Edition] [Billing Unit/Term]'
+    service_support_template: '[Outcome] [Scope] [Tier/Term]'
+    real_brand_names_allowed_in_generated_rows: false
+  common_attributes:
+  - subcategory
+  - family
+  - tier
+  - price_unit
+  - stocked
+  - term_months
+  categories:
+    end_user_computing_and_digital_workplace:
+      count: 18
+      product_type_mix:
+      - physical
+      billing_model: one_time
+      default_unit_of_measure: device
+      price_eur:
+        p10: 180
+        p50: 1050
+        p90: 3500
+      attributes:
+      - form_factor
+      - processor_tier
+      - ram_gb
+      - storage_gb
+      - display_size_in
+      - resolution
+      - operating_system
+      - connector_type
+      subcategories:
+        business_laptop: 5
+        desktop_mini_pc: 3
+        workstation: 2
+        monitor: 3
+        collaboration_device: 3
+        dock_peripheral: 2
+    servers_and_compute_infrastructure:
+      count: 12
+      product_type_mix:
+      - physical
+      billing_model: one_time
+      default_unit_of_measure: device
+      price_eur:
+        p10: 3000
+        p50: 12000
+        p90: 45000
+      attributes:
+      - form_factor
+      - cpu_tier
+      - socket_count
+      - ram_gb
+      - drive_bays
+      - gpu_capability
+      - redundant_psu
+      subcategories:
+        rack_server: 4
+        tower_server: 3
+        edge_compact_server: 2
+        gpu_accelerated_server: 3
+    storage_and_data_protection:
+      count: 10
+      product_type_mix:
+      - physical
+      billing_model: one_time
+      default_unit_of_measure: device
+      price_eur:
+        p10: 1200
+        p50: 9000
+        p90: 28000
+      attributes:
+      - usable_capacity_tb
+      - media_type
+      - protocol
+      - controller_redundancy
+      - throughput_tier
+      - rack_units
+      subcategories:
+        storage_array: 3
+        nas_file_storage: 2
+        backup_appliance: 3
+        enterprise_drive: 2
+    networking_and_connectivity:
+      count: 16
+      product_type_mix:
+      - physical
+      - subscription
+      billing_model: one_time_or_recurring
+      default_unit_of_measure: device
+      price_eur:
+        p10: 180
+        p50: 1800
+        p90: 8500
+      attributes:
+      - device_role
+      - port_count
+      - port_speed_gbps
+      - poe_budget_w
+      - uplink_type
+      - management_platform
+      - licence_required
+      subcategories:
+        switch: 5
+        router_sdwan: 3
+        wireless_access_point: 3
+        network_controller_management: 2
+        optics_transceiver: 3
+    cybersecurity:
+      count: 12
+      product_type_mix:
+      - physical
+      - software
+      - subscription
+      billing_model: one_time_or_recurring
+      default_unit_of_measure: device_year
+      price_eur:
+        p10: 300
+        p50: 2500
+        p90: 12000
+      attributes:
+      - deployment_type
+      - protected_unit
+      - protected_band
+      - throughput_tier
+      - security_tier
+      - term_months
+      - required_platform
+      subcategories:
+        firewall_security_appliance: 3
+        endpoint_xdr: 3
+        identity_access: 2
+        email_cloud_security: 2
+        siem_vulnerability_management: 2
+    cloud_services_and_subscriptions:
+      count: 12
+      product_type_mix:
+      - subscription
+      billing_model: recurring_or_usage_based
+      default_unit_of_measure: service_month
+      price_eur:
+        p10: 25
+        p50: 250
+        p90: 1500
+      attributes:
+      - service_family
+      - region_class
+      - vcpu
+      - ram_gb
+      - capacity_tier
+      - service_tier
+      - commitment_months
+      subcategories:
+        iaas_compute: 3
+        cloud_storage_backup: 2
+        managed_database_application_platform: 2
+        virtual_desktop: 2
+        disaster_recovery_as_a_service: 3
+    enterprise_software_and_licensing:
+      count: 18
+      product_type_mix:
+      - software
+      - subscription
+      billing_model: recurring
+      default_unit_of_measure: licence_year
+      price_eur:
+        p10: 75
+        p50: 750
+        p90: 6000
+      attributes:
+      - software_family
+      - edition
+      - licence_metric
+      - licence_band
+      - term_months
+      - deployment_model
+      - required_base_product
+      subcategories:
+        productivity_collaboration: 4
+        crm_erp: 4
+        data_bi_analytics: 3
+        backup_virtualization: 3
+        itsm_endpoint_management: 2
+        developer_database_tools: 2
+    professional_and_implementation_services:
+      count: 12
+      product_type_mix:
+      - service
+      billing_model: fixed_service_fee
+      default_unit_of_measure: service_package
+      price_eur:
+        p10: 1500
+        p50: 8000
+        p90: 25000
+      attributes:
+      - service_scope
+      - complexity_tier
+      - included_days
+      - delivery_mode
+      - prerequisite_category
+      subcategories:
+        discovery_assessment: 2
+        architecture_design: 2
+        deployment_integration: 3
+        migration_modernization: 3
+        training_adoption: 2
+    managed_support_and_warranty:
+      count: 10
+      product_type_mix:
+      - service
+      - subscription
+      billing_model: recurring
+      default_unit_of_measure: coverage_year
+      price_eur:
+        p10: 300
+        p50: 2200
+        p90: 10000
+      attributes:
+      - coverage_type
+      - response_target_hours
+      - coverage_window
+      - term_months
+      - covered_family
+      - managed_service
+      subcategories:
+        warranty_extension: 2
+        premium_vendor_support: 3
+        managed_infrastructure_network: 3
+        managed_security_cloud_operations: 2
+  validation:
+    required_total_products: 120
+    every_product_has_unit_of_measure: true
+    every_product_has_subcategory: true
+    physical_products_require_stocked_flag: true
+    recurring_products_require_term_or_usage_unit: true
+    standard_cost_status: completed_see_commercial_supply_calibration_yaml
+    required_total_products_scope: sellable_products_only
+commercial_supply:
+  version: 1.0
+  approved_date: 2026-09-25
+  scope: phase_1c_credit_payment_price_cost_inventory_inbound_supply
+  evidence_boundary: *id001
+  credit_profiles:
+    customer_count: 80
+    credit_limit_eur_by_segment:
+      SMB:
+        minimum: 20000
+        mode: 75000
+        maximum: 200000
+      Mid-Market:
+        minimum: 100000
+        mode: 300000
+        maximum: 750000
+      Enterprise:
+        minimum: 400000
+        mode: 1200000
+        maximum: 3000000
+    strategic_account_multiplier: 1.25
+    maximum_credit_limit_eur: 4000000
+    risk_rating_exact_counts:
+      Low: 44
+      Medium: 28
+      High: 8
+    credit_status_exact_counts:
+      Active: 72
+      Review: 5
+      On-Hold: 3
+    default_payment_terms_exact_counts_by_segment:
+      SMB:
+        15: 8
+        30: 22
+        45: 5
+        60: 1
+        90: 0
+      Mid-Market:
+        15: 0
+        30: 11
+        45: 10
+        60: 6
+        90: 1
+      Enterprise:
+        15: 0
+        30: 3
+        45: 5
+        60: 6
+        90: 2
+    relationships:
+    - Higher credit limits are more likely for larger and strategic accounts.
+    - Risk rating is correlated with payment behavior but is not deterministically derived from it.
+    - On-Hold customers must have a documented adverse signal; High risk alone does not force a hold.
+    - Review dates must precede next-review dates when a next review exists.
+  accounts_receivable:
+    snapshot_date: 2026-09-01
+    open_invoice_count_by_segment:
+      SMB:
+        minimum: 0
+        mode: 2
+        maximum: 4
+      Mid-Market:
+        minimum: 1
+        mode: 3
+        maximum: 6
+      Enterprise:
+        minimum: 2
+        mode: 5
+        maximum: 10
+    outstanding_to_original_amount:
+      paid: 0.0
+      partial_payment_range:
+      - 0.1
+      - 0.9
+      fully_open: 1.0
+    overdue_target_share_range:
+    - 0.18
+    - 0.28
+    customer_exposure_to_credit_limit_target:
+      normal_range:
+      - 0.1
+      - 0.8
+      caution_range:
+      - 0.8
+      - 1.0
+      exceeded_range:
+      - 1.0
+      - 1.25
+      exceeded_customer_target_share: 0.1
+    required_consistency:
+    - outstanding_amount is between zero and original_amount
+    - due_date is on or after invoice_date
+    - overdue status requires outstanding_amount greater than zero and due_date before snapshot_date
+    - paid status requires outstanding_amount equal to zero
+  payment_history:
+    history_window_months: 24
+    paid_invoice_count_by_segment:
+      SMB:
+        minimum: 8
+        mode: 12
+        maximum: 16
+      Mid-Market:
+        minimum: 12
+        mode: 18
+        maximum: 24
+      Enterprise:
+        minimum: 18
+        mode: 27
+        maximum: 36
+    payment_delay_day_bands_by_risk:
+      Low:
+        early_or_on_time:
+          share: 0.8
+          range:
+          - -10
+          - 0
+        slight_delay:
+          share: 0.17
+          range:
+          - 1
+          - 10
+        serious_delay:
+          share: 0.03
+          range:
+          - 11
+          - 45
+      Medium:
+        early_or_on_time:
+          share: 0.6
+          range:
+          - -7
+          - 0
+        slight_delay:
+          share: 0.3
+          range:
+          - 1
+          - 15
+        serious_delay:
+          share: 0.1
+          range:
+          - 16
+          - 60
+      High:
+        early_or_on_time:
+          share: 0.35
+          range:
+          - -3
+          - 0
+        slight_delay:
+          share: 0.4
+          range:
+          - 1
+          - 20
+        serious_delay:
+          share: 0.25
+          range:
+          - 21
+          - 90
+    strong_payment_history_definition:
+      minimum_on_time_share: 0.8
+      maximum_average_delay_days: 5
+      maximum_serious_delay_share: 0.05
+    required_edge_case:
+      description: post-deal exposure exceeds credit limit while payment history remains strong
+      location: hand_built_evaluation_set
+  standard_cost:
+    formula: list_price * (1 - target_list_margin_percent / 100)
+    rounding: 2_decimal_places
+    target_list_margin_percent_by_category:
+      end_user_computing_and_digital_workplace:
+        p10: 10
+        p50: 18
+        p90: 28
+      servers_and_compute_infrastructure:
+        p10: 9
+        p50: 16
+        p90: 25
+      storage_and_data_protection:
+        p10: 10
+        p50: 19
+        p90: 28
+      networking_and_connectivity:
+        p10: 12
+        p50: 21
+        p90: 32
+      cybersecurity:
+        p10: 18
+        p50: 32
+        p90: 48
+      cloud_services_and_subscriptions:
+        p10: 22
+        p50: 38
+        p90: 55
+      enterprise_software_and_licensing:
+        p10: 25
+        p50: 45
+        p90: 65
+      professional_and_implementation_services:
+        p10: 30
+        p50: 48
+        p90: 65
+      managed_support_and_warranty:
+        p10: 25
+        p50: 42
+        p90: 60
+    portfolio_validation:
+      realized_revenue_weighted_gross_margin_percent_range:
+      - 19
+      - 25
+      reason: brackets_public_2025_integrator_gross_margins_while_preserving_category_mix
+    constraints:
+    - sellable standard_cost is nonnegative and does not exceed list_price; component standard_cost is positive
+      and independently calibrated
+    - standard_cost is generated independently of requested quote discount
+    - quoted margin may fall below policy floor and must not be silently repaired
+    formula_scope: original_sellable_categories_only; assembled_products_require_BOM_cost_rollup
+  requested_discount:
+    historical_line_target_bands:
+      zero:
+        range_percent:
+        - 0
+        - 0
+        share: 0.15
+      nominal:
+        range_percent:
+        - 0.01
+        - 5
+        share: 0.35
+      standard:
+        range_percent:
+        - 5.01
+        - 10
+        share: 0.25
+      negotiated:
+        range_percent:
+        - 10.01
+        - 15
+        share: 0.15
+      exception:
+        range_percent:
+        - 15.01
+        - 20
+        share: 0.07
+      senior_exception:
+        range_percent:
+        - 20.01
+        - 30
+        share: 0.025
+      extreme:
+        range_percent:
+        - 30.01
+        - 40
+        share: 0.005
+    generation_dependencies:
+    - customer segment and strategic-account status
+    - category and unit of measure
+    - line quantity and applicable pricing rule
+    - target realized margin
+    note: AdventureWorks discount discreteness supports explicit bands, but its 97.29 percent zero-discount share
+      is rejected for a deal-desk experiment.
+  availability:
+    fulfillment_modes:
+      stocked_physical:
+        source: inventory_and_inbound_supply
+      supplier_order:
+        source: confirmed_unallocated_binding_inbound_only; planned_supply_is_conditional
+      digital_activation:
+        source: digital_capacity_exact_pool_commitment_and_activation_lead_days
+      scheduled_service:
+        source: products.attributes_json.fulfillment_lead_days
+        scope_limit: workforce_capacity_scheduling_is_out_of_scope_for_mvp
+    inventory_locations:
+    - WH-EU-CENTRAL
+    - WH-EU-WEST
+    inventory_state_target_share:
+      healthy: 0.55
+      tight: 0.25
+      below_reorder: 0.15
+      zero_available: 0.05
+    available_to_target_stock_ratio_by_state:
+      healthy:
+      - 0.75
+      - 1.3
+      tight:
+      - 0.35
+      - 0.74
+      below_reorder:
+      - 0.01
+      - 0.34
+      zero_available:
+      - 0.0
+      - 0.0
+    reserved_to_on_hand_ratio:
+      minimum: 0.0
+      mode: 0.15
+      maximum: 0.45
+    target_stock_units_by_demand_class:
+      core:
+        minimum: 20
+        mode: 50
+        maximum: 120
+      regular:
+        minimum: 5
+        mode: 18
+        maximum: 50
+      niche:
+        minimum: 1
+        mode: 5
+        maximum: 15
+    inbound_status_target_share:
+      Confirmed: 0.7
+      Planned: 0.2
+      Delayed: 0.08
+      Cancelled: 0.02
+    physical_lead_days_by_category:
+      end_user_computing_and_digital_workplace:
+        minimum: 2
+        mode: 7
+        maximum: 14
+      servers_and_compute_infrastructure:
+        minimum: 14
+        mode: 28
+        maximum: 45
+      storage_and_data_protection:
+        minimum: 10
+        mode: 21
+        maximum: 45
+      networking_and_connectivity:
+        minimum: 3
+        mode: 10
+        maximum: 21
+      cybersecurity_appliances:
+        minimum: 3
+        mode: 10
+        maximum: 21
+    inbound_rows:
+      replenished_product_range:
+      - 1
+      - 3
+      multiple_receipt_target_share: 0.2
+      below_reorder_products_with_active_inbound_minimum_share: 0.7
+    counting_rule:
+      eligible_statuses:
+      - Confirmed
+      excluded_statuses:
+      - Planned
+      - Delayed
+      - Cancelled
+      eligible_date_rule: confirmed_free_receipt_expected_date_plus_dispatch_and_shipping_transit_on_or_before_requested_delivery_date
+    required_consistency:
+    - quantity_on_hand and quantity_allocated are nonnegative at the same snapshot
+    - quantity_allocated does not exceed snapshot quantity_on_hand
+    - inbound_supply.quantity_allocated does not exceed inbound_supply.quantity
+    - every inbound quantity is positive
+    - cancelled supply never contributes to fulfillable quantity
+    - at least one generated case requires cumulative supply from two inbound rows
+    inventory_state_target_share_scope: original_stocked_sellable_products_only; component_stock_distribution_pending
+    reserved_to_on_hand_ratio_scope: earlier_sellable_inventory_only; reinterpret_as_aggregate_allocated_to_on_hand_ratio_before_generation
+  validation:
+    exact_customer_count: 80
+    payment_term_counts_sum_to_customer_count: true
+    risk_rating_counts_sum_to_customer_count: true
+    credit_status_counts_sum_to_customer_count: true
+    requested_discount_shares_sum_to_one: true
+    inventory_state_shares_sum_to_one: true
+    inbound_status_shares_sum_to_one: true
+governance:
+  numeric_policy_status: approved_for_synthetic_simulation_on_2026_09_29_not_empirical_company_policy
+  numeric_policy_review_note: Three profile thresholds accepted for controlled experiments; keep provenance labels and validate generated distributions before overall calibration freeze.
+  profile_semantics:
+    baseline: historical_default
+    lenient: controlled_evaluation_only
+    strict: controlled_evaluation_only
+    unchanged_across_profiles:
+    - products
+    - standard_cost
+    - quoted_deals
+    - inventory
+    - credit_limits
+    - accounts_receivable
+    - payment_history
+    - catalog_version
+    - commercial_unit_contract
+    same_deal_evaluated_under_each_policy_set: true
+    profile_replay:
+      input_deal_id: same_original_logical_deal_id_for_each_profile
+      policy_selection: evaluation_harness_supplies_validated_runtime_policy_set_code_override
+      persisted_deal_policy_set_code: unchanged_during_replay
+      log_each_run: new_run_id_and_input_snapshot_json_contains_original_and_applied_policy_set_codes
+      recompute_expected_outcome: independently_for_each_applied_profile
+      production_policy_override_allowed: false
+      catalog_version_override_allowed: false
+  profiles:
+    BASELINE_2026:
+      pricing:
+        routine_discount_max_pct: 10
+        discount_requires_sales_director_above_pct: 10
+        discount_requires_sales_vp_above_pct: 20
+        hard_discount_cap_pct: 35
+        category_margin_floor_pct:
+          end_user_computing_and_digital_workplace: 8
+          servers_and_compute_infrastructure: 7
+          storage_and_data_protection: 8
+          networking_and_connectivity: 10
+          cybersecurity: 15
+          cloud_services_and_subscriptions: 20
+          enterprise_software_and_licensing: 22
+          professional_and_implementation_services: 25
+          managed_support_and_warranty: 20
+        standard_discount_definition: discount <= routine_discount_max_pct; pricing_health_is_distinct_from_policy_compliance
+        discount_pct_formula: (list_price - quoted_unit_price) / list_price * 100
+        gross_margin_pct_formula: (quoted_unit_price - standard_cost) / quoted_unit_price * 100
+        validate_per_line_and_revenue_weighted_deal_margin: true
+        nonpositive_margin_action: hard_block
+        nonpositive_margin_block_at_or_below_pct: 0
+        margin_floor_exception_max_deviation_percentage_points: 2
+        below_floor_action: Sales_VP_review_only_if_margin_strictly_above_zero_and_shortfall_at_most_max_deviation;
+          otherwise_hard_block
+        discount_policy_scope: evaluate_each_line_and_revenue_weighted_deal_discount; most_severe_band_wins
+        discount_line_formula: (list_price - quoted_unit_price) / list_price * 100
+        discount_deal_formula: sum((list_price - quoted_unit_price) * quantity) / sum(list_price * quantity) * 100
+        positive_price_requirement: active_products_list_price_strictly_positive_and_all_quoted_unit_prices_strictly_positive
+      policy:
+        standard_payment_terms_max_days: 45
+        extended_terms_require_finance_above_days: 45
+        hard_payment_terms_cap_days: 90
+        credit_exposure_tolerance_pct: 0
+        credit_exception_max_over_limit_pct: 15
+        overdue_ar_exception_requires_finance: true
+        on_hold_is_hard_block: true
+        credit_exception_basis: post_deal_exposure / credit_limit; finance_only_up_to_max_over_limit
+        credit_above_exception_max_action: hard_block
+        review_status_action: finance_review
+        on_hold_action: hard_block
+        overdue_ar_action: finance_review_if_outstanding_overdue_amount_positive
+        contract_clause_actions:
+          standard: continue
+          preapproved_variant: continue
+          legal_review: Legal_Compliance
+          prohibited: hard_block
+        delivery_exception_action: Sales_Director_review_if_delivery_is_later_than_requested
+        terms_not_in_allowed_values_action: hard_block
+        prohibited_contract_clause_is_hard_block: true
+      approvals:
+        routine_approver: Regional_Manager
+        high_value_deal_above_eur: 100000
+        high_value_approver: Sales_Director
+        strategic_high_value_above_eur: 300000
+        strategic_high_value_approver: Sales_VP
+        high_value_basis: deal_commitment_eur_from_dataset.commercial_unit_contract
+    LENIENT_EXPERIMENT:
+      pricing:
+        routine_discount_max_pct: 15
+        discount_requires_sales_director_above_pct: 15
+        discount_requires_sales_vp_above_pct: 25
+        hard_discount_cap_pct: 40
+        category_margin_floor_pct:
+          end_user_computing_and_digital_workplace: 5
+          servers_and_compute_infrastructure: 4
+          storage_and_data_protection: 5
+          networking_and_connectivity: 7
+          cybersecurity: 11
+          cloud_services_and_subscriptions: 15
+          enterprise_software_and_licensing: 17
+          professional_and_implementation_services: 20
+          managed_support_and_warranty: 15
+        standard_discount_definition: discount <= routine_discount_max_pct; pricing_health_is_distinct_from_policy_compliance
+        discount_pct_formula: (list_price - quoted_unit_price) / list_price * 100
+        gross_margin_pct_formula: (quoted_unit_price - standard_cost) / quoted_unit_price * 100
+        validate_per_line_and_revenue_weighted_deal_margin: true
+        nonpositive_margin_action: hard_block
+        nonpositive_margin_block_at_or_below_pct: 0
+        margin_floor_exception_max_deviation_percentage_points: 2
+        below_floor_action: Sales_VP_review_only_if_margin_strictly_above_zero_and_shortfall_at_most_max_deviation;
+          otherwise_hard_block
+        discount_policy_scope: evaluate_each_line_and_revenue_weighted_deal_discount; most_severe_band_wins
+        discount_line_formula: (list_price - quoted_unit_price) / list_price * 100
+        discount_deal_formula: sum((list_price - quoted_unit_price) * quantity) / sum(list_price * quantity) * 100
+        positive_price_requirement: active_products_list_price_strictly_positive_and_all_quoted_unit_prices_strictly_positive
+      policy:
+        standard_payment_terms_max_days: 60
+        extended_terms_require_finance_above_days: 60
+        hard_payment_terms_cap_days: 90
+        credit_exposure_tolerance_pct: 0
+        credit_exception_max_over_limit_pct: 25
+        overdue_ar_exception_requires_finance: true
+        on_hold_is_hard_block: true
+        credit_exception_basis: post_deal_exposure / credit_limit; finance_only_up_to_max_over_limit
+        credit_above_exception_max_action: hard_block
+        review_status_action: finance_review
+        on_hold_action: hard_block
+        overdue_ar_action: finance_review_if_outstanding_overdue_amount_positive
+        contract_clause_actions:
+          standard: continue
+          preapproved_variant: continue
+          legal_review: Legal_Compliance
+          prohibited: hard_block
+        delivery_exception_action: Sales_Director_review_if_delivery_is_later_than_requested
+        terms_not_in_allowed_values_action: hard_block
+        prohibited_contract_clause_is_hard_block: true
+      approvals:
+        routine_approver: Regional_Manager
+        high_value_deal_above_eur: 200000
+        high_value_approver: Sales_Director
+        strategic_high_value_above_eur: 500000
+        strategic_high_value_approver: Sales_VP
+        high_value_basis: deal_commitment_eur_from_dataset.commercial_unit_contract
+    STRICT_EXPERIMENT:
+      pricing:
+        routine_discount_max_pct: 5
+        discount_requires_sales_director_above_pct: 5
+        discount_requires_sales_vp_above_pct: 15
+        hard_discount_cap_pct: 25
+        category_margin_floor_pct:
+          end_user_computing_and_digital_workplace: 11
+          servers_and_compute_infrastructure: 10
+          storage_and_data_protection: 11
+          networking_and_connectivity: 13
+          cybersecurity: 19
+          cloud_services_and_subscriptions: 25
+          enterprise_software_and_licensing: 28
+          professional_and_implementation_services: 30
+          managed_support_and_warranty: 25
+        standard_discount_definition: discount <= routine_discount_max_pct; pricing_health_is_distinct_from_policy_compliance
+        discount_pct_formula: (list_price - quoted_unit_price) / list_price * 100
+        gross_margin_pct_formula: (quoted_unit_price - standard_cost) / quoted_unit_price * 100
+        validate_per_line_and_revenue_weighted_deal_margin: true
+        nonpositive_margin_action: hard_block
+        nonpositive_margin_block_at_or_below_pct: 0
+        margin_floor_exception_max_deviation_percentage_points: 1
+        below_floor_action: Sales_VP_review_only_if_margin_strictly_above_zero_and_shortfall_at_most_max_deviation;
+          otherwise_hard_block
+        discount_policy_scope: evaluate_each_line_and_revenue_weighted_deal_discount; most_severe_band_wins
+        discount_line_formula: (list_price - quoted_unit_price) / list_price * 100
+        discount_deal_formula: sum((list_price - quoted_unit_price) * quantity) / sum(list_price * quantity) * 100
+        positive_price_requirement: active_products_list_price_strictly_positive_and_all_quoted_unit_prices_strictly_positive
+      policy:
+        standard_payment_terms_max_days: 30
+        extended_terms_require_finance_above_days: 30
+        hard_payment_terms_cap_days: 60
+        credit_exposure_tolerance_pct: 0
+        credit_exception_max_over_limit_pct: 5
+        overdue_ar_exception_requires_finance: true
+        on_hold_is_hard_block: true
+        credit_exception_basis: post_deal_exposure / credit_limit; finance_only_up_to_max_over_limit
+        credit_above_exception_max_action: hard_block
+        review_status_action: finance_review
+        on_hold_action: hard_block
+        overdue_ar_action: finance_review_if_outstanding_overdue_amount_positive
+        contract_clause_actions:
+          standard: continue
+          preapproved_variant: continue
+          legal_review: Legal_Compliance
+          prohibited: hard_block
+        delivery_exception_action: Sales_Director_review_if_delivery_is_later_than_requested
+        terms_not_in_allowed_values_action: hard_block
+        prohibited_contract_clause_is_hard_block: true
+      approvals:
+        routine_approver: Regional_Manager
+        high_value_deal_above_eur: 50000
+        high_value_approver: Sales_Director
+        strategic_high_value_above_eur: 150000
+        strategic_high_value_approver: Sales_VP
+        high_value_basis: deal_commitment_eur_from_dataset.commercial_unit_contract
+  approval_logic:
+    margin_below_category_floor:
+    - Sales_VP_only_within_profile_exception_deviation
+    credit_exception:
+    - Finance_Director
+    extended_payment_terms:
+    - Finance_Director
+    nonstandard_contract_clause:
+    - Legal_Compliance
+    delivery_exception:
+    - Sales_Director
+    role_order:
+    - Regional_Manager
+    - Sales_Director
+    - Sales_VP
+    - Finance_Director
+    - Legal_Compliance
+    route_only_if_not_hard_blocked: true
+    boundary_rule: above means strictly greater than; equal to threshold stays in lower band; margin_below_floor_max_deviation_is_inclusive
+    sales_escalation: choose_highest_triggered_sales_role_only; omit_Regional_Manager_when_Sales_Director_or_Sales_VP_required
+    sales_thresholds: max_of_discount_band_and_deal_value_band; strictly_greater_than_threshold_triggers_escalation
+    finance_triggers:
+    - credit_above_limit_within_profile_exception_cap
+    - positive_overdue_ar
+    - credit_status_Review
+    - terms_above_profile_standard_max
+    legal_triggers:
+    - contract_clause_legal_review
+    nonpositive_margin: hard_block
+    priority: hard_blocks_first_then_sales_then_finance_then_legal; deduplicate_each_role
+    hard_block_reasons:
+    - invalid_configuration
+    - inactive_or_blocked_account
+    - credit_On-Hold
+    - nonpositive_line_or_deal_margin
+    - discount_above_hard_cap
+    - payment_term_above_hard_cap
+    - credit_excess_above_exception_cap
+    - prohibited_contract_clause
+    - margin_shortfall_above_profile_exception_deviation
+    availability_cannot_deliver_at_any_plausible_date: block_pending_feasible_revised_date
+    margin_at_or_below_zero: hard_block
+    discount_escalation: most_severe_role_from_all_line_discounts_and_deal_weighted_discount
+    deal_margin_aggregation: sum(line_margin_eur) / sum(line_net_value_eur) * 100; compare_to_revenue_weighted_category_floor_for_reporting;
+      never_offset_a_line_floor_failure_with_another_line
+    deal_discount_aggregation: sum((list_price - quoted_unit_price) * quantity) / sum(list_price * quantity) * 100
+conflict_injection:
+  apply_to_dataset_types:
+  - generated_test
+  reference_profile: BASELINE_2026
+  requested_case_mix_pct:
+    clean: 30
+    discount_approval_only: 8
+    above_hard_discount_cap_with_healthy_margin: 4
+    positive_margin_below_category_floor: 4
+    credit_limit_exception_only: 7
+    payment_terms_exception_only: 3
+    invalid_configuration_only: 5
+    finished_stock_shortage_only: 5
+    component_shortage_only: 5
+    confirmed_PO_delay_only: 3
+    supplier_only_conditional_procurement: 3
+    equipment_capacity_full_only: 3
+    workforce_capacity_full_only: 3
+    digital_activation_unsupported_or_uncommitted: 4
+    installation_ineligible_only: 3
+    shipping_arrival_late_only: 3
+    stale_or_missing_snapshot_only: 3
+    multi_flag: 4
+  max_generation_attempts_per_case: 100
+  keep_unsatisfied_cases_out_of_dataset: true
+  seed: 22496
+  validation:
+    mix_tolerance_percentage_points: 0
+    require_exact_primary_case_count: true
+    independent_evaluation_fixtures: true
+    exclude_expected_labels_from_agent_inputs: true
+    actual_outcome_must_match_requested_case: true
+    verify_all_profiles_on_same_deals: true
+    verify_invalid_configuration_stops_before_pricing: true
+    require_margins_and_discounts_recomputed_from_prices: true
+    require_historical_decisions_consistent_with_baseline: true
+    check_secondary_flags: true
+    baseline_primary_labels_do_not_apply_unchanged_to_other_profiles: true
+    generated_test_deal_count: 100
+    require_independent_oracle_for_expected_actions: true
+    isolate_single_flag_scenarios: true
+  sampling_unit: whole_deal
+  case_labels: mutually_exclusive_primary_case; multi_flag_requires_at_least_two_independent_findings
+  scenario_eligibility: generated_test only; baseline history from historical distributions; evaluation cases constructed
+    separately
+  classification_rule: primary_case_is_exclusive_under_baseline; secondary_flags_recorded_separately; validate_against_rule_oracle_not_agent_outputs
+  status: v2_proposed_synthetic_case_mix_reference_fixtures_passed_generated_case_validation_pending
+  primary_counts_are_exact_for_100_generated_test_deals: true
+  coverage_overlay_min_counts_in_100_generated_test_deals:
+    partial_allowed_physical_deals: 8
+    actual_split_delivery_needed: 3
+    indivisible_groups: 5
+    indivisible_group_prevents_split: 2
+    shared_component_competing_lines: 5
+    downtime_changes_capacity_finding: 4
+    cumulative_two_receipt_cases: 4
+    confirmed_digital_activation_controls: 8
+    installation_eligible_controls: 6
+  overlay_rule: overlay_existing_test_cases_only_when_primary_label_is_preserved; clean_cases_must_remain_clean
+integrity_checks:
+  customer_counts_sum_to_80: true
+  all_category_margin_floor_keys_match_catalogue: true
+  terms_belong_to_allowed_values: true
+  no_unknown_policy_or_catalog_code: true
+  no_negative_or_zero_quoted_unit_price: true
+  quoted_price_and_cost_recompute_all_discount_and_margin_flags: true
+  discount_caps_strict_order: strict <= baseline <= lenient
+  margin_floors_strict_order: lenient <= baseline <= strict
+  no_hard_block_is_approvable: true
+  no_role_can_be_skipped_when_triggered: true
+  historical_outcomes_use_baseline_only: true
+  evaluation_answers_never_exposed_to_agents: true
+  ar_snapshot_matches_evaluation_as_of_date: true
+  no_historical_deal_rechecked_with_current_ar_snapshot: true
+  no_approved_invoice_double_counted_in_exposure: true
+  all_deal_lines_use_full_term_billable_quantity: true
+  credit_limit_strictly_positive: true
+  no_nonpositive_margin_approved: true
+  below_floor_margin_shortfall_respects_profile_exception_limit: true
+  both_line_and_weighted_deal_discounts_govern_escalation: true
+  profile_replay_logs_applied_and_original_policy_codes: true
+  exact_primary_case_mix_has_zero_tolerance: true
+  product_billing_models_are_concrete_not_catalogue_mix_labels: true
+  all_unit_of_measure_values_allowed: true
+  single_flag_case_has_no_accidental_second_primary_flag: true
+  sellable_product_category_counts_sum_to_120: true
+  total_product_rows_equals_sellable_plus_component_count: true
+  no_generation_until_v2_production_parameters_are_populated: true
+  all_24_table_references_and_scenario_evidence_validated: true
+  active_sellable_product_list_price_strictly_positive: true
+  stocked_component_standard_cost_strictly_positive: true
+implementation_notes:
+- Compile pricing_rules, policy_rules and approval_rules from governance.profiles; do not store the whole YAML as
+  a policy row.
+- Rule conditions and actions must be structured JSON; scope_value is null for global scope.
+- Use catalog_version for technical compatibility only and policy_set_code for commercial governance only.
+- For payment term hard caps, a valid allowed term above the cap blocks; invalid term also blocks.
+- Baseline historical line discounts follow commercial_supply.requested_discount, independently of generated_test
+  injection.
+- The 100 generated_test cases give integer case counts equal to the requested percentages; use fixed seed and record
+  unsatisfied cases.
+- The current AR snapshot is a current-state view. Historical outcomes are generated in chronological order from
+  transient facts and cannot be recomputed from the current credit and AR tables.
+- Compute current exposure from unpaid AR plus the dated unbilled_committed_amount aggregate on the credit profile;
+  do not also sum open deals, and exclude the current proposal and any amount represented in AR.
+- For monthly or yearly recurring products, deal_lines.quantity counts all billable units over the quoted term.
+  Reject a line whose quantity conflicts with contract_months and units_per_period.
+- Apply the same deal to all policy sets through an evaluation-only runtime override; input_snapshot_json must log
+  both persisted and applied policy_set_code.
+- Check both each line and revenue-weighted deal discount; no weighted average may hide a line above a hard discount
+  cap.
+- Within a category-floor deviation the Sales VP may review; beyond the profile limit, or at nonpositive margin,
+  hard block.
+- Category product_type_mix and billing_model entries are generator templates; product rows store one concrete billing
+  model and one unit_of_measure from dataset enumerations.
+- Original 100-deal conflict mix is historical and not a sufficient V2 production-case mix.
+- Products contains 120 sellable rows plus separately calibrated component rows; pricing floors do not apply to
+  non-sellable components.
+- Physical stock and confirmed inbound commitments are aggregate quantity_allocated fields on their dated snapshots;
+  there is no reservation-owner table and the proposed deal does not mutate allocations.
+- Existing production commitments are aggregate allocated_capacity_hours by location/capability/resource_type/day;
+  there is no individual job or machine/worker calendar in this MVP.
+- Digital activation confirmation requires exact edition/region/term/unit, available entitlement, valid binding
+  commitment evidence and activation lead time; installation checks only product/region eligibility.
+- Only confirmed purchase commitments count as confirmed inbound; supplier_items offers are conditional.
+- V1 14-table fields alone cannot support the expanded fulfillment agent; use Phase 1C V2 24-table design.
+schema_v2:
+  status: design_only
+  table_count: 24
+  retained_tables:
+  - products
+  - compatibility_rules
+  - customers
+  - customer_credit_profiles
+  - accounts_receivable
+  - payment_history
+  - pricing_rules
+  - policy_rules
+  - inventory
+  - inbound_supply
+  - deals
+  - deal_lines
+  - approval_rules
+  - agent_execution_log
+  added_tables:
+  - bom_headers
+  - bom_lines
+  - suppliers
+  - supplier_items
+  - purchase_orders
+  - production_requirements
+  - production_capacity
+  - digital_capacity
+  - deal_runs
+  - shipping_lanes
+  changed_existing_columns:
+    inventory: quantity_on_hand and quantity_allocated as one product/location/as-of snapshot; no owner link
+    products: add immutable catalog_version plus is_sellable, fulfillment_mode and stock_uom; unique product_code/catalog_version
+    compatibility_rules: line/configured_group/whole_deal scopes and installation product/region eligibility
+    customer_credit_profiles: dated unbilled_committed_amount aggregate with evidence reference and no AR overlap
+    deals: salesperson_id, immutable submission with supersedes_deal_id; destination, terms, justification and evidence references
+    deal_lines: product-level configuration, fulfillment_group_code, requested_activation_date and installation_requested
+    inbound_supply: purchase_orders commitment reference, confirmation/validity evidence and quantity_allocated
+    agent_execution_log: run_id foreign key to deal_runs, attempt trace and versions consistent with run
+  key_invariants:
+  - inventory_quantity_allocated_between_zero_and_quantity_on_hand_at_same_snapshot
+  - inbound_quantity_allocated_between_zero_and_quantity_at_same_snapshot
+  - aggregate_allocations_include_only_existing_commitments_and_are_not_subtracted_again_from_deal_rows
+  - evaluation_simulates_one_deal_across_all_lines_without_mutating_stock_inbound_or_capacity
+  - two_separate_uncommitted_quotes_may_compete_for_same_spare_capacity_and_are_not_guarantees
+  - a_confirmed_receipt_has_documented_supplier_commitment_before_evaluation_time
+  - received_supply_is_not_counted_again_as_inbound
+  - a_supplier_offer_is_never_misclassified_as_confirmed_inbound
+  - one_effective_BOM_matches_each_make_to_order_configuration
+  - BOMs_are_acyclic_and_components_have_compatible_stock_units
+  - production_requirements_order_steps_by_operation_seq_and_join_matching_capability_type_location_day
+  - allocated_capacity_hours_between_zero_and_net_available_capacity_hours
+  - both_equipment_and_workforce_free_daily_hours_cover_each_required_step
+  - capacity_uses_day_precision_not_exact_hour_or_named_worker_machine_scheduling
+  - a_proposed_quote_never_creates_a_committed_PO_or_allocation
+  - arrival_includes_dispatch_calendar_and_shipping_lane_transit
+  - indivisible_fulfillment_groups_cannot_be_partially_shipped
+  - non_sellable_components_are_never_quoted_as_customer_facing_lines
+  - credit_and_policy_outputs_remain_independent_from_fulfillment_output
+  - credit_aggregate_is_dated_unbilled_and_not_in_accounts_receivable_or_current_proposal
+  - digital_activation_confirmed_only_for_exact_edition_region_term_unit_valid_entitlement_and_binding_commitment
+  - installation_eligibility_does_not_claim_installer_availability_or_date
+  - submitted_deals_immutable_and_run_snapshots_versioned
+  - expected_evaluation_answers_hidden_from_all_agent_tools
+fulfillment_production_calibration:
+  status: proposed_synthetic_operational_values_14_reference_fixtures_passed_generator_validation_pending_do_not_generate_v2_rows_yet
+  evidence_classification: synthetic_operational_assumptions_unless_specific_independent_source_is_profiled
+  proposal_date: 2026-09-28
+  source_document: Phase1C-operational-calibration-PROPOSAL.md
+  reference_validation:
+    fixture_file: phase1c_reference_fixtures.yaml
+    validator_file: validate_phase1c_reference_fixtures.py
+    hand_authored_cases_passed: 14
+    limitation: design_oracle_only_no_generated_rows_or_independent_evaluation_answers
+  distribution_default: triangular_minimum_mode_maximum_then_round_and_validate
+  operating_reference_as_of: dataset.time_model.evaluation_as_of_date
+  proposed_parameters:
+    component_catalogue:
+      non_sellable_component_count: 36
+      family_counts: {compute: 12, storage: 9, network_and_power: 9, chassis_and_other: 6}
+      total_product_rows_with_120_sellable: 156
+      shared_across_at_least_two_BOMs_min_share: 0.4
+      physical_stock_uom_required: true
+      cost_rule: jointly_derive_component_costs_and_BOM_rollups_against_generated_sellable_cost_bands
+    BOMs:
+      make_to_order_sellable_count: 18
+      effective_configured_BOM_variants_range: [24, 36]
+      mandatory_components_per_BOM: [2, 4, 6]
+      required_component_units_per_finished_unit: [1, 2, 8]
+      scrap_pct: [0, 1, 4]
+      BOMs_with_explicit_substitute_group_max_share: 0.2
+      output_quantity_finished_unit: 1
+      effective_rule: exactly_one_BOM_per_selected_product_configuration_and_run_as_of
+    suppliers:
+      supplier_count: 10
+      component_SKUs_with_active_offers_min_share: 0.8
+      supplier_finished_SKUs_with_active_offers_min_share: 0.65
+      component_SKUs_with_at_least_two_offers_min_share: 0.5
+      minimum_order_qty: [1, 2, 10]
+      order_multiple: [1, 1, 5]
+      component_lead_workdays: [3, 10, 30]
+      offer_valid_calendar_days: [30, 60, 90]
+      offer_currency: EUR
+      supplier_finished_lead_source: commercial_supply.availability.physical_lead_days_by_category
+    purchase_orders_and_inbound:
+      active_PO_header_count: [30, 40, 50]
+      active_PO_status_pct: {Draft: 5, Placed: 20, Confirmed: 65, Delayed: 8, Cancelled: 2}
+      inbound_status_source: commercial_supply.availability.inbound_status_target_share
+      receipts_per_active_PO: [1, 1, 3]
+      receipt_quantity_stock_units: [2, 10, 40]
+      allocated_to_receipt_ratio: [0, 0.2, 0.65]
+      confirmation_lag_workdays: [0, 1, 5]
+      confirmation_evidence_recheck_calendar_days: 7
+      received_PO_has_no_active_inbound_receipt: true
+      joint_status_generation_required: true
+      delayed_receipt_requires_reconfirmed_ETA: true
+      binding_non_PO_evidence_required: true
+      confirmed_component_receipt_usable_for_production: on_expected_date_at_day_precision
+      intraday_arrival_or_start_time_claimed: false
+    aggregate_inventory:
+      stocked_sellable_bands_source: commercial_supply.availability
+      component_on_hand_units: [2, 12, 60]
+      component_allocated_to_on_hand_ratio: [0, 0.2, 0.5]
+      confirmed_stock_snapshot_max_age_hours: 24
+      snapshot_rule: latest_nonfuture_per_product_location_at_run_as_of
+      stale_missing_stock_label: unknown
+    production_requirements:
+      operations_per_BOM: [1, 2, 3]
+      capabilities: [assembly, configuration, test]
+      resource_types: [equipment, workforce]
+      setup_hours_per_batch: [0.25, 0.5, 1.5]
+      workforce_hours_per_finished_unit: [0.25, 0.75, 2]
+      equipment_hours_per_finished_unit: [0.15, 0.5, 1.5]
+      batch_size_finished_units: [1, 4, 10]
+      required_hours_formula: ceil(build_units/batch_size)*setup_hours+build_units*hours_per_unit
+      same_seq_resources_can_share_day: true
+      higher_operation_seq_earliest: next_working_day
+    production_capacity:
+      workshop_location: WH-EU-CENTRAL
+      horizon_calendar_days: 30
+      working_weekdays: [Mon, Tue, Wed, Thu, Fri]
+      equipment_daily_available_hours: [8, 8, 16]
+      workforce_daily_available_hours: [8, 16, 32]
+      existing_allocation_to_available_ratio: [0.25, 0.6, 0.9]
+      downtime_working_capability_day_share: 0.05
+      downtime_reduction_fraction: [0.25, 0.5, 0.75]
+      nonworking_day_available_hours: 0
+      feasible_capacity_snapshot_max_age_hours: 24
+      candidate_quote_capacity_consumed_in_memory_only: true
+      feasible_production_label: feasible_uncommitted
+    digital_capacity:
+      eligible_SKUs_with_exact_pool_coverage_min_share: 0.85
+      user_and_licence_concurrent_total: [20, 80, 250]
+      instance_concurrent_total: [2, 10, 40]
+      allocated_to_total_ratio: [0.2, 0.55, 0.85]
+      activation_lead_workdays: [0, 1, 5]
+      generated_commitment_status_pct: {binding: 70, provisional: 20, unknown: 10}
+      confirmed_pool_snapshot_max_age_hours: 24
+      binding_evidence_recheck_calendar_days: 7
+      trusted_provider_evidence_source: controlled_manifest_outside_deal_input
+      trusted_provider_evidence_required_fields: [evidence_ref, status, product_id, configuration_signature_json, provider_id, region_code, term_code, capacity_unit, capacity_total, covers_from, covers_until, verified_at]
+      provider_evidence_fixture_file: phase1c_provider_evidence_fixture.json
+      fixture_limitation: synthetic_reference_proof_not_live_provider_confirmation
+      monthly_concurrent_units: line_quantity/contract_months
+      annual_concurrent_units: line_quantity/(contract_months/12)
+      confirmed_requirement: exact_config_region_term_unit_and_sufficient_free_entitlement_and_binding_evidence_for_full_term
+      unbounded_usage_without_reserved_concurrent_unit: cannot_confirm_activation_capacity
+    installation_eligibility:
+      eligible_physical_sellable_SKU_count_range: [8, 14]
+      service_countries_supported_of_five: 3
+      installation_requested_share_of_eligible_product_deals: [0.1, 0.15, 0.2]
+      unsupported_region_per_covered_country_minimum: 1
+      check_scope: product_and_destination_yes_no_unknown_only_no_installer_date_or_capacity
+    shipping:
+      destination_country_codes: [DE, FR, NL, BE, AT]
+      origin_location_ids: [WH-EU-CENTRAL, WH-EU-WEST]
+      services: [standard, express]
+      standard_transit_workdays: [2, 4, 7]
+      express_transit_workdays: [1, 2, 3]
+      dispatch_weekdays: [Mon, Tue, Wed, Thu, Fri]
+      origin_local_cutoff: '15:00'
+      origin_IANA_timezone_required: true
+      standard_lane_for_every_active_physical_destination_required: true
+      selected_express_or_region_lane_gaps_required: true
+    deal_terms:
+      partial_delivery_allowed_share_physical_test_deals: 0.25
+      indivisible_group_share_test_deals: 0.15
+      requested_physical_arrival_slack_workdays: [-5, 2, 10]
+      requested_digital_activation_slack_workdays: [-3, 1, 7]
+    cost_rollup:
+      workforce_cost_eur_per_hour: [20, 30, 50]
+      overhead_fraction_of_material_plus_labor: [0.05, 0.1, 0.15]
+      equipment_depreciation_charged_separately: false
+      finished_standard_cost_rollup_tolerance_pct: 5
+      variant_cost_rule: materially_distinct_build_cost_requires_distinct_priced_SKU_or_documented_conservative_standard_cost
+  provenance: all_proposed_parameters_are_Synthetic_design_assumptions_not_observed_industry_rates
+  required_parameter_groups:
+    component_catalogue:
+    - count
+    - stock_uom
+    - component_family_mix
+    - cost_ranges
+    - reusability_across_BOMs
+    BOMs:
+    - sellable_assembly_share
+    - version_count
+    - components_per_BOM
+    - required_quantity
+    - scrap_pct
+    - substitute_groups
+    - effective_dates
+    suppliers:
+    - supplier_count
+    - item_coverage
+    - min_order_qty
+    - order_multiples
+    - lead_days_distribution
+    - offer_validity
+    purchase_orders_and_inbound:
+    - PO_status_mix
+    - confirmation_lag
+    - quantity
+    - receipts_per_PO
+    - ETA_revision_rules
+    - allocated_to_receipt_ratio
+    - confirmation_evidence_validity
+    aggregate_inventory:
+    - finished_and_component_stock_levels
+    - allocated_to_on_hand_ratio
+    - snapshot_freshness
+    production_requirements:
+    - operations_per_BOM
+    - equipment_and_workforce_capabilities
+    - setup_hours
+    - hours_per_unit
+    - batch_size
+    - operation_day_sequence_convention
+    production_capacity:
+    - capacity_days_horizon
+    - locations_and_capabilities
+    - equipment_and_workforce_daily_available_hours_net_downtime
+    - allocated_capacity_hours_existing_work
+    - nonworking_days_and_time_zone
+    - capacity_snapshot_freshness
+    digital_capacity:
+    - digital_product_and_edition_coverage
+    - entitlement_units_and_total_capacity
+    - quantity_allocated
+    - region_and_term_coverage
+    - activation_lead_days
+    - provider_commitment_mix_and_evidence_validity
+    - snapshot_freshness
+    installation_eligibility:
+    - eligible_product_share
+    - supported_destination_regions
+    - unknown_or_ineligible_share
+    shipping:
+    - lane_coverage
+    - origin_destination_pairs
+    - service_classes
+    - dispatch_days
+    - cutoffs
+    - transit_workdays
+    deal_terms:
+    - destination_mix
+    - allow_partial_delivery_share
+    - indivisible_group_share
+    - requested_date_slack
+    - requested_activation_date_slack
+    cost_rollup:
+    - component_cost
+    - scrap
+    - direct_labor
+    - overhead_assumption
+    - finished_standard_cost_tolerance
+  validation_gate: record_numeric_values_provenance_transformations_freshness_and_seed_then_check_physical_digital_installation_reference_scenarios_before_generation
