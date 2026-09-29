@@ -9,6 +9,7 @@ on:
       - phase1c_reader.py
       - test_phase1c_reader.py
       - phase1c_rule_rows.sql
+      - phase1c_provider_evidence_fixture.json
       - .github/workflows/phase1c-postgres.yml
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - phase1c_reader.py
       - test_phase1c_reader.py
       - phase1c_rule_rows.sql
+      - phase1c_provider_evidence_fixture.json
       - .github/workflows/phase1c-postgres.yml
   workflow_dispatch:
 
