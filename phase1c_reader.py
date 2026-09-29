@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 from decimal import Decimal, ROUND_CEILING
 from zoneinfo import ZoneInfo
 import json
+from pathlib import Path
 
 from psycopg.rows import dict_row
 
@@ -94,13 +95,46 @@ def _digital_proof(pool, line, deal, as_of, resolver):
         return False
     try:
         return (proof["verified_at"] <= as_of
+                and as_of - proof["verified_at"] <= timedelta(days=7)
                 and proof["capacity_total"] == pool["capacity_total"]
                 and proof["quantity_allocated"] == pool["quantity_allocated"]
                 and proof["covers_from"] <= activation
-                and proof["covers_until"] >= end
-                and pool["valid_until"].date() >= end)
+                and proof["covers_until"] >= end)
     except (KeyError, TypeError):
         return False
+
+
+def load_provider_evidence(path):
+    """Load a controlled provider manifest, outside salesperson deal input.
+
+    The caller chooses this trusted file during deployment. The reader never
+    accepts a manifest path or proof record from a deal or agent prompt.
+    """
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    if set(payload) != {"schema_version", "records"} or payload["schema_version"] != 1:
+        raise ValueError("Unsupported provider evidence manifest")
+    records = {}
+    required = {"evidence_ref", "product_id", "configuration_signature_json", "region_code",
+                "term_code", "capacity_unit", "capacity_total", "quantity_allocated",
+                "commitment_status", "verified_at", "covers_from", "covers_until"}
+    for raw in payload["records"]:
+        if set(raw) != required or not isinstance(raw["configuration_signature_json"], dict):
+            raise ValueError("Malformed provider evidence record")
+        ref = raw["evidence_ref"]
+        if not isinstance(ref, str) or not ref or ref in records:
+            raise ValueError("Duplicate or missing provider evidence reference")
+        record = dict(raw)
+        record["capacity_total"] = Decimal(str(raw["capacity_total"]))
+        record["quantity_allocated"] = Decimal(str(raw["quantity_allocated"]))
+        record["verified_at"] = datetime.fromisoformat(raw["verified_at"].replace("Z", "+00:00"))
+        record["covers_from"] = datetime.fromisoformat(raw["covers_from"]).date()
+        record["covers_until"] = datetime.fromisoformat(raw["covers_until"]).date()
+        if (record["verified_at"].tzinfo is None or record["covers_until"] < record["covers_from"]
+                or record["quantity_allocated"] < 0 or record["capacity_total"] < record["quantity_allocated"]
+                or record["commitment_status"] != "binding"):
+            raise ValueError("Invalid provider evidence values")
+        records[ref] = record
+    return records.get
 
 
 def _installation(line, deal, rules):
@@ -201,7 +235,8 @@ def _supply_findings(bundle, as_of):
                  (row["po_status"] == "Confirmed" and row["po_confirmed_at"] <= as_of
                   and row["destination_location_id"] == row["location_id"]))):
             bindings[row["product_id"]].append(row)
-    result = {"demand_by_product": dict(demands), "stock": {}, "binding_receipts": {}, "assembly": {}}
+    result = {"demand_by_product": dict(demands), "stock": {}, "binding_receipts": {}, "assembly": {},
+              "production_receipt_convention": "confirmed_receipt_usable_on_expected_date"}
     for product in set(demands) | {x["component_product_id"] for x in bundle["bom_lines"]}:
         result["stock"][product] = [{"id": x["inventory_id"], "location": x["location_id"],
             "free": x["quantity_on_hand"] - x["quantity_allocated"], "fresh": _fresh(x, as_of)} for x in by_product[product]]
