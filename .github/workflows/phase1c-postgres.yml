@@ -1,0 +1,56 @@
+name: Phase 1C PostgreSQL checks
+
+on:
+  push:
+    paths:
+      - schema.sql
+      - phase1c_schema_smoke.sql
+      - phase1c_row_fixtures.sql
+      - .github/workflows/phase1c-postgres.yml
+  pull_request:
+    paths:
+      - schema.sql
+      - phase1c_schema_smoke.sql
+      - phase1c_row_fixtures.sql
+      - .github/workflows/phase1c-postgres.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  database-checks:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: phase1c_ci_only
+          POSTGRES_DB: deal_desk_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d deal_desk_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: phase1c_ci_only
+      PGDATABASE: deal_desk_test
+    steps:
+      - name: Check out project files
+        uses: actions/checkout@v6
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+      - name: Apply 24-table schema
+        run: psql -X -v ON_ERROR_STOP=1 -f schema.sql
+      - name: Check constraints and connected rows
+        run: psql -X -v ON_ERROR_STOP=1 -f phase1c_schema_smoke.sql
+      - name: Check 14 isolated row scenarios
+        run: psql -X -v ON_ERROR_STOP=1 -f phase1c_row_fixtures.sql
