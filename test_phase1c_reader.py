@@ -3,13 +3,13 @@ import os
 import subprocess
 import tempfile
 import unittest
-from datetime import date, datetime, timezone
+from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
 import psycopg
 
-from phase1c_reader import read_run
+from phase1c_reader import load_provider_evidence, read_run
 
 
 ROOT = Path(__file__).parent
@@ -61,6 +61,8 @@ class ReaderReferenceTests(unittest.TestCase):
         self.assertEqual(a["component_demand"]["assembly_later_workday-C"], 16)
         self.assertEqual(a["required_hours"][("assembly", "workforce")], 5)
         self.assertEqual(a["first_fitting_day"], date(2026, 9, 2))
+        self.assertEqual(facts["supply"]["production_receipt_convention"],
+                         "confirmed_receipt_usable_on_expected_date")
         self.assertEqual(facts["lines"][0]["production_status"], "feasible_uncommitted")
         self.assertEqual(facts["lines"][0]["fulfillment_status"], "feasible_uncommitted")
         self.assertTrue(facts["lines"][0]["shipping_by_request"])
@@ -77,15 +79,7 @@ class ReaderReferenceTests(unittest.TestCase):
         self.assertEqual(d["concurrent_demand"], 5)
         self.assertEqual(d["pools"][0]["free"], 6)
         self.assertEqual(d["status"], "binding_candidate")
-        def verified_provider_record(ref):
-            if ref != "FULLTERM-digital_exact_binding_pool":
-                return None
-            return {"evidence_ref": ref, "product_id": "digital_exact_binding_pool-P",
-                    "configuration_signature_json": {"edition": "business"}, "region_code": "DE",
-                    "term_code": "12m", "capacity_unit": "instance", "commitment_status": "binding",
-                    "capacity_total": 10, "quantity_allocated": 4,
-                    "verified_at": datetime(2026, 9, 1, 10, tzinfo=timezone.utc),
-                    "covers_from": date(2026, 9, 4), "covers_until": date(2027, 9, 4)}
+        verified_provider_record = load_provider_evidence(ROOT / "phase1c_provider_evidence_fixture.json")
         checked = read_run(self.conn, "00000000-0000-4000-8000-000000040001",
                            digital_evidence_resolver=verified_provider_record)["facts"]["lines"][0]["digital"]
         self.assertEqual(checked["status"], "confirmed_by_date")
