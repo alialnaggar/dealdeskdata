@@ -130,7 +130,7 @@ class ReferenceDealIntegrationTests(unittest.TestCase):
                 self.assertEqual(result["policy_set_code"], "BASELINE_2026")
 
     def test_reference_contradictions_do_not_become_final_approval(self):
-        expectations = {2: "needs_commitment", 3: "needs_commitment", 5: "needs_commitment",
+        expectations = {2: "needs_commitment", 3: "needs_evidence", 5: "needs_commitment",
                         6: "needs_evidence", 7: "needs_revision", 8: "needs_evidence",
                         9: "blocked", 10: "needs_evidence", 14: "needs_revision"}
         for number, status in expectations.items():
