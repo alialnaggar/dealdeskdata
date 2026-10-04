@@ -87,6 +87,17 @@ dataset:
     Mid-Market: 28
     Enterprise: 16
   historical_lines_per_deal_target: 3
+  historical_lines_per_deal_sampling_percent:
+    1: 12.5
+    2: 21.75
+    3: 33.75
+    4: 20
+    5: 10
+    6: 1.5
+    7: 0.25
+    8: 0.25
+  historical_lines_per_deal_achieved_mean_range: [2.8, 3.2]
+  historical_lines_per_deal_bin_tolerance_percentage_points: 4
   product_popularity:
     top_product_share: 0.2
     target_historical_line_share_range:

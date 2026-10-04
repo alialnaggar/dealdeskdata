@@ -13,6 +13,10 @@ on:
       - calibration_config.yaml
       - validate_phase1c_calibration.py
       - test_validate_phase1c_calibration.py
+      - phase1c_column_rules.yaml
+      - validate_phase1c_column_rules.py
+      - test_validate_phase1c_column_rules.py
+      - render_phase1c_column_rules.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -32,6 +36,10 @@ on:
       - calibration_config.yaml
       - validate_phase1c_calibration.py
       - test_validate_phase1c_calibration.py
+      - phase1c_column_rules.yaml
+      - validate_phase1c_column_rules.py
+      - test_validate_phase1c_column_rules.py
+      - render_phase1c_column_rules.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -87,6 +95,10 @@ jobs:
         run: |
           python -m unittest -v test_validate_phase1c_calibration
           python validate_phase1c_calibration.py
+      - name: Verify rules cover every schema column
+        run: |
+          python -m unittest -v test_validate_phase1c_column_rules
+          python validate_phase1c_column_rules.py
       - name: Compare reader results with 14 reference scenarios
         run: python -m unittest -v test_phase1c_reader
       - name: Validate and compile synthetic policy profiles

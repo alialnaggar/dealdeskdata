@@ -38,6 +38,13 @@ class CalibrationContractTests(unittest.TestCase):
         self.assertIn("digital proof fields differ from reader's trusted manifest", errors)
         self.assertIn("BOM variants cannot cover the proposed assembled products", errors)
 
+    def test_historical_line_mix_mean_and_bins_are_checked(self):
+        changed = deepcopy(CONFIG)
+        changed["dataset"]["historical_lines_per_deal_sampling_percent"][8] += 1
+        errors = validate(changed)["errors"]
+        self.assertIn("historical line-count sampling weights", errors)
+        self.assertIn("historical line-count expected mean differs from target", errors)
+
 
 if __name__ == "__main__":
     unittest.main()

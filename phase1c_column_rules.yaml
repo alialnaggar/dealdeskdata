@@ -1,0 +1,1659 @@
+schema_source: schema.sql
+schema_version: Phase 1C Schema V2, 24 tables
+status: draft_pre_generation
+basis_codes:
+  SYS: generated/system observation
+  SYN: fictional company assumption
+  CAT: catalogue taxonomy/visible anchor, transformed to brand-neutral synthetic product
+  OBS: transformed shape of Olist observations, never copied rows
+  CFG: declared policy/catalogue configuration
+  DER: computed from other facts
+  SUB: submitted deal input, synthetically sampled in generated rows
+common_checks:
+- SQL types, nullability, unique keys, foreign keys, row checks and triggers in schema.sql always apply.
+- All synthetic generated fields retain a seed/config hash; IDs and names are fictional; no external source rows copied.
+- At a run, use only evidence at or before as_of_at and keep outcome/answer fields out of agent-visible inputs.
+- Exception cases change causal source facts and keep all unrelated invariants; record primary and secondary flags separately.
+tables:
+  products:
+    product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable versioned synthetic identifier
+      validation: Unique; one immutable catalogue row per ID
+    product_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: Brand-neutral archetype code from catalogue taxonomy
+      validation: Nonblank; unique with catalog_version; stable across versions
+    catalog_version:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: CATALOGUE_2026_V1 for initial catalogue
+      validation: Version agrees with BOM, compatibility rules and quoted deal
+    product_name:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: Brand-neutral name consistent with category and attributes
+      validation: Nonblank; avoid real brand/product claims
+    category:
+      sql_type: TEXT
+      nullable: false
+      basis: CAT+SYN
+      generation: Nine configured category counts
+      validation: One configured category; counts total 120 sellable rows
+    product_type:
+      sql_type: TEXT
+      nullable: false
+      basis: CAT+SYN
+      generation: Physical, software, subscription, service or component by archetype
+      validation: SQL enum; coherent with fulfillment_mode and billing_model
+    attributes_json:
+      sql_type: JSONB
+      nullable: false
+      basis: CAT+SYN
+      generation: Product-specific typed attribute template from catalogue calibration
+      validation: JSON object; required keys, units and option combinations per archetype must be validated
+      review_before_generation: Define archetype-specific JSON key/type/unit schemas and option compatibility.
+    list_price:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: CAT+SYN
+      generation: Sample category EUR price band and chosen unit; components may have zero list
+      validation: Active sellable price positive and within relevant unit/category band; preserve price-anchor date
+      review_before_generation: Recheck catalogue sample dates, currency, unit and category comparability.
+    standard_cost:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN+DER
+      generation: Independent category margin draw or BOM materials plus labor and overhead
+      validation: Nonnegative; component cost positive; assembled rollup within 5%; portfolio realized margin target checked
+      review_before_generation: Prove category/BOM costs and achieved portfolio margin from pilot rows.
+    billing_model:
+      sql_type: TEXT
+      nullable: false
+      basis: CAT+CFG
+      generation: Choose by sellable product archetype; components not_applicable
+      validation: SQL enum; recurring only with supported recurring UOM
+    unit_of_measure:
+      sql_type: TEXT
+      nullable: false
+      basis: CAT+CFG
+      generation: Unit consistent with billing model and product archetype
+      validation: SQL enum; term conversion must match deal_lines.quantity
+    is_active:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SYN
+      generation: Active catalogue coverage with deliberate retired version examples
+      validation: Boolean; no inactive product in new deal line
+    is_sellable:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SYN
+      generation: 120 sellable SKUs; proposed components nonsellable
+      validation: Boolean; components false and quote lines true
+    fulfillment_mode:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: Stocked, supplier, assembly, digital, service or component by product
+      validation: SQL enum; operational rows and BOM only for matching mode
+    stock_uom:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: each/component_unit for physical, not_applicable for digital/service
+      validation: SQL check; distinguish stock unit from billable unit
+  customers:
+    customer_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable synthetic customer key
+      validation: PK; credit, AR, history and deal FKs resolve
+    customer_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Unique fictional customer code
+      validation: Nonblank and unique; never a real-company identifier
+    customer_name:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Fictional/Faker name
+      validation: Nonblank; no imported client records
+    size_segment:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Exact 36 SMB, 28 Mid-Market, 16 Enterprise
+      validation: SQL enum and exact total 80
+    strategic_account:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SYN
+      generation: About eight, mainly Enterprise with some Mid-Market
+      validation: Boolean; enforce selected segment allocation, do not imply good credit
+    industry:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Controlled fictional B2B industry mix
+      validation: Nonblank and on configured industry list before freeze
+      review_before_generation: Freeze a controlled fictional industry list and proportions.
+    country_code:
+      sql_type: CHAR(2)
+      nullable: false
+      basis: SYN
+      generation: Two-letter supported customer country
+      validation: Uppercase ISO-style code; do not treat as shipping destination
+      review_before_generation: Freeze customer geography mix and country-region vocabulary.
+    region:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Country-compatible customer region
+      validation: Nonblank and belongs to chosen country code
+    customer_since:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Date before generated activity
+      validation: Not after first invoice/deal or generation as-of
+    account_status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Active/Inactive/Suspended/Blocked for conflict coverage
+      validation: SQL enum; baseline decisions block nonactive accounts
+  suppliers:
+    supplier_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable synthetic supplier/provider key
+      validation: PK; offers, POs and digital provider FKs resolve
+    supplier_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Unique fictional supplier code
+      validation: Nonblank and unique
+    supplier_name:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Fictional company name
+      validation: Nonblank; not an actual provider attestation
+    country_code:
+      sql_type: CHAR(2)
+      nullable: false
+      basis: SYN
+      generation: Supplier operating country
+      validation: Two uppercase letters, from declared supplier geography
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Active/inactive, with inactive edge cases
+      validation: SQL enum; inactive supplier must not support new commitment
+    order_calendar_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SYN
+      generation: Explicit working weekdays/holiday convention per supplier
+      validation: Typed JSON object; lead-workday calculation uses this calendar, not generic date addition
+      review_before_generation: Freeze calendar JSON schema and holidays; workday lead calculation.
+  pricing_rules:
+    pricing_rule_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS+CFG
+      generation: Stable ID compiled from profile and rule code
+      validation: PK and deterministic across repeat compile
+    policy_set_code:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Baseline, lenient or strict profile
+      validation: SQL enum; complete 33 pricing rows over three profiles
+    rule_name:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Human-readable compiled rule name
+      validation: Nonblank, stable; not used alone to decide
+    rule_type:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Volume, segment or category floor
+      validation: SQL enum; matches condition/action grammar
+    scope_type:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Global/product/category/segment/region
+      validation: SQL enum; scope_value null exactly when global
+    scope_value:
+      sql_type: TEXT
+      nullable: true
+      basis: CFG
+      generation: Null global, otherwise matching catalogue/segment/region key
+      validation: Scope exists and matches scope_type
+    condition_json:
+      sql_type: JSONB
+      nullable: false
+      basis: CFG
+      generation: Deterministic typed compiler output
+      validation: JSON object; interpreter accepts complete grammar only
+    action_json:
+      sql_type: JSONB
+      nullable: false
+      basis: CFG
+      generation: Deterministic typed ceiling/floor or discount action
+      validation: JSON object; numeric boundaries monotone and valid
+    priority:
+      sql_type: INTEGER
+      nullable: false
+      basis: CFG
+      generation: Stable explicit conflict precedence
+      validation: Integer; deterministic ordering and no ambiguous equal-priority conflict
+    is_stackable:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: CFG
+      generation: Explicit rule stacking setting
+      validation: Boolean; selected rule semantics tested at overlaps
+    is_active:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: CFG
+      generation: Active compiled policy rows
+      validation: Boolean; complete active profile required for interpretation
+  policy_rules:
+    policy_rule_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS+CFG
+      generation: Stable compiled profile/rule ID
+      validation: PK and deterministic
+    policy_set_code:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Baseline, lenient or strict profile
+      validation: SQL enum; complete 51 policy rows over three profiles
+    rule_name:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Human-readable compiled rule name
+      validation: Nonblank; not decision logic by itself
+    policy_area:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Pricing/margin/payment/contract/credit/delivery
+      validation: SQL enum and condition type agree
+    scope_type:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Global/product/category/segment/region
+      validation: SQL enum; global iff scope_value null
+    scope_value:
+      sql_type: TEXT
+      nullable: true
+      basis: CFG
+      generation: Key for chosen scope, null for global
+      validation: Resolvable configured product/category/segment/region
+    condition_json:
+      sql_type: JSONB
+      nullable: false
+      basis: CFG
+      generation: Typed condition from compiler
+      validation: JSON object; parse and validate every operator/threshold
+    severity:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Info/warning/approval_required/blocker
+      validation: SQL enum; matches required_action and hard block semantics
+    required_action:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Continue/request_exception/escalate/reject
+      validation: SQL enum; blocker must reject
+    explanation_template:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Versioned human explanation template
+      validation: Nonblank; references only declared condition fields
+    priority:
+      sql_type: INTEGER
+      nullable: false
+      basis: CFG
+      generation: Stable deterministic conflict precedence
+      validation: Integer; most severe applicable rule wins
+    is_active:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: CFG
+      generation: Active compiled rule
+      validation: Boolean; selected profile must be complete
+  approval_rules:
+    approval_rule_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS+CFG
+      generation: Stable profile/rule ID
+      validation: PK and deterministic
+    policy_set_code:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Baseline, lenient or strict profile
+      validation: SQL enum; complete 21 approval rows over three profiles
+    rule_name:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Human-readable compiled rule name
+      validation: Nonblank; not authority by itself
+    condition_json:
+      sql_type: JSONB
+      nullable: false
+      basis: CFG
+      generation: Typed routing trigger from compiler
+      validation: JSON object; parse complete grammar and threshold inclusivity
+    required_role:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Regional_Manager/Sales_Director/Sales_VP/Finance_Director/Legal_Compliance
+      validation: SQL enum; role required by matching trigger only
+    approval_sequence:
+      sql_type: INTEGER
+      nullable: false
+      basis: CFG
+      generation: Explicit ordering of applicable reviewers
+      validation: Nonnegative; ordered and deduplicated routing
+    is_mandatory:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: CFG
+      generation: Mandatory versus optional review
+      validation: Boolean; no actual approval implied
+    priority:
+      sql_type: INTEGER
+      nullable: false
+      basis: CFG
+      generation: Stable rule precedence
+      validation: Integer; reproducible on replay
+    is_active:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: CFG
+      generation: Active compiled rule
+      validation: Boolean; profile completeness check
+  compatibility_rules:
+    compatibility_rule_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable synthetic rule ID
+      validation: PK
+    catalog_version:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Catalogue version of all referenced products
+      validation: Same version as source and target products
+    rule_name:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: Named technical dependency/eligibility
+      validation: Nonblank; not executable by name alone
+    rule_type:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: Requires/excludes/attribute/required-field/installation
+      validation: SQL enum; subject and condition agree
+    scope_type:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Line/configured_group/whole_deal
+      validation: SQL enum; group scope evaluated across all grouped lines
+    source_product_id:
+      sql_type: TEXT
+      nullable: true
+      basis: SYN+CAT
+      generation: Source SKU or null for global condition
+      validation: If present FK and matching catalogue version; dependencies require source
+    target_product_id:
+      sql_type: TEXT
+      nullable: true
+      basis: SYN+CAT
+      generation: Required/excluded SKU or null when inapplicable
+      validation: If present FK/version; dependency needs target; not same as source
+    condition_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SYN+CAT
+      generation: Versioned typed configuration/region predicate
+      validation: JSON object; executable grammar and missing-key result defined before generation
+      review_before_generation: Complete executable condition grammar, installation regions and dependency coverage.
+    severity:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Warning or blocker based on dependency
+      validation: SQL enum; blocker prevents supported quote
+    message:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Plain-language finding template
+      validation: Nonblank and consistent with condition
+    priority:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Stable order for overlapping rules
+      validation: Integer; ambiguous simultaneous rules rejected
+    is_active:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SYN
+      generation: Current catalogue rules
+      validation: Boolean; inactive rule does not decide
+  bom_headers:
+    bom_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable BOM variant identifier
+      validation: PK; lines and production requirements resolve
+    finished_product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: One make_to_order sellable product
+      validation: FK/version; active effective variants cover chosen configurations
+    catalog_version:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Same catalogue as finished SKU/components
+      validation: Composite FK and no cross-version recipe
+    bom_version:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Explicit revision string
+      validation: Unique with product/version/signature
+    configuration_signature_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SYN+CAT
+      generation: Canonical option signature for offered build
+      validation: Typed JSON object; exactly one active effective BOM matches deal option signature
+      review_before_generation: Prove 18 make-to-order SKUs and 24-36 effective variants cover offered configurations.
+    output_quantity:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: Positive finished units yielded by a BOM run
+      validation: SQL positive; component needs scale by output quantity
+    effective_from:
+      sql_type: TIME
+      nullable: false
+      basis: SYN
+      generation: Revision start timestamp
+      validation: At/before eligible deal run; no active overlapping same signature
+    effective_to:
+      sql_type: TIME
+      nullable: true
+      basis: SYN
+      generation: Null open-ended or later retirement time
+      validation: Greater than start; no overlap for active equivalent BOMs
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Active/inactive revision
+      validation: SQL enum; only effective active variant selectable
+  bom_lines:
+    bom_line_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable recipe line ID
+      validation: PK and unique BOM/component pair
+    bom_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Parent configured BOM
+      validation: FK; every active offered BOM has nonempty mandatory component coverage
+    component_product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: Same-version non-sellable component
+      validation: FK; component mode, no self/cycle, UOM compatible
+    required_quantity_per_output:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: Positive component units per finished output
+      validation: SQL positive; total requirement scaled by quote and scrap
+    scrap_pct:
+      sql_type: NUMERIC(5,2)
+      nullable: false
+      basis: SYN
+      generation: Configured component loss percent
+      validation: 0 to below 100; cost and quantity both apply same loss convention
+    substitute_group_code:
+      sql_type: TEXT
+      nullable: true
+      basis: SYN
+      generation: Null or explicit substitute group for this BOM
+      validation: Nonblank when present; group alternatives share a validated function
+    priority:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Deterministic choice within substitute group
+      validation: Nonnegative; exactly one preferred valid option
+    is_mandatory:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SYN
+      generation: Required versus allowed alternative
+      validation: Boolean; all mandatory components counted once
+  customer_credit_profiles:
+    customer_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: One profile per customer
+      validation: PK/FK; every generated active customer has profile
+    credit_limit:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN
+      generation: Segment triangular EUR limits, strategic multiplier and cap
+      validation: Positive; SMB 20k/75k/200k, Mid 100k/300k/750k, Enterprise 400k/1.2m/3m; capped at 4m
+    unbilled_committed_amount:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN+DER
+      generation: Dated open commitment amount excluding invoiced AR and current deal
+      validation: Nonnegative; no double count in post-deal exposure
+    commitments_as_of_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Source observation timestamp for unbilled commitments
+      validation: Not after run as_of_at; freshness rule applied
+    commitment_evidence_ref:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Controlled independent source reference
+      validation: Nonblank; resolves to generator evidence manifest
+      review_before_generation: Define independent commitment evidence manifest and completeness marker.
+    risk_rating:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+DER
+      generation: 44 Low, 28 Medium, 8 High; payment behavior sampled conditionally
+      validation: SQL enum and exact counts; never derive from current target decision
+    credit_status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: 72 Active, 5 Review, 3 On-Hold
+      validation: SQL enum and exact counts; On-Hold blocks regardless of spare limit
+    default_payment_terms_days:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Segment-specific exact terms quotas
+      validation: SQL enum; aggregate 8/36/20/13/3 for 15/30/45/60/90
+    last_review_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Credit review date at or before current run
+      validation: Not after as-of date; freshness applied
+    next_review_date:
+      sql_type: DATE
+      nullable: true
+      basis: SYN
+      generation: Optional scheduled next review
+      validation: Null or at/after last_review_date; overdue review flagged
+  accounts_receivable:
+    receivable_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable dated invoice snapshot ID
+      validation: PK; unique invoice_number currently restricts one stored snapshot per invoice
+    customer_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Owner of invoice
+      validation: FK; matches payment record if linked by invoice_number
+    invoice_number:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Unique fictional invoice key
+      validation: SQL unique; no collision with other customer's invoice
+    invoice_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Issue date after customer_since
+      validation: At/before due and snapshot date; at/before run when selected
+    due_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Invoice date plus accepted term or recorded historical term
+      validation: At/after invoice; overdue iff due before as_of and unpaid
+    original_amount:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN+DER
+      generation: Positive invoice amount correlated with customer/deal size
+      validation: Greater than zero; agreed invoice total and paid/outstanding logic
+    outstanding_amount:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN+DER
+      generation: Remaining unpaid portion at snapshot
+      validation: 0 to original; paid exactly zero; excluded from payment history paid amount
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: DER
+      generation: Open/Partially Paid/Overdue/Paid from dates and balance
+      validation: SQL enum; overdue only if due<as_of and positive; Paid iff zero
+    as_of_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYS
+      generation: Date that snapshot represents
+      validation: At/after invoice date; select latest nonfuture snapshot per invoice
+      review_before_generation: Current unique invoice_number permits only one snapshot per invoice; historical replay needs frozen prior evidence.
+  payment_history:
+    payment_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable synthetic payment event ID
+      validation: PK
+    customer_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Payer
+      validation: FK; same owner as matching AR invoice where present
+    invoice_number:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Invoice being settled
+      validation: Nonblank; historical settled invoice may have no current AR row; no duplicate full payment
+    invoice_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Historical invoice issue
+      validation: At/before due and paid date; after customer_since
+    due_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Historical due date
+      validation: At/after invoice; lateness computed from paid_date
+    paid_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Actual synthetic settlement date
+      validation: At/after invoice, at/before historical run as-of to inform it
+    invoice_amount:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN+DER
+      generation: Full invoice value
+      validation: Positive; reconciles to invoice where same number
+    paid_amount:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN+DER
+      generation: Settled portion, not open exposure
+      validation: Positive and <= invoice amount; multiple events cannot exceed original
+  inventory:
+    inventory_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable stock snapshot ID
+      validation: PK and unique product/location/time
+    product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Physical stocked, supplier, assembly output or component SKU
+      validation: FK; product mode guard; active catalogue version
+    location_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Declared warehouse/site code
+      validation: Matches inbound/production/shipping origin vocabulary
+      review_before_generation: Freeze warehouse/site vocabulary and mapping across supply/production/shipping.
+    quantity_on_hand:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN+DER
+      generation: Demand-scaled physical stock; component proposal 2/12/60
+      validation: Nonnegative and >= allocated; snapshot states target 55/25/15/5 only for appropriate stocked sample
+    quantity_allocated:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN+DER
+      generation: Existing commitments, not proposed deal
+      validation: 0 to on-hand; free=on_hand-allocated; no row mutation for quote
+    snapshot_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Observation time for this product/location
+      validation: Latest nonfuture snapshot; older than 24h is unknown, not zero
+  supplier_items:
+    supplier_item_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable offer ID
+      validation: PK and unique supplier/product/valid_from
+    supplier_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Offering supplier
+      validation: FK; active supplier for selectable offer
+    product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Offered physical SKU/component
+      validation: FK; physical product mode only
+    supplier_sku:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Fictional supplier catalogue code
+      validation: Nonblank; scoped to supplier/product
+    minimum_order_qty:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: Positive offer minimum
+      validation: Compare required quantity after allocation; do not promise fractional forbidden order
+    order_multiple:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: Positive permissible order increment
+      validation: Purchasable quantity is ceiling to multiple above minimum
+    lead_days_min:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Earliest workday lead, proposed 3
+      validation: Nonnegative <= mode <= max, applied to supplier calendar
+    lead_days_mode:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Most likely workday lead, proposed 10
+      validation: Between min/max; no offer becomes binding confirmation
+    lead_days_max:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Upper workday lead, proposed 30
+      validation: '>= mode; may exceed capacity planning window'
+      review_before_generation: Choose horizon treatment for 30 supplier workdays versus 30 capacity calendar days.
+    unit_cost:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SYN
+      generation: Supplier offered EUR unit cost
+      validation: Positive; not automatically product standard_cost or customer quote
+    currency_code:
+      sql_type: CHAR(3)
+      nullable: false
+      basis: CFG
+      generation: EUR only
+      validation: SQL check; no implicit FX on offer
+    valid_from:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Offer start day
+      validation: At/before as-of for selection
+    valid_to:
+      sql_type: DATE
+      nullable: true
+      basis: SYN
+      generation: Null or last offer day
+      validation: Null or >= start; expired offer ignored
+    is_active:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SYN
+      generation: Active offer state
+      validation: Boolean and valid date plus supplier active
+  purchase_orders:
+    purchase_order_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable PO key
+      validation: PK; inbound rows reference it
+    supplier_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Supplier committed on header
+      validation: FK; must match any independently linked offer/provider evidence
+    reference_number:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Unique synthetic PO number
+      validation: Nonblank, SQL unique
+    ordered_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYN
+      generation: Order creation timestamp
+      validation: At/before confirmed_at and run as-of when used
+    confirmed_at:
+      sql_type: TIME
+      nullable: true
+      basis: SYN
+      generation: Null until supplier confirmation
+      validation: Required for Confirmed/Delayed/Received; >= ordered_at
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+DER
+      generation: Draft/Placed/Confirmed/Delayed/Cancelled/Received
+      validation: SQL enum; cancelled/received cannot retain active confirmed inbound
+    destination_location_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Receiving warehouse/site
+      validation: Matches every linked inbound location_id
+  inbound_supply:
+    supply_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable receipt commitment row ID
+      validation: PK
+    purchase_order_id:
+      sql_type: TEXT
+      nullable: true
+      basis: SYN
+      generation: PO key or null for independently evidenced commitment
+      validation: FK; confirmed with PO uses effective Confirmed/Delayed header
+    product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Physical SKU/component arriving
+      validation: FK and product mode guard; matches referenced PO item evidence
+    location_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Receiving warehouse/site
+      validation: Equal to PO destination; supports matching stock location
+    quantity:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: Positive dated arriving units
+      validation: SQL positive, in product stock unit, allocated<=quantity
+    quantity_allocated:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: Existing assigned inbound quantity
+      validation: 0 to quantity; free quantity only, cumulative by date
+    expected_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Date of receipt expectation
+      validation: No before confirmation for future supply; arrival needs dispatch/transit; same-day component production convention
+    confirmed_at:
+      sql_type: TIME
+      nullable: true
+      basis: SYN
+      generation: Null for unconfirmed, timestamp for binding receipt
+      validation: Nonfuture at run; >= PO confirmed_at where PO-backed
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+DER
+      generation: Planned/Confirmed/Delayed/Cancelled
+      validation: SQL enum; only valid Confirmed and effective evidence counts
+    reference_number:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Unique synthetic receipt reference
+      validation: SQL unique; traceable to one commitment
+    evidence_ref:
+      sql_type: TEXT
+      nullable: true
+      basis: SYN
+      generation: Independent binding reference if no PO
+      validation: Required for confirmed no-PO; manifest resolves and is valid
+      review_before_generation: Define independently controlled no-PO binding evidence schema and validation.
+    valid_until:
+      sql_type: TIME
+      nullable: true
+      basis: SYN
+      generation: Null or evidence expiry
+      validation: '> confirmed_at; as-of not after expiry for selection'
+  production_requirements:
+    requirement_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable operation/resource ID
+      validation: PK; unique BOM/sequence/capability/type
+    bom_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: BOM requiring this operation
+      validation: FK; every offered make_to_order BOM has complete resource path
+    operation_seq:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Positive process sequence
+      validation: SQL >=1; same-sequence resources checked on same day
+    capability_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Configured site capability name
+      validation: Nonblank; matching day capacity exists or result unknown
+    resource_type:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: equipment or workforce
+      validation: SQL enum; separate capacity consumption
+    setup_hours:
+      sql_type: NUMERIC(10,3)
+      nullable: false
+      basis: SYN
+      generation: Proposed setup hours per batch
+      validation: Nonnegative; ceil(units/batch)*setup plus units*per_unit
+    hours_per_unit:
+      sql_type: NUMERIC(10,3)
+      nullable: false
+      basis: SYN
+      generation: Proposed workforce/equipment hours per output
+      validation: Nonnegative; at least one of setup/per-unit positive
+    batch_size:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Positive whole finished units per setup batch
+      validation: SQL positive; explicit rounding convention
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: active/inactive requirement
+      validation: SQL enum; active recipe requirements complete
+  production_capacity:
+    capacity_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable capability/day snapshot ID
+      validation: PK and unique location/capability/type/day/snapshot
+    location_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Production site/warehouse code
+      validation: Declared site and matches selected BOM production location
+    capability_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Operation capability available at site
+      validation: Matches production_requirements code
+    resource_type:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: equipment or workforce
+      validation: SQL enum; both required resource types checked
+    capacity_date:
+      sql_type: DATE
+      nullable: false
+      basis: SYN
+      generation: Operating date within configured planning window
+      validation: Site-local date; do not confirm beyond horizon
+    time_zone:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: IANA zone for site
+      validation: PostgreSQL zone guard; day boundaries use this zone
+    available_capacity_hours:
+      sql_type: NUMERIC(10,3)
+      nullable: false
+      basis: SYN
+      generation: Workforce 8/16/32 or equipment 8/8/16 proposed per day
+      validation: Nonnegative; downtime applied once; unavailable implies zero
+    allocated_capacity_hours:
+      sql_type: NUMERIC(10,3)
+      nullable: false
+      basis: SYN
+      generation: Existing committed work in same capability/day
+      validation: 0 to available; proposed work held in memory only
+    snapshot_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Observation timestamp
+      validation: Latest nonfuture snapshot; freshness gate, never merge stale with current
+      review_before_generation: Define capacity freshness threshold and out-of-horizon unknown behavior.
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: active or unavailable
+      validation: SQL enum; unavailable implies zero hours
+    evidence_ref:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Controlled source observation key
+      validation: Nonblank and resolves to capacity generation ledger
+  digital_capacity:
+    digital_capacity_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable pool snapshot ID
+      validation: PK and unique pool scope/snapshot
+    product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Digital-activation sellable SKU
+      validation: FK/product-mode trigger; exact quote product match
+    configuration_signature_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SYN+CAT
+      generation: Canonical edition/configuration scope
+      validation: Typed object, equals quoted configuration signature
+    provider_id:
+      sql_type: TEXT
+      nullable: true
+      basis: SYN
+      generation: Supplier/provider key or null for internal pool
+      validation: FK if present; trusted proof must match exact provider including null
+    region_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Entitlement region/country code
+      validation: Exact quote service region; no inferred global coverage
+    term_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Supported contract term identifier
+      validation: Exact quote term and full-term coverage
+    capacity_unit:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+CAT
+      generation: user/licence/instance/protected_tb
+      validation: SQL enum and quote entitlement unit compatible
+    capacity_total:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: User/licence 20/80/250 or instance 2/10/40 proposed
+      validation: Nonnegative and >= allocated; pool-specific unit/range
+    quantity_allocated:
+      sql_type: NUMERIC(14,3)
+      nullable: false
+      basis: SYN
+      generation: Existing simultaneous entitlement commitments
+      validation: 0 to total; free pool must cover converted concurrent demand
+    activation_lead_days:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Proposed activation workday 0/1/5
+      validation: SQL nonnegative; calendar/lead yields earliest supported date
+    commitment_status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Binding/provisional/unknown proposed 70/20/10%
+      validation: SQL enum; only independently proven binding can confirm
+    confirmed_at:
+      sql_type: TIME
+      nullable: true
+      basis: SYN
+      generation: Binding evidence confirmation timestamp
+      validation: Present for binding; <= run as-of
+    valid_until:
+      sql_type: TIME
+      nullable: true
+      basis: SYN
+      generation: Term/evidence expiry
+      validation: Required binding; > confirmed_at and covers complete requested term
+    snapshot_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Pool observation timestamp
+      validation: Latest nonfuture snapshot; 24h freshness threshold
+    evidence_ref:
+      sql_type: TEXT
+      nullable: true
+      basis: SYN
+      generation: Independent synthetic provider proof key
+      validation: Required binding; trusted manifest exact scope, allocation, full-term dates and <=7-day verification age
+      review_before_generation: Generate and validate independent synthetic full-term proof manifest.
+  shipping_lanes:
+    lane_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable lane ID
+      validation: PK; active origin/destination/service unique
+    origin_location_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Stock/production dispatch location
+      validation: Matches location vocabulary and candidate physical supply
+    origin_time_zone:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: IANA timezone at origin
+      validation: PostgreSQL guard; cutoff evaluated in origin-local time
+    destination_country_code:
+      sql_type: CHAR(2)
+      nullable: false
+      basis: SYN
+      generation: One supported destination country
+      validation: Two letters; matches quoted country
+    destination_region:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: Supported region within country
+      validation: Exact quoted region, not customer default
+    shipping_service_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN
+      generation: standard or express
+      validation: SQL enum; explicit lane needed for requested service
+    transit_workdays:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYN
+      generation: Standard 2/4/7 or express 1/2/3 proposal
+      validation: Nonnegative; count allowed workdays after dispatch
+    dispatch_weekdays_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SYN
+      generation: Explicit Monday-Friday/exception days at origin
+      validation: JSON array of unique valid weekday numbers; no empty active lane
+      review_before_generation: Define holiday handling and exact weekday-number convention.
+    cutoff_local_time:
+      sql_type: TIME
+      nullable: false
+      basis: SYN
+      generation: Proposed 15:00 origin-local
+      validation: Valid TIME; before/after cutoff affects dispatch date
+    is_active:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SYN
+      generation: Active lane setting
+      validation: Boolean; inactive lanes cannot confirm delivery
+  deals:
+    deal_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Immutable synthetic submission ID
+      validation: PK; no self/cyclic supersession
+    supersedes_deal_id:
+      sql_type: TEXT
+      nullable: true
+      basis: SUB+SYS
+      generation: Prior deal ID only for resubmission
+      validation: FK, not self, no cycle; original inputs remain immutable
+    customer_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SUB+SYN+OBS
+      generation: Selected existing customer; customer repeat activity uses an explicitly transformed popularity shape
+      validation: FK; account/credit owner and submitted customer frozen
+    salesperson_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+SUB
+      generation: Fictional assigned salesperson code
+      validation: Nonblank controlled owner list; no implied employee master
+    deal_name:
+      sql_type: TEXT
+      nullable: false
+      basis: SYN+SUB
+      generation: Short synthetic purpose/name
+      validation: Nonblank; no label leakage
+    submitted_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Submission timestamp
+      validation: Before run start/as-of; historical chronology; no future evidence
+    currency_code:
+      sql_type: CHAR(3)
+      nullable: false
+      basis: CFG
+      generation: EUR only
+      validation: SQL check; all monetary arithmetic same currency
+    catalog_version:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Active chosen catalogue
+      validation: Quote lines and rules match; immutable on submission
+    policy_set_code:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG
+      generation: Original selected policy, baseline for historical
+      validation: SQL enum; replay changes only applied run policy
+    requested_delivery_date:
+      sql_type: DATE
+      nullable: true
+      basis: SUB+SYN
+      generation: Physical requested arrival date or null for digital-only
+      validation: Required physical; may deliberately precede feasible arrival for labelled tests
+    destination_country_code:
+      sql_type: CHAR(2)
+      nullable: true
+      basis: SUB+SYN
+      generation: Quoted destination country
+      validation: Required physical/installation; exact lane/eligibility match
+    destination_region:
+      sql_type: TEXT
+      nullable: true
+      basis: SUB+SYN
+      generation: Quoted destination region
+      validation: Required physical/installation; country/region compatibility
+    shipping_service_code:
+      sql_type: TEXT
+      nullable: true
+      basis: SUB+SYN
+      generation: standard/express for physical, null otherwise
+      validation: SQL enum; matching active lane required
+    terms_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SUB+CFG
+      generation: Payment days, clause codes, partial delivery, optional contract_months
+      validation: Typed JSON; no payment_method; recurring quote term; allowed values; schema and no label leakage
+    exception_justification:
+      sql_type: TEXT
+      nullable: true
+      basis: SUB+SYN
+      generation: Sales reason for requested exception or null
+      validation: Required by applicable exception policy; never substitutes approval
+    requirements_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SUB+SYN
+      generation: Structured customer needs, no expected answer
+      validation: JSON object; whitelisted keys/types before agent visibility
+      review_before_generation: Define allowed keys/types; unstructured text must not become hidden rule inputs.
+    evidence_refs_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SUB+SYN
+      generation: References to supplied documents, not proof by their string alone
+      validation: JSON array of typed references; resolution and authorization required
+      review_before_generation: Define typed reference metadata and resolution; string alone is not proof.
+    salesperson_comments:
+      sql_type: TEXT
+      nullable: true
+      basis: SUB+SYN
+      generation: Optional human note
+      validation: Text; cannot override typed data or policies
+    deal_status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS+SYN
+      generation: Draft/Submitted/Under Review/Approved/Rejected/Cancelled
+      validation: SQL enum; transitions consistent with historical decision; no draft after submit
+    dataset_type:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: historical/generated_test/evaluation partition
+      validation: SQL enum; evaluation answers isolated, never in agent view
+    historical_decision:
+      sql_type: TEXT
+      nullable: true
+      basis: DER
+      generation: Historical Approved/Rejected or null elsewhere
+      validation: SQL check; derive from baseline facts at historical as-of
+    decision_reason:
+      sql_type: TEXT
+      nullable: true
+      basis: DER
+      generation: Historical explanation or null elsewhere
+      validation: Consistent with independent baseline decision, absent from agent-visible view
+    approved_by_roles_json:
+      sql_type: JSONB
+      nullable: true
+      basis: DER
+      generation: Historical simulated role list or null elsewhere
+      validation: JSON array; roles required by policy; no actual human approval or agent leakage
+  deal_lines:
+    deal_line_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Stable line ID
+      validation: PK; no edits after submission
+    deal_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SUB+SYS
+      generation: Parent deal
+      validation: FK; submitted header has >=1 line
+    line_number:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYS
+      generation: 1-based within deal
+      validation: SQL positive, unique and contiguous per deal
+    product_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SUB+SYN+OBS
+      generation: Active sellable SKU of deal catalogue
+      validation: FK and trigger; historical popularity target 60-70% top fifth
+      review_before_generation: Verify transformed popularity target and tolerance in a pilot; source-mirror checksum is still unverified.
+    quantity:
+      sql_type: INTEGER
+      nullable: false
+      basis: SUB+DER
+      generation: Positive full-term billable unit count
+      validation: SQL positive; recurring equals units_per_period times months or years
+    quoted_unit_price:
+      sql_type: NUMERIC(14,2)
+      nullable: false
+      basis: SUB+DER
+      generation: List price minus requested discount/exception
+      validation: Positive; line and weighted discount/margin recomputed; no silent policy repair
+    configuration_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SUB+CAT
+      generation: Product-specific selected options and units_per_period for recurring
+      validation: Typed JSON object; catalogue signature, dependencies and unit consistency
+      review_before_generation: Freeze per-archetype JSON schema and signature mapping.
+    fulfillment_group_code:
+      sql_type: TEXT
+      nullable: true
+      basis: SUB+SYN
+      generation: Null or shared indivisible group code within deal
+      validation: Nonblank when present; all grouped lines evaluated together
+    requested_activation_date:
+      sql_type: DATE
+      nullable: true
+      basis: SUB+SYN
+      generation: Optional digital requested date
+      validation: Only digital line; deliberately unsupported dates remain visible
+    installation_requested:
+      sql_type: BOOLEAN
+      nullable: false
+      basis: SUB+SYN
+      generation: Boolean installation request
+      validation: Only eligible physical product/region can return eligible; destination required
+  deal_runs:
+    run_id:
+      sql_type: UUID
+      nullable: false
+      basis: SYS
+      generation: Random/reproducible UUID for run
+      validation: PK; unique across profile replays
+    deal_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Frozen submitted deal ID
+      validation: Composite FK with original policy/catalogue; no draft
+    original_policy_set_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Copy of deal policy_set_code
+      validation: Composite FK exact; never changed by replay
+    applied_policy_set_code:
+      sql_type: TEXT
+      nullable: false
+      basis: CFG+SYS
+      generation: Same or explicitly selected replay policy
+      validation: SQL enum; only commercial policy varies for counterfactual
+    catalog_version_used:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Copy of deal catalogue version
+      validation: Composite FK exact
+    as_of_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Frozen evidence evaluation time
+      validation: <= started_at; no selected evidence in future
+    data_snapshot_ref:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Reproducible frozen data snapshot identifier
+      validation: Nonblank and resolves to stored snapshot manifest
+      review_before_generation: Define reproducible snapshot manifest and historical evidence isolation.
+    input_snapshot_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SYS
+      generation: Immutable typed agent-visible submitted input
+      validation: JSON object; hashes to deal version, no hidden answers/decisions
+    config_hash:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Hash of effective generator/decision config
+      validation: Nonblank digest; replay uses same facts and correct profile
+    run_status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: queued/running/completed/stopped/failed
+      validation: SQL enum; terminal status needs completion time
+    started_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Runtime start
+      validation: '>= submission/as_of'
+    completed_at:
+      sql_type: TIME
+      nullable: true
+      basis: SYS
+      generation: Null until terminal, then completion timestamp
+      validation: '>= started_at; terminal status required'
+  agent_execution_log:
+    execution_id:
+      sql_type: BIGINT
+      nullable: false
+      basis: SYS
+      generation: Database identity number
+      validation: PK; not assigned from external dataset
+    run_id:
+      sql_type: UUID
+      nullable: false
+      basis: SYS
+      generation: Parent immutable run
+      validation: Composite FK with deal/profile/catalogue
+    deal_id:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Copy of run deal ID
+      validation: Composite FK exact
+    agent_name:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Six specialist names or Orchestrator
+      validation: SQL enum; required attempt coverage or explicit Skipped
+    attempt_number:
+      sql_type: INTEGER
+      nullable: false
+      basis: SYS
+      generation: Positive per-run/per-agent retry index
+      validation: Unique run/agent/attempt, sequential without gaps
+    started_at:
+      sql_type: TIME
+      nullable: false
+      basis: SYS
+      generation: Agent attempt start
+      validation: '>= run start; no future evidence'
+    completed_at:
+      sql_type: TIME
+      nullable: true
+      basis: SYS
+      generation: Null only for Running; otherwise >= start
+      validation: SQL status/timestamp check
+    status:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Running/Success/Failed/Retried/Skipped
+      validation: SQL enum; failure has error, success has typed output
+    latency_ms:
+      sql_type: INTEGER
+      nullable: true
+      basis: SYS+DER
+      generation: Monotonic elapsed milliseconds
+      validation: Null while running or skipped; nonnegative; agrees with timestamps within clock tolerance
+    error_message:
+      sql_type: TEXT
+      nullable: true
+      basis: SYS
+      generation: Failure reason or null
+      validation: Required on Failed; no secrets; no hallucinated business outcome
+    input_snapshot_json:
+      sql_type: JSONB
+      nullable: false
+      basis: SYS
+      generation: Typed allowed agent input
+      validation: JSON object; subset of frozen run, no historical/evaluation labels
+    output_json:
+      sql_type: JSONB
+      nullable: true
+      basis: SYS
+      generation: Structured decision/findings or null on failed/skipped
+      validation: JSON object; contract for named agent and cited evidence
+      review_before_generation: Define typed output contracts for each agent and Orchestrator.
+    flags_json:
+      sql_type: JSONB
+      nullable: true
+      basis: SYS
+      generation: Structured flags
+      validation: JSON object/array; flags attributable and reproducible
+    reasoning_summary:
+      sql_type: TEXT
+      nullable: true
+      basis: SYS
+      generation: Short evidence-based explanation
+      validation: No private chain-of-thought or unsupported claims
+    model_name:
+      sql_type: TEXT
+      nullable: true
+      basis: SYS
+      generation: Model identifier used by attempt or null for deterministic gate
+      validation: Versioned; no fake model call
+    prompt_version:
+      sql_type: TEXT
+      nullable: true
+      basis: SYS
+      generation: Prompt template version or null for deterministic gate
+      validation: Resolvable hash/version when model used
+    applied_policy_set_code:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Copy of run applied policy
+      validation: Composite FK exact
+    catalog_version_used:
+      sql_type: TEXT
+      nullable: false
+      basis: SYS
+      generation: Copy of run catalogue
+      validation: Composite FK exact
