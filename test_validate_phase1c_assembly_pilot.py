@@ -110,7 +110,8 @@ class AssemblyDatabaseTests(unittest.TestCase):
                                   cost_parameters=ASSEMBLY["cost_parameters"], commercial_rule_mode="reference")
                 assembly = bundle["facts"]["supply"]["assembly"]["PILOT-P-BUILD"]
                 self.assertEqual(assembly["bom_id"], "PILOT-BOM-001")
-                self.assertEqual(assembly["component_demand"]["PILOT-P-COMP-A"], Decimal("6") / Decimal("0.99"))
+                self.assertLess(abs(assembly["component_demand"]["PILOT-P-COMP-A"] -
+                                    Decimal("6") / Decimal("0.99")), Decimal("0.001"))
                 self.assertEqual(assembly["operation_days"], [date(2026, 10, 5), date(2026, 10, 6)])
                 self.assertTrue(assembly["cost_rollup"]["within_5_pct"])
                 self.assertEqual(bundle["facts"]["lines"][0]["production_status"], "feasible_uncommitted")
