@@ -123,6 +123,8 @@ def compile_rows(config):
              "basis": "each_line"}, "approval_required", "escalate", 10)
         pol("PAYMENT-CAP", "Payment terms exceed hard cap", "payment",
             {"payment_terms_days_gt": policy["hard_payment_terms_cap_days"]}, "blocker", "reject", 1)
+        pol("PAYMENT-INVALID", "Payment terms are not allowed", "payment",
+            {"payment_terms_days_not_in": config["dataset"]["payment_terms_days"]}, "blocker", "reject", 1)
         pol("PAYMENT-EXCEPTION", "Payment terms need Finance review", "payment",
             {"payment_terms_days_gt": policy["standard_payment_terms_max_days"],
              "payment_terms_days_lte": policy["hard_payment_terms_cap_days"]},
@@ -135,6 +137,8 @@ def compile_rows(config):
             "approval_required", "escalate", 10)
         pol("CREDIT-ON-HOLD", "Customer credit is on hold", "credit",
             {"credit_status_eq": "On-Hold"}, "blocker", "reject", 1)
+        pol("ACCOUNT-INACTIVE", "Customer account is not active", "credit",
+            {"account_status_in": ["Inactive", "Suspended", "Blocked"]}, "blocker", "reject", 1)
         pol("CREDIT-REVIEW", "Customer credit status needs review", "credit",
             {"credit_status_eq": "Review"}, "approval_required", "escalate", 10)
         pol("OVERDUE-AR", "Positive overdue AR needs Finance review", "credit",
@@ -143,6 +147,8 @@ def compile_rows(config):
             {"contract_clause_eq": "legal_review"}, "approval_required", "escalate", 10)
         pol("CONTRACT-PROHIBITED", "Prohibited contract clause", "contract",
             {"contract_clause_eq": "prohibited"}, "blocker", "reject", 1)
+        pol("CONTRACT-INVALID", "Contract clause is not allowed", "contract",
+            {"contract_clause_not_in": config["dataset"]["contract_clause_codes"]}, "blocker", "reject", 1)
         pol("DELIVERY-LATE", "Delivery later than requested", "delivery",
             {"delivery_later_than_requested": True}, "approval_required", "escalate", 10)
         def route(suffix, name, condition, role, priority):
