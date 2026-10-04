@@ -237,6 +237,18 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
                     errors.append("make-to-order configuration contains unknown keys")
             elif set(payload) - set(spec["physical_allowed_keys"]):
                 errors.append("physical configuration contains unknown keys")
+    elif kind == "configuration_signature":
+        spec = jc["configuration_signature_json"]
+        if not isinstance(payload, dict):
+            errors.append("configuration signature must be an object")
+        else:
+            if set(payload) - set(spec["allowed_top_level_keys"]):
+                errors.append("configuration signature contains unknown keys")
+            for key in ("selected_options", "option_codes", "feature_codes"):
+                if key in payload and (not isinstance(payload[key], list) or
+                                       any(not _is_nonempty_string(v) for v in payload[key]) or
+                                       len(payload[key]) != len(set(payload[key]))):
+                    errors.append(f"configuration signature {key} must be unique nonempty strings")
     elif kind == "requirements":
         spec = jc["requirements_json"]
         if not isinstance(payload, dict):
