@@ -273,7 +273,7 @@ def evaluate_compiled_policy(bundle):
             sales_rank = max(sales_rank, rank)
     blocked = [item for item in hits if item["severity"] == "blocker"]
     approvals = []
-    if not blocked:
+    if not blocked and not gaps:
         sales_suffix = ("ROUTINE", "SALES-DIRECTOR", "SALES-VP")[sales_rank]
         for suffix, selected in ((sales_suffix, True), ("FINANCE", finance), ("LEGAL", legal)):
             if selected:
