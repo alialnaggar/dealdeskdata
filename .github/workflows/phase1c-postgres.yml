@@ -20,6 +20,9 @@ on:
       - phase1c_data_contract.yaml
       - validate_phase1c_data_contract.py
       - test_validate_phase1c_data_contract.py
+      - phase1c_pilot_slice.json
+      - validate_phase1c_pilot.py
+      - test_validate_phase1c_pilot.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -46,6 +49,9 @@ on:
       - phase1c_data_contract.yaml
       - validate_phase1c_data_contract.py
       - test_validate_phase1c_data_contract.py
+      - phase1c_pilot_slice.json
+      - validate_phase1c_pilot.py
+      - test_validate_phase1c_pilot.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -109,6 +115,10 @@ jobs:
         run: |
           python -m unittest -v test_validate_phase1c_data_contract
           python validate_phase1c_data_contract.py
+      - name: Preflight connected pilot rows and SQL constraints
+        run: |
+          python validate_phase1c_pilot.py
+          python -m unittest -v test_validate_phase1c_pilot
       - name: Compare reader results with 14 reference scenarios
         run: python -m unittest -v test_phase1c_reader
       - name: Validate and compile synthetic policy profiles
