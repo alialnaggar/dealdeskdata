@@ -58,7 +58,7 @@ tables:
       basis: CAT+SYN
       generation: Product-specific typed attribute template from catalogue calibration
       validation: JSON object; required keys, units and option combinations per archetype must be validated
-      review_before_generation: Define archetype-specific JSON key/type/unit schemas and option compatibility.
+      review_before_generation: Contract defined in phase1c_data_contract.yaml; implement and test archetype-specific row validation and option compatibility.
     list_price:
       sql_type: NUMERIC(14,2)
       nullable: false
@@ -146,14 +146,14 @@ tables:
       basis: SYN
       generation: Controlled fictional B2B industry mix
       validation: Nonblank and on configured industry list before freeze
-      review_before_generation: Freeze a controlled fictional industry list and proportions.
+      review_before_generation: Industry vocabulary and synthetic proportions are defined in phase1c_data_contract.yaml; run pilot distribution validation.
     country_code:
       sql_type: CHAR(2)
       nullable: false
       basis: SYN
       generation: Two-letter supported customer country
       validation: Uppercase ISO-style code; do not treat as shipping destination
-      review_before_generation: Freeze customer geography mix and country-region vocabulary.
+      review_before_generation: Country/region vocabulary and synthetic shares are defined in phase1c_data_contract.yaml; run pilot distribution validation.
     region:
       sql_type: TEXT
       nullable: false
@@ -209,7 +209,7 @@ tables:
       basis: SYN
       generation: Explicit working weekdays/holiday convention per supplier
       validation: Typed JSON object; lead-workday calculation uses this calendar, not generic date addition
-      review_before_generation: Freeze calendar JSON schema and holidays; workday lead calculation.
+      review_before_generation: Calendar JSON shape and weekday-only convention are defined in phase1c_data_contract.yaml; implement supplier workday validation.
   pricing_rules:
     pricing_rule_id:
       sql_type: TEXT
@@ -454,7 +454,7 @@ tables:
       basis: SYN+CAT
       generation: Versioned typed configuration/region predicate
       validation: JSON object; executable grammar and missing-key result defined before generation
-      review_before_generation: Complete executable condition grammar, installation regions and dependency coverage.
+      review_before_generation: Predicate shape and installation regions are defined in phase1c_data_contract.yaml; complete dependency coverage and row execution.
     severity:
       sql_type: TEXT
       nullable: false
@@ -510,7 +510,7 @@ tables:
       basis: SYN+CAT
       generation: Canonical option signature for offered build
       validation: Typed JSON object; exactly one active effective BOM matches deal option signature
-      review_before_generation: Prove 18 make-to-order SKUs and 24-36 effective variants cover offered configurations.
+      review_before_generation: Canonical signature shape is defined in phase1c_data_contract.yaml; prove 18 make-to-order SKUs and 24-36 effective variants cover offered configurations.
     output_quantity:
       sql_type: NUMERIC(14,3)
       nullable: false
@@ -770,7 +770,7 @@ tables:
       basis: SYN
       generation: Declared warehouse/site code
       validation: Matches inbound/production/shipping origin vocabulary
-      review_before_generation: Freeze warehouse/site vocabulary and mapping across supply/production/shipping.
+      review_before_generation: Warehouse/site vocabulary and time zones are defined in phase1c_data_contract.yaml; enforce location mapping across generated rows.
     quantity_on_hand:
       sql_type: NUMERIC(14,3)
       nullable: false
@@ -1256,7 +1256,7 @@ tables:
       basis: SYN
       generation: Explicit Monday-Friday/exception days at origin
       validation: JSON array of unique valid weekday numbers; no empty active lane
-      review_before_generation: Define holiday handling and exact weekday-number convention.
+      review_before_generation: ISO weekday and no-holiday convention are defined in phase1c_data_contract.yaml; implement lane payload validation.
     cutoff_local_time:
       sql_type: TIME
       nullable: false
@@ -1366,14 +1366,14 @@ tables:
       basis: SUB+SYN
       generation: Structured customer needs, no expected answer
       validation: JSON object; whitelisted keys/types before agent visibility
-      review_before_generation: Define allowed keys/types; unstructured text must not become hidden rule inputs.
+      review_before_generation: Allowed keys/types are defined in phase1c_data_contract.yaml; implement row-level rejection and leakage tests.
     evidence_refs_json:
       sql_type: JSONB
       nullable: false
       basis: SUB+SYN
       generation: References to supplied documents, not proof by their string alone
       validation: JSON array of typed references; resolution and authorization required
-      review_before_generation: Define typed reference metadata and resolution; string alone is not proof.
+      review_before_generation: Typed reference metadata is defined in phase1c_data_contract.yaml; implement resolution and independent evidence checks.
     salesperson_comments:
       sql_type: TEXT
       nullable: true
@@ -1454,7 +1454,7 @@ tables:
       basis: SUB+CAT
       generation: Product-specific selected options and units_per_period for recurring
       validation: Typed JSON object; catalogue signature, dependencies and unit consistency
-      review_before_generation: Freeze per-archetype JSON schema and signature mapping.
+      review_before_generation: Per-mode configuration keys and signature mapping are defined in phase1c_data_contract.yaml; implement row-level enforcement.
     fulfillment_group_code:
       sql_type: TEXT
       nullable: true
@@ -1620,7 +1620,7 @@ tables:
       basis: SYS
       generation: Structured decision/findings or null on failed/skipped
       validation: JSON object; contract for named agent and cited evidence
-      review_before_generation: Define typed output contracts for each agent and Orchestrator.
+      review_before_generation: Common typed output envelope is defined in phase1c_data_contract.yaml; complete per-agent output contracts and runtime validation.
     flags_json:
       sql_type: JSONB
       nullable: true

@@ -27,6 +27,9 @@ def render(contract):
         "SQL requiredness, uniqueness, FKs, checks and triggers also apply. A **Review** mark means "
         "an executable generation or validation choice is still open. The checker verifies exact "
         "column coverage and SQL shape; it cannot certify the prose or empirical realism.",
+        "The companion phase1c_data_contract.yaml now fixes the synthetic geography, location/time-zone, "
+        "weekday/calendar, industry/country mix, structured deal/evidence JSON and agent-output contract. "
+        "This closes the vocabulary and shape definitions; row generation and full validator execution remain pending.",
         "",
         "## Cross-field and cross-table relationships",
         "",

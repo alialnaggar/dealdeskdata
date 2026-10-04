@@ -17,6 +17,9 @@ on:
       - validate_phase1c_column_rules.py
       - test_validate_phase1c_column_rules.py
       - render_phase1c_column_rules.py
+      - phase1c_data_contract.yaml
+      - validate_phase1c_data_contract.py
+      - test_validate_phase1c_data_contract.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -40,6 +43,9 @@ on:
       - validate_phase1c_column_rules.py
       - test_validate_phase1c_column_rules.py
       - render_phase1c_column_rules.py
+      - phase1c_data_contract.yaml
+      - validate_phase1c_data_contract.py
+      - test_validate_phase1c_data_contract.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -99,6 +105,10 @@ jobs:
         run: |
           python -m unittest -v test_validate_phase1c_column_rules
           python validate_phase1c_column_rules.py
+      - name: Validate controlled vocabularies and JSON contracts
+        run: |
+          python -m unittest -v test_validate_phase1c_data_contract
+          python validate_phase1c_data_contract.py
       - name: Compare reader results with 14 reference scenarios
         run: python -m unittest -v test_phase1c_reader
       - name: Validate and compile synthetic policy profiles
