@@ -58,6 +58,17 @@ def validate(config):
           "category/margin keys differ")
 
     shares(ds["customer_segment_counts"], ds["customers"], "customer segment counts")
+    line_weights = ds["historical_lines_per_deal_sampling_percent"]
+    shares(line_weights, 100, "historical line-count sampling weights")
+    check(set(line_weights) == set(range(1, 9)), "historical line-count bins must be 1..8")
+    check(abs(sum(n * pct for n, pct in line_weights.items()) / 100 -
+              ds["historical_lines_per_deal_target"]) < 1e-8,
+          "historical line-count expected mean differs from target")
+    bounds = ds["historical_lines_per_deal_achieved_mean_range"]
+    check(len(bounds) == 2 and bounds[0] <= ds["historical_lines_per_deal_target"] <= bounds[1],
+          "historical achieved mean band must contain target")
+    check(0 <= ds["historical_lines_per_deal_bin_tolerance_percentage_points"] <= 100,
+          "historical line-count bin tolerance")
     credit = commercial["credit_profiles"]
     shares(credit["risk_rating_exact_counts"], ds["customers"], "risk rating counts")
     shares(credit["credit_status_exact_counts"], ds["customers"], "credit status counts")
