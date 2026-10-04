@@ -1391,6 +1391,10 @@ fulfillment_production_calibration:
   proposed_parameters:
     component_catalogue:
       non_sellable_component_count: 36
+      component_unit_indivisible: true
+      stock_quantity_rule: component_unit_on_hand_and_allocated_are_whole_nonnegative_units
+      stock_requirement_rule: sum_scrap_adjusted_theoretical_demand_across_selected_builds_then_round_up_once_per_component
+      cost_rule_note: per_finished_unit_material_cost_uses_unrounded_expected_scrap_consumption;_stock_check_uses_rounded_units
       family_counts: {compute: 12, storage: 9, network_and_power: 9, chassis_and_other: 6}
       total_product_rows_with_120_sellable: 156
       shared_across_at_least_two_BOMs_min_share: 0.4

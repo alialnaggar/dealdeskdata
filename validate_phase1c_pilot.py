@@ -156,6 +156,11 @@ def validate_pilot(pilot, contract, schema_sql, config):
         try:
             if not 0 <= _number(stock["quantity_allocated"]) <= _number(stock["quantity_on_hand"]):
                 errors.append(f"inventory.{key}: allocation exceeds stock")
+            if product is not None and product["stock_uom"] == "component_unit" and any(
+                _number(stock[field]) != _number(stock[field]).to_integral_value()
+                for field in ("quantity_on_hand", "quantity_allocated")
+            ):
+                errors.append(f"inventory.{key}: component_unit stock and allocation must be whole units")
             snapshot = _instant(stock["snapshot_at"])
             if snapshot > as_of:
                 errors.append(f"inventory.{key}: snapshot is after as_of_at")

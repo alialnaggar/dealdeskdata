@@ -38,6 +38,11 @@ class CalibrationContractTests(unittest.TestCase):
         self.assertIn("digital proof fields differ from reader's trusted manifest", errors)
         self.assertIn("BOM variants cannot cover the proposed assembled products", errors)
 
+    def test_component_rounding_contract_is_required(self):
+        changed = deepcopy(CONFIG)
+        changed["fulfillment_production_calibration"]["proposed_parameters"]["component_catalogue"]["component_unit_indivisible"] = False
+        self.assertIn("component stock rounding contract differs from reader", validate(changed)["errors"])
+
     def test_historical_line_mix_mean_and_bins_are_checked(self):
         changed = deepcopy(CONFIG)
         changed["dataset"]["historical_lines_per_deal_sampling_percent"][8] += 1

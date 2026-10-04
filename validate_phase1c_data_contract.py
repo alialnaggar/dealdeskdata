@@ -110,6 +110,13 @@ def validate_contract(contract):
     if supplier_calendar.get("holiday_dates") != []:
         errors.append("Phase 1C supplier holiday list must remain empty")
 
+    component = contract.get("component_stock", {})
+    if (component.get("initial_unit") != "component_unit" or component.get("indivisible") is not True or
+        component.get("on_hand_and_allocated") != "whole_nonnegative_units" or
+        component.get("requirement") != "aggregate_scrap_adjusted_theoretical_demand_across_selected_builds_then_ceil_per_component" or
+        not component.get("no_quote_reservation")):
+        errors.append("component stock contract must preserve whole units and aggregate rounding")
+
     json_contracts = contract.get("json_contracts", {})
     required_contracts = {
         "products_attributes_json", "deal_terms_json", "deal_line_configuration_json",

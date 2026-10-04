@@ -34,6 +34,8 @@ class AssemblyPreflightTests(unittest.TestCase):
         self.assertEqual((finding["bom_id"], finding["operation_dates"], finding["status"]),
                          ("PILOT-BOM-001", ["2026-10-05", "2026-10-06"], "feasible_uncommitted"))
         self.assertEqual(finding["required_hours"], {"PILOT-R-ASM": "2.0", "PILOT-R-TEST": "2.75"})
+        self.assertEqual(finding["component_stock_required"],
+                         {"PILOT-P-COMP-A": "7", "PILOT-P-COMP-B": "3"})
         self.assertEqual(finding["cost_rollup_eur"], "428.47")
 
     def test_rejects_ambiguous_or_invalid_bom_and_cost(self):
@@ -58,6 +60,9 @@ class AssemblyPreflightTests(unittest.TestCase):
         changed = deepcopy(ASSEMBLY)
         changed["inventory_rows"][0]["quantity_allocated"] = 8
         self.assertTrue(any("component stock is insufficient" in e for e in check(changed)["errors"]))
+        changed = deepcopy(ASSEMBLY)
+        changed["inventory_rows"][0]["quantity_on_hand"] = 8.5
+        self.assertTrue(any("component_unit stock and allocation must be whole" in e for e in check(changed)["errors"]))
         changed = deepcopy(ASSEMBLY)
         changed["production_capacity"][1]["allocated_capacity_hours"] = 6
         self.assertTrue(any("no fresh fitting capacity" in e for e in check(changed)["errors"]))
@@ -112,6 +117,8 @@ class AssemblyDatabaseTests(unittest.TestCase):
                 self.assertEqual(assembly["bom_id"], "PILOT-BOM-001")
                 self.assertLess(abs(assembly["component_demand"]["PILOT-P-COMP-A"] -
                                     Decimal("6") / Decimal("0.99")), Decimal("0.001"))
+                self.assertEqual(assembly["component_stock_required"],
+                                 {"PILOT-P-COMP-A": Decimal(7), "PILOT-P-COMP-B": Decimal(3)})
                 self.assertEqual(assembly["operation_days"], [date(2026, 10, 5), date(2026, 10, 6)])
                 self.assertTrue(assembly["cost_rollup"]["within_5_pct"])
                 self.assertEqual(bundle["facts"]["lines"][0]["production_status"], "feasible_uncommitted")

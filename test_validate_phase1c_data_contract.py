@@ -41,6 +41,12 @@ class DataContractTests(unittest.TestCase):
             with self.subTest(weekdays=weekdays):
                 self.assertTrue(validate_payload("shipping_weekdays", weekdays, CONTRACT))
 
+    def test_component_stock_rounding_contract(self):
+        changed = deepcopy(CONTRACT)
+        changed["component_stock"]["indivisible"] = False
+        self.assertIn("component stock contract must preserve whole units and aggregate rounding",
+                      validate_contract(changed)["errors"])
+
     def test_terms_and_evidence_payloads_are_typed(self):
         terms = {
             "payment_terms_days": 30,

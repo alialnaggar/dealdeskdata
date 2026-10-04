@@ -80,6 +80,14 @@ supplier_order_calendar:
   holiday_dates: []
   holiday_policy: no public-holiday model in Phase 1C; do not claim holiday-aware lead times
 
+component_stock:
+  initial_unit: component_unit
+  indivisible: true
+  on_hand_and_allocated: whole_nonnegative_units
+  requirement: aggregate_scrap_adjusted_theoretical_demand_across_selected_builds_then_ceil_per_component
+  standard_cost: unrounded_expected_material_scrap_consumption_plus_labor_and_overhead
+  no_quote_reservation: true
+
 json_contracts:
   products_attributes_json:
     common_required:

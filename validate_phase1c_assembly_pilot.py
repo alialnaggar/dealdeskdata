@@ -9,6 +9,7 @@ import json
 import yaml
 
 from validate_phase1c_column_rules import schema_columns
+from phase1c_component_units import whole_component_requirements
 from validate_phase1c_data_contract import validate_payload
 from validate_phase1c_pilot import _day, _instant, _number, add_workdays, validate_pilot
 
@@ -100,11 +101,13 @@ def validate_assembly(base, extension, contract, schema_sql, config):
         material += per_unit * _number(component["standard_cost"])
     stock = pilot["rows"]["inventory"]
     location = config["fulfillment_production_calibration"]["proposed_parameters"]["production_capacity"]["workshop_location"]
-    for component_id, units in demand.items():
+    stock_required = whole_component_requirements(demand)
+    for component_id in demand:
+        relevant = [s for s in stock if s["product_id"] == component_id]
         available = sum((_number(s["quantity_on_hand"]) - _number(s["quantity_allocated"])
-                         for s in stock if s["product_id"] == component_id and s["location_id"] == location and
+                         for s in relevant if s["location_id"] == location and
                          _instant(s["snapshot_at"]) <= as_of and as_of - _instant(s["snapshot_at"]) <= timedelta(hours=24)), Decimal(0))
-        if available < units:
+        if available < stock_required[component_id]:
             errors.append(f"{component_id}: component stock is insufficient at build site")
 
     capacities = extension["production_capacity"]
@@ -153,6 +156,7 @@ def validate_assembly(base, extension, contract, schema_sql, config):
     return {"errors": errors, "findings": [] if errors else [{
         "code": "assembly_candidate", "bom_id": bom["bom_id"],
         "build_units": str(build), "component_demand": {k: str(v) for k, v in demand.items()},
+        "component_stock_required": {k: str(v) for k, v in stock_required.items()},
         "required_hours": {k: str(v) for k, v in required_hours.items()},
         "operation_dates": [d.isoformat() for d in operation_dates],
         "cost_rollup_eur": str(total_cost.quantize(Decimal("0.01"))),

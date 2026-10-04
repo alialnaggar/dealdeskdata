@@ -8,6 +8,7 @@ from collections import defaultdict
 from calendar import monthrange
 from datetime import datetime, timedelta
 from decimal import Decimal, ROUND_CEILING
+from phase1c_component_units import whole_component_requirements
 from zoneinfo import ZoneInfo
 import json
 from pathlib import Path
@@ -334,6 +335,9 @@ def _supply_findings(bundle, as_of):
                 "labor_hours_for_one_unit": labor_per_unit}
         plans.append(plan)
 
+    # These initial physical component SKUs are indivisible. Combine demand
+    # across the deal's selected builds before rounding each component once.
+    stock_required = whole_component_requirements(aggregate_components)
     reserved_hours = defaultdict(lambda: Decimal(0))
     for plan in plans:
         product, b, build = plan["product"], plan["bom"], plan["build"]
@@ -360,7 +364,7 @@ def _supply_findings(bundle, as_of):
                                  if x["location_id"] == location and _fresh(x, as_of)), Decimal(0))
                             + sum((x["quantity"] - x["quantity_allocated"] for x in bindings[c]
                                    if x["location_id"] == location and x["expected_date"] <= day), Decimal(0))
-                            >= units for c, units in aggregate_components.items())
+                            >= units for c, units in stock_required.items())
                         if not material:
                             continue
                     matching = []
@@ -390,7 +394,8 @@ def _supply_findings(bundle, as_of):
             for key, need in best[2]:
                 reserved_hours[(best[1], *key)] += need
         result["assembly"][product] = {"bom_id": b["bom_id"], "build_units": build,
-            "component_demand": plan["components"], "required_hours": plan["hours"],
+            "component_demand": plan["components"], "component_stock_required": stock_required,
+            "required_hours": plan["hours"],
             "operation_days": [key[2] for key, _ in best[2]] if best else [],
             "first_fitting_day": best[0] if best else None,
             "material_cost_per_unit": plan["material_cost_per_unit"],

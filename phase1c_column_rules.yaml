@@ -71,7 +71,7 @@ tables:
       nullable: false
       basis: SYN+DER
       generation: Independent category margin draw or BOM materials plus labor and overhead
-      validation: Nonnegative; component cost positive; assembled rollup within 5%; portfolio realized margin target checked
+      validation: Nonnegative; component cost positive; assembled expected material scrap cost remains unrounded, plus labor/overhead within 5%; portfolio realized margin target checked
       review_before_generation: Prove category/BOM costs and achieved portfolio margin from pilot rows.
     billing_model:
       sql_type: TEXT
@@ -108,7 +108,7 @@ tables:
       nullable: false
       basis: SYN+CAT
       generation: each/component_unit for physical, not_applicable for digital/service
-      validation: SQL check; distinguish stock unit from billable unit
+      validation: SQL check; component_unit is indivisible in the initial catalogue; distinguish stock unit from billable unit
   customers:
     customer_id:
       sql_type: TEXT
@@ -559,13 +559,13 @@ tables:
       nullable: false
       basis: SYN
       generation: Positive component units per finished output
-      validation: SQL positive; total requirement scaled by quote and scrap
+      validation: SQL positive; scale by build/output and scrap yield, aggregate shared component demand, then round stock requirement up once per component
     scrap_pct:
       sql_type: NUMERIC(5,2)
       nullable: false
       basis: SYN
       generation: Configured component loss percent
-      validation: 0 to below 100; cost and quantity both apply same loss convention
+      validation: 0 to below 100; cost uses theoretical expected consumption and physical stock check rounds aggregate component need up
     substitute_group_code:
       sql_type: TEXT
       nullable: true
@@ -776,13 +776,13 @@ tables:
       nullable: false
       basis: SYN+DER
       generation: Demand-scaled physical stock; component proposal 2/12/60
-      validation: Nonnegative and >= allocated; snapshot states target 55/25/15/5 only for appropriate stocked sample
+      validation: Nonnegative and >= allocated; component_unit stock is whole units; snapshot states target 55/25/15/5 only for appropriate stocked sample
     quantity_allocated:
       sql_type: NUMERIC(14,3)
       nullable: false
       basis: SYN+DER
       generation: Existing commitments, not proposed deal
-      validation: 0 to on-hand; free=on_hand-allocated; no row mutation for quote
+      validation: 0 to on-hand; component_unit allocations are whole units; free=on_hand-allocated; no row mutation for quote
     snapshot_at:
       sql_type: TIME
       nullable: false

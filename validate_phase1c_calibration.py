@@ -94,6 +94,9 @@ def validate(config):
     check(sum(c["family_counts"].values()) == c["non_sellable_component_count"] and
           c["total_product_rows_with_120_sellable"] == ds["sellable_products"] + c["non_sellable_component_count"],
           "component count/total product count mismatch")
+    check(c.get("component_unit_indivisible") is True and
+          c.get("stock_requirement_rule") == "sum_scrap_adjusted_theoretical_demand_across_selected_builds_then_round_up_once_per_component",
+          "component stock rounding contract differs from reader")
     b = p["BOMs"]
     check(0 < b["make_to_order_sellable_count"] <= ds["sellable_products"] and
           b["effective_configured_BOM_variants_range"][0] >= b["make_to_order_sellable_count"],
