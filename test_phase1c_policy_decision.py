@@ -120,6 +120,7 @@ class CommercialDecisionTests(unittest.TestCase):
         self.assertEqual(result["status"], "needs_evidence")
         self.assertIn("credit_commitments_stale", result["evidence_gaps"])
         self.assertNotIn("PO-BASE-CREDIT-EXCEPTION", ids(result))
+        self.assertEqual(roles(result), [])
 
     def test_line_discount_cannot_be_hidden_by_deal_average(self):
         item = deal(price=100)
