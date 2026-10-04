@@ -87,6 +87,7 @@ def _digital_proof(pool, line, deal, as_of, resolver):
     expected = {
         "evidence_ref": pool["evidence_ref"],
         "product_id": pool["product_id"],
+        "provider_id": pool["provider_id"],
         "configuration_signature_json": pool["configuration_signature_json"],
         "region_code": pool["region_code"],
         "term_code": pool["term_code"],
@@ -116,7 +117,7 @@ def load_provider_evidence(path):
     if set(payload) != {"schema_version", "records"} or payload["schema_version"] != 1:
         raise ValueError("Unsupported provider evidence manifest")
     records = {}
-    required = {"evidence_ref", "product_id", "configuration_signature_json", "region_code",
+    required = {"evidence_ref", "product_id", "provider_id", "configuration_signature_json", "region_code",
                 "term_code", "capacity_unit", "capacity_total", "quantity_allocated",
                 "commitment_status", "verified_at", "covers_from", "covers_until"}
     for raw in payload["records"]:

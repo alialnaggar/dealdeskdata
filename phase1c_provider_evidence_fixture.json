@@ -4,6 +4,7 @@
     {
       "evidence_ref": "FULLTERM-digital_exact_binding_pool",
       "product_id": "digital_exact_binding_pool-P",
+      "provider_id": null,
       "configuration_signature_json": {"edition": "business"},
       "region_code": "DE",
       "term_code": "12m",

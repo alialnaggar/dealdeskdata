@@ -1461,7 +1461,7 @@ fulfillment_production_calibration:
       confirmed_pool_snapshot_max_age_hours: 24
       binding_evidence_recheck_calendar_days: 7
       trusted_provider_evidence_source: controlled_manifest_outside_deal_input
-      trusted_provider_evidence_required_fields: [evidence_ref, status, product_id, configuration_signature_json, provider_id, region_code, term_code, capacity_unit, capacity_total, covers_from, covers_until, verified_at]
+      trusted_provider_evidence_required_fields: [evidence_ref, product_id, provider_id, configuration_signature_json, region_code, term_code, capacity_unit, capacity_total, quantity_allocated, commitment_status, verified_at, covers_from, covers_until]
       provider_evidence_fixture_file: phase1c_provider_evidence_fixture.json
       fixture_limitation: synthetic_reference_proof_not_live_provider_confirmation
       monthly_concurrent_units: line_quantity/contract_months

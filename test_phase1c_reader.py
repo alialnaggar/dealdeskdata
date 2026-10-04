@@ -87,6 +87,9 @@ class ReaderReferenceTests(unittest.TestCase):
         invalid = read_run(self.conn, "00000000-0000-4000-8000-000000040001",
                            digital_evidence_resolver=lambda ref: dict(verified_provider_record(ref), covers_until=date(2027, 8, 4)))
         self.assertEqual(invalid["facts"]["lines"][0]["digital"]["status"], "binding_candidate")
+        wrong_provider = read_run(self.conn, "00000000-0000-4000-8000-000000040001",
+                                  digital_evidence_resolver=lambda ref: dict(verified_provider_record(ref), provider_id="other"))
+        self.assertEqual(wrong_provider["facts"]["lines"][0]["digital"]["status"], "binding_candidate")
 
     def test_digital_provisional(self):
         d = self.read(5)["facts"]["lines"][0]["digital"]
