@@ -47,6 +47,12 @@ class DataContractTests(unittest.TestCase):
         self.assertIn("component stock contract must preserve whole units and aggregate rounding",
                       validate_contract(changed)["errors"])
 
+    def test_configured_builds_separate_same_product_variants(self):
+        changed = deepcopy(CONTRACT)
+        changed["configured_builds"]["same_product_variant_demand"] = "group_by_product"
+        self.assertIn("configured build contract must separate BOM variants and unbound finished stock",
+                      validate_contract(changed)["errors"])
+
     def test_terms_and_evidence_payloads_are_typed(self):
         terms = {
             "payment_terms_days": 30,

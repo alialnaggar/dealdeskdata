@@ -122,6 +122,74 @@ class AssemblyDatabaseTests(unittest.TestCase):
                 self.assertEqual(assembly["operation_days"], [date(2026, 10, 5), date(2026, 10, 6)])
                 self.assertTrue(assembly["cost_rollup"]["within_5_pct"])
                 self.assertEqual(bundle["facts"]["lines"][0]["production_status"], "feasible_uncommitted")
+
+                # A second configuration of the same sellable SKU shares both
+                # components. Finished stock lacks a configuration identifier.
+                conn.execute("UPDATE deal_desk.inventory SET quantity_on_hand=13 WHERE inventory_id='PILOT-I-COMP-A'")
+                conn.execute("""INSERT INTO deal_desk.inventory
+                    (inventory_id, product_id, location_id, quantity_on_hand, quantity_allocated, snapshot_at)
+                    VALUES ('PILOT-I-BUILD', 'PILOT-P-BUILD', 'WH-EU-CENTRAL', 1, 0,
+                            '2026-10-04T10:00:00+02:00')""")
+                conn.execute("""INSERT INTO deal_desk.bom_headers
+                    (bom_id, finished_product_id, catalog_version, bom_version,
+                     configuration_signature_json, output_quantity, effective_from, status)
+                    VALUES ('PILOT-BOM-002', 'PILOT-P-BUILD', 'CATALOGUE_2026_V1', 'V2',
+                            '{"selected_options":["enhanced"]}', 1, '2026-09-01T00:00:00+02:00', 'active')""")
+                conn.execute("""INSERT INTO deal_desk.bom_lines
+                    (bom_line_id, bom_id, component_product_id, required_quantity_per_output,
+                     scrap_pct, priority, is_mandatory)
+                    SELECT 'PILOT-BL2-' || right(bom_line_id, 1), 'PILOT-BOM-002', component_product_id,
+                           required_quantity_per_output, scrap_pct, priority, is_mandatory
+                    FROM deal_desk.bom_lines WHERE bom_id='PILOT-BOM-001'""")
+                conn.execute("""INSERT INTO deal_desk.production_requirements
+                    (requirement_id, bom_id, operation_seq, capability_code, resource_type,
+                     setup_hours, hours_per_unit, batch_size, status)
+                    SELECT 'PILOT-R2-' || operation_seq, 'PILOT-BOM-002', operation_seq,
+                           capability_code, resource_type, setup_hours, hours_per_unit, batch_size, status
+                    FROM deal_desk.production_requirements WHERE bom_id='PILOT-BOM-001'""")
+                conn.execute("""INSERT INTO deal_desk.deals
+                    (deal_id, customer_id, salesperson_id, deal_name, submitted_at, currency_code,
+                     catalog_version, policy_set_code, requested_delivery_date, destination_country_code,
+                     destination_region, shipping_service_code, terms_json, deal_status, dataset_type)
+                    SELECT 'PILOT-D-002', customer_id, salesperson_id, 'Two configured builds', submitted_at,
+                           currency_code, catalog_version, policy_set_code, requested_delivery_date,
+                           destination_country_code, destination_region, shipping_service_code,
+                           terms_json, 'Draft', dataset_type
+                    FROM deal_desk.deals WHERE deal_id='PILOT-D-001'""")
+                conn.execute("""INSERT INTO deal_desk.deal_lines
+                    (deal_line_id, deal_id, line_number, product_id, quantity, quoted_unit_price,
+                     configuration_json, installation_requested)
+                    SELECT 'PILOT-DL-002A', 'PILOT-D-002', 1, product_id, 3, quoted_unit_price,
+                           configuration_json, false
+                    FROM deal_desk.deal_lines WHERE deal_line_id='PILOT-DL-001'""")
+                conn.execute("""INSERT INTO deal_desk.deal_lines
+                    (deal_line_id, deal_id, line_number, product_id, quantity, quoted_unit_price,
+                     configuration_json, installation_requested)
+                    SELECT 'PILOT-DL-002B', 'PILOT-D-002', 2, product_id, 2, quoted_unit_price,
+                           '{"selected_options":["enhanced"]}', false
+                    FROM deal_desk.deal_lines WHERE deal_line_id='PILOT-DL-001'""")
+                conn.execute("UPDATE deal_desk.deals SET deal_status='Submitted' WHERE deal_id='PILOT-D-002'")
+                conn.execute("SET CONSTRAINTS ALL IMMEDIATE")
+                conn.execute("""INSERT INTO deal_desk.deal_runs
+                    (run_id, deal_id, original_policy_set_code, applied_policy_set_code,
+                     catalog_version_used, as_of_at, data_snapshot_ref, input_snapshot_json,
+                     config_hash, run_status, started_at)
+                    SELECT '00000000-0000-4000-8000-000000990002', 'PILOT-D-002',
+                           original_policy_set_code, applied_policy_set_code, catalog_version_used,
+                           as_of_at, 'SYN-MULTI-BOM-SNAPSHOT', '{}', config_hash, run_status, started_at
+                    FROM deal_desk.deal_runs WHERE run_id='00000000-0000-4000-8000-000000990001'""")
+                multi = read_run(conn, "00000000-0000-4000-8000-000000990002",
+                                 cost_parameters=ASSEMBLY["cost_parameters"], commercial_rule_mode="reference")
+                supply = multi["facts"]["supply"]
+                self.assertEqual({key: plan["build_units"] for key, plan in supply["assembly_by_bom"].items()},
+                                 {"PILOT-BOM-001": Decimal(3), "PILOT-BOM-002": Decimal(2)})
+                self.assertNotIn("PILOT-P-BUILD", supply["assembly"])
+                self.assertEqual(supply["aggregate_component_stock_required"]["PILOT-P-COMP-A"], Decimal(11))
+                self.assertEqual({f["selected_bom_id"] for f in multi["facts"]["lines"]},
+                                 {"PILOT-BOM-001", "PILOT-BOM-002"})
+                self.assertTrue(all(f["finished_stock_configuration_unbound"] and
+                                    f["production_status"] == "feasible_uncommitted"
+                                    for f in multi["facts"]["lines"]))
             finally:
                 conn.rollback()
 

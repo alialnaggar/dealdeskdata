@@ -4,7 +4,7 @@
     {
       "product_id": "PILOT-P-BUILD", "product_code": "SYN-BUILD-001", "catalog_version": "CATALOGUE_2026_V1",
       "product_name": "Synthetic Configured Server", "category": "servers_and_compute_infrastructure",
-      "product_type": "physical", "attributes_json": {"archetype_code": "configured_server", "demand_class": "regular", "option_codes": ["standard"]},
+      "product_type": "physical", "attributes_json": {"archetype_code": "configured_server", "demand_class": "regular", "option_codes": ["standard", "enhanced"]},
       "list_price": 650, "standard_cost": 430, "billing_model": "one_time", "unit_of_measure": "device",
       "is_active": true, "is_sellable": true, "fulfillment_mode": "make_to_order", "stock_uom": "each"
     },

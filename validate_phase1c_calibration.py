@@ -101,6 +101,10 @@ def validate(config):
     check(0 < b["make_to_order_sellable_count"] <= ds["sellable_products"] and
           b["effective_configured_BOM_variants_range"][0] >= b["make_to_order_sellable_count"],
           "BOM variants cannot cover the proposed assembled products")
+    check(b.get("selected_build_scope") == "product_and_exact_configuration_signature" and
+          b.get("multi_variant_finished_stock_without_configuration") == "unbound_cannot_confirm_either_variant" and
+          b.get("same_product_variant_demand") == "group_line_quantities_by_selected_BOM_not_product_total",
+          "multi-variant BOM selection contract differs from reader")
     triplet(b["mandatory_components_per_BOM"], "components per BOM")
     triplet(p["suppliers"]["component_lead_workdays"], "supplier lead workdays")
     triplet(p["aggregate_inventory"]["component_on_hand_units"], "component stock")

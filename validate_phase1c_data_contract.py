@@ -116,6 +116,13 @@ def validate_contract(contract):
         component.get("requirement") != "aggregate_scrap_adjusted_theoretical_demand_across_selected_builds_then_ceil_per_component" or
         not component.get("no_quote_reservation")):
         errors.append("component stock contract must preserve whole units and aggregate rounding")
+    configured = contract.get("configured_builds", {})
+    if (configured.get("line_bom_match") != "product_catalogue_and_exact_configuration_signature_at_run_as_of" or
+        configured.get("same_product_variant_demand") != "group_by_selected_BOM" or
+        configured.get("unconfigured_finished_stock_with_multiple_variants") != "visible_but_not_confirming_either_variant" or
+        configured.get("shared_component_stock") != "aggregate_and_round_once_per_component_at_site" or
+        configured.get("result_attribution") != "per_BOM_and_quoted_line"):
+        errors.append("configured build contract must separate BOM variants and unbound finished stock")
 
     json_contracts = contract.get("json_contracts", {})
     required_contracts = {

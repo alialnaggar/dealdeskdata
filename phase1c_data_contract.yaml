@@ -88,6 +88,13 @@ component_stock:
   standard_cost: unrounded_expected_material_scrap_consumption_plus_labor_and_overhead
   no_quote_reservation: true
 
+configured_builds:
+  line_bom_match: product_catalogue_and_exact_configuration_signature_at_run_as_of
+  same_product_variant_demand: group_by_selected_BOM
+  unconfigured_finished_stock_with_multiple_variants: visible_but_not_confirming_either_variant
+  shared_component_stock: aggregate_and_round_once_per_component_at_site
+  result_attribution: per_BOM_and_quoted_line
+
 json_contracts:
   products_attributes_json:
     common_required:

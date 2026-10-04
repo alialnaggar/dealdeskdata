@@ -52,7 +52,8 @@ def assemble_deal_decision(bundle):
         configuration.append({"line_id": line_id, "status": "invalid" if config_reasons else "valid",
                               "codes": config_reasons,
                               "bom_ids": [b["bom_id"] for b in bundle["bom"]
-                                          if b["finished_product_id"] == line["product_id"]]})
+                                          if b["finished_product_id"] == line["product_id"] and
+                                          b["configuration_signature_json"] == line["configuration_json"]]})
 
         if line["fulfillment_mode"] == "digital_activation":
             status = fact.get("digital", {}).get("status", "unknown")
@@ -67,6 +68,8 @@ def assemble_deal_decision(bundle):
             source_ids = [s for option in fact.get("shipping_options", [])
                           for s in ([option["stock_id"]] if option.get("stock_id") else [])
                           + option.get("supply_ids", [])]
+            if fact.get("selected_bom_id"):
+                source_ids.append(fact["selected_bom_id"])
             date = fact.get("earliest_full_date")
             if status == "late_alternative" or (status == "feasible_uncommitted"
                                                  and fact.get("shipping_by_request") is False):
@@ -93,10 +96,12 @@ def assemble_deal_decision(bundle):
                             "tentative": status == "feasible_uncommitted"})
 
     rollup_gaps = []
-    for product, plan in bundle["facts"]["supply"]["assembly"].items():
+    supply = bundle["facts"]["supply"]
+    cost_plans = supply.get("assembly_by_bom") or supply["assembly"]
+    for key, plan in cost_plans.items():
         rollup = plan.get("cost_rollup")
         if rollup and not rollup["within_5_pct"]:
-            rollup_gaps.append(f"assembly_cost_disagreement:{product}")
+            rollup_gaps.append(f"assembly_cost_disagreement:{key}")
     evidence_gaps.extend(rollup_gaps)
     blockers = list(commercial["hard_blocks"]) + config_blocks
     if blockers:

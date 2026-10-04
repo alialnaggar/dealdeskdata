@@ -509,7 +509,7 @@ tables:
       nullable: false
       basis: SYN+CAT
       generation: Canonical option signature for offered build
-      validation: Typed JSON object; exactly one active effective BOM matches deal option signature
+      validation: Typed JSON object; each quoted line selects exactly one active effective BOM by product and exact signature; same-SKU variant quantities stay separate
       review_before_generation: Canonical signature shape is defined in phase1c_data_contract.yaml; prove 18 make-to-order SKUs and 24-36 effective variants cover offered configurations.
     output_quantity:
       sql_type: NUMERIC(14,3)
@@ -763,7 +763,7 @@ tables:
       nullable: false
       basis: SYN
       generation: Physical stocked, supplier, assembly output or component SKU
-      validation: FK; product mode guard; active catalogue version
+      validation: FK; product mode guard; active catalogue version; make-to-order finished stock without configuration is unbound when a deal selects multiple variants
     location_id:
       sql_type: TEXT
       nullable: false

@@ -88,12 +88,38 @@ class DecisionGateTests(unittest.TestCase):
         item = complete_bundle()
         item["facts"]["supply"]["assembly"] = {"P1": {"cost_rollup": {"within_5_pct": False}}}
         self.assertEqual(assemble_deal_decision(item)["status"], "needs_evidence")
+        item = complete_bundle()
+        item["facts"]["supply"]["assembly_by_bom"] = {
+            "B1": {"cost_rollup": {"within_5_pct": True}},
+            "B2": {"cost_rollup": {"within_5_pct": False}},
+        }
+        result = assemble_deal_decision(item)
+        self.assertEqual(result["status"], "needs_evidence")
+        self.assertIn("assembly_cost_disagreement:B2", result["evidence_gaps"])
 
     def test_lines_must_match_reader_facts(self):
         item = complete_bundle()
         item["facts"]["lines"][0]["line_id"] = "wrong"
         with self.assertRaisesRegex(ValueError, "Misaligned"):
             assemble_deal_decision(item)
+
+    def test_two_configurations_keep_bom_attribution_per_line(self):
+        item = complete_bundle()
+        item["lines"][0].update(fulfillment_mode="make_to_order", configuration_json={"selected_options": ["standard"]})
+        other = deepcopy(item["lines"][0])
+        other.update(deal_line_id="L2", line_id="L2", configuration_json={"selected_options": ["enhanced"]})
+        item["lines"].append(other)
+        item["facts"]["lines"][0].update(fulfillment_status="feasible_uncommitted", selected_bom_id="B1")
+        second_fact = deepcopy(item["facts"]["lines"][0])
+        second_fact.update(line_id="L2", selected_bom_id="B2")
+        item["facts"]["lines"].append(second_fact)
+        item["bom"] = [
+            {"bom_id": "B1", "finished_product_id": "P1", "configuration_signature_json": {"selected_options": ["standard"]}},
+            {"bom_id": "B2", "finished_product_id": "P1", "configuration_signature_json": {"selected_options": ["enhanced"]}},
+        ]
+        result = assemble_deal_decision(item)
+        self.assertEqual([f["bom_ids"] for f in result["specialists"]["configuration"]], [["B1"], ["B2"]])
+        self.assertEqual([f["source_ids"] for f in result["specialists"]["availability"]], [["B1", "I1"], ["B2", "I1"]])
 
 
 @unittest.skipUnless(os.environ.get("DATABASE_URL"), "PostgreSQL integration requires DATABASE_URL")

@@ -227,6 +227,9 @@ def _supply_findings(bundle, as_of):
     demands = defaultdict(lambda: Decimal(0))
     for line in lines:
         demands[line["product_id"]] += Decimal(line["quantity"])
+    selected_boms_by_product = defaultdict(list)
+    for bom in bundle["bom"]:
+        selected_boms_by_product[bom["finished_product_id"]].append(bom)
     by_product = defaultdict(list)
     for row in stock:
         by_product[row["product_id"]].append(row)
@@ -239,7 +242,8 @@ def _supply_findings(bundle, as_of):
                  (row["po_status"] == "Confirmed" and row["po_confirmed_at"] <= as_of
                   and row["destination_location_id"] == row["location_id"]))):
             bindings[row["product_id"]].append(row)
-    result = {"demand_by_product": dict(demands), "stock": {}, "binding_receipts": {}, "assembly": {},
+    result = {"demand_by_product": dict(demands), "stock": {}, "binding_receipts": {},
+              "assembly": {}, "assembly_by_bom": {},
               "production_receipt_convention": "confirmed_receipt_usable_on_expected_date"}
     for product in set(demands) | {x["component_product_id"] for x in bundle["bom_lines"]}:
         result["stock"][product] = [{"id": x["inventory_id"], "location": x["location_id"],
@@ -251,8 +255,13 @@ def _supply_findings(bundle, as_of):
             continue
         product = line["product_id"]
         demand = demands[product]
+        # Finished inventory has no configuration key. It cannot confirm either
+        # variant when this deal selects multiple BOMs for the same product.
+        unbound_finished = (line["fulfillment_mode"] == "make_to_order" and
+                            len(selected_boms_by_product[product]) > 1)
         options = []
-        locations = {x["location_id"] for x in by_product[product] + bindings[product]}
+        locations = set() if unbound_finished else {
+            x["location_id"] for x in by_product[product] + bindings[product]}
         for location in locations:
             lane = lanes.get(location)
             if not lane:
@@ -280,19 +289,23 @@ def _supply_findings(bundle, as_of):
                 if running >= demand:
                     break
         line_fact = next(f for f in bundle["facts"]["lines"] if f["line_id"] == line["deal_line_id"])
+        if unbound_finished:
+            line_fact["finished_stock_configuration_unbound"] = True
         line_fact["shipping_options"] = options
         full_options = [o for o in options if o["quantity"] >= demand]
         requested = bundle["deal"]["requested_delivery_date"]
         line_fact["shipping_by_request"] = any(o["arrival"] <= requested for o in full_options) if requested else None
         line_fact["quantity_by_requested_date"] = max((o["quantity"] for o in options if requested and o["arrival"] <= requested), default=Decimal(0))
-        available_now = max((x["quantity_on_hand"] - x["quantity_allocated"] for x in by_product[product] if _fresh(x, as_of)), default=Decimal(0))
+        available_now = (Decimal(0) if unbound_finished else max(
+            (x["quantity_on_hand"] - x["quantity_allocated"] for x in by_product[product] if _fresh(x, as_of)),
+            default=Decimal(0)))
         line_fact["available_now_quantity"] = min(demand, available_now)
         line_fact["partial_available_now"] = (bool(bundle["deal"]["terms_json"].get("allow_partial_delivery"))
                                               and 0 < available_now < demand)
         if full_options:
             line_fact["earliest_full_date"] = min(x["arrival"] for x in full_options)
             line_fact["fulfillment_status"] = "confirmed_by_date" if line_fact["shipping_by_request"] else "late_alternative"
-        elif not by_product[product] and line["fulfillment_mode"] == "make_to_order":
+        elif (not by_product[product] or unbound_finished) and line["fulfillment_mode"] == "make_to_order":
             line_fact["fulfillment_status"] = "pending_production_check"
         elif by_product[product] and not any(_fresh(x, as_of) for x in by_product[product]):
             line_fact["fulfillment_status"] = "unknown"
@@ -304,9 +317,15 @@ def _supply_findings(bundle, as_of):
     aggregate_components = defaultdict(lambda: Decimal(0))
     for b in bundle["bom"]:
         product = b["finished_product_id"]
-        free_finished = max((x["quantity_on_hand"] - x["quantity_allocated"]
-                             for x in by_product[product] if _fresh(x, as_of)), default=Decimal(0))
-        build = max(Decimal(0), demands[product] - free_finished)
+        matching_lines = [line for line in lines if line["product_id"] == product and
+                          line["configuration_json"] == b["configuration_signature_json"]]
+        if not matching_lines:
+            continue
+        requested_build = sum((Decimal(line["quantity"]) for line in matching_lines), Decimal(0))
+        free_finished = (Decimal(0) if len(selected_boms_by_product[product]) > 1 else max(
+            (x["quantity_on_hand"] - x["quantity_allocated"]
+             for x in by_product[product] if _fresh(x, as_of)), default=Decimal(0)))
+        build = max(Decimal(0), requested_build - free_finished)
         components = defaultdict(lambda: Decimal(0))
         material_cost = Decimal(0)
         for bl in bundle["bom_lines"]:
@@ -330,7 +349,8 @@ def _supply_findings(bundle, as_of):
             hours[(req["capability_code"], req["resource_type"])] += need
             if req["resource_type"] == "workforce":
                 labor_per_unit += req["setup_hours"] + req["hours_per_unit"]
-        plan = {"bom": b, "product": product, "build": build, "components": dict(components),
+        plan = {"bom": b, "product": product, "build": build,
+                "line_ids": {line["deal_line_id"] for line in matching_lines}, "components": dict(components),
                 "hours": dict(hours), "steps": steps, "material_cost_per_unit": material_cost,
                 "labor_hours_for_one_unit": labor_per_unit}
         plans.append(plan)
@@ -338,6 +358,7 @@ def _supply_findings(bundle, as_of):
     # These initial physical component SKUs are indivisible. Combine demand
     # across the deal's selected builds before rounding each component once.
     stock_required = whole_component_requirements(aggregate_components)
+    result["aggregate_component_stock_required"] = stock_required
     reserved_hours = defaultdict(lambda: Decimal(0))
     for plan in plans:
         product, b, build = plan["product"], plan["bom"], plan["build"]
@@ -393,26 +414,31 @@ def _supply_findings(bundle, as_of):
         if best:
             for key, need in best[2]:
                 reserved_hours[(best[1], *key)] += need
-        result["assembly"][product] = {"bom_id": b["bom_id"], "build_units": build,
+        record = {"bom_id": b["bom_id"], "product_id": product, "line_ids": sorted(plan["line_ids"]),
+            "build_units": build,
             "component_demand": plan["components"], "component_stock_required": stock_required,
             "required_hours": plan["hours"],
             "operation_days": [key[2] for key, _ in best[2]] if best else [],
             "first_fitting_day": best[0] if best else None,
             "material_cost_per_unit": plan["material_cost_per_unit"],
             "labor_hours_for_one_unit": plan["labor_hours_for_one_unit"]}
+        result["assembly_by_bom"][b["bom_id"]] = record
+        if len(selected_boms_by_product[product]) == 1:
+            result["assembly"][product] = record
         params = bundle.get("cost_parameters")
         if params:
             labor = plan["labor_hours_for_one_unit"] * Decimal(str(params["workforce_cost_eur_per_hour"]))
             overhead = (plan["material_cost_per_unit"] + labor) * Decimal(str(params["overhead_fraction"]))
             rollup = plan["material_cost_per_unit"] + labor + overhead
             standard = next(x["standard_cost"] for x in lines if x["product_id"] == product)
-            result["assembly"][product]["cost_rollup"] = {"material": plan["material_cost_per_unit"],
+            record["cost_rollup"] = {"material": plan["material_cost_per_unit"],
                 "labor": labor, "overhead": overhead, "total": rollup,
                 "within_5_pct": abs(rollup - standard) <= standard * Decimal("0.05")}
         if build > 0:
             for line, fact in zip(lines, bundle["facts"]["lines"]):
-                if line["product_id"] != product:
+                if line["deal_line_id"] not in plan["line_ids"]:
                     continue
+                fact["selected_bom_id"] = b["bom_id"]
                 fact["production_status"] = ("feasible_uncommitted" if best else
                     "unknown" if not has_material_evidence or not plan["steps"] else "infeasible_without_replenishment")
                 if best:

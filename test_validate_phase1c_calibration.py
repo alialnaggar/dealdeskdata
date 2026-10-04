@@ -43,6 +43,11 @@ class CalibrationContractTests(unittest.TestCase):
         changed["fulfillment_production_calibration"]["proposed_parameters"]["component_catalogue"]["component_unit_indivisible"] = False
         self.assertIn("component stock rounding contract differs from reader", validate(changed)["errors"])
 
+    def test_multi_variant_bom_selection_contract_is_required(self):
+        changed = deepcopy(CONFIG)
+        changed["fulfillment_production_calibration"]["proposed_parameters"]["BOMs"]["same_product_variant_demand"] = "group_by_product"
+        self.assertIn("multi-variant BOM selection contract differs from reader", validate(changed)["errors"])
+
     def test_historical_line_mix_mean_and_bins_are_checked(self):
         changed = deepcopy(CONFIG)
         changed["dataset"]["historical_lines_per_deal_sampling_percent"][8] += 1

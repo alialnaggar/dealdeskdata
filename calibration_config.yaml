@@ -1402,6 +1402,9 @@ fulfillment_production_calibration:
       cost_rule: jointly_derive_component_costs_and_BOM_rollups_against_generated_sellable_cost_bands
     BOMs:
       make_to_order_sellable_count: 18
+      selected_build_scope: product_and_exact_configuration_signature
+      multi_variant_finished_stock_without_configuration: unbound_cannot_confirm_either_variant
+      same_product_variant_demand: group_line_quantities_by_selected_BOM_not_product_total
       effective_configured_BOM_variants_range: [24, 36]
       mandatory_components_per_BOM: [2, 4, 6]
       required_component_units_per_finished_unit: [1, 2, 8]
