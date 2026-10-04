@@ -13,6 +13,8 @@ on:
       - calibration_config.yaml
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
+      - phase1c_policy_decision.py
+      - test_phase1c_policy_decision.py
       - .github/workflows/phase1c-postgres.yml
   pull_request:
     paths:
@@ -26,6 +28,8 @@ on:
       - calibration_config.yaml
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
+      - phase1c_policy_decision.py
+      - test_phase1c_policy_decision.py
       - .github/workflows/phase1c-postgres.yml
   workflow_dispatch:
 
@@ -78,4 +82,6 @@ jobs:
           python -m unittest -v test_phase1c_policy_compiler
           python compile_phase1c_policy.py --output /tmp/phase1c_compiled_rules.sql
           psql -X -v ON_ERROR_STOP=1 -f /tmp/phase1c_compiled_rules.sql
-          psql -X -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF (SELECT count(*) FROM deal_desk.pricing_rules) <> 33 OR (SELECT count(*) FROM deal_desk.policy_rules) <> 42 OR (SELECT count(*) FROM deal_desk.approval_rules) <> 21 THEN RAISE EXCEPTION 'Incomplete compiled policy rows'; END IF; END \$\$;"
+          psql -X -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF (SELECT count(*) FROM deal_desk.pricing_rules) <> 33 OR (SELECT count(*) FROM deal_desk.policy_rules) <> 51 OR (SELECT count(*) FROM deal_desk.approval_rules) <> 21 THEN RAISE EXCEPTION 'Incomplete compiled policy rows'; END IF; END \$\$;"
+      - name: Test full commercial decisions using compiled rows
+        run: python -m unittest -v test_phase1c_policy_decision
