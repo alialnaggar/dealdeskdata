@@ -86,13 +86,20 @@ class PilotDatabaseTests(unittest.TestCase):
                 conn.execute("SET LOCAL search_path TO deal_desk, public")
                 for table in TABLES:
                     for row in PILOT["rows"][table]:
-                        names = list(row)
+                        # Submitted headers lock their lines. Build the draft first,
+                        # then submit it after the line insert in this transaction.
+                        insert_row = {**row, "deal_status": "Draft"} if table == "deals" else row
+                        names = list(insert_row)
                         query = sql.SQL("INSERT INTO deal_desk.{} ({}) VALUES ({})").format(
                             sql.Identifier(table), sql.SQL(", ").join(map(sql.Identifier, names)),
                             sql.SQL(", ").join(sql.Placeholder() for _ in names))
-                        values = [Jsonb(row[name]) if name.endswith("_json") and row[name] is not None
-                                  else row[name] for name in names]
+                        values = [Jsonb(insert_row[name]) if name.endswith("_json") and insert_row[name] is not None
+                                  else insert_row[name] for name in names]
                         conn.execute(query, values)
+                deal = PILOT["rows"]["deals"][0]
+                conn.execute("UPDATE deal_desk.deals SET deal_status = %s WHERE deal_id = %s",
+                             (deal["deal_status"], deal["deal_id"]))
+                conn.execute("SET CONSTRAINTS ALL IMMEDIATE")
                 for table in TABLES:
                     key = PILOT["rows"][table][0][ID_FIELD[table]]
                     query = sql.SQL("SELECT count(*) FROM deal_desk.{} WHERE {} = %s").format(
