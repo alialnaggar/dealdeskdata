@@ -16,6 +16,8 @@ def _is_nonempty_string(value):
 
 
 def _check_zone(zone):
+    if not isinstance(zone, str) or not zone:
+        return False
     try:
         ZoneInfo(zone)
         return True
@@ -31,6 +33,12 @@ def _check_percentages(values, label, errors):
         errors.append(f"{label} must contain nonnegative numeric percentages")
     if abs(sum(values.values()) - 100) > 1e-9:
         errors.append(f"{label} must sum to 100")
+
+
+def _valid_weekdays(days):
+    return (isinstance(days, list) and bool(days)
+            and all(type(day) is int and 1 <= day <= 7 for day in days)
+            and len(days) == len(set(days)))
 
 
 def validate_contract(contract):
@@ -69,7 +77,7 @@ def validate_contract(contract):
     if weekday_values != set(range(1, 8)):
         errors.append("ISO weekday mapping must contain exactly 1 through 7")
     working = calendar.get("default_working_weekdays", [])
-    if not working or not set(working) <= weekday_values or len(working) != len(set(working)):
+    if not _valid_weekdays(working) or set(working) != {1, 2, 3, 4, 5}:
         errors.append("default working weekdays must be unique ISO weekdays")
     if calendar.get("holidays_mode") == "omitted_from_phase1c" and not calendar.get("holiday_dates_must_be_empty"):
         errors.append("omitted holiday mode must require an empty holiday list")
@@ -85,7 +93,7 @@ def validate_contract(contract):
         if not _check_zone(row.get("time_zone")):
             errors.append(f"{location} has invalid IANA time zone")
         days = row.get("working_weekdays", [])
-        if not days or not set(days) <= weekday_values or len(days) != len(set(days)):
+        if not _valid_weekdays(days):
             errors.append(f"{location} has invalid working weekdays")
 
     pattern = vocab.get("salesperson_code_pattern")
@@ -97,6 +105,8 @@ def validate_contract(contract):
     supplier_calendar = contract.get("supplier_order_calendar", {})
     if supplier_calendar.get("required_keys") != ["working_weekdays", "holiday_dates", "time_zone"]:
         errors.append("supplier calendar required keys are incomplete or reordered")
+    if not _valid_weekdays(supplier_calendar.get("working_weekdays")):
+        errors.append("supplier working weekdays must use ISO 1 through 7")
     if supplier_calendar.get("holiday_dates") != []:
         errors.append("Phase 1C supplier holiday list must remain empty")
 
@@ -126,7 +136,23 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
     """Small contract checks used by tests and future row validators."""
     errors = []
     jc = contract["json_contracts"]
-    if kind == "deal_terms":
+    if kind == "supplier_calendar":
+        spec = contract["supplier_order_calendar"]
+        if not isinstance(payload, dict):
+            errors.append("supplier calendar must be an object")
+        else:
+            if set(payload) != set(spec["required_keys"]):
+                errors.append("supplier calendar keys must match contract")
+            if not _valid_weekdays(payload.get("working_weekdays")):
+                errors.append("supplier working weekdays are invalid")
+            if payload.get("holiday_dates") != []:
+                errors.append("supplier holidays are omitted in Phase 1C")
+            if not _check_zone(payload.get("time_zone")):
+                errors.append("supplier time zone is invalid")
+    elif kind == "shipping_weekdays":
+        if not _valid_weekdays(payload):
+            errors.append("shipping weekdays must be a nonempty unique ISO weekday array")
+    elif kind == "deal_terms":
         spec = jc["deal_terms_json"]
         if not isinstance(payload, dict):
             errors.append("terms must be an object")

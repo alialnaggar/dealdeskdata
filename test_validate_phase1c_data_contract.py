@@ -26,6 +26,21 @@ class DataContractTests(unittest.TestCase):
         self.assertIn("regions for DE must use the DE- prefix", errors)
         self.assertIn("WH-EU-CENTRAL has invalid IANA time zone", errors)
 
+    def test_supplier_and_shipping_calendar_rows(self):
+        supplier = {
+            "working_weekdays": [1, 2, 3, 4, 5],
+            "holiday_dates": [],
+            "time_zone": "Europe/Berlin",
+        }
+        self.assertEqual(validate_payload("supplier_calendar", supplier, CONTRACT), [])
+        self.assertEqual(validate_payload("shipping_weekdays", [1, 2, 3, 4, 5], CONTRACT), [])
+        bad = dict(supplier, working_weekdays=[1, True, 8], holiday_dates=["2026-12-25"],
+                   time_zone="Not/AZone", unexpected=True)
+        self.assertEqual(len(validate_payload("supplier_calendar", bad, CONTRACT)), 4)
+        for weekdays in ([], [1, 1], [0, 1], [True, 2], "Mon-Fri"):
+            with self.subTest(weekdays=weekdays):
+                self.assertTrue(validate_payload("shipping_weekdays", weekdays, CONTRACT))
+
     def test_terms_and_evidence_payloads_are_typed(self):
         terms = {
             "payment_terms_days": 30,

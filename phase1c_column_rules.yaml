@@ -209,7 +209,7 @@ tables:
       basis: SYN
       generation: Explicit working weekdays/holiday convention per supplier
       validation: Typed JSON object; lead-workday calculation uses this calendar, not generic date addition
-      review_before_generation: Calendar JSON shape and weekday-only convention are defined in phase1c_data_contract.yaml; implement supplier workday validation.
+      review_before_generation: Supplier calendar payload validator exists; integrate it with generated rows and prove lead-workday arithmetic, including out-of-horizon handling.
   pricing_rules:
     pricing_rule_id:
       sql_type: TEXT
@@ -1256,7 +1256,7 @@ tables:
       basis: SYN
       generation: Explicit Monday-Friday/exception days at origin
       validation: JSON array of unique valid weekday numbers; no empty active lane
-      review_before_generation: ISO weekday and no-holiday convention are defined in phase1c_data_contract.yaml; implement lane payload validation.
+      review_before_generation: ISO weekday payload validator exists; integrate it with generated shipping-lane rows and validate origin-local dispatch dates.
     cutoff_local_time:
       sql_type: TIME
       nullable: false
