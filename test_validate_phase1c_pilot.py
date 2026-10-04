@@ -83,6 +83,7 @@ class PilotDatabaseTests(unittest.TestCase):
 
         with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
             try:
+                conn.execute("SET LOCAL search_path TO deal_desk, public")
                 for table in TABLES:
                     for row in PILOT["rows"][table]:
                         names = list(row)

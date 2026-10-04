@@ -209,7 +209,7 @@ tables:
       basis: SYN
       generation: Explicit working weekdays/holiday convention per supplier
       validation: Typed JSON object; lead-workday calculation uses this calendar, not generic date addition
-      review_before_generation: Supplier calendar payload validator exists; integrate it with generated rows and prove lead-workday arithmetic, including out-of-horizon handling.
+      review_before_generation: The eight-table pilot checks supplier weekdays and lead-workday arithmetic; integrate it with full generated rows and source-specific freshness/evidence.
   pricing_rules:
     pricing_rule_id:
       sql_type: TEXT
@@ -844,7 +844,7 @@ tables:
       basis: SYN
       generation: Upper workday lead, proposed 30
       validation: '>= mode; may exceed capacity planning window'
-      review_before_generation: Choose horizon treatment for 30 supplier workdays versus 30 capacity calendar days.
+      review_before_generation: Pilot labels a lead beyond the 30-calendar-day capacity horizon unknown/conditional; carry the same rule through the full reader and generator, without treating an offer as a binding receipt.
     unit_cost:
       sql_type: NUMERIC(14,2)
       nullable: false
@@ -1256,7 +1256,7 @@ tables:
       basis: SYN
       generation: Explicit Monday-Friday/exception days at origin
       validation: JSON array of unique valid weekday numbers; no empty active lane
-      review_before_generation: ISO weekday payload validator exists; integrate it with generated shipping-lane rows and validate origin-local dispatch dates.
+      review_before_generation: The eight-table pilot checks ISO weekdays, origin time zone, cutoff and candidate transit date; integrate with the full generator and evidence-bound fulfillment reader.
     cutoff_local_time:
       sql_type: TIME
       nullable: false
