@@ -14,6 +14,8 @@ from pathlib import Path
 
 from psycopg.rows import dict_row
 
+from phase1c_policy_decision import evaluate_compiled_policy
+
 
 def _rows(conn, query, args=()):
     with conn.cursor(row_factory=dict_row) as cur:
@@ -420,7 +422,8 @@ def _supply_findings(bundle, as_of):
     return result
 
 
-def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=None):
+def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=None,
+             commercial_rule_mode="auto"):
     """Return run context, selected evidence and derived facts. No writes.
 
     Call inside a REPEATABLE READ READ ONLY transaction for a stable DB snapshot.
@@ -440,6 +443,7 @@ def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=No
     if not lines or any(x["catalog_version"] != run["catalog_version_used"] for x in lines):
         raise ValueError("Missing lines or mismatched catalogue version")
     products = [x["product_id"] for x in lines]
+    customer = _one(conn, "SELECT * FROM deal_desk.customers WHERE customer_id=%s", (deal["customer_id"],))
     credit = _one(conn, "SELECT * FROM deal_desk.customer_credit_profiles WHERE customer_id=%s", (deal["customer_id"],))
     ar = _latest(_rows(conn, "SELECT * FROM deal_desk.accounts_receivable WHERE customer_id=%s AND as_of_date<=%s::date", (deal["customer_id"], as_of)), ("invoice_number",), as_of.date(), "as_of_date")
     payments = _rows(conn, "SELECT * FROM deal_desk.payment_history WHERE customer_id=%s AND paid_date<=%s::date", (deal["customer_id"], as_of))
@@ -519,11 +523,16 @@ def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=No
                 fact["digital"] = {"concurrent_demand": per_period, "pools": selected, "status": status}
         facts["lines"].append(fact)
 
-    bundle = {"run": run, "deal": deal, "lines": lines, "credit": credit, "receivables": ar, "payments": payments,
+    bundle = {"run": run, "deal": deal, "lines": lines, "customer": customer, "credit": credit, "receivables": ar, "payments": payments,
             "rules": rules, "compatibility": compatibility, "bom": bom, "bom_lines": bom_lines, "requirements": requirements,
             "inventory": inventory, "inbound_supply": supply, "supplier_offers": offers,
             "production_capacity": capacities, "digital_capacity": digital, "shipping_lanes": lanes,
             "cost_parameters": cost_parameters, "facts": facts}
     facts["supply"] = _supply_findings(bundle, as_of)
-    facts["commercial"] = _commercial_findings(bundle)
+    if commercial_rule_mode not in ("auto", "reference", "compiled"):
+        raise ValueError("Unknown commercial rule mode")
+    compiled = (commercial_rule_mode == "compiled" or
+                commercial_rule_mode == "auto" and any(
+                    r["rule_type"] == "category_margin_floor" for r in rules["pricing_rules"]))
+    facts["commercial"] = evaluate_compiled_policy(bundle) if compiled else _commercial_findings(bundle)
     return bundle
