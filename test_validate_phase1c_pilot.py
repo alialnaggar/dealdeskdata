@@ -90,7 +90,8 @@ class PilotDatabaseTests(unittest.TestCase):
                         query = sql.SQL("INSERT INTO deal_desk.{} ({}) VALUES ({})").format(
                             sql.Identifier(table), sql.SQL(", ").join(map(sql.Identifier, names)),
                             sql.SQL(", ").join(sql.Placeholder() for _ in names))
-                        values = [Jsonb(row[name]) if name.endswith("_json") else row[name] for name in names]
+                        values = [Jsonb(row[name]) if name.endswith("_json") and row[name] is not None
+                                  else row[name] for name in names]
                         conn.execute(query, values)
                 for table in TABLES:
                     key = PILOT["rows"][table][0][ID_FIELD[table]]
