@@ -24,7 +24,7 @@ class PolicyCompilerTests(unittest.TestCase):
                 self.assertEqual(profiles[code]["policy"]["standard_payment_terms_max_days"], terms)
         rows = compile_rows(CONFIG)
         self.assertEqual({table: len(items) for table, items in rows.items()},
-                         {"pricing_rules": 33, "policy_rules": 42, "approval_rules": 21})
+                         {"pricing_rules": 33, "policy_rules": 51, "approval_rules": 21})
         for table, items in rows.items():
             self.assertEqual({r["policy_set_code"] for r in items}, set(PROFILE_CODES))
             self.assertEqual(len({next(v for k, v in r.items() if k.endswith("_rule_id")) for r in items}), len(items))
