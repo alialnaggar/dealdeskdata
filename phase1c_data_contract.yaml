@@ -90,7 +90,9 @@ component_stock:
 
 production_horizon:
   boundary: latest_capacity_date_represented_at_the_candidate_location
+  missing_or_stale_capacity_window: unknown
   confirmed_required_component_supply_after_boundary: unknown
+  missing_window_unknown_reason: production_capacity_evidence_missing_or_stale
   unknown_reason: confirmed_component_supply_after_capacity_horizon
   supplier_offer_counts_as_binding_supply: false
   infer_capacity_after_boundary: false

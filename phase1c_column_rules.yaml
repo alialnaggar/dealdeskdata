@@ -1102,7 +1102,7 @@ tables:
       basis: SYS
       generation: Observation timestamp
       validation: Latest nonfuture snapshot; freshness gate, never merge stale with current
-      review_before_generation: Reader uses the 24-hour freshness gate and returns unknown when required confirmed component supply is beyond the latest represented capacity date; verify this across generated capacity rows.
+      review_before_generation: Reader uses the 24-hour freshness gate and returns unknown when no fresh capacity window exists or required confirmed component supply is beyond the latest represented capacity date; verify this across generated capacity rows.
     status:
       sql_type: TEXT
       nullable: false

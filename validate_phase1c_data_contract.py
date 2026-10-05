@@ -119,7 +119,9 @@ def validate_contract(contract):
     configured = contract.get("configured_builds", {})
     horizon = contract.get("production_horizon", {})
     if (horizon.get("boundary") != "latest_capacity_date_represented_at_the_candidate_location" or
+        horizon.get("missing_or_stale_capacity_window") != "unknown" or
         horizon.get("confirmed_required_component_supply_after_boundary") != "unknown" or
+        horizon.get("missing_window_unknown_reason") != "production_capacity_evidence_missing_or_stale" or
         horizon.get("unknown_reason") != "confirmed_component_supply_after_capacity_horizon" or
         horizon.get("supplier_offer_counts_as_binding_supply") is not False or
         horizon.get("infer_capacity_after_boundary") is not False):

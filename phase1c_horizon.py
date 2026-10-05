@@ -3,6 +3,22 @@
 from decimal import Decimal
 
 
+def has_fresh_capacity_evidence(required_keys, capacity_rows):
+    """Whether one location has fresh rows for every required resource type."""
+    required_keys = set(required_keys)
+    if not required_keys:
+        return False
+    locations = {row["location_id"] for row in capacity_rows}
+    return any(
+        required_keys <= {
+            (row["capability_code"], row["resource_type"])
+            for row in capacity_rows
+            if row["location_id"] == location and row["is_fresh"]
+        }
+        for location in locations
+    )
+
+
 def components_waiting_beyond_capacity_horizon(
     component_ids,
     required_units,
@@ -49,8 +65,15 @@ def components_waiting_beyond_capacity_horizon(
     return waiting
 
 
-def classify_unscheduled_build(has_material_evidence, has_operation_steps, late_components):
+def classify_unscheduled_build(
+    has_material_evidence,
+    has_operation_steps,
+    late_components,
+    has_capacity_window=True,
+):
     """Classify a build that did not fit any represented capacity dates."""
+    if not has_capacity_window:
+        return "unknown", "production_capacity_evidence_missing_or_stale"
     if late_components:
         return "unknown", "confirmed_component_supply_after_capacity_horizon"
     if not has_material_evidence or not has_operation_steps:

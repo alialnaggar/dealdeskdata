@@ -14,6 +14,7 @@ from phase1c_compatibility import evaluate_compatibility
 from phase1c_horizon import (
     classify_unscheduled_build,
     components_waiting_beyond_capacity_horizon,
+    has_fresh_capacity_evidence,
 )
 from zoneinfo import ZoneInfo
 import json
@@ -372,6 +373,14 @@ def _supply_findings(bundle, as_of):
         fitting = []
         horizon_limited = {}
         has_material_evidence = all(by_product[c] or bindings[c] for c in plan["components"])
+        required_capacity_keys = {
+            (req["capability_code"], req["resource_type"])
+            for requirements in plan["steps"].values()
+            for req, _need in requirements
+        }
+        has_capacity_window = has_fresh_capacity_evidence(
+            required_capacity_keys,
+            [dict(row, is_fresh=_fresh(row, as_of)) for row in bundle["production_capacity"]])
         for location in sorted({x["location_id"] for x in bundle["production_capacity"]}):
             caps = {(x["capability_code"], x["resource_type"], x["capacity_date"]): x
                     for x in bundle["production_capacity"] if x["location_id"] == location}
@@ -461,7 +470,8 @@ def _supply_findings(bundle, as_of):
                     fact["production_status"] = "feasible_uncommitted"
                 else:
                     status, unknown_reason = classify_unscheduled_build(
-                        has_material_evidence, bool(plan["steps"]), horizon_limited)
+                        has_material_evidence, bool(plan["steps"]), horizon_limited,
+                        has_capacity_window)
                     fact["production_status"] = status
                     if unknown_reason:
                         fact["production_unknown_reason"] = unknown_reason

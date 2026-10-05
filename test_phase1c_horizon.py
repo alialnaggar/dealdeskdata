@@ -5,6 +5,7 @@ from decimal import Decimal
 from phase1c_horizon import (
     classify_unscheduled_build,
     components_waiting_beyond_capacity_horizon,
+    has_fresh_capacity_evidence,
 )
 
 
@@ -51,6 +52,24 @@ class CapacityHorizonTests(unittest.TestCase):
     def test_shortage_inside_complete_horizon_remains_infeasible(self):
         self.assertEqual(classify_unscheduled_build(True, True, []),
                          ("infeasible_without_replenishment", None))
+
+    def test_missing_or_stale_capacity_window_is_unknown(self):
+        self.assertEqual(classify_unscheduled_build(True, True, [], False),
+                         ("unknown", "production_capacity_evidence_missing_or_stale"))
+
+    def test_capacity_evidence_requires_every_resource_at_one_fresh_location(self):
+        rows = [
+            {"location_id": "WH-1", "capability_code": "assembly",
+             "resource_type": "workforce", "is_fresh": True},
+            {"location_id": "WH-1", "capability_code": "assembly",
+             "resource_type": "equipment", "is_fresh": True},
+        ]
+        required = {("assembly", "workforce"), ("assembly", "equipment")}
+        self.assertTrue(has_fresh_capacity_evidence(required, rows))
+        self.assertFalse(has_fresh_capacity_evidence(required, rows[:1]))
+        self.assertFalse(has_fresh_capacity_evidence(required, [dict(row, is_fresh=False) for row in rows]))
+        split = [dict(row, location_id=f"WH-{i}") for i, row in enumerate(rows)]
+        self.assertFalse(has_fresh_capacity_evidence(required, split))
 
 
 if __name__ == "__main__":
