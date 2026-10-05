@@ -844,7 +844,7 @@ tables:
       basis: SYN
       generation: Upper workday lead, proposed 30
       validation: '>= mode; may exceed capacity planning window'
-      review_before_generation: Pilot labels a lead beyond the 30-calendar-day capacity horizon unknown/conditional; carry the same rule through the full reader and generator, without treating an offer as a binding receipt.
+      review_before_generation: Reader labels confirmed component supply arriving after the represented capacity window unknown; test the same behavior in generated rows. Never treat a supplier offer as a binding receipt.
     unit_cost:
       sql_type: NUMERIC(14,2)
       nullable: false
@@ -1102,7 +1102,7 @@ tables:
       basis: SYS
       generation: Observation timestamp
       validation: Latest nonfuture snapshot; freshness gate, never merge stale with current
-      review_before_generation: Define capacity freshness threshold and out-of-horizon unknown behavior.
+      review_before_generation: Reader uses the 24-hour freshness gate and returns unknown when required confirmed component supply is beyond the latest represented capacity date; verify this across generated capacity rows.
     status:
       sql_type: TEXT
       nullable: false

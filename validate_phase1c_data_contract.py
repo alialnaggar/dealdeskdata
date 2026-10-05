@@ -117,6 +117,13 @@ def validate_contract(contract):
         not component.get("no_quote_reservation")):
         errors.append("component stock contract must preserve whole units and aggregate rounding")
     configured = contract.get("configured_builds", {})
+    horizon = contract.get("production_horizon", {})
+    if (horizon.get("boundary") != "latest_capacity_date_represented_at_the_candidate_location" or
+        horizon.get("confirmed_required_component_supply_after_boundary") != "unknown" or
+        horizon.get("unknown_reason") != "confirmed_component_supply_after_capacity_horizon" or
+        horizon.get("supplier_offer_counts_as_binding_supply") is not False or
+        horizon.get("infer_capacity_after_boundary") is not False):
+        errors.append("production horizon contract must preserve uncertainty beyond represented capacity")
     if (configured.get("line_bom_match") != "product_catalogue_and_exact_configuration_signature_at_run_as_of" or
         configured.get("same_product_variant_demand") != "group_by_selected_BOM" or
         configured.get("unconfigured_finished_stock_with_multiple_variants") != "visible_but_not_confirming_either_variant" or

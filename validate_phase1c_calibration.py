@@ -137,7 +137,7 @@ def validate(config):
     # A planning horizon can be shorter than a supplier lead; this is a
     # coverage limit, never a reason to invent a confirmed production date.
     if capacity["horizon_calendar_days"] < p["suppliers"]["component_lead_workdays"][2] * 7 / 5:
-        review.append("30-workday supplier lead can exceed the capacity horizon: label out-of-horizon builds unknown/conditional, or extend the horizon before generation")
+        review.append("30-workday supplier lead can exceed the capacity horizon: reader marks confirmed supply beyond represented capacity dates unknown; test generated rows and do not extend the horizon without evidence")
     if ds["component_products_target"] is None or ds["total_product_rows_target"] is None:
         review.append("36 components/156 total products are proposals; top-level generation targets remain unset until BOM coverage review")
     review.append("Olist mirror checksums have not been matched to the canonical download; do not call derived rates enterprise statistics")

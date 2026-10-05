@@ -88,6 +88,13 @@ component_stock:
   standard_cost: unrounded_expected_material_scrap_consumption_plus_labor_and_overhead
   no_quote_reservation: true
 
+production_horizon:
+  boundary: latest_capacity_date_represented_at_the_candidate_location
+  confirmed_required_component_supply_after_boundary: unknown
+  unknown_reason: confirmed_component_supply_after_capacity_horizon
+  supplier_offer_counts_as_binding_supply: false
+  infer_capacity_after_boundary: false
+
 configured_builds:
   line_bom_match: product_catalogue_and_exact_configuration_signature_at_run_as_of
   same_product_variant_demand: group_by_selected_BOM

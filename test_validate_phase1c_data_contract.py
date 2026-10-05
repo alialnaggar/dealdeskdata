@@ -59,6 +59,12 @@ class DataContractTests(unittest.TestCase):
         self.assertIn("configured build contract must define deterministic substitute selection",
                       validate_contract(changed)["errors"])
 
+    def test_production_horizon_preserves_unknown_supply(self):
+        changed = deepcopy(CONTRACT)
+        changed["production_horizon"]["infer_capacity_after_boundary"] = True
+        self.assertIn("production horizon contract must preserve uncertainty beyond represented capacity",
+                      validate_contract(changed)["errors"])
+
     def test_terms_and_evidence_payloads_are_typed(self):
         terms = {
             "payment_terms_days": 30,

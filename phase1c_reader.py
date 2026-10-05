@@ -11,6 +11,10 @@ from decimal import Decimal, ROUND_CEILING
 from phase1c_component_units import whole_component_requirements
 from phase1c_bom_selection import select_bom_components
 from phase1c_compatibility import evaluate_compatibility
+from phase1c_horizon import (
+    classify_unscheduled_build,
+    components_waiting_beyond_capacity_horizon,
+)
 from zoneinfo import ZoneInfo
 import json
 from pathlib import Path
@@ -366,11 +370,20 @@ def _supply_findings(bundle, as_of):
     for plan in plans:
         product, b, build = plan["product"], plan["bom"], plan["build"]
         fitting = []
+        horizon_limited = {}
         has_material_evidence = all(by_product[c] or bindings[c] for c in plan["components"])
         for location in sorted({x["location_id"] for x in bundle["production_capacity"]}):
             caps = {(x["capability_code"], x["resource_type"], x["capacity_date"]): x
                     for x in bundle["production_capacity"] if x["location_id"] == location}
             dates = sorted({x["capacity_date"] for x in caps.values() if x["capacity_date"] >= as_of.date()})
+            if dates:
+                late_components = components_waiting_beyond_capacity_horizon(
+                    plan["components"], stock_required,
+                    [dict(row, is_fresh=_fresh(row, as_of)) for row in bundle["inventory"]],
+                    [receipt for component in plan["components"] for receipt in bindings[component]],
+                    location, dates[-1])
+                if late_components:
+                    horizon_limited[location] = late_components
             if not plan["steps"]:
                 continue
             first_day = None
@@ -424,6 +437,7 @@ def _supply_findings(bundle, as_of):
             "required_hours": plan["hours"],
             "operation_days": [key[2] for key, _ in best[2]] if best else [],
             "first_fitting_day": best[0] if best else None,
+            "capacity_horizon_limited_components": horizon_limited,
             "material_cost_per_unit": plan["material_cost_per_unit"],
             "labor_hours_for_one_unit": plan["labor_hours_for_one_unit"]}
         result["assembly_by_bom"][b["bom_id"]] = record
@@ -443,8 +457,15 @@ def _supply_findings(bundle, as_of):
                 if line["deal_line_id"] not in plan["line_ids"]:
                     continue
                 fact["selected_bom_id"] = b["bom_id"]
-                fact["production_status"] = ("feasible_uncommitted" if best else
-                    "unknown" if not has_material_evidence or not plan["steps"] else "infeasible_without_replenishment")
+                if best:
+                    fact["production_status"] = "feasible_uncommitted"
+                else:
+                    status, unknown_reason = classify_unscheduled_build(
+                        has_material_evidence, bool(plan["steps"]), horizon_limited)
+                    fact["production_status"] = status
+                    if unknown_reason:
+                        fact["production_unknown_reason"] = unknown_reason
+                        fact["fulfillment_status"] = "unknown"
                 if best:
                     fact["fulfillment_status"] = "feasible_uncommitted"
                     lane = lanes.get(best[1])

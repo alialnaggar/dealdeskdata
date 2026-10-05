@@ -7,6 +7,8 @@ on:
       - phase1c_schema_smoke.sql
       - phase1c_row_fixtures.sql
       - phase1c_reader.py
+      - phase1c_horizon.py
+      - test_phase1c_horizon.py
       - phase1c_component_units.py
       - test_phase1c_component_units.py
       - test_phase1c_reader.py
@@ -41,6 +43,8 @@ on:
       - phase1c_schema_smoke.sql
       - phase1c_row_fixtures.sql
       - phase1c_reader.py
+      - phase1c_horizon.py
+      - test_phase1c_horizon.py
       - phase1c_component_units.py
       - test_phase1c_component_units.py
       - test_phase1c_reader.py
@@ -132,6 +136,7 @@ jobs:
       - name: Preflight configured assembly and production capacity
         run: |
           python -m unittest -v test_phase1c_component_units
+          python -m unittest -v test_phase1c_horizon
           python validate_phase1c_assembly_pilot.py
           python -m unittest -v test_validate_phase1c_assembly_pilot
       - name: Compare reader results with 14 reference scenarios
