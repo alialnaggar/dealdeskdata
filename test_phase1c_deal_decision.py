@@ -147,7 +147,7 @@ class ReferenceDealIntegrationTests(unittest.TestCase):
         for number in range(1, 15):
             with self.subTest(reference_case=number):
                 result = assemble_deal_decision(self.read(number))
-                self.assertEqual(len(result["specialists"]), 6)
+                self.assertEqual(len(result["specialists"]), 7)
                 self.assertEqual(len(result["specialists"]["availability"]), expected_lines.get(number, 1))
                 self.assertEqual(result["required_approvals"],
                                  result["specialists"]["approval_routing"]["required_roles"])
