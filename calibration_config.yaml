@@ -133,6 +133,11 @@ dataset:
   - attribute_constraint
   - required_deal_field
   - installation_eligibility
+  compatibility_rule_operators:
+    requires_product: [present]
+    excludes_product: [present]
+    attribute_constraint: [equals, not_equals, in, contains, exists]
+    required_deal_field: [present]
   compatibility_severities:
   - warning
   - blocker
@@ -1410,6 +1415,12 @@ fulfillment_production_calibration:
       required_component_units_per_finished_unit: [1, 2, 8]
       scrap_pct: [0, 1, 4]
       BOMs_with_explicit_substitute_group_max_share: 0.2
+      substitute_selection_rule:
+        one_selected_line_per_bom_and_group: true
+        preference_order: sufficient_selectable_units_then_lowest_priority_then_component_product_id
+        selectable_units: fresh_component_stock_plus_confirmed_unexpired_inbound_at_active_production_locations
+        shortage_behavior: choose_lowest_priority_then_component_product_id_and_expose_group_shortfall
+        alternatives_not_double_counted: true
       output_quantity_finished_unit: 1
       effective_rule: exactly_one_BOM_per_selected_product_configuration_and_run_as_of
     suppliers:

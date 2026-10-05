@@ -123,6 +123,13 @@ def validate_contract(contract):
         configured.get("shared_component_stock") != "aggregate_and_round_once_per_component_at_site" or
         configured.get("result_attribution") != "per_BOM_and_quoted_line"):
         errors.append("configured build contract must separate BOM variants and unbound finished stock")
+    substitution = configured.get("substitution_selection", {})
+    if (substitution.get("one_selected_line_per_bom_and_group") is not True or
+        substitution.get("preference_order") != "sufficient_selectable_units_then_lowest_priority_then_component_product_id" or
+        substitution.get("selectable_units") != "fresh_component_stock_plus_confirmed_unexpired_inbound_at_active_production_locations" or
+        substitution.get("shortage_behavior") != "choose_lowest_priority_then_component_product_id_and_expose_group_shortfall" or
+        substitution.get("alternatives_not_double_counted") is not True):
+        errors.append("configured build contract must define deterministic substitute selection")
 
     json_contracts = contract.get("json_contracts", {})
     required_contracts = {
@@ -298,6 +305,10 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
                 errors.append("compatibility condition is missing required keys")
             if set(payload) - required:
                 errors.append("compatibility condition contains unknown keys")
+            if "operator" in payload:
+                allowed_operators = spec.get("allowed_operators_by_rule_type", {}).get(rule_type, [])
+                if payload["operator"] not in allowed_operators:
+                    errors.append("compatibility condition operator is invalid")
     elif kind == "provider_evidence":
         spec = jc["provider_evidence_record"]
         if not isinstance(payload, dict):

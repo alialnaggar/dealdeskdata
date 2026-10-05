@@ -9,6 +9,8 @@ from calendar import monthrange
 from datetime import datetime, timedelta
 from decimal import Decimal, ROUND_CEILING
 from phase1c_component_units import whole_component_requirements
+from phase1c_bom_selection import select_bom_components
+from phase1c_compatibility import evaluate_compatibility
 from zoneinfo import ZoneInfo
 import json
 from pathlib import Path
@@ -326,11 +328,11 @@ def _supply_findings(bundle, as_of):
             (x["quantity_on_hand"] - x["quantity_allocated"]
              for x in by_product[product] if _fresh(x, as_of)), default=Decimal(0)))
         build = max(Decimal(0), requested_build - free_finished)
+        selected_lines, substitution_groups = select_bom_components(
+            b, bundle["bom_lines"], build, bundle, as_of)
         components = defaultdict(lambda: Decimal(0))
         material_cost = Decimal(0)
-        for bl in bundle["bom_lines"]:
-            if bl["bom_id"] != b["bom_id"]:
-                continue
+        for bl in selected_lines:
             per_unit = (bl["required_quantity_per_output"] / b["output_quantity"] /
                         (Decimal(1) - bl["scrap_pct"] / 100))
             components[bl["component_product_id"]] += build * per_unit
@@ -352,7 +354,8 @@ def _supply_findings(bundle, as_of):
         plan = {"bom": b, "product": product, "build": build,
                 "line_ids": {line["deal_line_id"] for line in matching_lines}, "components": dict(components),
                 "hours": dict(hours), "steps": steps, "material_cost_per_unit": material_cost,
-                "labor_hours_for_one_unit": labor_per_unit}
+                "labor_hours_for_one_unit": labor_per_unit,
+                "substitution_groups": substitution_groups}
         plans.append(plan)
 
     # These initial physical component SKUs are indivisible. Combine demand
@@ -417,6 +420,7 @@ def _supply_findings(bundle, as_of):
         record = {"bom_id": b["bom_id"], "product_id": product, "line_ids": sorted(plan["line_ids"]),
             "build_units": build,
             "component_demand": plan["components"], "component_stock_required": stock_required,
+            "substitution_groups": plan["substitution_groups"],
             "required_hours": plan["hours"],
             "operation_days": [key[2] for key, _ in best[2]] if best else [],
             "first_fitting_day": best[0] if best else None,
@@ -560,6 +564,7 @@ def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=No
             "inventory": inventory, "inbound_supply": supply, "supplier_offers": offers,
             "production_capacity": capacities, "digital_capacity": digital, "shipping_lanes": lanes,
             "cost_parameters": cost_parameters, "facts": facts}
+    facts["compatibility"] = evaluate_compatibility(lines, deal, compatibility)
     facts["supply"] = _supply_findings(bundle, as_of)
     if commercial_rule_mode not in ("auto", "reference", "compiled"):
         raise ValueError("Unknown commercial rule mode")

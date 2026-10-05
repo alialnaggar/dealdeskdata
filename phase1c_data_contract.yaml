@@ -94,6 +94,12 @@ configured_builds:
   unconfigured_finished_stock_with_multiple_variants: visible_but_not_confirming_either_variant
   shared_component_stock: aggregate_and_round_once_per_component_at_site
   result_attribution: per_BOM_and_quoted_line
+  substitution_selection:
+    one_selected_line_per_bom_and_group: true
+    preference_order: sufficient_selectable_units_then_lowest_priority_then_component_product_id
+    selectable_units: fresh_component_stock_plus_confirmed_unexpired_inbound_at_active_production_locations
+    shortage_behavior: choose_lowest_priority_then_component_product_id_and_expose_group_shortfall
+    alternatives_not_double_counted: true
 
 json_contracts:
   products_attributes_json:
@@ -164,6 +170,11 @@ json_contracts:
       attribute_constraint: [attribute, operator, expected]
       required_deal_field: [field]
       installation_eligibility: [country_code, region_codes, eligible]
+    allowed_operators_by_rule_type:
+      requires_product: [present]
+      excludes_product: [present]
+      attribute_constraint: [equals, not_equals, in, contains, exists]
+      required_deal_field: [present]
     unknown_keys: reject
   provider_evidence_record:
     required_keys: [evidence_ref, product_id, provider_id, configuration_signature_json, region_code, term_code, capacity_unit, capacity_total, quantity_allocated, commitment_status, verified_at, covers_from, covers_until]

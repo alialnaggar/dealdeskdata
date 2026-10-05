@@ -95,6 +95,17 @@ def assemble_deal_decision(bundle):
                             "source_ids": sorted(set(source_ids)),
                             "tentative": status == "feasible_uncommitted"})
 
+    for finding in bundle["facts"].get("compatibility", []):
+        if finding["status"] in ("fail", "unsupported"):
+            if finding["severity"] == "blocker":
+                config_blocks.append({"code": "compatibility_rule_failed",
+                                      "rule_id": finding["compatibility_rule_id"],
+                                      "detail": finding["detail"]})
+            else:
+                evidence_gaps.append(f"compatibility_rule_failed:{finding['compatibility_rule_id']}")
+        elif finding["status"] == "unknown":
+            evidence_gaps.append(f"compatibility_rule_unknown:{finding['compatibility_rule_id']}")
+
     rollup_gaps = []
     supply = bundle["facts"]["supply"]
     cost_plans = supply.get("assembly_by_bom") or supply["assembly"]
@@ -118,6 +129,7 @@ def assemble_deal_decision(bundle):
     rule_hits = commercial["rule_hits"]
     specialists = {
         "configuration": configuration,
+        "compatibility": bundle["facts"].get("compatibility", []),
         "pricing": {"deal_discount_pct": commercial["deal_discount_pct"],
                     "deal_margin_pct": commercial["deal_margin_pct"],
                     "rule_hits": [h for h in rule_hits if h["area"] == "pricing"],

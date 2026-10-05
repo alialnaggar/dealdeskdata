@@ -53,6 +53,12 @@ class DataContractTests(unittest.TestCase):
         self.assertIn("configured build contract must separate BOM variants and unbound finished stock",
                       validate_contract(changed)["errors"])
 
+    def test_substitution_selection_contract_is_required(self):
+        changed = deepcopy(CONTRACT)
+        changed["configured_builds"]["substitution_selection"]["preference_order"] = "priority_only"
+        self.assertIn("configured build contract must define deterministic substitute selection",
+                      validate_contract(changed)["errors"])
+
     def test_terms_and_evidence_payloads_are_typed(self):
         terms = {
             "payment_terms_days": 30,

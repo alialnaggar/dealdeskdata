@@ -571,19 +571,19 @@ tables:
       nullable: true
       basis: SYN
       generation: Null or explicit substitute group for this BOM
-      validation: Nonblank when present; group alternatives share a validated function
+      validation: Nonblank when present; exactly one line is selected per BOM/group and alternatives are not double-counted
     priority:
       sql_type: INTEGER
       nullable: false
       basis: SYN
       generation: Deterministic choice within substitute group
-      validation: Nonnegative; exactly one preferred valid option
+      validation: Nonnegative; selectable alternative uses sufficient fresh stock/confirmed inbound first, then lowest priority and component ID
     is_mandatory:
       sql_type: BOOLEAN
       nullable: false
       basis: SYN
       generation: Required versus allowed alternative
-      validation: Boolean; all mandatory components counted once
+      validation: Boolean; mandatory lines count once; substitute groups count one selected line and expose any group shortfall
   customer_credit_profiles:
     customer_id:
       sql_type: TEXT
