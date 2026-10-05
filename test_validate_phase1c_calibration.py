@@ -48,6 +48,17 @@ class CalibrationContractTests(unittest.TestCase):
         changed["fulfillment_production_calibration"]["proposed_parameters"]["BOMs"]["same_product_variant_demand"] = "group_by_product"
         self.assertIn("multi-variant BOM selection contract differs from reader", validate(changed)["errors"])
 
+    def test_bom_portfolio_proposal_relationships_are_checked(self):
+        changed = deepcopy(CONFIG)
+        params = changed["fulfillment_production_calibration"]["proposed_parameters"]
+        params["BOMs"]["effective_configured_BOM_variants_range"] = [36, 24]
+        params["BOMs"]["scrap_pct"] = [0, 4, 100]
+        params["component_catalogue"]["shared_across_at_least_two_BOMs_min_share"] = 1.2
+        errors = validate(changed)["errors"]
+        self.assertIn("BOM variants cannot cover the proposed assembled products", errors)
+        self.assertIn("BOM scrap percent must remain below 100", errors)
+        self.assertIn("shared component minimum share must be between zero and one", errors)
+
     def test_historical_line_mix_mean_and_bins_are_checked(self):
         changed = deepcopy(CONFIG)
         changed["dataset"]["historical_lines_per_deal_sampling_percent"][8] += 1

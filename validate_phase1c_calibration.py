@@ -94,18 +94,28 @@ def validate(config):
     check(sum(c["family_counts"].values()) == c["non_sellable_component_count"] and
           c["total_product_rows_with_120_sellable"] == ds["sellable_products"] + c["non_sellable_component_count"],
           "component count/total product count mismatch")
+    check(0 <= c["shared_across_at_least_two_BOMs_min_share"] <= 1,
+          "shared component minimum share must be between zero and one")
     check(c.get("component_unit_indivisible") is True and
           c.get("stock_requirement_rule") == "sum_scrap_adjusted_theoretical_demand_across_selected_builds_then_round_up_once_per_component",
           "component stock rounding contract differs from reader")
     b = p["BOMs"]
+    variant_range = b["effective_configured_BOM_variants_range"]
     check(0 < b["make_to_order_sellable_count"] <= ds["sellable_products"] and
-          b["effective_configured_BOM_variants_range"][0] >= b["make_to_order_sellable_count"],
+          isinstance(variant_range, list) and len(variant_range) == 2 and
+          all(isinstance(v, int) and not isinstance(v, bool) for v in variant_range) and
+          variant_range[0] >= b["make_to_order_sellable_count"] and variant_range[1] >= variant_range[0],
           "BOM variants cannot cover the proposed assembled products")
     check(b.get("selected_build_scope") == "product_and_exact_configuration_signature" and
           b.get("multi_variant_finished_stock_without_configuration") == "unbound_cannot_confirm_either_variant" and
           b.get("same_product_variant_demand") == "group_line_quantities_by_selected_BOM_not_product_total",
           "multi-variant BOM selection contract differs from reader")
     triplet(b["mandatory_components_per_BOM"], "components per BOM")
+    triplet(b["required_component_units_per_finished_unit"], "component units per finished unit")
+    triplet(b["scrap_pct"], "BOM scrap percent")
+    check(b["scrap_pct"][2] < 100, "BOM scrap percent must remain below 100")
+    check(0 <= b["BOMs_with_explicit_substitute_group_max_share"] <= 1,
+          "BOM substitute-group maximum share must be between zero and one")
     triplet(p["suppliers"]["component_lead_workdays"], "supplier lead workdays")
     triplet(p["aggregate_inventory"]["component_on_hand_units"], "component stock")
     for key in ("setup_hours_per_batch", "workforce_hours_per_finished_unit", "equipment_hours_per_finished_unit"):
