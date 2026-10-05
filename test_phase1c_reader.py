@@ -7,9 +7,13 @@ from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
-import psycopg
+try:
+    import psycopg
+except ImportError:  # The local pure-test environment may not install DB drivers.
+    psycopg = None
 
-from phase1c_reader import load_provider_evidence, read_run
+if psycopg is not None:
+    from phase1c_reader import load_provider_evidence, read_run
 
 
 ROOT = Path(__file__).parent
@@ -29,6 +33,10 @@ def load_fixture_rows():
         subprocess.run(["psql", "-X", "-v", "ON_ERROR_STOP=1", "-q", "-f", temp.name], check=True)
 
 
+@unittest.skipUnless(
+    psycopg is not None and os.environ.get("DATABASE_URL"),
+    "PostgreSQL integration requires psycopg and DATABASE_URL",
+)
 class ReaderReferenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
