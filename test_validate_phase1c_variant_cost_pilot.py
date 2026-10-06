@@ -7,7 +7,7 @@ import unittest
 
 import yaml
 
-from validate_phase1c_variant_cost_pilot import evaluate_cost_pilot
+from validate_phase1c_variant_cost_pilot import evaluate_build_cost_draft, evaluate_cost_pilot
 
 
 HERE = Path(__file__).resolve().parent
@@ -18,6 +18,7 @@ class VariantCostPilotTests(unittest.TestCase):
     def setUpClass(cls):
         cls.portfolio = json.loads((HERE / "phase1c_portfolio_draft.json").read_text())
         cls.pilot = json.loads((HERE / "phase1c_variant_cost_pilot.json").read_text())
+        cls.build_draft = json.loads((HERE / "phase1c_build_cost_draft.json").read_text())
         cls.config = yaml.safe_load((HERE / "calibration_config.yaml").read_text())
 
     def test_one_cost_and_one_list_price_cover_both_options(self):
@@ -46,6 +47,21 @@ class VariantCostPilotTests(unittest.TestCase):
         errors = evaluate_cost_pilot(self.portfolio, pilot, self.config)["errors"]
         self.assertTrue(any("substitute selections" in error for error in errors))
         self.assertTrue(any("part cost" in error for error in errors))
+
+    def test_every_buildable_sku_and_bom_has_a_cost_rollup(self):
+        result = evaluate_build_cost_draft(self.portfolio, self.build_draft, self.config)
+        self.assertEqual(result["errors"], [])
+        self.assertEqual((result["checked_products"], result["checked_boms"]), (18, 24))
+        self.assertFalse(result["ready_for_full_generation"])
+
+    def test_batch_rejects_omitted_product_and_component_cost(self):
+        draft = deepcopy(self.build_draft)
+        draft["products"].pop()
+        draft["component_standard_costs_eur"].pop("COMP-COMPUTE-001")
+        errors = evaluate_build_cost_draft(self.portfolio, draft, self.config)["errors"]
+        self.assertIn("cost draft must cover each buildable product exactly once", errors)
+        self.assertIn("component costs must cover the exact draft component catalogue", errors)
+        self.assertTrue(any("selected part cost" in error for error in errors))
 
 
 if __name__ == "__main__":

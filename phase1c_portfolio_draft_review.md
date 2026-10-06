@@ -83,8 +83,7 @@ remaining field reviews and source/price checks stay open.
 precise 10/6/2 mix, detailed part compatibility, component identity/cost and price
 bands are still open. No database setup is required for this structural pass.
 
-Next: extend cost checks to the other buildable SKUs and representative
-master-data rows, then consider whether the fictional part catalogue needs
+Next: prepare representative master-data rows, then consider whether the fictional part catalogue needs
 more detailed compatibility fields. Keep the dataset-generation gate closed.
 
 ## Variant cost boundary
@@ -109,5 +108,25 @@ both within 5%. Its €1,050 list price is the draft category median anchor,
 31.90% catalogue margin is arithmetic only, not an achieved market margin.
 Negative tests reject an undercosted shared standard cost, a materially
 more expensive option, a missing part cost, and an unresolved substitute.
-Only this one product has cost inputs; the other 17 buildable SKUs and price
-comparability remain open before dataset generation.
+The initial workstation is retained unchanged in the broader synthetic draft.
+
+## All-build cost feasibility draft
+
+`phase1c_build_cost_draft.json` provides one shared component-cost set for all
+36 proposed parts, explicit substitute choices, and one list price and
+standard cost for each of the 18 buildable products. The batch check reuses
+the product cost gate rather than adding a new product or pricing schema. It
+passes all 18 products and all 24 offered BOMs; no paired option exceeds the
+5% shared-cost tolerance. It rejects missing products, missing component
+costs and invalid per-product cost rollups. The generation gate remains closed.
+
+These values are **constructed to test arithmetic**, not independently
+calibrated commercial inputs. Except for the retained workstation pilot,
+component costs use simple platform/family bases with small ordinal variation;
+prices are derived from the resulting cost and the category's proposed p50
+margin, rounded up to the next €10. The resulting workstation margins are
+18.59% and 31.90%, server margins 16.02–16.07%, and storage margins
+19.00–19.03%. Because inputs and prices were jointly constructed, passing
+the cost gate cannot establish realistic market prices, GPU premiums,
+individual component compatibility or credible supplier sourcing. Those
+reviews remain open before full dataset generation.

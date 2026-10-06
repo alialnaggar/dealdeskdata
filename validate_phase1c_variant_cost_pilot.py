@@ -118,13 +118,49 @@ def evaluate_cost_pilot(portfolio, pilot, config):
     }
 
 
+def evaluate_build_cost_draft(portfolio, draft, config):
+    """Reuse the single-product cost gate for every offered buildable SKU."""
+    products = {row["product_id"] for row in portfolio["products"]
+                if row["is_sellable"] and row["fulfillment_mode"] == "make_to_order"}
+    rows = draft.get("products")
+    if not isinstance(rows, list):
+        return {"errors": ["products must be a list"], "products": {},
+                "ready_for_full_generation": False}
+    ids = [row.get("product_id") for row in rows if isinstance(row, dict)]
+    errors = []
+    if len(ids) != len(rows) or len(set(ids)) != len(ids) or set(ids) != products:
+        errors.append("cost draft must cover each buildable product exactly once")
+    components = {row["product_id"] for row in portfolio["products"]
+                  if row["fulfillment_mode"] == "component"}
+    costs = draft.get("component_standard_costs_eur")
+    if not isinstance(costs, dict) or set(costs) != components:
+        errors.append("component costs must cover the exact draft component catalogue")
+        costs = costs if isinstance(costs, dict) else {}
+    results = {}
+    for row in rows:
+        if not isinstance(row, dict) or row.get("product_id") not in products:
+            continue
+        pilot = dict(row, component_standard_costs_eur=costs,
+                     workforce_cost_eur_per_hour=draft.get("workforce_cost_eur_per_hour"),
+                     overhead_fraction=draft.get("overhead_fraction"))
+        result = evaluate_cost_pilot(portfolio, pilot, config)
+        results[row["product_id"]] = result
+        errors.extend(f"{row['product_id']}: {error}" for error in result["errors"])
+    return {"errors": errors, "products": results,
+            "checked_products": len(results),
+            "checked_boms": sum(len(row["rollups_eur"]) for row in results.values()),
+            "ready_for_full_generation": False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pilot", type=Path)
     args = parser.parse_args()
     portfolio = json.loads((HERE / "phase1c_portfolio_draft.json").read_text(encoding="utf-8"))
     config = yaml.safe_load((HERE / "calibration_config.yaml").read_text(encoding="utf-8"))
-    result = evaluate_cost_pilot(portfolio, json.loads(args.pilot.read_text(encoding="utf-8")), config)
+    data = json.loads(args.pilot.read_text(encoding="utf-8"))
+    result = (evaluate_build_cost_draft(portfolio, data, config) if "products" in data else
+              evaluate_cost_pilot(portfolio, data, config))
     print(json.dumps(result, indent=2))
     raise SystemExit(bool(result["errors"]))
 
