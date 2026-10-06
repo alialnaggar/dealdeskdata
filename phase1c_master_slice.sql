@@ -25,10 +25,10 @@ INSERT INTO products (product_id, product_code, catalog_version, product_name, c
  ('COMP-NETWORK_AND_POWER-003', 'COMP-NETWORK_AND_POWER-003', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-NETWORK_AND_POWER-003', 'components', 'component', '{"archetype_code":"COMP-NETWORK_AND_POWER","component_family":"network_and_power","demand_class":"regular","supported_platforms":["server"]}', '0', '353.50', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
  ('COMP-NETWORK_AND_POWER-004', 'COMP-NETWORK_AND_POWER-004', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-NETWORK_AND_POWER-004', 'components', 'component', '{"archetype_code":"COMP-NETWORK_AND_POWER","component_family":"network_and_power","demand_class":"regular","supported_platforms":["server"]}', '0', '350.00', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
  ('COMP-NETWORK_AND_POWER-007', 'COMP-NETWORK_AND_POWER-007', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-NETWORK_AND_POWER-007', 'components', 'component', '{"archetype_code":"COMP-NETWORK_AND_POWER","component_family":"network_and_power","demand_class":"regular","supported_platforms":["storage_system"]}', '0', '300.00', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
- ('COMP-CHASSIS_AND_OTHER-001', 'COMP-CHASSIS_AND_OTHER-001', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-001', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["workstation"]}', '0', '90', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
- ('COMP-CHASSIS_AND_OTHER-002', 'COMP-CHASSIS_AND_OTHER-002', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-002', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["server"]}', '0', '502.50', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
- ('COMP-CHASSIS_AND_OTHER-003', 'COMP-CHASSIS_AND_OTHER-003', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-003', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["server"]}', '0', '505.00', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
- ('COMP-CHASSIS_AND_OTHER-005', 'COMP-CHASSIS_AND_OTHER-005', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-005', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["storage_system"]}', '0', '502.50', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit');
+ ('COMP-CHASSIS_AND_OTHER-001', 'COMP-CHASSIS_AND_OTHER-001', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-001', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["workstation"]}', '0', '180.0', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
+ ('COMP-CHASSIS_AND_OTHER-002', 'COMP-CHASSIS_AND_OTHER-002', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-002', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["server"]}', '0', '1005.0', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
+ ('COMP-CHASSIS_AND_OTHER-003', 'COMP-CHASSIS_AND_OTHER-003', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-003', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["server"]}', '0', '1010.0', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit'),
+ ('COMP-CHASSIS_AND_OTHER-005', 'COMP-CHASSIS_AND_OTHER-005', 'CATALOGUE_2026_V1', 'Synthetic fixture COMP-CHASSIS_AND_OTHER-005', 'components', 'component', '{"archetype_code":"COMP-CHASSIS_AND_OTHER","component_family":"chassis_and_other","demand_class":"regular","supported_platforms":["storage_system"]}', '0', '1005.0', 'not_applicable', 'component_unit', FALSE, 'component', 'component_unit');
 
 INSERT INTO bom_headers (bom_id, finished_product_id, catalog_version, bom_version, configuration_signature_json, output_quantity, effective_from, effective_to, status) VALUES
  ('BOM-001', 'SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009', 'CATALOGUE_2026_V1', 'V1', '{"selected_options":["standard"]}', '1', '2026-01-01T00:00:00Z', NULL, 'active'),
@@ -41,24 +41,24 @@ INSERT INTO bom_lines (bom_line_id, bom_id, component_product_id, required_quant
  ('BOM-001-1', 'BOM-001', 'COMP-COMPUTE-001', '2', '1', NULL, '0', TRUE),
  ('BOM-001-2', 'BOM-001', 'COMP-STORAGE-001', '2', '1', NULL, '0', TRUE),
  ('BOM-001-3', 'BOM-001', 'COMP-NETWORK_AND_POWER-001', '2', '1', 'NETWORK_OPTION', '0', TRUE),
- ('BOM-001-4', 'BOM-001', 'COMP-CHASSIS_AND_OTHER-001', '2', '1', NULL, '0', TRUE),
+ ('BOM-001-4', 'BOM-001', 'COMP-CHASSIS_AND_OTHER-001', '1', '0', NULL, '0', TRUE),
  ('BOM-001-NETWORK-ALT', 'BOM-001', 'COMP-NETWORK_AND_POWER-002', '2', '1', 'NETWORK_OPTION', '1', TRUE),
  ('BOM-002-1', 'BOM-002', 'COMP-COMPUTE-002', '2', '1', NULL, '0', TRUE),
  ('BOM-002-2', 'BOM-002', 'COMP-STORAGE-002', '2', '1', NULL, '0', TRUE),
  ('BOM-002-3', 'BOM-002', 'COMP-NETWORK_AND_POWER-002', '2', '1', NULL, '0', TRUE),
- ('BOM-002-4', 'BOM-002', 'COMP-CHASSIS_AND_OTHER-001', '2', '1', NULL, '0', TRUE),
+ ('BOM-002-4', 'BOM-002', 'COMP-CHASSIS_AND_OTHER-001', '1', '0', NULL, '0', TRUE),
  ('BOM-005-1', 'BOM-005', 'COMP-COMPUTE-004', '2', '1', NULL, '0', TRUE),
  ('BOM-005-2', 'BOM-005', 'COMP-STORAGE-003', '2', '1', NULL, '0', TRUE),
  ('BOM-005-3', 'BOM-005', 'COMP-NETWORK_AND_POWER-003', '2', '1', NULL, '0', TRUE),
- ('BOM-005-4', 'BOM-005', 'COMP-CHASSIS_AND_OTHER-002', '2', '1', NULL, '0', TRUE),
+ ('BOM-005-4', 'BOM-005', 'COMP-CHASSIS_AND_OTHER-002', '1', '0', NULL, '0', TRUE),
  ('BOM-006-1', 'BOM-006', 'COMP-COMPUTE-005', '2', '1', NULL, '0', TRUE),
  ('BOM-006-2', 'BOM-006', 'COMP-STORAGE-004', '2', '1', NULL, '0', TRUE),
  ('BOM-006-3', 'BOM-006', 'COMP-NETWORK_AND_POWER-004', '2', '1', NULL, '0', TRUE),
- ('BOM-006-4', 'BOM-006', 'COMP-CHASSIS_AND_OTHER-003', '2', '1', NULL, '0', TRUE),
+ ('BOM-006-4', 'BOM-006', 'COMP-CHASSIS_AND_OTHER-003', '1', '0', NULL, '0', TRUE),
  ('BOM-019-1', 'BOM-019', 'COMP-COMPUTE-010', '2', '1', NULL, '0', TRUE),
  ('BOM-019-2', 'BOM-019', 'COMP-STORAGE-007', '2', '1', NULL, '0', TRUE),
  ('BOM-019-3', 'BOM-019', 'COMP-NETWORK_AND_POWER-007', '2', '1', NULL, '0', TRUE),
- ('BOM-019-4', 'BOM-019', 'COMP-CHASSIS_AND_OTHER-005', '2', '1', NULL, '0', TRUE);
+ ('BOM-019-4', 'BOM-019', 'COMP-CHASSIS_AND_OTHER-005', '1', '0', NULL, '0', TRUE);
 
 INSERT INTO production_requirements (requirement_id, bom_id, operation_seq, capability_code, resource_type, setup_hours, hours_per_unit, batch_size, status) VALUES
  ('BOM-001-1', 'BOM-001', '1', 'assembly', 'workforce', '0.5', '0.5', '4', 'active'),
