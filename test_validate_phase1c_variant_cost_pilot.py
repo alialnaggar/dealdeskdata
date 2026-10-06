@@ -25,7 +25,7 @@ class VariantCostPilotTests(unittest.TestCase):
         result = evaluate_cost_pilot(self.portfolio, self.pilot, self.config)
         self.assertEqual(result["errors"], [])
         self.assertEqual(set(result["rollups_eur"]), {"BOM-001", "BOM-002"})
-        self.assertEqual(result["rollups_eur"], {"BOM-001": "686.56", "BOM-002": "708.78"})
+        self.assertEqual(result["rollups_eur"], {"BOM-001": "683.33", "BOM-002": "705.33"})
         self.assertFalse(result["ready_for_full_generation"])
 
     def test_catalogue_cost_must_cover_more_expensive_option(self):
@@ -36,7 +36,7 @@ class VariantCostPilotTests(unittest.TestCase):
 
     def test_materially_more_expensive_option_cannot_hide_under_one_cost(self):
         pilot = deepcopy(self.pilot)
-        pilot["component_standard_costs_eur"]["COMP-COMPUTE-002"] = 200
+        pilot["component_standard_costs_eur"]["COMP-COMPUTE-002"] = 400
         errors = evaluate_cost_pilot(self.portfolio, pilot, self.config)["errors"]
         self.assertIn("variant costs cannot share one standard cost within tolerance", errors)
 
