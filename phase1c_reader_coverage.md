@@ -49,3 +49,12 @@ Follow-up CI [run 37295550922](https://github.com/alialnaggar/dealdeskdata/actio
 
 
 **Portfolio BOM coverage preflight (6 October 2026):** `validate_phase1c_bom_portfolio.py` checks an explicitly prepared portfolio snapshot. Each listed make-to-order configuration must map to exactly one active effective BOM; components must match the catalogue/version and proposal family counts; BOM intervals cannot overlap; component reuse and substitute groups must stay inside their proposal bounds; and each effective BOM needs active production requirements. Eight pure tests use a small fictional portfolio in test code only. They validate checker behavior, not the proposed 18-SKU/24–36-variant portfolio. GitHub Actions [run 37434768059](https://github.com/alialnaggar/dealdeskdata/actions/runs/37434768059) passed all 20 workflow steps, including PostgreSQL and all 14 reader scenarios. Local suite: 71 passed, 21 database-dependent tests skipped. Full generation remains gated.
+
+## Structural portfolio draft (6 October 2026)
+
+`build_phase1c_portfolio_draft.py` generates a reviewable catalogue/BOM
+projection, validated by `validate_phase1c_bom_portfolio.py` and the CI
+portfolio step. It has 120 sellable products, 36 components, 18 make-to-order
+products, 24 effective BOMs, and 16 shared components (44.44%). See
+`phase1c_portfolio_draft_review.md` for unverified assumptions. This does not
+close the calibration or generated-row gate.
