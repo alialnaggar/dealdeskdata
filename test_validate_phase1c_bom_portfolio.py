@@ -40,15 +40,18 @@ def portfolio():
         {"product_id": "COMP-COMPUTE", "catalog_version": CATALOG, "is_sellable": False,
          "product_type": "component", "fulfillment_mode": "component",
          "attributes_json": {"archetype_code": "COMPUTE", "demand_class": "regular",
-                             "component_family": "compute", "supported_platforms": ["server"]}},
+                             "component_family": "compute", "component_role": "compute_kit",
+                             "supported_platforms": ["server"]}},
         {"product_id": "COMP-STORAGE", "catalog_version": CATALOG, "is_sellable": False,
          "product_type": "component", "fulfillment_mode": "component",
          "attributes_json": {"archetype_code": "STORAGE", "demand_class": "regular",
-                             "component_family": "storage", "supported_platforms": ["server"]}},
+                             "component_family": "storage", "component_role": "storage_drive",
+                             "supported_platforms": ["server"]}},
         {"product_id": "COMP-NETWORK", "catalog_version": CATALOG, "is_sellable": False,
          "product_type": "component", "fulfillment_mode": "component",
          "attributes_json": {"archetype_code": "NETWORK", "demand_class": "regular",
-                             "component_family": "network_and_power", "supported_platforms": ["server"]}},
+                             "component_family": "network_and_power", "component_role": "network_power_kit",
+                             "supported_platforms": ["server"]}},
     ]
     sigs = [{"selected_options": ["standard"]}, {"selected_options": ["enhanced"]}]
     headers = []
@@ -151,6 +154,12 @@ class BomPortfolioTests(unittest.TestCase):
         errors = self.check(data)["errors"]
         self.assertTrue(any("product attributes missing demand_class" in error for error in errors))
         self.assertTrue(any("does not support build platform server" in error for error in errors))
+
+    def test_component_role_must_match_family(self):
+        data = portfolio()
+        data["products"][2]["attributes_json"]["component_role"] = "storage_drive"
+        self.assertTrue(any("component_role does not match its family" in error
+                            for error in self.check(data)["errors"]))
 
     def test_undeclared_option_fails_even_with_a_matching_bom(self):
         data = portfolio()
