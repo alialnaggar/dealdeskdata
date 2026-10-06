@@ -61,8 +61,8 @@ are placeholders and require compatibility and cost validation.
 One standard workstation BOM has two same-family network/power alternatives.
 The selector takes **one**, preferring sufficient fresh stock or confirmed
 inbound; it does not consume both. A focused test gives the second-priority
-part three available units and the first none, so the second is selected for
-the three whole parts required by one build. This proves the selection
+part one available unit and the first none, so the second is selected for
+the one whole kit required by one build. This proves the selection
 mechanic, not electrical or form-factor interchangeability. The remaining
 23 BOMs have no substitute group.
 
@@ -101,7 +101,7 @@ pricing-design change.
 
 The explicit **illustrative** workstation pilot uses €30 per workforce hour,
 10% overhead, and component costs supplied in
-`phase1c_variant_cost_pilot.json`. After the enclosure-quantity correction, it calculates €686.56 and €708.78 for the
+`phase1c_variant_cost_pilot.json`. With the current explicit kit quantities, it calculates €683.33 and €705.33 for the
 two configurations. A single €715 standard cost is conservative and fits
 both within 5%. Its €1,050 list price is the draft category median anchor,
 **not a verified comparable current workstation price**. The resulting
@@ -185,8 +185,29 @@ enclosure or assembly kit per finished system. Its 24 BOM lines now use one
 unit with zero scrap. The six **synthetic** enclosure unit costs were doubled
 to keep the arithmetic pilot roughly comparable, not to claim market cost
 evidence. The workstation option rollups changed from €688.56/€710.78 to
-€686.56/€708.78; its €715 standard cost and €1,050 list price are unchanged.
+€686.56/€708.78 at that correction step; its €715 standard cost and €1,050 list price were unchanged.
 The draft JSON and representative SQL slice were regenerated, and the batch
 cost rule still passes 18 products and 24 BOMs. The compute, storage and
 network/power quantities remain illustrative until the part roles are named;
 the entire portfolio still awaits technical compatibility and price sourcing.
+
+## Explicit component roles and quantities — 6 October 2026
+
+The four families now have concrete **synthetic bundle roles**: one compute
+kit (board, CPU and memory as a prevalidated bundle), two storage drives, one
+network/power kit, and one enclosure kit per finished system. Each part record
+declares its role; the portfolio validator rejects a role that does not match
+its family. The standard workstation substitutes one network/power kit for
+another, so the selector now needs one available kit. The only nonzero draft
+scrap remains 1% for the two drives. These are deliberately simple assembly
+assumptions, not a claim that arbitrary CPUs, boards, drives, supplies and
+chassis fit together.
+
+Synthetic unit costs for compute and network/power kits were doubled when
+their quantities fell from two to one, to retain comparable cost arithmetic.
+The current workstation option rollups are €683.33 and €705.33; one €715
+standard cost still covers both within the proposed 5% tolerance. The
+€1,050 list price and 31.90% catalogue margin remain **unverified**. All 18
+buildable products and 24 BOM cost rollups pass locally. Full generation
+stays gated on sourced kit specifications, cross-kit interfaces and power,
+and comparable price/cost evidence.
