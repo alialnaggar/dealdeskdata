@@ -132,6 +132,8 @@ class BomPortfolioTests(unittest.TestCase):
         })
         self.assertIn("BOMs with substitute groups exceed the current proposal maximum",
                       self.check(data)["errors"])
+        self.assertIn("BOM-STANDARD: substitute group POWER mixes component families",
+                      self.check(data)["errors"])
 
 
 if __name__ == "__main__":

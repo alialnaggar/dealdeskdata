@@ -99,7 +99,18 @@ def build(config):
             cid = ids[index]
             lines.append({"bom_line_id": f"{bid}-{slot}", "bom_id": bid,
                           "component_product_id": cid, "required_quantity_per_output": 2,
-                          "scrap_pct": 1, "substitute_group_code": None, "priority": 0,
+                          "scrap_pct": 1,
+                          "substitute_group_code": "NETWORK_OPTION" if index == 0 and
+                          family == "network_and_power" else None,
+                          "priority": 0,
+                          "is_mandatory": True})
+        if index == 0:
+            # Exactly one network/power part is selected. The second candidate
+            # illustrates supplier or inventory substitution, not extra demand.
+            lines.append({"bom_line_id": f"{bid}-NETWORK-ALT", "bom_id": bid,
+                          "component_product_id": components_by_family["network_and_power"][1],
+                          "required_quantity_per_output": 2, "scrap_pct": 1,
+                          "substitute_group_code": "NETWORK_OPTION", "priority": 1,
                           "is_mandatory": True})
         for seq, capability, resource in ((1, "assembly", "workforce"),
                                           (2, "test", "equipment")):

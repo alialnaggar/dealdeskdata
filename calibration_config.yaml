@@ -1407,6 +1407,8 @@ fulfillment_production_calibration:
       cost_rule: jointly_derive_component_costs_and_BOM_rollups_against_generated_sellable_cost_bands
     BOMs:
       make_to_order_sellable_count: 18
+      operating_model: small_local_configuration_and_test_workshop
+      operating_model_decision: user_approved_2026_10_06;_product_mix_and_costs_remain_proposed
       selected_build_scope: product_and_exact_configuration_signature
       multi_variant_finished_stock_without_configuration: unbound_cannot_confirm_either_variant
       same_product_variant_demand: group_line_quantities_by_selected_BOM_not_product_total

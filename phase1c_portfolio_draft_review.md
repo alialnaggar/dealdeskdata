@@ -11,7 +11,7 @@ file against current proposed counts and effective BOM relationships.
 | Make-to-order products | 18 |
 | Explicitly offered configurations / effective BOMs | 24 / 24 |
 | Components reused in at least two BOMs | 16/36 (44.44%) |
-| BOMs with substitution groups | 0 |
+| BOMs with substitution groups | 1/24 (4.17%) |
 
 The nine sellable category counts follow `calibration_config.yaml`. The
 **proposed operating mix** is:
@@ -39,13 +39,24 @@ chassis/other) and has assembly and test operations. Sixteen components are
 reused in at least two BOMs.
 
 These allocations are **synthetic design assumptions**, not observed market
-shares. They model a provider with a small local configuration workshop;
+shares. The user approved a small local configuration and test workshop for
+the 18 buildable SKUs on 6 October 2026. The precise 10/6/2 product mix,
+component identities and commercial values remain proposed. This model
+assumes the provider can assemble/configure the listed systems locally;
 supplier-finished hardware is sourced as a complete item. Real OEMs offer
 configurable workstations, servers and storage, but those examples do not
 prove our fictional provider builds them in-house. Neutral IDs are used;
 the projection has no names, prices, costs, supplier offers, inventories,
 capacity dates, customers, or deals. The chosen component IDs and quantities
 are placeholders and require compatibility and cost validation.
+
+One standard workstation BOM has two same-family network/power alternatives.
+The selector takes **one**, preferring sufficient fresh stock or confirmed
+inbound; it does not consume both. A focused test gives the second-priority
+part three available units and the first none, so the second is selected for
+the three whole parts required by one build. This proves the selection
+mechanic, not electrical or form-factor interchangeability. The remaining
+23 BOMs have no substitute group.
 
 Illustrative official configuration references: [HP Z workstation options](https://www.hp.com/emea_middle_east-en/workstations/desktop-workstation-pc.html),
 [Dell PowerEdge configuration services](https://i.dell.com/sites/csdocuments/Legal_Docs/en/us/dell-emc-configuration-services-enterprise-sd-en.pdf),
@@ -60,12 +71,10 @@ parts are compatible, that component costs fit price bands, that substitutions
 are covered, or that the whole 24-table dataset can be generated. The
 remaining field reviews and source/price checks stay open.
 
-**User review before freeze:** decide whether the fictional provider should
-have its own small assembly/configuration workshop for the 18 buildable
-products, or whether any of these should instead be supplier-configured.
-The precise 10/6/2 mix is adjustable. No database setup is required for this
-review.
+**User review before freeze:** the workshop operating model is settled. The
+precise 10/6/2 mix, option compatibility, component identity/cost and price
+bands are still open. No database setup is required for this structural pass.
 
-Next: make product-option and component compatibility explicit, add a
-justified substitute example, then validate costs and representative master
-data rows. Keep the dataset-generation gate closed until those checks pass.
+Next: make product-option and component compatibility explicit, then validate
+costs and representative master-data rows. Keep the dataset-generation gate
+closed until those checks pass.

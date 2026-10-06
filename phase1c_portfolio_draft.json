@@ -2242,7 +2242,7 @@
       "component_product_id": "COMP-NETWORK_AND_POWER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
-      "substitute_group_code": null,
+      "substitute_group_code": "NETWORK_OPTION",
       "priority": 0,
       "is_mandatory": true
     },
@@ -2254,6 +2254,16 @@
       "scrap_pct": 1,
       "substitute_group_code": null,
       "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-001-NETWORK-ALT",
+      "bom_id": "BOM-001",
+      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": "NETWORK_OPTION",
+      "priority": 1,
       "is_mandatory": true
     },
     {

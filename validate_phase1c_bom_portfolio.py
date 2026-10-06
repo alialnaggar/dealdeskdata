@@ -281,6 +281,11 @@ def validate_portfolio(portfolio, config, contract):
         for group, candidates in groups.items():
             if len(candidates) < 2:
                 errors.append(f"{bom_id}: substitute group {group} needs at least two alternatives")
+            families = {components[line["component_product_id"]]["attributes_json"].get("component_family")
+                        for line in candidates if line["component_product_id"] in components
+                        and isinstance(components[line["component_product_id"]].get("attributes_json"), dict)}
+            if len(families) > 1:
+                errors.append(f"{bom_id}: substitute group {group} mixes component families")
             mandatory_count += 1  # The reader selects exactly one line from every declared group.
         bounds = bom_proposal["mandatory_components_per_BOM"]
         if not bounds[0] <= mandatory_count <= bounds[2]:
