@@ -147,3 +147,32 @@ standard cost, then rolls back. CI also checks that the SQL matches its JSON
 source before applying it to PostgreSQL. This is a focused schema/relationship
 fixture; it does not load all 156 products or prove supplier, inventory,
 capacity, deal and evidence coverage for the final dataset.
+
+## Compatibility and price evidence audit — 6 October 2026
+
+`audit_phase1c_build_readiness.py` makes the remaining evidence boundary
+visible. All 36 component records lack basic interface/form-factor/power
+specifications, so all 24 BOMs await detailed fit checking. The existing
+platform check still passes; it cannot establish electrical, mechanical or
+vendor interchangeability. Filling the fields alone would not establish fit:
+cross-part constraints and independently sourced component identities are
+still needed. The audit also finds the €1,050 workstation at a 31.90% draft
+margin, above the proposed category p90 of 28%.
+
+Official manufacturer pages illustrate why price evidence must include an
+exact configuration and tax basis. [HP's Z2 Tower G1i German listing](https://www.hp.com/de-de/shop/products/desktops/hp-z2-tower-g1i-workstation-desktop-pc-a40mdet-abd)
+shows €4,049 including VAT for a Core Ultra 9, 32 GB, 1 TB SSD and RTX 2000
+Ada configuration. [Dell's Precision 5860 Ireland configurator](https://www.dell.com/en-ie/shop/dell-pro-max-pcs-and-workstations/precision-5860-tower-workstation/spd/precision-5860-workstation/xctopt5860emea_vp)
+shows €3,504.96 including VAT for its selected configuration and exposes
+separate choices for graphics, memory, storage and chassis power. These
+retail listings are **not** comparable to the anonymous €1,050 draft build:
+the draft has no CPU/GPU/RAM/storage specification, brand, support term,
+country or tax treatment. Neither listing reveals the fictional provider's
+component purchase costs or gross margin. Prices are time-sensitive snapshots
+checked on 6 October 2026; no market price or 28% margin is frozen from them.
+
+Next input to prepare is a named specification for one workstation and its
+alternatives (CPU/socket or controller, storage interface/form factor, power
+draw and supply budget), plus a comparable dated price excluding or including
+tax consistently. Then test actual cross-part fit before extending this to
+the other 23 BOMs. Full generation remains gated.
