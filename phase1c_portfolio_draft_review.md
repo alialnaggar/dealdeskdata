@@ -133,3 +133,17 @@ reviews remain open before full dataset generation. The retained €1,050
 workstation pilot's 31.90% margin also exceeds its category's proposed p90
 margin of 28%; reconcile that mismatch with cost and price evidence before
 treating the product as calibrated.
+
+## Representative PostgreSQL master slice
+
+`render_phase1c_master_slice.py` maps one proposed workstation, one rack
+server and one storage array into the actual `products`, `bom_headers`,
+`bom_lines` and `production_requirements` columns. The five offered BOMs
+reuse their shared component-cost inputs and include the workstation's
+declared substitute group. The generated `phase1c_master_slice.sql` inserts
+the rows in a transaction, checks product/BOM counts, component platform
+support and the selected BOM cost against each finished product's one
+standard cost, then rolls back. CI also checks that the SQL matches its JSON
+source before applying it to PostgreSQL. This is a focused schema/relationship
+fixture; it does not load all 156 products or prove supplier, inventory,
+capacity, deal and evidence coverage for the final dataset.

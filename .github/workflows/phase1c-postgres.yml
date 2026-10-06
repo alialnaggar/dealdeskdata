@@ -36,8 +36,11 @@ on:
       - test_build_phase1c_portfolio_draft.py
       - phase1c_portfolio_draft.json
       - phase1c_variant_cost_pilot.json
+      - phase1c_build_cost_draft.json
       - validate_phase1c_variant_cost_pilot.py
       - test_validate_phase1c_variant_cost_pilot.py
+      - render_phase1c_master_slice.py
+      - phase1c_master_slice.sql
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -80,8 +83,11 @@ on:
       - test_build_phase1c_portfolio_draft.py
       - phase1c_portfolio_draft.json
       - phase1c_variant_cost_pilot.json
+      - phase1c_build_cost_draft.json
       - validate_phase1c_variant_cost_pilot.py
       - test_validate_phase1c_variant_cost_pilot.py
+      - render_phase1c_master_slice.py
+      - phase1c_master_slice.sql
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -133,6 +139,10 @@ jobs:
         run: psql -X -v ON_ERROR_STOP=1 -f phase1c_row_fixtures.sql
       - name: Install read layer dependency
         run: python -m pip install 'psycopg[binary]>=3.2,<4' 'PyYAML>=6,<7'
+      - name: Check representative catalogue and BOM master rows
+        run: |
+          python render_phase1c_master_slice.py --check
+          psql -X -v ON_ERROR_STOP=1 -f phase1c_master_slice.sql
       - name: Validate calibration relationships before generation
         run: |
           python -m unittest -v test_validate_phase1c_calibration
@@ -155,6 +165,7 @@ jobs:
           python validate_phase1c_bom_portfolio.py phase1c_portfolio_draft.json
           python -m unittest -v test_validate_phase1c_variant_cost_pilot
           python validate_phase1c_variant_cost_pilot.py phase1c_variant_cost_pilot.json
+          python validate_phase1c_variant_cost_pilot.py phase1c_build_cost_draft.json
           python -m unittest -v test_validate_phase1c_bom_portfolio
           python -m unittest -v test_phase1c_component_units
           python -m unittest -v test_phase1c_horizon
