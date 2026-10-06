@@ -145,6 +145,11 @@ def build(config):
                           family == "network_and_power" else None,
                           "priority": 0,
                           "is_mandatory": True})
+            if family == "chassis_and_other":
+                # One physical enclosure per finished system. The earlier
+                # two-unit value was only a structural placeholder.
+                lines[-1]["required_quantity_per_output"] = 1
+                lines[-1]["scrap_pct"] = 0
         if index == 0:
             # Exactly one network/power part is selected. The second candidate
             # illustrates supplier or inventory substitution, not extra demand.
