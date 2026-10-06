@@ -27,7 +27,7 @@ class DraftPortfolioTests(unittest.TestCase):
         self.assertEqual(result["metrics"]["sellable_products"], 120)
         self.assertEqual(result["metrics"]["components"], 36)
         self.assertEqual(result["metrics"]["effective_bom_variants"], 24)
-        self.assertEqual(result["metrics"]["components_shared_across_two_or_more_boms"], 16)
+        self.assertEqual(result["metrics"]["components_shared_across_two_or_more_boms"], 18)
         self.assertEqual(result["metrics"]["boms_with_substitute_groups"], 1)
         self.assertFalse(result["ready_for_full_generation"])
 
@@ -78,6 +78,16 @@ class DraftPortfolioTests(unittest.TestCase):
         components = {row["product_id"]: row for row in draft["products"]}
         self.assertEqual({components[row["component_product_id"]]["attributes_json"]["component_family"]
                           for row in candidates}, {"network_and_power"})
+
+    def test_two_options_of_one_product_use_different_components(self):
+        draft = build(self.config)
+        product = draft["bom_headers"][0]["finished_product_id"]
+        boms = [row["bom_id"] for row in draft["bom_headers"]
+                if row["finished_product_id"] == product]
+        self.assertEqual(len(boms), 2)
+        component_sets = [{row["component_product_id"] for row in draft["bom_lines"]
+                           if row["bom_id"] == bom_id} for bom_id in boms]
+        self.assertNotEqual(*component_sets)
 
     def test_draft_substitute_is_selected_when_preferred_part_is_unavailable(self):
         draft = build(self.config)

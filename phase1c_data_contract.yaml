@@ -98,6 +98,8 @@ production_horizon:
   infer_capacity_after_boundary: false
 
 configured_builds:
+  build_platforms: [workstation, server, storage_system]
+  offered_option_codes: [standard, enhanced]
   line_bom_match: product_catalogue_and_exact_configuration_signature_at_run_as_of
   same_product_variant_demand: group_by_selected_BOM
   unconfigured_finished_stock_with_multiple_variants: visible_but_not_confirming_either_variant
@@ -119,6 +121,8 @@ json_contracts:
       fulfillment_lead_days: nonnegative_integer
       installation_eligible: boolean
       supported_installation_regions: region_code_array
+      category: string
+      subcategory: string
     mode_rules:
       digital_activation:
         required: [edition]
@@ -129,10 +133,10 @@ json_contracts:
         optional: [fulfillment_lead_days]
       physical:
         required: []
-        optional: [installation_eligible, supported_installation_regions, option_codes]
+        optional: [installation_eligible, supported_installation_regions, option_codes, build_platform, offered_options]
       component:
         required: []
-        optional: [component_family]
+        optional: [component_family, supported_platforms]
   deal_terms_json:
     required_on_submission:
       payment_terms_days: payment_terms_days

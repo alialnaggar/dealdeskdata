@@ -10,7 +10,7 @@ file against current proposed counts and effective BOM relationships.
 | Sellable products / component products | 120 / 36 |
 | Make-to-order products | 18 |
 | Explicitly offered configurations / effective BOMs | 24 / 24 |
-| Components reused in at least two BOMs | 16/36 (44.44%) |
+| Components reused in at least two BOMs | 18/36 (50%) |
 | BOMs with substitution groups | 1/24 (4.17%) |
 
 The nine sellable category counts follow `calibration_config.yaml`. The
@@ -35,8 +35,16 @@ appliance). The two workstations and four rack servers offer both standard
 and enhanced options; the other 12 offer standard only. That yields 24
 explicit configurations and 24 effective BOMs. Every BOM contains one part
 from each of the four component families (compute, storage, network/power,
-chassis/other) and has assembly and test operations. Sixteen components are
+chassis/other) and has assembly and test operations. Eighteen components are
 reused in at least two BOMs.
+
+All 156 draft products now have the common typed product attributes. Digital
+products have an edition, services have a service code, and components declare
+their supported build platform. The three synthetic platforms are workstation,
+server and storage system. Every BOM component supports its finished product's
+platform. A product offers only the options declared in its attributes, and
+the paired standard/enhanced BOMs use different components. Negative tests
+reject undeclared options, wrong-platform parts and missing attributes.
 
 These allocations are **synthetic design assumptions**, not observed market
 shares. The user approved a small local configuration and test workshop for
@@ -67,14 +75,14 @@ The validator reports no structural errors and still returns
 `ready_for_full_generation: false`. The pass proves only that one explicit
 allocation can meet the proposed 18/24/36 coverage and 40% reuse threshold.
 It does **not** prove the mix is commercially believable, that individual
-parts are compatible, that component costs fit price bands, that substitutions
-are covered, or that the whole 24-table dataset can be generated. The
+parts fit at socket/interface/power level, that component costs fit price
+bands, or that the whole 24-table dataset can be generated. The
 remaining field reviews and source/price checks stay open.
 
 **User review before freeze:** the workshop operating model is settled. The
-precise 10/6/2 mix, option compatibility, component identity/cost and price
+precise 10/6/2 mix, detailed part compatibility, component identity/cost and price
 bands are still open. No database setup is required for this structural pass.
 
-Next: make product-option and component compatibility explicit, then validate
-costs and representative master-data rows. Keep the dataset-generation gate
-closed until those checks pass.
+Next: validate costs and representative master-data rows, then consider whether
+the fictional part catalogue needs more detailed compatibility fields. Keep
+the dataset-generation gate closed until those checks pass.

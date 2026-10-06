@@ -117,6 +117,12 @@ def validate_contract(contract):
         not component.get("no_quote_reservation")):
         errors.append("component stock contract must preserve whole units and aggregate rounding")
     configured = contract.get("configured_builds", {})
+    for key in ("build_platforms", "offered_option_codes"):
+        values = configured.get(key)
+        if (not isinstance(values, list) or not values or
+            any(not _is_nonempty_string(value) for value in values) or
+            len(values) != len(set(values))):
+            errors.append(f"configured {key} must be nonempty unique strings")
     horizon = contract.get("production_horizon", {})
     if (horizon.get("boundary") != "latest_capacity_date_represented_at_the_candidate_location" or
         horizon.get("missing_or_stale_capacity_window") != "unknown" or
@@ -219,6 +225,19 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
                 errors.append("archetype_code must be nonempty string")
             if payload.get("demand_class") not in spec["common_required"]["demand_class"]:
                 errors.append("demand_class is invalid")
+            for key in ("category", "subcategory"):
+                if key in payload and not _is_nonempty_string(payload[key]):
+                    errors.append(f"{key} must be nonempty string")
+            if "build_platform" in payload and payload["build_platform"] not in contract["configured_builds"]["build_platforms"]:
+                errors.append("build_platform is invalid")
+            for key, vocabulary in (("offered_options", "offered_option_codes"),
+                                    ("supported_platforms", "build_platforms")):
+                if key in payload:
+                    values = payload[key]
+                    if (not isinstance(values, list) or not values or
+                        any(not isinstance(value, str) or value not in contract["configured_builds"][vocabulary]
+                            for value in values) or len(values) != len(set(values))):
+                        errors.append(f"{key} must be a nonempty unique allowed list")
             mode_spec = spec["mode_rules"].get(mode)
             if mode_spec is None:
                 errors.append("product mode is not defined")

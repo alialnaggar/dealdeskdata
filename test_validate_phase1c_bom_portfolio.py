@@ -31,15 +31,24 @@ def small_config():
 def portfolio():
     products = [
         {"product_id": "SELL-STOCK", "catalog_version": CATALOG, "is_sellable": True,
-         "product_type": "physical", "fulfillment_mode": "stocked_finished", "attributes_json": {}},
+         "product_type": "physical", "fulfillment_mode": "stocked_finished",
+         "attributes_json": {"archetype_code": "STOCK", "demand_class": "regular"}},
         {"product_id": "SELL-BUILD", "catalog_version": CATALOG, "is_sellable": True,
-         "product_type": "physical", "fulfillment_mode": "make_to_order", "attributes_json": {}},
+         "product_type": "physical", "fulfillment_mode": "make_to_order",
+         "attributes_json": {"archetype_code": "BUILD", "demand_class": "regular",
+                             "build_platform": "server", "offered_options": ["standard", "enhanced"]}},
         {"product_id": "COMP-COMPUTE", "catalog_version": CATALOG, "is_sellable": False,
-         "product_type": "component", "fulfillment_mode": "component", "attributes_json": {"component_family": "compute"}},
+         "product_type": "component", "fulfillment_mode": "component",
+         "attributes_json": {"archetype_code": "COMPUTE", "demand_class": "regular",
+                             "component_family": "compute", "supported_platforms": ["server"]}},
         {"product_id": "COMP-STORAGE", "catalog_version": CATALOG, "is_sellable": False,
-         "product_type": "component", "fulfillment_mode": "component", "attributes_json": {"component_family": "storage"}},
+         "product_type": "component", "fulfillment_mode": "component",
+         "attributes_json": {"archetype_code": "STORAGE", "demand_class": "regular",
+                             "component_family": "storage", "supported_platforms": ["server"]}},
         {"product_id": "COMP-NETWORK", "catalog_version": CATALOG, "is_sellable": False,
-         "product_type": "component", "fulfillment_mode": "component", "attributes_json": {"component_family": "network_and_power"}},
+         "product_type": "component", "fulfillment_mode": "component",
+         "attributes_json": {"archetype_code": "NETWORK", "demand_class": "regular",
+                             "component_family": "network_and_power", "supported_platforms": ["server"]}},
     ]
     sigs = [{"selected_options": ["standard"]}, {"selected_options": ["enhanced"]}]
     headers = []
@@ -134,6 +143,22 @@ class BomPortfolioTests(unittest.TestCase):
                       self.check(data)["errors"])
         self.assertIn("BOM-STANDARD: substitute group POWER mixes component families",
                       self.check(data)["errors"])
+
+    def test_product_attributes_and_platform_mismatch_fail(self):
+        data = portfolio()
+        data["products"][1]["attributes_json"].pop("demand_class")
+        data["products"][2]["attributes_json"]["supported_platforms"] = ["workstation"]
+        errors = self.check(data)["errors"]
+        self.assertTrue(any("product attributes missing demand_class" in error for error in errors))
+        self.assertTrue(any("does not support build platform server" in error for error in errors))
+
+    def test_undeclared_option_fails_even_with_a_matching_bom(self):
+        data = portfolio()
+        signature = {"selected_options": ["premium"]}
+        data["offered_configurations"][0]["configuration_signature_json"] = signature
+        data["bom_headers"][0]["configuration_signature_json"] = signature
+        self.assertTrue(any("offered configuration must name one declared option" in error
+                            for error in self.check(data)["errors"]))
 
 
 if __name__ == "__main__":

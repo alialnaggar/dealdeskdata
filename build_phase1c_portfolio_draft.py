@@ -30,8 +30,17 @@ SUBSCRIPTION_SUBCATEGORIES = {
     "network_controller_management", "endpoint_xdr", "identity_access",
     "email_cloud_security", "siem_vulnerability_management",
 }
-SHARED_COMPONENTS_BY_FAMILY = {
-    "compute": 5, "storage": 4, "network_and_power": 4, "chassis_and_other": 3,
+COMPONENT_POOL_SIZES = {
+    "compute": {"workstation": 3, "server": 6, "storage_system": 3},
+    "storage": {"workstation": 2, "server": 4, "storage_system": 3},
+    "network_and_power": {"workstation": 2, "server": 4, "storage_system": 3},
+    "chassis_and_other": {"workstation": 1, "server": 3, "storage_system": 2},
+}
+REUSED_POOL_SIZES = {
+    "compute": {"workstation": 1, "server": 3, "storage_system": 1},
+    "storage": {"workstation": 1, "server": 2, "storage_system": 1},
+    "network_and_power": {"workstation": 1, "server": 2, "storage_system": 1},
+    "chassis_and_other": {"workstation": 1, "server": 2, "storage_system": 1},
 }
 AS_OF = "2026-10-06T12:00:00Z"
 
@@ -40,6 +49,7 @@ def build(config):
     catalogue = config["product_catalogue"]["metadata"]["catalogue_version"]
     params = config["fulfillment_production_calibration"]["proposed_parameters"]
     products, mto_ids = [], []
+    platform_by_product = {}
     for category, settings in config["product_catalogue"]["categories"].items():
         ordinal = 0
         for subcategory, count in settings["subcategories"].items():
@@ -55,25 +65,50 @@ def build(config):
                         "scheduled_service" if product_type == "service" else
                         "digital_activation")
                 pid = f"SELL-{category.upper()}-{ordinal:03d}"
+                attributes = {"archetype_code": subcategory.upper(),
+                              "demand_class": "regular", "category": category,
+                              "subcategory": subcategory}
+                if mto:
+                    platform = ("workstation" if subcategory == "workstation" else
+                                "storage_system" if category == "storage_and_data_protection" else
+                                "server")
+                    attributes.update({"build_platform": platform,
+                                       "offered_options": ["standard", "enhanced"]
+                                       if len(mto_ids) < 6 else ["standard"]})
+                    platform_by_product[pid] = platform
+                elif mode == "digital_activation":
+                    attributes["edition"] = "business"
+                elif mode == "scheduled_service":
+                    attributes["service_code"] = "standard"
                 products.append({"product_id": pid, "catalog_version": catalogue,
                                  "is_sellable": True, "product_type": product_type,
                                  "fulfillment_mode": mode,
-                                 "attributes_json": {"category": category, "subcategory": subcategory}})
+                                 "attributes_json": attributes})
                 if mto:
                     mto_ids.append(pid)
 
     component_ids = []
-    components_by_family = {}
+    components_by_platform = {platform: {} for platform in ("workstation", "server", "storage_system")}
     for family, count in params["component_catalogue"]["family_counts"].items():
-        components_by_family[family] = []
+        sizes = COMPONENT_POOL_SIZES[family]
+        assert sum(sizes.values()) == count
+        for platform in components_by_platform:
+            components_by_platform[platform][family] = []
         for ordinal in range(1, count + 1):
             pid = f"COMP-{family.upper()}-{ordinal:03d}"
             component_ids.append(pid)
-            components_by_family[family].append(pid)
+            remaining = ordinal
+            for platform, size in sizes.items():
+                if remaining <= size:
+                    break
+                remaining -= size
+            components_by_platform[platform][family].append(pid)
             products.append({"product_id": pid, "catalog_version": catalogue,
                              "is_sellable": False, "product_type": "component",
                              "fulfillment_mode": "component",
-                             "attributes_json": {"component_family": family}})
+                             "attributes_json": {"archetype_code": f"COMP-{family.upper()}",
+                                                 "demand_class": "regular", "component_family": family,
+                                                 "supported_platforms": [platform]}})
 
     # Two workstations and four rack servers have two explicitly offered
     # variants; the remaining twelve assembled SKUs have one. Sixteen of the
@@ -81,13 +116,19 @@ def build(config):
     variants = [(pid, variant) for index, pid in enumerate(mto_ids)
                 for variant in (["standard", "enhanced"] if index < 6 else ["standard"])]
     assert len(variants) == 24 and len(component_ids) == 36
-    component_slots = {}
-    for family, ids in components_by_family.items():
-        repeatable = ids[:SHARED_COMPONENTS_BY_FAMILY[family]]
-        component_slots[family] = ids + [repeatable[i % len(repeatable)]
-                                         for i in range(len(variants) - len(ids))]
+    counts = Counter(platform_by_product[pid] for pid, _ in variants)
+    component_slots = {platform: {} for platform in components_by_platform}
+    for platform, families in components_by_platform.items():
+        for family, ids in families.items():
+            repeatable = ids[:REUSED_POOL_SIZES[family][platform]]
+            component_slots[platform][family] = ids + [repeatable[i % len(repeatable)]
+                                                       for i in range(counts[platform] - len(ids))]
     offered, headers, lines, requirements = [], [], [], []
+    platform_index = {platform: 0 for platform in components_by_platform}
     for index, (pid, variant) in enumerate(variants):
+        platform = platform_by_product[pid]
+        current_index = platform_index[platform]
+        platform_index[platform] += 1
         signature = {"selected_options": [variant]}
         bid = f"BOM-{index + 1:03d}"
         offered.append({"product_id": pid, "configuration_signature_json": signature})
@@ -95,8 +136,8 @@ def build(config):
                         "catalog_version": catalogue, "configuration_signature_json": signature,
                         "output_quantity": 1, "effective_from": "2026-01-01T00:00:00Z",
                         "effective_to": None, "status": "active"})
-        for slot, (family, ids) in enumerate(component_slots.items(), start=1):
-            cid = ids[index]
+        for slot, (family, ids) in enumerate(component_slots[platform].items(), start=1):
+            cid = ids[current_index]
             lines.append({"bom_line_id": f"{bid}-{slot}", "bom_id": bid,
                           "component_product_id": cid, "required_quantity_per_output": 2,
                           "scrap_pct": 1,
@@ -108,7 +149,7 @@ def build(config):
             # Exactly one network/power part is selected. The second candidate
             # illustrates supplier or inventory substitution, not extra demand.
             lines.append({"bom_line_id": f"{bid}-NETWORK-ALT", "bom_id": bid,
-                          "component_product_id": components_by_family["network_and_power"][1],
+                          "component_product_id": components_by_platform[platform]["network_and_power"][1],
                           "required_quantity_per_output": 2, "scrap_pct": 1,
                           "substitute_group_code": "NETWORK_OPTION", "priority": 1,
                           "is_mandatory": True})

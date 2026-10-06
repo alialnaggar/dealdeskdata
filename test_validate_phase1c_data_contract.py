@@ -53,6 +53,18 @@ class DataContractTests(unittest.TestCase):
         self.assertIn("configured build contract must separate BOM variants and unbound finished stock",
                       validate_contract(changed)["errors"])
 
+    def test_build_platform_and_option_vocabularies_are_typed(self):
+        changed = deepcopy(CONTRACT)
+        changed["configured_builds"]["build_platforms"] = ["server", "server"]
+        self.assertIn("configured build_platforms must be nonempty unique strings",
+                      validate_contract(changed)["errors"])
+        attrs = {"archetype_code": "RACK_SERVER", "demand_class": "regular",
+                 "build_platform": "server", "offered_options": ["standard", "enhanced"]}
+        self.assertEqual(validate_payload("product_attributes", attrs, CONTRACT, mode="physical"), [])
+        attrs["offered_options"] = ["standard", "premium"]
+        self.assertIn("offered_options must be a nonempty unique allowed list",
+                      validate_payload("product_attributes", attrs, CONTRACT, mode="physical"))
+
     def test_substitution_selection_contract_is_required(self):
         changed = deepcopy(CONTRACT)
         changed["configured_builds"]["substitution_selection"]["preference_order"] = "priority_only"

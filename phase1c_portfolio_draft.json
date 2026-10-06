@@ -9,6 +9,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "BUSINESS_LAPTOP",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "business_laptop"
       }
@@ -20,6 +22,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "BUSINESS_LAPTOP",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "business_laptop"
       }
@@ -31,6 +35,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "BUSINESS_LAPTOP",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "business_laptop"
       }
@@ -42,6 +48,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "BUSINESS_LAPTOP",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "business_laptop"
       }
@@ -53,6 +61,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "BUSINESS_LAPTOP",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "business_laptop"
       }
@@ -64,6 +74,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "DESKTOP_MINI_PC",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "desktop_mini_pc"
       }
@@ -75,6 +87,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "DESKTOP_MINI_PC",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "desktop_mini_pc"
       }
@@ -86,6 +100,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "DESKTOP_MINI_PC",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "desktop_mini_pc"
       }
@@ -97,8 +113,15 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "WORKSTATION",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
-        "subcategory": "workstation"
+        "subcategory": "workstation",
+        "build_platform": "workstation",
+        "offered_options": [
+          "standard",
+          "enhanced"
+        ]
       }
     },
     {
@@ -108,8 +131,15 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "WORKSTATION",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
-        "subcategory": "workstation"
+        "subcategory": "workstation",
+        "build_platform": "workstation",
+        "offered_options": [
+          "standard",
+          "enhanced"
+        ]
       }
     },
     {
@@ -119,6 +149,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "MONITOR",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "monitor"
       }
@@ -130,6 +162,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "MONITOR",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "monitor"
       }
@@ -141,6 +175,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "MONITOR",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "monitor"
       }
@@ -152,6 +188,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "COLLABORATION_DEVICE",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "collaboration_device"
       }
@@ -163,6 +201,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "COLLABORATION_DEVICE",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "collaboration_device"
       }
@@ -174,6 +214,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "COLLABORATION_DEVICE",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "collaboration_device"
       }
@@ -185,6 +227,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "DOCK_PERIPHERAL",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "dock_peripheral"
       }
@@ -196,6 +240,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "DOCK_PERIPHERAL",
+        "demand_class": "regular",
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "dock_peripheral"
       }
@@ -207,8 +253,15 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "RACK_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "rack_server"
+        "subcategory": "rack_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard",
+          "enhanced"
+        ]
       }
     },
     {
@@ -218,8 +271,15 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "RACK_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "rack_server"
+        "subcategory": "rack_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard",
+          "enhanced"
+        ]
       }
     },
     {
@@ -229,8 +289,15 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "RACK_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "rack_server"
+        "subcategory": "rack_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard",
+          "enhanced"
+        ]
       }
     },
     {
@@ -240,8 +307,15 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "RACK_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "rack_server"
+        "subcategory": "rack_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard",
+          "enhanced"
+        ]
       }
     },
     {
@@ -251,8 +325,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "TOWER_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "tower_server"
+        "subcategory": "tower_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -262,8 +342,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "TOWER_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "tower_server"
+        "subcategory": "tower_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -273,8 +359,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "TOWER_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "tower_server"
+        "subcategory": "tower_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -284,8 +376,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "EDGE_COMPACT_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "edge_compact_server"
+        "subcategory": "edge_compact_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -295,8 +393,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "EDGE_COMPACT_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "edge_compact_server"
+        "subcategory": "edge_compact_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -306,8 +410,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "GPU_ACCELERATED_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
-        "subcategory": "gpu_accelerated_server"
+        "subcategory": "gpu_accelerated_server",
+        "build_platform": "server",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -317,6 +427,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "GPU_ACCELERATED_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
         "subcategory": "gpu_accelerated_server"
       }
@@ -328,6 +440,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "GPU_ACCELERATED_SERVER",
+        "demand_class": "regular",
         "category": "servers_and_compute_infrastructure",
         "subcategory": "gpu_accelerated_server"
       }
@@ -339,8 +453,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "STORAGE_ARRAY",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
-        "subcategory": "storage_array"
+        "subcategory": "storage_array",
+        "build_platform": "storage_system",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -350,8 +470,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "STORAGE_ARRAY",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
-        "subcategory": "storage_array"
+        "subcategory": "storage_array",
+        "build_platform": "storage_system",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -361,8 +487,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "STORAGE_ARRAY",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
-        "subcategory": "storage_array"
+        "subcategory": "storage_array",
+        "build_platform": "storage_system",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -372,8 +504,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "NAS_FILE_STORAGE",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
-        "subcategory": "nas_file_storage"
+        "subcategory": "nas_file_storage",
+        "build_platform": "storage_system",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -383,8 +521,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "NAS_FILE_STORAGE",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
-        "subcategory": "nas_file_storage"
+        "subcategory": "nas_file_storage",
+        "build_platform": "storage_system",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -394,8 +538,14 @@
       "product_type": "physical",
       "fulfillment_mode": "make_to_order",
       "attributes_json": {
+        "archetype_code": "BACKUP_APPLIANCE",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
-        "subcategory": "backup_appliance"
+        "subcategory": "backup_appliance",
+        "build_platform": "storage_system",
+        "offered_options": [
+          "standard"
+        ]
       }
     },
     {
@@ -405,6 +555,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "BACKUP_APPLIANCE",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
         "subcategory": "backup_appliance"
       }
@@ -416,6 +568,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "BACKUP_APPLIANCE",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
         "subcategory": "backup_appliance"
       }
@@ -427,6 +581,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "ENTERPRISE_DRIVE",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
         "subcategory": "enterprise_drive"
       }
@@ -438,6 +594,8 @@
       "product_type": "physical",
       "fulfillment_mode": "stocked_finished",
       "attributes_json": {
+        "archetype_code": "ENTERPRISE_DRIVE",
+        "demand_class": "regular",
         "category": "storage_and_data_protection",
         "subcategory": "enterprise_drive"
       }
@@ -449,6 +607,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "SWITCH",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "switch"
       }
@@ -460,6 +620,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "SWITCH",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "switch"
       }
@@ -471,6 +633,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "SWITCH",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "switch"
       }
@@ -482,6 +646,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "SWITCH",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "switch"
       }
@@ -493,6 +659,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "SWITCH",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "switch"
       }
@@ -504,6 +672,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "ROUTER_SDWAN",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "router_sdwan"
       }
@@ -515,6 +685,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "ROUTER_SDWAN",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "router_sdwan"
       }
@@ -526,6 +698,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "ROUTER_SDWAN",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "router_sdwan"
       }
@@ -537,6 +711,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "WIRELESS_ACCESS_POINT",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "wireless_access_point"
       }
@@ -548,6 +724,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "WIRELESS_ACCESS_POINT",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "wireless_access_point"
       }
@@ -559,6 +737,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "WIRELESS_ACCESS_POINT",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "wireless_access_point"
       }
@@ -570,8 +750,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "NETWORK_CONTROLLER_MANAGEMENT",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
-        "subcategory": "network_controller_management"
+        "subcategory": "network_controller_management",
+        "edition": "business"
       }
     },
     {
@@ -581,8 +764,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "NETWORK_CONTROLLER_MANAGEMENT",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
-        "subcategory": "network_controller_management"
+        "subcategory": "network_controller_management",
+        "edition": "business"
       }
     },
     {
@@ -592,6 +778,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "OPTICS_TRANSCEIVER",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "optics_transceiver"
       }
@@ -603,6 +791,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "OPTICS_TRANSCEIVER",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "optics_transceiver"
       }
@@ -614,6 +804,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "OPTICS_TRANSCEIVER",
+        "demand_class": "regular",
         "category": "networking_and_connectivity",
         "subcategory": "optics_transceiver"
       }
@@ -625,6 +817,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "FIREWALL_SECURITY_APPLIANCE",
+        "demand_class": "regular",
         "category": "cybersecurity",
         "subcategory": "firewall_security_appliance"
       }
@@ -636,6 +830,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "FIREWALL_SECURITY_APPLIANCE",
+        "demand_class": "regular",
         "category": "cybersecurity",
         "subcategory": "firewall_security_appliance"
       }
@@ -647,6 +843,8 @@
       "product_type": "physical",
       "fulfillment_mode": "supplier_finished",
       "attributes_json": {
+        "archetype_code": "FIREWALL_SECURITY_APPLIANCE",
+        "demand_class": "regular",
         "category": "cybersecurity",
         "subcategory": "firewall_security_appliance"
       }
@@ -658,8 +856,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "ENDPOINT_XDR",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "endpoint_xdr"
+        "subcategory": "endpoint_xdr",
+        "edition": "business"
       }
     },
     {
@@ -669,8 +870,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "ENDPOINT_XDR",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "endpoint_xdr"
+        "subcategory": "endpoint_xdr",
+        "edition": "business"
       }
     },
     {
@@ -680,8 +884,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "ENDPOINT_XDR",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "endpoint_xdr"
+        "subcategory": "endpoint_xdr",
+        "edition": "business"
       }
     },
     {
@@ -691,8 +898,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "IDENTITY_ACCESS",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "identity_access"
+        "subcategory": "identity_access",
+        "edition": "business"
       }
     },
     {
@@ -702,8 +912,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "IDENTITY_ACCESS",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "identity_access"
+        "subcategory": "identity_access",
+        "edition": "business"
       }
     },
     {
@@ -713,8 +926,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "EMAIL_CLOUD_SECURITY",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "email_cloud_security"
+        "subcategory": "email_cloud_security",
+        "edition": "business"
       }
     },
     {
@@ -724,8 +940,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "EMAIL_CLOUD_SECURITY",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "email_cloud_security"
+        "subcategory": "email_cloud_security",
+        "edition": "business"
       }
     },
     {
@@ -735,8 +954,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "SIEM_VULNERABILITY_MANAGEMENT",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "siem_vulnerability_management"
+        "subcategory": "siem_vulnerability_management",
+        "edition": "business"
       }
     },
     {
@@ -746,8 +968,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "SIEM_VULNERABILITY_MANAGEMENT",
+        "demand_class": "regular",
         "category": "cybersecurity",
-        "subcategory": "siem_vulnerability_management"
+        "subcategory": "siem_vulnerability_management",
+        "edition": "business"
       }
     },
     {
@@ -757,8 +982,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "IAAS_COMPUTE",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "iaas_compute"
+        "subcategory": "iaas_compute",
+        "edition": "business"
       }
     },
     {
@@ -768,8 +996,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "IAAS_COMPUTE",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "iaas_compute"
+        "subcategory": "iaas_compute",
+        "edition": "business"
       }
     },
     {
@@ -779,8 +1010,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "IAAS_COMPUTE",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "iaas_compute"
+        "subcategory": "iaas_compute",
+        "edition": "business"
       }
     },
     {
@@ -790,8 +1024,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "CLOUD_STORAGE_BACKUP",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "cloud_storage_backup"
+        "subcategory": "cloud_storage_backup",
+        "edition": "business"
       }
     },
     {
@@ -801,8 +1038,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "CLOUD_STORAGE_BACKUP",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "cloud_storage_backup"
+        "subcategory": "cloud_storage_backup",
+        "edition": "business"
       }
     },
     {
@@ -812,8 +1052,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "MANAGED_DATABASE_APPLICATION_PLATFORM",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "managed_database_application_platform"
+        "subcategory": "managed_database_application_platform",
+        "edition": "business"
       }
     },
     {
@@ -823,8 +1066,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "MANAGED_DATABASE_APPLICATION_PLATFORM",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "managed_database_application_platform"
+        "subcategory": "managed_database_application_platform",
+        "edition": "business"
       }
     },
     {
@@ -834,8 +1080,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "VIRTUAL_DESKTOP",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "virtual_desktop"
+        "subcategory": "virtual_desktop",
+        "edition": "business"
       }
     },
     {
@@ -845,8 +1094,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "VIRTUAL_DESKTOP",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "virtual_desktop"
+        "subcategory": "virtual_desktop",
+        "edition": "business"
       }
     },
     {
@@ -856,8 +1108,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DISASTER_RECOVERY_AS_A_SERVICE",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "disaster_recovery_as_a_service"
+        "subcategory": "disaster_recovery_as_a_service",
+        "edition": "business"
       }
     },
     {
@@ -867,8 +1122,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DISASTER_RECOVERY_AS_A_SERVICE",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "disaster_recovery_as_a_service"
+        "subcategory": "disaster_recovery_as_a_service",
+        "edition": "business"
       }
     },
     {
@@ -878,8 +1136,11 @@
       "product_type": "subscription",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DISASTER_RECOVERY_AS_A_SERVICE",
+        "demand_class": "regular",
         "category": "cloud_services_and_subscriptions",
-        "subcategory": "disaster_recovery_as_a_service"
+        "subcategory": "disaster_recovery_as_a_service",
+        "edition": "business"
       }
     },
     {
@@ -889,8 +1150,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "PRODUCTIVITY_COLLABORATION",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "productivity_collaboration"
+        "subcategory": "productivity_collaboration",
+        "edition": "business"
       }
     },
     {
@@ -900,8 +1164,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "PRODUCTIVITY_COLLABORATION",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "productivity_collaboration"
+        "subcategory": "productivity_collaboration",
+        "edition": "business"
       }
     },
     {
@@ -911,8 +1178,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "PRODUCTIVITY_COLLABORATION",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "productivity_collaboration"
+        "subcategory": "productivity_collaboration",
+        "edition": "business"
       }
     },
     {
@@ -922,8 +1192,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "PRODUCTIVITY_COLLABORATION",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "productivity_collaboration"
+        "subcategory": "productivity_collaboration",
+        "edition": "business"
       }
     },
     {
@@ -933,8 +1206,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "CRM_ERP",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "crm_erp"
+        "subcategory": "crm_erp",
+        "edition": "business"
       }
     },
     {
@@ -944,8 +1220,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "CRM_ERP",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "crm_erp"
+        "subcategory": "crm_erp",
+        "edition": "business"
       }
     },
     {
@@ -955,8 +1234,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "CRM_ERP",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "crm_erp"
+        "subcategory": "crm_erp",
+        "edition": "business"
       }
     },
     {
@@ -966,8 +1248,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "CRM_ERP",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "crm_erp"
+        "subcategory": "crm_erp",
+        "edition": "business"
       }
     },
     {
@@ -977,8 +1262,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DATA_BI_ANALYTICS",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "data_bi_analytics"
+        "subcategory": "data_bi_analytics",
+        "edition": "business"
       }
     },
     {
@@ -988,8 +1276,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DATA_BI_ANALYTICS",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "data_bi_analytics"
+        "subcategory": "data_bi_analytics",
+        "edition": "business"
       }
     },
     {
@@ -999,8 +1290,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DATA_BI_ANALYTICS",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "data_bi_analytics"
+        "subcategory": "data_bi_analytics",
+        "edition": "business"
       }
     },
     {
@@ -1010,8 +1304,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "BACKUP_VIRTUALIZATION",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "backup_virtualization"
+        "subcategory": "backup_virtualization",
+        "edition": "business"
       }
     },
     {
@@ -1021,8 +1318,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "BACKUP_VIRTUALIZATION",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "backup_virtualization"
+        "subcategory": "backup_virtualization",
+        "edition": "business"
       }
     },
     {
@@ -1032,8 +1332,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "BACKUP_VIRTUALIZATION",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "backup_virtualization"
+        "subcategory": "backup_virtualization",
+        "edition": "business"
       }
     },
     {
@@ -1043,8 +1346,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "ITSM_ENDPOINT_MANAGEMENT",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "itsm_endpoint_management"
+        "subcategory": "itsm_endpoint_management",
+        "edition": "business"
       }
     },
     {
@@ -1054,8 +1360,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "ITSM_ENDPOINT_MANAGEMENT",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "itsm_endpoint_management"
+        "subcategory": "itsm_endpoint_management",
+        "edition": "business"
       }
     },
     {
@@ -1065,8 +1374,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DEVELOPER_DATABASE_TOOLS",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "developer_database_tools"
+        "subcategory": "developer_database_tools",
+        "edition": "business"
       }
     },
     {
@@ -1076,8 +1388,11 @@
       "product_type": "software",
       "fulfillment_mode": "digital_activation",
       "attributes_json": {
+        "archetype_code": "DEVELOPER_DATABASE_TOOLS",
+        "demand_class": "regular",
         "category": "enterprise_software_and_licensing",
-        "subcategory": "developer_database_tools"
+        "subcategory": "developer_database_tools",
+        "edition": "business"
       }
     },
     {
@@ -1087,8 +1402,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "DISCOVERY_ASSESSMENT",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "discovery_assessment"
+        "subcategory": "discovery_assessment",
+        "service_code": "standard"
       }
     },
     {
@@ -1098,8 +1416,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "DISCOVERY_ASSESSMENT",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "discovery_assessment"
+        "subcategory": "discovery_assessment",
+        "service_code": "standard"
       }
     },
     {
@@ -1109,8 +1430,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "ARCHITECTURE_DESIGN",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "architecture_design"
+        "subcategory": "architecture_design",
+        "service_code": "standard"
       }
     },
     {
@@ -1120,8 +1444,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "ARCHITECTURE_DESIGN",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "architecture_design"
+        "subcategory": "architecture_design",
+        "service_code": "standard"
       }
     },
     {
@@ -1131,8 +1458,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "DEPLOYMENT_INTEGRATION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "deployment_integration"
+        "subcategory": "deployment_integration",
+        "service_code": "standard"
       }
     },
     {
@@ -1142,8 +1472,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "DEPLOYMENT_INTEGRATION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "deployment_integration"
+        "subcategory": "deployment_integration",
+        "service_code": "standard"
       }
     },
     {
@@ -1153,8 +1486,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "DEPLOYMENT_INTEGRATION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "deployment_integration"
+        "subcategory": "deployment_integration",
+        "service_code": "standard"
       }
     },
     {
@@ -1164,8 +1500,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MIGRATION_MODERNIZATION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "migration_modernization"
+        "subcategory": "migration_modernization",
+        "service_code": "standard"
       }
     },
     {
@@ -1175,8 +1514,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MIGRATION_MODERNIZATION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "migration_modernization"
+        "subcategory": "migration_modernization",
+        "service_code": "standard"
       }
     },
     {
@@ -1186,8 +1528,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MIGRATION_MODERNIZATION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "migration_modernization"
+        "subcategory": "migration_modernization",
+        "service_code": "standard"
       }
     },
     {
@@ -1197,8 +1542,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "TRAINING_ADOPTION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "training_adoption"
+        "subcategory": "training_adoption",
+        "service_code": "standard"
       }
     },
     {
@@ -1208,8 +1556,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "TRAINING_ADOPTION",
+        "demand_class": "regular",
         "category": "professional_and_implementation_services",
-        "subcategory": "training_adoption"
+        "subcategory": "training_adoption",
+        "service_code": "standard"
       }
     },
     {
@@ -1219,8 +1570,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "WARRANTY_EXTENSION",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "warranty_extension"
+        "subcategory": "warranty_extension",
+        "service_code": "standard"
       }
     },
     {
@@ -1230,8 +1584,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "WARRANTY_EXTENSION",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "warranty_extension"
+        "subcategory": "warranty_extension",
+        "service_code": "standard"
       }
     },
     {
@@ -1241,8 +1598,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "PREMIUM_VENDOR_SUPPORT",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "premium_vendor_support"
+        "subcategory": "premium_vendor_support",
+        "service_code": "standard"
       }
     },
     {
@@ -1252,8 +1612,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "PREMIUM_VENDOR_SUPPORT",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "premium_vendor_support"
+        "subcategory": "premium_vendor_support",
+        "service_code": "standard"
       }
     },
     {
@@ -1263,8 +1626,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "PREMIUM_VENDOR_SUPPORT",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "premium_vendor_support"
+        "subcategory": "premium_vendor_support",
+        "service_code": "standard"
       }
     },
     {
@@ -1274,8 +1640,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MANAGED_INFRASTRUCTURE_NETWORK",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "managed_infrastructure_network"
+        "subcategory": "managed_infrastructure_network",
+        "service_code": "standard"
       }
     },
     {
@@ -1285,8 +1654,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MANAGED_INFRASTRUCTURE_NETWORK",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "managed_infrastructure_network"
+        "subcategory": "managed_infrastructure_network",
+        "service_code": "standard"
       }
     },
     {
@@ -1296,8 +1668,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MANAGED_INFRASTRUCTURE_NETWORK",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "managed_infrastructure_network"
+        "subcategory": "managed_infrastructure_network",
+        "service_code": "standard"
       }
     },
     {
@@ -1307,8 +1682,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MANAGED_SECURITY_CLOUD_OPERATIONS",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "managed_security_cloud_operations"
+        "subcategory": "managed_security_cloud_operations",
+        "service_code": "standard"
       }
     },
     {
@@ -1318,8 +1696,11 @@
       "product_type": "service",
       "fulfillment_mode": "scheduled_service",
       "attributes_json": {
+        "archetype_code": "MANAGED_SECURITY_CLOUD_OPERATIONS",
+        "demand_class": "regular",
         "category": "managed_support_and_warranty",
-        "subcategory": "managed_security_cloud_operations"
+        "subcategory": "managed_security_cloud_operations",
+        "service_code": "standard"
       }
     },
     {
@@ -1329,7 +1710,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1339,7 +1725,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1349,7 +1740,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1359,7 +1755,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1369,7 +1770,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1379,7 +1785,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1389,7 +1800,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1399,7 +1815,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1409,7 +1830,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1419,7 +1845,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1429,7 +1860,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1439,7 +1875,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "compute"
+        "archetype_code": "COMP-COMPUTE",
+        "demand_class": "regular",
+        "component_family": "compute",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1449,7 +1890,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1459,7 +1905,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1469,7 +1920,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1479,7 +1935,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1489,7 +1950,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1499,7 +1965,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1509,7 +1980,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1519,7 +1995,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1529,7 +2010,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "storage"
+        "archetype_code": "COMP-STORAGE",
+        "demand_class": "regular",
+        "component_family": "storage",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1539,7 +2025,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1549,7 +2040,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1559,7 +2055,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1569,7 +2070,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1579,7 +2085,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1589,7 +2100,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1599,7 +2115,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1609,7 +2130,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1619,7 +2145,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "network_and_power"
+        "archetype_code": "COMP-NETWORK_AND_POWER",
+        "demand_class": "regular",
+        "component_family": "network_and_power",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1629,7 +2160,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "chassis_and_other"
+        "archetype_code": "COMP-CHASSIS_AND_OTHER",
+        "demand_class": "regular",
+        "component_family": "chassis_and_other",
+        "supported_platforms": [
+          "workstation"
+        ]
       }
     },
     {
@@ -1639,7 +2175,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "chassis_and_other"
+        "archetype_code": "COMP-CHASSIS_AND_OTHER",
+        "demand_class": "regular",
+        "component_family": "chassis_and_other",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1649,7 +2190,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "chassis_and_other"
+        "archetype_code": "COMP-CHASSIS_AND_OTHER",
+        "demand_class": "regular",
+        "component_family": "chassis_and_other",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1659,7 +2205,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "chassis_and_other"
+        "archetype_code": "COMP-CHASSIS_AND_OTHER",
+        "demand_class": "regular",
+        "component_family": "chassis_and_other",
+        "supported_platforms": [
+          "server"
+        ]
       }
     },
     {
@@ -1669,7 +2220,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "chassis_and_other"
+        "archetype_code": "COMP-CHASSIS_AND_OTHER",
+        "demand_class": "regular",
+        "component_family": "chassis_and_other",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     },
     {
@@ -1679,7 +2235,12 @@
       "product_type": "component",
       "fulfillment_mode": "component",
       "attributes_json": {
-        "component_family": "chassis_and_other"
+        "archetype_code": "COMP-CHASSIS_AND_OTHER",
+        "demand_class": "regular",
+        "component_family": "chassis_and_other",
+        "supported_platforms": [
+          "storage_system"
+        ]
       }
     }
   ],
@@ -2299,7 +2860,7 @@
     {
       "bom_line_id": "BOM-002-4",
       "bom_id": "BOM-002",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2319,7 +2880,7 @@
     {
       "bom_line_id": "BOM-003-2",
       "bom_id": "BOM-003",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-STORAGE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2329,7 +2890,7 @@
     {
       "bom_line_id": "BOM-003-3",
       "bom_id": "BOM-003",
-      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2339,7 +2900,7 @@
     {
       "bom_line_id": "BOM-003-4",
       "bom_id": "BOM-003",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2349,7 +2910,7 @@
     {
       "bom_line_id": "BOM-004-1",
       "bom_id": "BOM-004",
-      "component_product_id": "COMP-COMPUTE-004",
+      "component_product_id": "COMP-COMPUTE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2359,7 +2920,7 @@
     {
       "bom_line_id": "BOM-004-2",
       "bom_id": "BOM-004",
-      "component_product_id": "COMP-STORAGE-004",
+      "component_product_id": "COMP-STORAGE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2369,7 +2930,7 @@
     {
       "bom_line_id": "BOM-004-3",
       "bom_id": "BOM-004",
-      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "component_product_id": "COMP-NETWORK_AND_POWER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2379,7 +2940,7 @@
     {
       "bom_line_id": "BOM-004-4",
       "bom_id": "BOM-004",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-004",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2389,7 +2950,7 @@
     {
       "bom_line_id": "BOM-005-1",
       "bom_id": "BOM-005",
-      "component_product_id": "COMP-COMPUTE-005",
+      "component_product_id": "COMP-COMPUTE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2399,7 +2960,7 @@
     {
       "bom_line_id": "BOM-005-2",
       "bom_id": "BOM-005",
-      "component_product_id": "COMP-STORAGE-005",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2409,7 +2970,7 @@
     {
       "bom_line_id": "BOM-005-3",
       "bom_id": "BOM-005",
-      "component_product_id": "COMP-NETWORK_AND_POWER-005",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2419,7 +2980,7 @@
     {
       "bom_line_id": "BOM-005-4",
       "bom_id": "BOM-005",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2429,7 +2990,7 @@
     {
       "bom_line_id": "BOM-006-1",
       "bom_id": "BOM-006",
-      "component_product_id": "COMP-COMPUTE-006",
+      "component_product_id": "COMP-COMPUTE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2439,7 +3000,7 @@
     {
       "bom_line_id": "BOM-006-2",
       "bom_id": "BOM-006",
-      "component_product_id": "COMP-STORAGE-006",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2449,7 +3010,7 @@
     {
       "bom_line_id": "BOM-006-3",
       "bom_id": "BOM-006",
-      "component_product_id": "COMP-NETWORK_AND_POWER-006",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2459,7 +3020,7 @@
     {
       "bom_line_id": "BOM-006-4",
       "bom_id": "BOM-006",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-006",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2469,7 +3030,7 @@
     {
       "bom_line_id": "BOM-007-1",
       "bom_id": "BOM-007",
-      "component_product_id": "COMP-COMPUTE-007",
+      "component_product_id": "COMP-COMPUTE-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2479,7 +3040,7 @@
     {
       "bom_line_id": "BOM-007-2",
       "bom_id": "BOM-007",
-      "component_product_id": "COMP-STORAGE-007",
+      "component_product_id": "COMP-STORAGE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2489,7 +3050,7 @@
     {
       "bom_line_id": "BOM-007-3",
       "bom_id": "BOM-007",
-      "component_product_id": "COMP-NETWORK_AND_POWER-007",
+      "component_product_id": "COMP-NETWORK_AND_POWER-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2499,7 +3060,7 @@
     {
       "bom_line_id": "BOM-007-4",
       "bom_id": "BOM-007",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2509,7 +3070,7 @@
     {
       "bom_line_id": "BOM-008-1",
       "bom_id": "BOM-008",
-      "component_product_id": "COMP-COMPUTE-008",
+      "component_product_id": "COMP-COMPUTE-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2519,7 +3080,7 @@
     {
       "bom_line_id": "BOM-008-2",
       "bom_id": "BOM-008",
-      "component_product_id": "COMP-STORAGE-008",
+      "component_product_id": "COMP-STORAGE-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2529,7 +3090,7 @@
     {
       "bom_line_id": "BOM-008-3",
       "bom_id": "BOM-008",
-      "component_product_id": "COMP-NETWORK_AND_POWER-008",
+      "component_product_id": "COMP-NETWORK_AND_POWER-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2549,7 +3110,7 @@
     {
       "bom_line_id": "BOM-009-1",
       "bom_id": "BOM-009",
-      "component_product_id": "COMP-COMPUTE-009",
+      "component_product_id": "COMP-COMPUTE-008",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2559,7 +3120,7 @@
     {
       "bom_line_id": "BOM-009-2",
       "bom_id": "BOM-009",
-      "component_product_id": "COMP-STORAGE-009",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2569,7 +3130,7 @@
     {
       "bom_line_id": "BOM-009-3",
       "bom_id": "BOM-009",
-      "component_product_id": "COMP-NETWORK_AND_POWER-009",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2589,7 +3150,7 @@
     {
       "bom_line_id": "BOM-010-1",
       "bom_id": "BOM-010",
-      "component_product_id": "COMP-COMPUTE-010",
+      "component_product_id": "COMP-COMPUTE-009",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2599,7 +3160,7 @@
     {
       "bom_line_id": "BOM-010-2",
       "bom_id": "BOM-010",
-      "component_product_id": "COMP-STORAGE-001",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2609,7 +3170,7 @@
     {
       "bom_line_id": "BOM-010-3",
       "bom_id": "BOM-010",
-      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2619,7 +3180,7 @@
     {
       "bom_line_id": "BOM-010-4",
       "bom_id": "BOM-010",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2629,7 +3190,7 @@
     {
       "bom_line_id": "BOM-011-1",
       "bom_id": "BOM-011",
-      "component_product_id": "COMP-COMPUTE-011",
+      "component_product_id": "COMP-COMPUTE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2639,7 +3200,7 @@
     {
       "bom_line_id": "BOM-011-2",
       "bom_id": "BOM-011",
-      "component_product_id": "COMP-STORAGE-002",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2649,7 +3210,7 @@
     {
       "bom_line_id": "BOM-011-3",
       "bom_id": "BOM-011",
-      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2659,7 +3220,7 @@
     {
       "bom_line_id": "BOM-011-4",
       "bom_id": "BOM-011",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2669,7 +3230,7 @@
     {
       "bom_line_id": "BOM-012-1",
       "bom_id": "BOM-012",
-      "component_product_id": "COMP-COMPUTE-012",
+      "component_product_id": "COMP-COMPUTE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2679,7 +3240,7 @@
     {
       "bom_line_id": "BOM-012-2",
       "bom_id": "BOM-012",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2689,7 +3250,7 @@
     {
       "bom_line_id": "BOM-012-3",
       "bom_id": "BOM-012",
-      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2699,7 +3260,7 @@
     {
       "bom_line_id": "BOM-012-4",
       "bom_id": "BOM-012",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2709,7 +3270,7 @@
     {
       "bom_line_id": "BOM-013-1",
       "bom_id": "BOM-013",
-      "component_product_id": "COMP-COMPUTE-001",
+      "component_product_id": "COMP-COMPUTE-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2719,7 +3280,7 @@
     {
       "bom_line_id": "BOM-013-2",
       "bom_id": "BOM-013",
-      "component_product_id": "COMP-STORAGE-004",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2729,7 +3290,7 @@
     {
       "bom_line_id": "BOM-013-3",
       "bom_id": "BOM-013",
-      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2739,7 +3300,7 @@
     {
       "bom_line_id": "BOM-013-4",
       "bom_id": "BOM-013",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2749,7 +3310,7 @@
     {
       "bom_line_id": "BOM-014-1",
       "bom_id": "BOM-014",
-      "component_product_id": "COMP-COMPUTE-002",
+      "component_product_id": "COMP-COMPUTE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2759,7 +3320,7 @@
     {
       "bom_line_id": "BOM-014-2",
       "bom_id": "BOM-014",
-      "component_product_id": "COMP-STORAGE-001",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2769,7 +3330,7 @@
     {
       "bom_line_id": "BOM-014-3",
       "bom_id": "BOM-014",
-      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2789,7 +3350,7 @@
     {
       "bom_line_id": "BOM-015-1",
       "bom_id": "BOM-015",
-      "component_product_id": "COMP-COMPUTE-003",
+      "component_product_id": "COMP-COMPUTE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2799,7 +3360,7 @@
     {
       "bom_line_id": "BOM-015-2",
       "bom_id": "BOM-015",
-      "component_product_id": "COMP-STORAGE-002",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2809,7 +3370,7 @@
     {
       "bom_line_id": "BOM-015-3",
       "bom_id": "BOM-015",
-      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2829,7 +3390,7 @@
     {
       "bom_line_id": "BOM-016-1",
       "bom_id": "BOM-016",
-      "component_product_id": "COMP-COMPUTE-004",
+      "component_product_id": "COMP-COMPUTE-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2839,7 +3400,7 @@
     {
       "bom_line_id": "BOM-016-2",
       "bom_id": "BOM-016",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2849,7 +3410,7 @@
     {
       "bom_line_id": "BOM-016-3",
       "bom_id": "BOM-016",
-      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2859,7 +3420,7 @@
     {
       "bom_line_id": "BOM-016-4",
       "bom_id": "BOM-016",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2869,7 +3430,7 @@
     {
       "bom_line_id": "BOM-017-1",
       "bom_id": "BOM-017",
-      "component_product_id": "COMP-COMPUTE-005",
+      "component_product_id": "COMP-COMPUTE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2879,7 +3440,7 @@
     {
       "bom_line_id": "BOM-017-2",
       "bom_id": "BOM-017",
-      "component_product_id": "COMP-STORAGE-004",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2889,7 +3450,7 @@
     {
       "bom_line_id": "BOM-017-3",
       "bom_id": "BOM-017",
-      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2899,7 +3460,7 @@
     {
       "bom_line_id": "BOM-017-4",
       "bom_id": "BOM-017",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2909,7 +3470,7 @@
     {
       "bom_line_id": "BOM-018-1",
       "bom_id": "BOM-018",
-      "component_product_id": "COMP-COMPUTE-001",
+      "component_product_id": "COMP-COMPUTE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2919,7 +3480,7 @@
     {
       "bom_line_id": "BOM-018-2",
       "bom_id": "BOM-018",
-      "component_product_id": "COMP-STORAGE-001",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2929,7 +3490,7 @@
     {
       "bom_line_id": "BOM-018-3",
       "bom_id": "BOM-018",
-      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2939,7 +3500,7 @@
     {
       "bom_line_id": "BOM-018-4",
       "bom_id": "BOM-018",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2949,7 +3510,7 @@
     {
       "bom_line_id": "BOM-019-1",
       "bom_id": "BOM-019",
-      "component_product_id": "COMP-COMPUTE-002",
+      "component_product_id": "COMP-COMPUTE-010",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2959,7 +3520,7 @@
     {
       "bom_line_id": "BOM-019-2",
       "bom_id": "BOM-019",
-      "component_product_id": "COMP-STORAGE-002",
+      "component_product_id": "COMP-STORAGE-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2969,7 +3530,7 @@
     {
       "bom_line_id": "BOM-019-3",
       "bom_id": "BOM-019",
-      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "component_product_id": "COMP-NETWORK_AND_POWER-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2979,7 +3540,7 @@
     {
       "bom_line_id": "BOM-019-4",
       "bom_id": "BOM-019",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2989,7 +3550,7 @@
     {
       "bom_line_id": "BOM-020-1",
       "bom_id": "BOM-020",
-      "component_product_id": "COMP-COMPUTE-003",
+      "component_product_id": "COMP-COMPUTE-011",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2999,7 +3560,7 @@
     {
       "bom_line_id": "BOM-020-2",
       "bom_id": "BOM-020",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-STORAGE-008",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3009,7 +3570,7 @@
     {
       "bom_line_id": "BOM-020-3",
       "bom_id": "BOM-020",
-      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-008",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3019,7 +3580,7 @@
     {
       "bom_line_id": "BOM-020-4",
       "bom_id": "BOM-020",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3029,7 +3590,7 @@
     {
       "bom_line_id": "BOM-021-1",
       "bom_id": "BOM-021",
-      "component_product_id": "COMP-COMPUTE-004",
+      "component_product_id": "COMP-COMPUTE-012",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3039,7 +3600,7 @@
     {
       "bom_line_id": "BOM-021-2",
       "bom_id": "BOM-021",
-      "component_product_id": "COMP-STORAGE-004",
+      "component_product_id": "COMP-STORAGE-009",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3049,7 +3610,7 @@
     {
       "bom_line_id": "BOM-021-3",
       "bom_id": "BOM-021",
-      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "component_product_id": "COMP-NETWORK_AND_POWER-009",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3059,7 +3620,7 @@
     {
       "bom_line_id": "BOM-021-4",
       "bom_id": "BOM-021",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3069,7 +3630,7 @@
     {
       "bom_line_id": "BOM-022-1",
       "bom_id": "BOM-022",
-      "component_product_id": "COMP-COMPUTE-005",
+      "component_product_id": "COMP-COMPUTE-010",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3079,7 +3640,7 @@
     {
       "bom_line_id": "BOM-022-2",
       "bom_id": "BOM-022",
-      "component_product_id": "COMP-STORAGE-001",
+      "component_product_id": "COMP-STORAGE-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3089,7 +3650,7 @@
     {
       "bom_line_id": "BOM-022-3",
       "bom_id": "BOM-022",
-      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "component_product_id": "COMP-NETWORK_AND_POWER-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3099,7 +3660,7 @@
     {
       "bom_line_id": "BOM-022-4",
       "bom_id": "BOM-022",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3109,7 +3670,7 @@
     {
       "bom_line_id": "BOM-023-1",
       "bom_id": "BOM-023",
-      "component_product_id": "COMP-COMPUTE-001",
+      "component_product_id": "COMP-COMPUTE-010",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3119,7 +3680,7 @@
     {
       "bom_line_id": "BOM-023-2",
       "bom_id": "BOM-023",
-      "component_product_id": "COMP-STORAGE-002",
+      "component_product_id": "COMP-STORAGE-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3129,7 +3690,7 @@
     {
       "bom_line_id": "BOM-023-3",
       "bom_id": "BOM-023",
-      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "component_product_id": "COMP-NETWORK_AND_POWER-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3139,7 +3700,7 @@
     {
       "bom_line_id": "BOM-023-4",
       "bom_id": "BOM-023",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3149,7 +3710,7 @@
     {
       "bom_line_id": "BOM-024-1",
       "bom_id": "BOM-024",
-      "component_product_id": "COMP-COMPUTE-002",
+      "component_product_id": "COMP-COMPUTE-010",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3159,7 +3720,7 @@
     {
       "bom_line_id": "BOM-024-2",
       "bom_id": "BOM-024",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-STORAGE-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3169,7 +3730,7 @@
     {
       "bom_line_id": "BOM-024-3",
       "bom_id": "BOM-024",
-      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -3179,7 +3740,7 @@
     {
       "bom_line_id": "BOM-024-4",
       "bom_id": "BOM-024",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,

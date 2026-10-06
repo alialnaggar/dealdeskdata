@@ -109,6 +109,20 @@ def validate_portfolio(portfolio, config, contract):
             errors.append(f"{product_id}: product catalogue version differs")
         if not isinstance(row.get("attributes_json"), dict):
             errors.append(f"{product_id}: attributes_json must be an object")
+        else:
+            mode = row.get("fulfillment_mode")
+            mode = "physical" if mode in {"make_to_order", "stocked_finished", "supplier_finished"} else mode
+            for message in validate_payload("product_attributes", row["attributes_json"], contract, mode=mode):
+                errors.append(f"{product_id}: {message}")
+            if row.get("fulfillment_mode") == "make_to_order":
+                attrs = row["attributes_json"]
+                if (attrs.get("build_platform") not in contract["configured_builds"]["build_platforms"] or
+                    not isinstance(attrs.get("offered_options"), list) or not attrs["offered_options"]):
+                    errors.append(f"{product_id}: make-to-order platform and offered options are required")
+            if row.get("fulfillment_mode") == "component":
+                platforms = row["attributes_json"].get("supported_platforms")
+                if not isinstance(platforms, list) or not platforms:
+                    errors.append(f"{product_id}: component supported_platforms are required")
 
     sellable = {pid: row for pid, row in products.items() if row.get("is_sellable") is True}
     components = {pid: row for pid, row in products.items()
@@ -128,7 +142,8 @@ def validate_portfolio(portfolio, config, contract):
     for pid, row in components.items():
         if row.get("is_sellable") is not False or row.get("product_type") != "component":
             errors.append(f"{pid}: component must be non-sellable and product_type=component")
-        family = row.get("attributes_json", {}).get("component_family")
+        attrs = row.get("attributes_json")
+        family = attrs.get("component_family") if isinstance(attrs, dict) else None
         if family not in component_proposal["family_counts"]:
             errors.append(f"{pid}: component_family is missing or not in the proposal")
         else:
@@ -148,6 +163,10 @@ def validate_portfolio(portfolio, config, contract):
             continue
         for message in validate_payload("configuration_signature", signature, contract):
             errors.append(f"{pid}: {message}")
+        options = signature.get("selected_options") if isinstance(signature, dict) else None
+        allowed = make_to_order[pid].get("attributes_json", {}).get("offered_options", [])
+        if not isinstance(options, list) or len(options) != 1 or options[0] not in allowed:
+            errors.append(f"{pid}: offered configuration must name one declared option")
         key = (pid, _signature(signature))
         if key in offered:
             errors.append(f"{pid}: duplicate offered configuration")
@@ -239,6 +258,15 @@ def validate_portfolio(portfolio, config, contract):
         component = components[component_id]
         if component.get("catalog_version") != headers[bom_id].get("catalog_version"):
             errors.append(f"{bom_id}: component {component_id} is from a different catalogue version")
+        product = make_to_order.get(headers[bom_id].get("finished_product_id"))
+        if product is not None:
+            attrs = product.get("attributes_json")
+            component_attrs = component.get("attributes_json")
+            platform = attrs.get("build_platform") if isinstance(attrs, dict) else None
+            supported = (component_attrs.get("supported_platforms")
+                         if isinstance(component_attrs, dict) else None)
+            if not isinstance(supported, list) or platform not in supported:
+                errors.append(f"{bom_id}: component {component_id} does not support build platform {platform}")
         if headers[bom_id].get("finished_product_id") == component_id:
             errors.append(f"{bom_id}: finished product cannot be its own component")
         try:
