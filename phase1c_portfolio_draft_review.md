@@ -129,4 +129,7 @@ margin, rounded up to the next €10. The resulting workstation margins are
 19.00–19.03%. Because inputs and prices were jointly constructed, passing
 the cost gate cannot establish realistic market prices, GPU premiums,
 individual component compatibility or credible supplier sourcing. Those
-reviews remain open before full dataset generation.
+reviews remain open before full dataset generation. The retained €1,050
+workstation pilot's 31.90% margin also exceeds its category's proposed p90
+margin of 28%; reconcile that mismatch with cost and price evidence before
+treating the product as calibrated.
