@@ -68,6 +68,16 @@ class DraftPortfolioTests(unittest.TestCase):
                       if line["bom_id"] == header["bom_id"]}
             self.assertEqual(actual, expected, header["bom_id"])
 
+    def test_each_draft_build_uses_one_enclosure(self):
+        draft = build(self.config)
+        families = {row["product_id"]: row["attributes_json"]["component_family"]
+                    for row in draft["products"] if row["fulfillment_mode"] == "component"}
+        chassis_lines = [row for row in draft["bom_lines"]
+                         if families[row["component_product_id"]] == "chassis_and_other"]
+        self.assertEqual(len(chassis_lines), 24)
+        self.assertTrue(all(row["required_quantity_per_output"] == 1 and row["scrap_pct"] == 0
+                            for row in chassis_lines))
+
     def test_one_network_option_group_selects_one_of_two_same_family_parts(self):
         draft = build(self.config)
         candidates = [row for row in draft["bom_lines"]
