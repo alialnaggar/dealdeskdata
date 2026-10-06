@@ -7,10 +7,12 @@
     "COMP-STORAGE-002": 60,
     "COMP-NETWORK_AND_POWER-001": 25,
     "COMP-NETWORK_AND_POWER-002": 25,
-    "COMP-CHASSIS_AND_OTHER-001": 90
+    "COMP-CHASSIS_AND_OTHER-001": 180
   },
   "selected_substitutes": {
-    "BOM-001": {"NETWORK_OPTION": "COMP-NETWORK_AND_POWER-001"},
+    "BOM-001": {
+      "NETWORK_OPTION": "COMP-NETWORK_AND_POWER-001"
+    },
     "BOM-002": {}
   },
   "workforce_cost_eur_per_hour": 30,
