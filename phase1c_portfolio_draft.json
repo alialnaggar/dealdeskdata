@@ -62,7 +62,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "desktop_mini_pc"
@@ -73,7 +73,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "desktop_mini_pc"
@@ -84,7 +84,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "desktop_mini_pc"
@@ -95,7 +95,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "make_to_order",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "workstation"
@@ -106,7 +106,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "make_to_order",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "workstation"
@@ -150,7 +150,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "collaboration_device"
@@ -161,7 +161,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "collaboration_device"
@@ -172,7 +172,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "end_user_computing_and_digital_workplace",
         "subcategory": "collaboration_device"
@@ -271,7 +271,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "make_to_order",
       "attributes_json": {
         "category": "servers_and_compute_infrastructure",
         "subcategory": "tower_server"
@@ -282,7 +282,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "make_to_order",
       "attributes_json": {
         "category": "servers_and_compute_infrastructure",
         "subcategory": "edge_compact_server"
@@ -293,7 +293,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "make_to_order",
       "attributes_json": {
         "category": "servers_and_compute_infrastructure",
         "subcategory": "edge_compact_server"
@@ -304,7 +304,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "make_to_order",
       "attributes_json": {
         "category": "servers_and_compute_infrastructure",
         "subcategory": "gpu_accelerated_server"
@@ -315,7 +315,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "servers_and_compute_infrastructure",
         "subcategory": "gpu_accelerated_server"
@@ -326,7 +326,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "servers_and_compute_infrastructure",
         "subcategory": "gpu_accelerated_server"
@@ -403,7 +403,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "storage_and_data_protection",
         "subcategory": "backup_appliance"
@@ -414,7 +414,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "storage_and_data_protection",
         "subcategory": "backup_appliance"
@@ -447,7 +447,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "make_to_order",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "switch"
@@ -458,7 +458,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "make_to_order",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "switch"
@@ -469,7 +469,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "make_to_order",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "switch"
@@ -480,7 +480,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "make_to_order",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "switch"
@@ -491,7 +491,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "make_to_order",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "switch"
@@ -502,7 +502,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "make_to_order",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "router_sdwan"
@@ -513,7 +513,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "router_sdwan"
@@ -524,7 +524,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "router_sdwan"
@@ -535,7 +535,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "wireless_access_point"
@@ -546,7 +546,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "wireless_access_point"
@@ -557,7 +557,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "wireless_access_point"
@@ -567,8 +567,8 @@
       "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-012",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "network_controller_management"
@@ -578,8 +578,8 @@
       "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-013",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "network_controller_management"
@@ -590,7 +590,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "optics_transceiver"
@@ -601,7 +601,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "optics_transceiver"
@@ -612,7 +612,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "networking_and_connectivity",
         "subcategory": "optics_transceiver"
@@ -623,7 +623,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "firewall_security_appliance"
@@ -634,7 +634,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "firewall_security_appliance"
@@ -645,7 +645,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
       "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "fulfillment_mode": "supplier_finished",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "firewall_security_appliance"
@@ -655,8 +655,8 @@
       "product_id": "SELL-CYBERSECURITY-004",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "endpoint_xdr"
@@ -666,8 +666,8 @@
       "product_id": "SELL-CYBERSECURITY-005",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "endpoint_xdr"
@@ -677,8 +677,8 @@
       "product_id": "SELL-CYBERSECURITY-006",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "endpoint_xdr"
@@ -688,8 +688,8 @@
       "product_id": "SELL-CYBERSECURITY-007",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "identity_access"
@@ -699,8 +699,8 @@
       "product_id": "SELL-CYBERSECURITY-008",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "identity_access"
@@ -710,8 +710,8 @@
       "product_id": "SELL-CYBERSECURITY-009",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "email_cloud_security"
@@ -721,8 +721,8 @@
       "product_id": "SELL-CYBERSECURITY-010",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "email_cloud_security"
@@ -732,8 +732,8 @@
       "product_id": "SELL-CYBERSECURITY-011",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "siem_vulnerability_management"
@@ -743,8 +743,8 @@
       "product_id": "SELL-CYBERSECURITY-012",
       "catalog_version": "CATALOGUE_2026_V1",
       "is_sellable": true,
-      "product_type": "physical",
-      "fulfillment_mode": "stocked_finished",
+      "product_type": "subscription",
+      "fulfillment_mode": "digital_activation",
       "attributes_json": {
         "category": "cybersecurity",
         "subcategory": "siem_vulnerability_management"
@@ -1685,6 +1685,38 @@
   ],
   "offered_configurations": [
     {
+      "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009",
+      "configuration_signature_json": {
+        "selected_options": [
+          "standard"
+        ]
+      }
+    },
+    {
+      "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009",
+      "configuration_signature_json": {
+        "selected_options": [
+          "enhanced"
+        ]
+      }
+    },
+    {
+      "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-010",
+      "configuration_signature_json": {
+        "selected_options": [
+          "standard"
+        ]
+      }
+    },
+    {
+      "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-010",
+      "configuration_signature_json": {
+        "selected_options": [
+          "enhanced"
+        ]
+      }
+    },
+    {
       "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-001",
       "configuration_signature_json": {
         "selected_options": [
@@ -1757,14 +1789,6 @@
       }
     },
     {
-      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-005",
-      "configuration_signature_json": {
-        "selected_options": [
-          "enhanced"
-        ]
-      }
-    },
-    {
       "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-006",
       "configuration_signature_json": {
         "selected_options": [
@@ -1773,10 +1797,34 @@
       }
     },
     {
-      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-006",
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-007",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "standard"
+        ]
+      }
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-008",
+      "configuration_signature_json": {
+        "selected_options": [
+          "standard"
+        ]
+      }
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-009",
+      "configuration_signature_json": {
+        "selected_options": [
+          "standard"
+        ]
+      }
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-010",
+      "configuration_signature_json": {
+        "selected_options": [
+          "standard"
         ]
       }
     },
@@ -1827,60 +1875,12 @@
           "standard"
         ]
       }
-    },
-    {
-      "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-001",
-      "configuration_signature_json": {
-        "selected_options": [
-          "standard"
-        ]
-      }
-    },
-    {
-      "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-002",
-      "configuration_signature_json": {
-        "selected_options": [
-          "standard"
-        ]
-      }
-    },
-    {
-      "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-003",
-      "configuration_signature_json": {
-        "selected_options": [
-          "standard"
-        ]
-      }
-    },
-    {
-      "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-004",
-      "configuration_signature_json": {
-        "selected_options": [
-          "standard"
-        ]
-      }
-    },
-    {
-      "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-005",
-      "configuration_signature_json": {
-        "selected_options": [
-          "standard"
-        ]
-      }
-    },
-    {
-      "product_id": "SELL-NETWORKING_AND_CONNECTIVITY-006",
-      "configuration_signature_json": {
-        "selected_options": [
-          "standard"
-        ]
-      }
     }
   ],
   "bom_headers": [
     {
       "bom_id": "BOM-001",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-001",
+      "finished_product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1894,7 +1894,7 @@
     },
     {
       "bom_id": "BOM-002",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-001",
+      "finished_product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1908,7 +1908,7 @@
     },
     {
       "bom_id": "BOM-003",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-002",
+      "finished_product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-010",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1922,7 +1922,7 @@
     },
     {
       "bom_id": "BOM-004",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-002",
+      "finished_product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-010",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1936,7 +1936,7 @@
     },
     {
       "bom_id": "BOM-005",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-003",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-001",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1950,7 +1950,7 @@
     },
     {
       "bom_id": "BOM-006",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-003",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-001",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1964,7 +1964,7 @@
     },
     {
       "bom_id": "BOM-007",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-004",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-002",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1978,7 +1978,7 @@
     },
     {
       "bom_id": "BOM-008",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-004",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-002",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -1992,7 +1992,7 @@
     },
     {
       "bom_id": "BOM-009",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-005",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-003",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2006,7 +2006,7 @@
     },
     {
       "bom_id": "BOM-010",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-005",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-003",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2020,7 +2020,7 @@
     },
     {
       "bom_id": "BOM-011",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-006",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-004",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2034,7 +2034,7 @@
     },
     {
       "bom_id": "BOM-012",
-      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-006",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-004",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2048,7 +2048,7 @@
     },
     {
       "bom_id": "BOM-013",
-      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-001",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-005",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2062,7 +2062,7 @@
     },
     {
       "bom_id": "BOM-014",
-      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-002",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-006",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2076,7 +2076,7 @@
     },
     {
       "bom_id": "BOM-015",
-      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-003",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-007",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2090,7 +2090,7 @@
     },
     {
       "bom_id": "BOM-016",
-      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-004",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-008",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2104,7 +2104,7 @@
     },
     {
       "bom_id": "BOM-017",
-      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-005",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-009",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2118,7 +2118,7 @@
     },
     {
       "bom_id": "BOM-018",
-      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-006",
+      "finished_product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-010",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2132,7 +2132,7 @@
     },
     {
       "bom_id": "BOM-019",
-      "finished_product_id": "SELL-NETWORKING_AND_CONNECTIVITY-001",
+      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-001",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2146,7 +2146,7 @@
     },
     {
       "bom_id": "BOM-020",
-      "finished_product_id": "SELL-NETWORKING_AND_CONNECTIVITY-002",
+      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-002",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2160,7 +2160,7 @@
     },
     {
       "bom_id": "BOM-021",
-      "finished_product_id": "SELL-NETWORKING_AND_CONNECTIVITY-003",
+      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-003",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2174,7 +2174,7 @@
     },
     {
       "bom_id": "BOM-022",
-      "finished_product_id": "SELL-NETWORKING_AND_CONNECTIVITY-004",
+      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-004",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2188,7 +2188,7 @@
     },
     {
       "bom_id": "BOM-023",
-      "finished_product_id": "SELL-NETWORKING_AND_CONNECTIVITY-005",
+      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-005",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2202,7 +2202,7 @@
     },
     {
       "bom_id": "BOM-024",
-      "finished_product_id": "SELL-NETWORKING_AND_CONNECTIVITY-006",
+      "finished_product_id": "SELL-STORAGE_AND_DATA_PROTECTION-006",
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
@@ -2229,7 +2229,7 @@
     {
       "bom_line_id": "BOM-001-2",
       "bom_id": "BOM-001",
-      "component_product_id": "COMP-COMPUTE-002",
+      "component_product_id": "COMP-STORAGE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2239,7 +2239,17 @@
     {
       "bom_line_id": "BOM-001-3",
       "bom_id": "BOM-001",
-      "component_product_id": "COMP-COMPUTE-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-001-4",
+      "bom_id": "BOM-001",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2249,7 +2259,7 @@
     {
       "bom_line_id": "BOM-002-1",
       "bom_id": "BOM-002",
-      "component_product_id": "COMP-COMPUTE-004",
+      "component_product_id": "COMP-COMPUTE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2259,7 +2269,7 @@
     {
       "bom_line_id": "BOM-002-2",
       "bom_id": "BOM-002",
-      "component_product_id": "COMP-COMPUTE-005",
+      "component_product_id": "COMP-STORAGE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2269,7 +2279,17 @@
     {
       "bom_line_id": "BOM-002-3",
       "bom_id": "BOM-002",
-      "component_product_id": "COMP-COMPUTE-006",
+      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-002-4",
+      "bom_id": "BOM-002",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2279,7 +2299,7 @@
     {
       "bom_line_id": "BOM-003-1",
       "bom_id": "BOM-003",
-      "component_product_id": "COMP-COMPUTE-007",
+      "component_product_id": "COMP-COMPUTE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2289,7 +2309,7 @@
     {
       "bom_line_id": "BOM-003-2",
       "bom_id": "BOM-003",
-      "component_product_id": "COMP-COMPUTE-008",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2299,7 +2319,17 @@
     {
       "bom_line_id": "BOM-003-3",
       "bom_id": "BOM-003",
-      "component_product_id": "COMP-COMPUTE-009",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-003-4",
+      "bom_id": "BOM-003",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2309,7 +2339,7 @@
     {
       "bom_line_id": "BOM-004-1",
       "bom_id": "BOM-004",
-      "component_product_id": "COMP-COMPUTE-010",
+      "component_product_id": "COMP-COMPUTE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2319,7 +2349,7 @@
     {
       "bom_line_id": "BOM-004-2",
       "bom_id": "BOM-004",
-      "component_product_id": "COMP-COMPUTE-011",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2329,7 +2359,17 @@
     {
       "bom_line_id": "BOM-004-3",
       "bom_id": "BOM-004",
-      "component_product_id": "COMP-COMPUTE-012",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-004-4",
+      "bom_id": "BOM-004",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2339,7 +2379,7 @@
     {
       "bom_line_id": "BOM-005-1",
       "bom_id": "BOM-005",
-      "component_product_id": "COMP-STORAGE-001",
+      "component_product_id": "COMP-COMPUTE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2349,7 +2389,7 @@
     {
       "bom_line_id": "BOM-005-2",
       "bom_id": "BOM-005",
-      "component_product_id": "COMP-STORAGE-002",
+      "component_product_id": "COMP-STORAGE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2359,7 +2399,17 @@
     {
       "bom_line_id": "BOM-005-3",
       "bom_id": "BOM-005",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-005",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-005-4",
+      "bom_id": "BOM-005",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2369,7 +2419,7 @@
     {
       "bom_line_id": "BOM-006-1",
       "bom_id": "BOM-006",
-      "component_product_id": "COMP-STORAGE-004",
+      "component_product_id": "COMP-COMPUTE-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2379,7 +2429,7 @@
     {
       "bom_line_id": "BOM-006-2",
       "bom_id": "BOM-006",
-      "component_product_id": "COMP-STORAGE-005",
+      "component_product_id": "COMP-STORAGE-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2389,7 +2439,17 @@
     {
       "bom_line_id": "BOM-006-3",
       "bom_id": "BOM-006",
-      "component_product_id": "COMP-STORAGE-006",
+      "component_product_id": "COMP-NETWORK_AND_POWER-006",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-006-4",
+      "bom_id": "BOM-006",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-006",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2399,7 +2459,7 @@
     {
       "bom_line_id": "BOM-007-1",
       "bom_id": "BOM-007",
-      "component_product_id": "COMP-STORAGE-007",
+      "component_product_id": "COMP-COMPUTE-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2409,7 +2469,7 @@
     {
       "bom_line_id": "BOM-007-2",
       "bom_id": "BOM-007",
-      "component_product_id": "COMP-STORAGE-008",
+      "component_product_id": "COMP-STORAGE-007",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2419,7 +2479,17 @@
     {
       "bom_line_id": "BOM-007-3",
       "bom_id": "BOM-007",
-      "component_product_id": "COMP-STORAGE-009",
+      "component_product_id": "COMP-NETWORK_AND_POWER-007",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-007-4",
+      "bom_id": "BOM-007",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2429,7 +2499,7 @@
     {
       "bom_line_id": "BOM-008-1",
       "bom_id": "BOM-008",
-      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "component_product_id": "COMP-COMPUTE-008",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2439,7 +2509,7 @@
     {
       "bom_line_id": "BOM-008-2",
       "bom_id": "BOM-008",
-      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "component_product_id": "COMP-STORAGE-008",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2449,7 +2519,17 @@
     {
       "bom_line_id": "BOM-008-3",
       "bom_id": "BOM-008",
-      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-008",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-008-4",
+      "bom_id": "BOM-008",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2459,7 +2539,7 @@
     {
       "bom_line_id": "BOM-009-1",
       "bom_id": "BOM-009",
-      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "component_product_id": "COMP-COMPUTE-009",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2469,7 +2549,7 @@
     {
       "bom_line_id": "BOM-009-2",
       "bom_id": "BOM-009",
-      "component_product_id": "COMP-NETWORK_AND_POWER-005",
+      "component_product_id": "COMP-STORAGE-009",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2479,7 +2559,17 @@
     {
       "bom_line_id": "BOM-009-3",
       "bom_id": "BOM-009",
-      "component_product_id": "COMP-NETWORK_AND_POWER-006",
+      "component_product_id": "COMP-NETWORK_AND_POWER-009",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-009-4",
+      "bom_id": "BOM-009",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2489,7 +2579,7 @@
     {
       "bom_line_id": "BOM-010-1",
       "bom_id": "BOM-010",
-      "component_product_id": "COMP-NETWORK_AND_POWER-007",
+      "component_product_id": "COMP-COMPUTE-010",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2499,7 +2589,7 @@
     {
       "bom_line_id": "BOM-010-2",
       "bom_id": "BOM-010",
-      "component_product_id": "COMP-NETWORK_AND_POWER-008",
+      "component_product_id": "COMP-STORAGE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2509,7 +2599,17 @@
     {
       "bom_line_id": "BOM-010-3",
       "bom_id": "BOM-010",
-      "component_product_id": "COMP-NETWORK_AND_POWER-009",
+      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-010-4",
+      "bom_id": "BOM-010",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2519,7 +2619,7 @@
     {
       "bom_line_id": "BOM-011-1",
       "bom_id": "BOM-011",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
+      "component_product_id": "COMP-COMPUTE-011",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2529,7 +2629,7 @@
     {
       "bom_line_id": "BOM-011-2",
       "bom_id": "BOM-011",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
+      "component_product_id": "COMP-STORAGE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2539,7 +2639,17 @@
     {
       "bom_line_id": "BOM-011-3",
       "bom_id": "BOM-011",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-011-4",
+      "bom_id": "BOM-011",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2549,7 +2659,7 @@
     {
       "bom_line_id": "BOM-012-1",
       "bom_id": "BOM-012",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-004",
+      "component_product_id": "COMP-COMPUTE-012",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2559,7 +2669,7 @@
     {
       "bom_line_id": "BOM-012-2",
       "bom_id": "BOM-012",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-005",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2569,7 +2679,17 @@
     {
       "bom_line_id": "BOM-012-3",
       "bom_id": "BOM-012",
-      "component_product_id": "COMP-CHASSIS_AND_OTHER-006",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-012-4",
+      "bom_id": "BOM-012",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2589,7 +2709,7 @@
     {
       "bom_line_id": "BOM-013-2",
       "bom_id": "BOM-013",
-      "component_product_id": "COMP-COMPUTE-002",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2599,7 +2719,17 @@
     {
       "bom_line_id": "BOM-013-3",
       "bom_id": "BOM-013",
-      "component_product_id": "COMP-COMPUTE-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-013-4",
+      "bom_id": "BOM-013",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2609,7 +2739,7 @@
     {
       "bom_line_id": "BOM-014-1",
       "bom_id": "BOM-014",
-      "component_product_id": "COMP-COMPUTE-004",
+      "component_product_id": "COMP-COMPUTE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2619,7 +2749,7 @@
     {
       "bom_line_id": "BOM-014-2",
       "bom_id": "BOM-014",
-      "component_product_id": "COMP-COMPUTE-005",
+      "component_product_id": "COMP-STORAGE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2629,7 +2759,17 @@
     {
       "bom_line_id": "BOM-014-3",
       "bom_id": "BOM-014",
-      "component_product_id": "COMP-COMPUTE-006",
+      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-014-4",
+      "bom_id": "BOM-014",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2639,7 +2779,7 @@
     {
       "bom_line_id": "BOM-015-1",
       "bom_id": "BOM-015",
-      "component_product_id": "COMP-COMPUTE-007",
+      "component_product_id": "COMP-COMPUTE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2649,7 +2789,7 @@
     {
       "bom_line_id": "BOM-015-2",
       "bom_id": "BOM-015",
-      "component_product_id": "COMP-COMPUTE-008",
+      "component_product_id": "COMP-STORAGE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2659,7 +2799,17 @@
     {
       "bom_line_id": "BOM-015-3",
       "bom_id": "BOM-015",
-      "component_product_id": "COMP-COMPUTE-009",
+      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-015-4",
+      "bom_id": "BOM-015",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2669,7 +2819,7 @@
     {
       "bom_line_id": "BOM-016-1",
       "bom_id": "BOM-016",
-      "component_product_id": "COMP-COMPUTE-010",
+      "component_product_id": "COMP-COMPUTE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2679,7 +2829,7 @@
     {
       "bom_line_id": "BOM-016-2",
       "bom_id": "BOM-016",
-      "component_product_id": "COMP-COMPUTE-011",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2689,7 +2839,17 @@
     {
       "bom_line_id": "BOM-016-3",
       "bom_id": "BOM-016",
-      "component_product_id": "COMP-COMPUTE-012",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-016-4",
+      "bom_id": "BOM-016",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2699,7 +2859,7 @@
     {
       "bom_line_id": "BOM-017-1",
       "bom_id": "BOM-017",
-      "component_product_id": "COMP-STORAGE-001",
+      "component_product_id": "COMP-COMPUTE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2709,7 +2869,7 @@
     {
       "bom_line_id": "BOM-017-2",
       "bom_id": "BOM-017",
-      "component_product_id": "COMP-STORAGE-002",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2719,7 +2879,17 @@
     {
       "bom_line_id": "BOM-017-3",
       "bom_id": "BOM-017",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-017-4",
+      "bom_id": "BOM-017",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2729,7 +2899,7 @@
     {
       "bom_line_id": "BOM-018-1",
       "bom_id": "BOM-018",
-      "component_product_id": "COMP-STORAGE-004",
+      "component_product_id": "COMP-COMPUTE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2739,7 +2909,7 @@
     {
       "bom_line_id": "BOM-018-2",
       "bom_id": "BOM-018",
-      "component_product_id": "COMP-COMPUTE-001",
+      "component_product_id": "COMP-STORAGE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2749,7 +2919,17 @@
     {
       "bom_line_id": "BOM-018-3",
       "bom_id": "BOM-018",
-      "component_product_id": "COMP-COMPUTE-002",
+      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-018-4",
+      "bom_id": "BOM-018",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2759,7 +2939,7 @@
     {
       "bom_line_id": "BOM-019-1",
       "bom_id": "BOM-019",
-      "component_product_id": "COMP-COMPUTE-003",
+      "component_product_id": "COMP-COMPUTE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2769,7 +2949,7 @@
     {
       "bom_line_id": "BOM-019-2",
       "bom_id": "BOM-019",
-      "component_product_id": "COMP-COMPUTE-004",
+      "component_product_id": "COMP-STORAGE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2779,7 +2959,17 @@
     {
       "bom_line_id": "BOM-019-3",
       "bom_id": "BOM-019",
-      "component_product_id": "COMP-COMPUTE-005",
+      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-019-4",
+      "bom_id": "BOM-019",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2789,7 +2979,7 @@
     {
       "bom_line_id": "BOM-020-1",
       "bom_id": "BOM-020",
-      "component_product_id": "COMP-COMPUTE-006",
+      "component_product_id": "COMP-COMPUTE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2799,7 +2989,7 @@
     {
       "bom_line_id": "BOM-020-2",
       "bom_id": "BOM-020",
-      "component_product_id": "COMP-COMPUTE-007",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2809,7 +2999,17 @@
     {
       "bom_line_id": "BOM-020-3",
       "bom_id": "BOM-020",
-      "component_product_id": "COMP-COMPUTE-008",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-020-4",
+      "bom_id": "BOM-020",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2819,7 +3019,7 @@
     {
       "bom_line_id": "BOM-021-1",
       "bom_id": "BOM-021",
-      "component_product_id": "COMP-COMPUTE-009",
+      "component_product_id": "COMP-COMPUTE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2829,7 +3029,7 @@
     {
       "bom_line_id": "BOM-021-2",
       "bom_id": "BOM-021",
-      "component_product_id": "COMP-COMPUTE-010",
+      "component_product_id": "COMP-STORAGE-004",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2839,7 +3039,17 @@
     {
       "bom_line_id": "BOM-021-3",
       "bom_id": "BOM-021",
-      "component_product_id": "COMP-COMPUTE-011",
+      "component_product_id": "COMP-NETWORK_AND_POWER-004",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-021-4",
+      "bom_id": "BOM-021",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2849,7 +3059,7 @@
     {
       "bom_line_id": "BOM-022-1",
       "bom_id": "BOM-022",
-      "component_product_id": "COMP-COMPUTE-012",
+      "component_product_id": "COMP-COMPUTE-005",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2869,7 +3079,17 @@
     {
       "bom_line_id": "BOM-022-3",
       "bom_id": "BOM-022",
-      "component_product_id": "COMP-STORAGE-002",
+      "component_product_id": "COMP-NETWORK_AND_POWER-001",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-022-4",
+      "bom_id": "BOM-022",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2879,7 +3099,7 @@
     {
       "bom_line_id": "BOM-023-1",
       "bom_id": "BOM-023",
-      "component_product_id": "COMP-STORAGE-003",
+      "component_product_id": "COMP-COMPUTE-001",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2889,7 +3109,7 @@
     {
       "bom_line_id": "BOM-023-2",
       "bom_id": "BOM-023",
-      "component_product_id": "COMP-STORAGE-004",
+      "component_product_id": "COMP-STORAGE-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2899,7 +3119,17 @@
     {
       "bom_line_id": "BOM-023-3",
       "bom_id": "BOM-023",
-      "component_product_id": "COMP-COMPUTE-001",
+      "component_product_id": "COMP-NETWORK_AND_POWER-002",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-023-4",
+      "bom_id": "BOM-023",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-002",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2919,7 +3149,7 @@
     {
       "bom_line_id": "BOM-024-2",
       "bom_id": "BOM-024",
-      "component_product_id": "COMP-COMPUTE-003",
+      "component_product_id": "COMP-STORAGE-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,
@@ -2929,7 +3159,17 @@
     {
       "bom_line_id": "BOM-024-3",
       "bom_id": "BOM-024",
-      "component_product_id": "COMP-COMPUTE-004",
+      "component_product_id": "COMP-NETWORK_AND_POWER-003",
+      "required_quantity_per_output": 2,
+      "scrap_pct": 1,
+      "substitute_group_code": null,
+      "priority": 0,
+      "is_mandatory": true
+    },
+    {
+      "bom_line_id": "BOM-024-4",
+      "bom_id": "BOM-024",
+      "component_product_id": "COMP-CHASSIS_AND_OTHER-003",
       "required_quantity_per_output": 2,
       "scrap_pct": 1,
       "substitute_group_code": null,

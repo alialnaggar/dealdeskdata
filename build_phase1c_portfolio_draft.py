@@ -15,10 +15,23 @@ from validate_phase1c_bom_portfolio import validate_portfolio
 
 
 HERE = Path(__file__).resolve().parent
-MTO_BY_CATEGORY = {
-    "servers_and_compute_infrastructure": 6,
-    "storage_and_data_protection": 6,
-    "networking_and_connectivity": 6,
+MTO_BY_SUBCATEGORY = {
+    "workstation": 2,
+    "rack_server": 4,
+    "tower_server": 3,
+    "edge_compact_server": 2,
+    "gpu_accelerated_server": 1,
+    "storage_array": 3,
+    "nas_file_storage": 2,
+    "backup_appliance": 1,
+}
+STOCKED_SUBCATEGORIES = {"business_laptop", "monitor", "dock_peripheral", "enterprise_drive"}
+SUBSCRIPTION_SUBCATEGORIES = {
+    "network_controller_management", "endpoint_xdr", "identity_access",
+    "email_cloud_security", "siem_vulnerability_management",
+}
+SHARED_COMPONENTS_BY_FAMILY = {
+    "compute": 5, "storage": 4, "network_and_power": 4, "chassis_and_other": 3,
 }
 AS_OF = "2026-10-06T12:00:00Z"
 
@@ -30,12 +43,15 @@ def build(config):
     for category, settings in config["product_catalogue"]["categories"].items():
         ordinal = 0
         for subcategory, count in settings["subcategories"].items():
-            for _ in range(count):
+            for local_index in range(count):
                 ordinal += 1
-                mto = ordinal <= MTO_BY_CATEGORY.get(category, 0)
-                product_type = "physical" if mto else settings["product_type_mix"][0]
+                mto = local_index < MTO_BY_SUBCATEGORY.get(subcategory, 0)
+                product_type = ("physical" if mto else
+                                "subscription" if subcategory in SUBSCRIPTION_SUBCATEGORIES else
+                                settings["product_type_mix"][0])
                 mode = ("make_to_order" if mto else
-                        "stocked_finished" if product_type == "physical" else
+                        "stocked_finished" if subcategory in STOCKED_SUBCATEGORIES else
+                        "supplier_finished" if product_type == "physical" else
                         "scheduled_service" if product_type == "service" else
                         "digital_activation")
                 pid = f"SELL-{category.upper()}-{ordinal:03d}"
@@ -47,22 +63,29 @@ def build(config):
                     mto_ids.append(pid)
 
     component_ids = []
+    components_by_family = {}
     for family, count in params["component_catalogue"]["family_counts"].items():
+        components_by_family[family] = []
         for ordinal in range(1, count + 1):
             pid = f"COMP-{family.upper()}-{ordinal:03d}"
             component_ids.append(pid)
+            components_by_family[family].append(pid)
             products.append({"product_id": pid, "catalog_version": catalogue,
                              "is_sellable": False, "product_type": "component",
                              "fulfillment_mode": "component",
                              "attributes_json": {"component_family": family}})
 
-    # The first six assembled SKUs have two explicitly offered variants;
-    # the remaining twelve have one. Sixteen of the 36 parts recur in BOMs.
+    # Two workstations and four rack servers have two explicitly offered
+    # variants; the remaining twelve assembled SKUs have one. Sixteen of the
+    # 36 parts recur in BOMs. Component assignments are structural placeholders.
     variants = [(pid, variant) for index, pid in enumerate(mto_ids)
                 for variant in (["standard", "enhanced"] if index < 6 else ["standard"])]
     assert len(variants) == 24 and len(component_ids) == 36
-    component_slots = component_ids + component_ids[:16] * 2 + component_ids[:4]
-    assert len(component_slots) == 72
+    component_slots = {}
+    for family, ids in components_by_family.items():
+        repeatable = ids[:SHARED_COMPONENTS_BY_FAMILY[family]]
+        component_slots[family] = ids + [repeatable[i % len(repeatable)]
+                                         for i in range(len(variants) - len(ids))]
     offered, headers, lines, requirements = [], [], [], []
     for index, (pid, variant) in enumerate(variants):
         signature = {"selected_options": [variant]}
@@ -72,9 +95,9 @@ def build(config):
                         "catalog_version": catalogue, "configuration_signature_json": signature,
                         "output_quantity": 1, "effective_from": "2026-01-01T00:00:00Z",
                         "effective_to": None, "status": "active"})
-        for slot in range(3):
-            cid = component_slots[index * 3 + slot]
-            lines.append({"bom_line_id": f"{bid}-{slot + 1}", "bom_id": bid,
+        for slot, (family, ids) in enumerate(component_slots.items(), start=1):
+            cid = ids[index]
+            lines.append({"bom_line_id": f"{bid}-{slot}", "bom_id": bid,
                           "component_product_id": cid, "required_quantity_per_output": 2,
                           "scrap_pct": 1, "substitute_group_code": None, "priority": 0,
                           "is_mandatory": True})

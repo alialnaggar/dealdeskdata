@@ -34,6 +34,36 @@ class DraftPortfolioTests(unittest.TestCase):
         result = validate_portfolio(draft, self.config, self.contract)
         self.assertIn("every proposed component must be used by an effective BOM", result["errors"])
 
+    def test_business_mix_keeps_network_devices_supplier_sourced(self):
+        draft = build(self.config)
+        sellable = [row for row in draft["products"] if row["is_sellable"]]
+        assembled = [row for row in sellable if row["fulfillment_mode"] == "make_to_order"]
+        by_category = {}
+        for row in assembled:
+            category = row["attributes_json"]["category"]
+            by_category[category] = by_category.get(category, 0) + 1
+        self.assertEqual(by_category, {
+            "end_user_computing_and_digital_workplace": 2,
+            "servers_and_compute_infrastructure": 10,
+            "storage_and_data_protection": 6,
+        })
+        network_devices = [row for row in sellable
+                           if row["attributes_json"]["category"] == "networking_and_connectivity"
+                           and row["product_type"] == "physical"]
+        self.assertTrue(all(row["fulfillment_mode"] == "supplier_finished"
+                            for row in network_devices))
+
+    def test_every_build_has_one_part_from_each_proposed_family(self):
+        draft = build(self.config)
+        families = {row["product_id"]: row["attributes_json"]["component_family"]
+                    for row in draft["products"] if row["fulfillment_mode"] == "component"}
+        expected = set(self.config["fulfillment_production_calibration"]["proposed_parameters"]
+                       ["component_catalogue"]["family_counts"])
+        for header in draft["bom_headers"]:
+            actual = {families[line["component_product_id"]] for line in draft["bom_lines"]
+                      if line["bom_id"] == header["bom_id"]}
+            self.assertEqual(actual, expected, header["bom_id"])
+
 
 if __name__ == "__main__":
     unittest.main()
