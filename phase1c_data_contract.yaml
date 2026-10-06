@@ -99,6 +99,11 @@ production_horizon:
 
 configured_builds:
   build_platforms: [workstation, server, storage_system]
+  component_roles_by_family:
+    compute: compute_kit
+    storage: storage_drive
+    network_and_power: network_power_kit
+    chassis_and_other: enclosure_kit
   offered_option_codes: [standard, alternate, enhanced]
   line_bom_match: product_catalogue_and_exact_configuration_signature_at_run_as_of
   same_product_variant_demand: group_by_selected_BOM
@@ -136,7 +141,7 @@ json_contracts:
         optional: [installation_eligible, supported_installation_regions, option_codes, build_platform, offered_options]
       component:
         required: []
-        optional: [component_family, supported_platforms]
+        optional: [component_family, component_role, supported_platforms]
   deal_terms_json:
     required_on_submission:
       payment_terms_days: payment_terms_days
