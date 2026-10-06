@@ -148,6 +148,9 @@ def validate_portfolio(portfolio, config, contract):
             errors.append(f"{pid}: component_family is missing or not in the proposal")
         else:
             families[family] += 1
+            expected_role = contract["configured_builds"]["component_roles_by_family"].get(family)
+            if attrs.get("component_role") != expected_role:
+                errors.append(f"{pid}: component_role does not match its family")
     observed_families = {family: families.get(family, 0) for family in component_proposal["family_counts"]}
     check(observed_families == component_proposal["family_counts"],
           "component family counts differ from the current proposal")
