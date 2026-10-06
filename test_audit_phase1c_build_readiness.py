@@ -37,13 +37,13 @@ class ReadinessAuditTests(unittest.TestCase):
             if component["fulfillment_mode"] != "component":
                 continue
             attrs = component["attributes_json"]
-            for family, fields in {
-                "compute": ("socket_or_controller_interface", "rated_watts"),
-                "storage": ("host_interface", "form_factor"),
-                "network_and_power": ("host_interface", "rated_watts"),
-                "chassis_and_other": ("supported_form_factor", "power_budget_watts"),
+            for role, fields in {
+                "compute_kit": ("storage_host_interface", "rated_watts"),
+                "storage_drive": ("host_interface", "form_factor"),
+                "network_power_kit": ("network_interface", "psu_output_watts"),
+                "enclosure_kit": ("supported_form_factor", "power_budget_watts"),
             }.items():
-                if attrs["component_family"] == family:
+                if attrs["component_role"] == role:
                     attrs.update({field: "example" for field in fields})
         result = audit(portfolio, self.costs, self.config)
         self.assertEqual(result["component_specifications_missing"], {})
