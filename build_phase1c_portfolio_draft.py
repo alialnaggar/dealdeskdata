@@ -42,6 +42,12 @@ REUSED_POOL_SIZES = {
     "network_and_power": {"workstation": 1, "server": 2, "storage_system": 1},
     "chassis_and_other": {"workstation": 1, "server": 2, "storage_system": 1},
 }
+COMPONENT_ROLES = {
+    "compute": ("compute_kit", 1, 0),
+    "storage": ("storage_drive", 2, 1),
+    "network_and_power": ("network_power_kit", 1, 0),
+    "chassis_and_other": ("enclosure_kit", 1, 0),
+}
 AS_OF = "2026-10-06T12:00:00Z"
 
 
@@ -108,6 +114,7 @@ def build(config):
                              "fulfillment_mode": "component",
                              "attributes_json": {"archetype_code": f"COMP-{family.upper()}",
                                                  "demand_class": "regular", "component_family": family,
+                                                 "component_role": COMPONENT_ROLES[family][0],
                                                  "supported_platforms": [platform]}})
 
     # Two workstations and four rack servers have two explicitly offered
@@ -138,24 +145,20 @@ def build(config):
                         "effective_to": None, "status": "active"})
         for slot, (family, ids) in enumerate(component_slots[platform].items(), start=1):
             cid = ids[current_index]
+            _, quantity, scrap = COMPONENT_ROLES[family]
             lines.append({"bom_line_id": f"{bid}-{slot}", "bom_id": bid,
-                          "component_product_id": cid, "required_quantity_per_output": 2,
-                          "scrap_pct": 1,
+                          "component_product_id": cid, "required_quantity_per_output": quantity,
+                          "scrap_pct": scrap,
                           "substitute_group_code": "NETWORK_OPTION" if index == 0 and
                           family == "network_and_power" else None,
                           "priority": 0,
                           "is_mandatory": True})
-            if family == "chassis_and_other":
-                # One physical enclosure per finished system. The earlier
-                # two-unit value was only a structural placeholder.
-                lines[-1]["required_quantity_per_output"] = 1
-                lines[-1]["scrap_pct"] = 0
         if index == 0:
             # Exactly one network/power part is selected. The second candidate
             # illustrates supplier or inventory substitution, not extra demand.
             lines.append({"bom_line_id": f"{bid}-NETWORK-ALT", "bom_id": bid,
                           "component_product_id": components_by_platform[platform]["network_and_power"][1],
-                          "required_quantity_per_output": 2, "scrap_pct": 1,
+                          "required_quantity_per_output": 1, "scrap_pct": 0,
                           "substitute_group_code": "NETWORK_OPTION", "priority": 1,
                           "is_mandatory": True})
         for seq, capability, resource in ((1, "assembly", "workforce"),
