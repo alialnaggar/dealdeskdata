@@ -117,6 +117,11 @@ def validate_contract(contract):
         not component.get("no_quote_reservation")):
         errors.append("component stock contract must preserve whole units and aggregate rounding")
     configured = contract.get("configured_builds", {})
+    roles = configured.get("component_roles_by_family", {})
+    if (set(roles) != {"compute", "storage", "network_and_power", "chassis_and_other"}
+        or len(set(roles.values())) != 4
+        or any(not _is_nonempty_string(value) for value in roles.values())):
+        errors.append("configured component roles must cover the four families uniquely")
     for key in ("build_platforms", "offered_option_codes"):
         values = configured.get(key)
         if (not isinstance(values, list) or not values or
@@ -230,6 +235,8 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
                     errors.append(f"{key} must be nonempty string")
             if "build_platform" in payload and payload["build_platform"] not in contract["configured_builds"]["build_platforms"]:
                 errors.append("build_platform is invalid")
+            if "component_role" in payload and not _is_nonempty_string(payload["component_role"]):
+                errors.append("component_role must be nonempty string")
             for key, vocabulary in (("offered_options", "offered_option_codes"),
                                     ("supported_platforms", "build_platforms")):
                 if key in payload:
