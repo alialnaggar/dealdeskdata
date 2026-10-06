@@ -37,6 +37,8 @@ on:
       - phase1c_portfolio_draft.json
       - phase1c_variant_cost_pilot.json
       - phase1c_build_cost_draft.json
+      - audit_phase1c_build_readiness.py
+      - test_audit_phase1c_build_readiness.py
       - validate_phase1c_variant_cost_pilot.py
       - test_validate_phase1c_variant_cost_pilot.py
       - render_phase1c_master_slice.py
@@ -84,6 +86,8 @@ on:
       - phase1c_portfolio_draft.json
       - phase1c_variant_cost_pilot.json
       - phase1c_build_cost_draft.json
+      - audit_phase1c_build_readiness.py
+      - test_audit_phase1c_build_readiness.py
       - validate_phase1c_variant_cost_pilot.py
       - test_validate_phase1c_variant_cost_pilot.py
       - render_phase1c_master_slice.py
@@ -167,6 +171,8 @@ jobs:
           python validate_phase1c_variant_cost_pilot.py phase1c_variant_cost_pilot.json
           python validate_phase1c_variant_cost_pilot.py phase1c_build_cost_draft.json
           python -m unittest -v test_validate_phase1c_bom_portfolio
+          python -m unittest -v test_audit_phase1c_build_readiness
+          python audit_phase1c_build_readiness.py > /tmp/phase1c_build_readiness.json
           python -m unittest -v test_phase1c_component_units
           python -m unittest -v test_phase1c_horizon
           python validate_phase1c_assembly_pilot.py
