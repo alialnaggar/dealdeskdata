@@ -32,8 +32,8 @@ The nine sellable category counts follow `calibration_config.yaml`. The
 The 18 locally buildable SKUs are 2 workstations, 10 servers (4 rack, 3
 tower, 2 edge, 1 GPU), and 6 storage systems (3 arrays, 2 NAS, 1 backup
 appliance). The two workstations and four rack servers offer both standard
-and enhanced options; the other 12 offer standard only. That yields 24
-explicit configurations and 24 effective BOMs. Every BOM contains one part
+and alternate options at the same product price; the other 12 offer standard
+only. That yields 24 explicit configurations and 24 effective BOMs. Every BOM contains one part
 from each of the four component families (compute, storage, network/power,
 chassis/other) and has assembly and test operations. Eighteen components are
 reused in at least two BOMs.
@@ -43,7 +43,7 @@ products have an edition, services have a service code, and components declare
 their supported build platform. The three synthetic platforms are workstation,
 server and storage system. Every BOM component supports its finished product's
 platform. A product offers only the options declared in its attributes, and
-the paired standard/enhanced BOMs use different components. Negative tests
+the paired standard/alternate BOMs use different components. Negative tests
 reject undeclared options, wrong-platform parts and missing attributes.
 
 These allocations are **synthetic design assumptions**, not observed market
@@ -79,7 +79,7 @@ parts fit at socket/interface/power level, that component costs fit price
 bands, or that the whole 24-table dataset can be generated. The
 remaining field reviews and source/price checks stay open.
 
-**User review before freeze:** the workshop operating model is settled. The
+**User review before freeze:** the shared-price paired-option model is settled. The
 precise 10/6/2 mix, detailed part compatibility, component identity/cost and price
 bands are still open. No database setup is required for this structural pass.
 
@@ -89,7 +89,10 @@ more detailed compatibility fields. Keep the dataset-generation gate closed.
 
 ## Variant cost boundary
 
-The schema has one `list_price` and one `standard_cost` per product, even when
+The user chose the simpler shared-price route on 6 October 2026. The six
+paired options are **technical alternatives**, so the label is `alternate`
+rather than `enhanced`; they do not imply a separate premium price. The schema
+has one `list_price` and one `standard_cost` per product, even when
 the product has two configured BOMs. `validate_phase1c_variant_cost_pilot.py`
 therefore requires one standard cost to stay within the configured 5% rollup
 tolerance for **both** BOMs and to be at least the higher BOM cost. This is the

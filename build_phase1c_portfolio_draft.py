@@ -73,7 +73,7 @@ def build(config):
                                 "storage_system" if category == "storage_and_data_protection" else
                                 "server")
                     attributes.update({"build_platform": platform,
-                                       "offered_options": ["standard", "enhanced"]
+                                       "offered_options": ["standard", "alternate"]
                                        if len(mto_ids) < 6 else ["standard"]})
                     platform_by_product[pid] = platform
                 elif mode == "digital_activation":
@@ -111,10 +111,10 @@ def build(config):
                                                  "supported_platforms": [platform]}})
 
     # Two workstations and four rack servers have two explicitly offered
-    # variants; the remaining twelve assembled SKUs have one. Sixteen of the
+    # variants at one catalogue price; the remaining twelve have one. Eighteen of the
     # 36 parts recur in BOMs. Component assignments are structural placeholders.
     variants = [(pid, variant) for index, pid in enumerate(mto_ids)
-                for variant in (["standard", "enhanced"] if index < 6 else ["standard"])]
+                for variant in (["standard", "alternate"] if index < 6 else ["standard"])]
     assert len(variants) == 24 and len(component_ids) == 36
     counts = Counter(platform_by_product[pid] for pid, _ in variants)
     component_slots = {platform: {} for platform in components_by_platform}

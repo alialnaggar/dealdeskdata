@@ -120,7 +120,7 @@
         "build_platform": "workstation",
         "offered_options": [
           "standard",
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -138,7 +138,7 @@
         "build_platform": "workstation",
         "offered_options": [
           "standard",
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -260,7 +260,7 @@
         "build_platform": "server",
         "offered_options": [
           "standard",
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -278,7 +278,7 @@
         "build_platform": "server",
         "offered_options": [
           "standard",
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -296,7 +296,7 @@
         "build_platform": "server",
         "offered_options": [
           "standard",
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -314,7 +314,7 @@
         "build_platform": "server",
         "offered_options": [
           "standard",
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -2257,7 +2257,7 @@
       "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -2273,7 +2273,7 @@
       "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-010",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -2289,7 +2289,7 @@
       "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-001",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -2305,7 +2305,7 @@
       "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-002",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -2321,7 +2321,7 @@
       "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-003",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -2337,7 +2337,7 @@
       "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-004",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       }
     },
@@ -2459,7 +2459,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       },
       "output_quantity": 1,
@@ -2487,7 +2487,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       },
       "output_quantity": 1,
@@ -2515,7 +2515,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       },
       "output_quantity": 1,
@@ -2543,7 +2543,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       },
       "output_quantity": 1,
@@ -2571,7 +2571,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       },
       "output_quantity": 1,
@@ -2599,7 +2599,7 @@
       "catalog_version": "CATALOGUE_2026_V1",
       "configuration_signature_json": {
         "selected_options": [
-          "enhanced"
+          "alternate"
         ]
       },
       "output_quantity": 1,

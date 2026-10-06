@@ -59,7 +59,7 @@ class DataContractTests(unittest.TestCase):
         self.assertIn("configured build_platforms must be nonempty unique strings",
                       validate_contract(changed)["errors"])
         attrs = {"archetype_code": "RACK_SERVER", "demand_class": "regular",
-                 "build_platform": "server", "offered_options": ["standard", "enhanced"]}
+                 "build_platform": "server", "offered_options": ["standard", "alternate"]}
         self.assertEqual(validate_payload("product_attributes", attrs, CONTRACT, mode="physical"), [])
         attrs["offered_options"] = ["standard", "premium"]
         self.assertIn("offered_options must be a nonempty unique allowed list",

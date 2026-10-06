@@ -99,7 +99,7 @@ production_horizon:
 
 configured_builds:
   build_platforms: [workstation, server, storage_system]
-  offered_option_codes: [standard, enhanced]
+  offered_option_codes: [standard, alternate, enhanced]
   line_bom_match: product_catalogue_and_exact_configuration_signature_at_run_as_of
   same_product_variant_demand: group_by_selected_BOM
   unconfigured_finished_stock_with_multiple_variants: visible_but_not_confirming_either_variant

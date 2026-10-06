@@ -1409,6 +1409,7 @@ fulfillment_production_calibration:
       make_to_order_sellable_count: 18
       operating_model: small_local_configuration_and_test_workshop
       operating_model_decision: user_approved_2026_10_06;_product_mix_and_costs_remain_proposed
+      paired_option_price_decision: one_list_price_per_product_and_conservative_standard_cost_for_its_standard_and_alternate_BOMs
       selected_build_scope: product_and_exact_configuration_signature
       multi_variant_finished_stock_without_configuration: unbound_cannot_confirm_either_variant
       same_product_variant_demand: group_line_quantities_by_selected_BOM_not_product_total
@@ -1527,6 +1528,7 @@ fulfillment_production_calibration:
       equipment_depreciation_charged_separately: false
       finished_standard_cost_rollup_tolerance_pct: 5
       variant_cost_rule: materially_distinct_build_cost_requires_distinct_priced_SKU_or_documented_conservative_standard_cost
+      initial_paired_option_rule: same_price_for_technical_alternatives;_cost_rollups_must_fit_one_conservative_standard_cost_within_5_pct
   provenance: all_proposed_parameters_are_Synthetic_design_assumptions_not_observed_industry_rates
   required_parameter_groups:
     component_catalogue:
