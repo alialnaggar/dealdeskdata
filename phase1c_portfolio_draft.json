@@ -1713,6 +1713,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "workstation"
         ]
@@ -1728,6 +1729,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "workstation"
         ]
@@ -1743,6 +1745,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "workstation"
         ]
@@ -1758,6 +1761,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "server"
         ]
@@ -1773,6 +1777,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "server"
         ]
@@ -1788,6 +1793,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "server"
         ]
@@ -1803,6 +1809,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "server"
         ]
@@ -1818,6 +1825,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "server"
         ]
@@ -1833,6 +1841,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "server"
         ]
@@ -1848,6 +1857,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -1863,6 +1873,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -1878,6 +1889,7 @@
         "archetype_code": "COMP-COMPUTE",
         "demand_class": "regular",
         "component_family": "compute",
+        "component_role": "compute_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -1893,6 +1905,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "workstation"
         ]
@@ -1908,6 +1921,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "workstation"
         ]
@@ -1923,6 +1937,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "server"
         ]
@@ -1938,6 +1953,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "server"
         ]
@@ -1953,6 +1969,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "server"
         ]
@@ -1968,6 +1985,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "server"
         ]
@@ -1983,6 +2001,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "storage_system"
         ]
@@ -1998,6 +2017,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "storage_system"
         ]
@@ -2013,6 +2033,7 @@
         "archetype_code": "COMP-STORAGE",
         "demand_class": "regular",
         "component_family": "storage",
+        "component_role": "storage_drive",
         "supported_platforms": [
           "storage_system"
         ]
@@ -2028,6 +2049,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "workstation"
         ]
@@ -2043,6 +2065,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "workstation"
         ]
@@ -2058,6 +2081,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "server"
         ]
@@ -2073,6 +2097,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "server"
         ]
@@ -2088,6 +2113,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "server"
         ]
@@ -2103,6 +2129,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "server"
         ]
@@ -2118,6 +2145,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -2133,6 +2161,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -2148,6 +2177,7 @@
         "archetype_code": "COMP-NETWORK_AND_POWER",
         "demand_class": "regular",
         "component_family": "network_and_power",
+        "component_role": "network_power_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -2163,6 +2193,7 @@
         "archetype_code": "COMP-CHASSIS_AND_OTHER",
         "demand_class": "regular",
         "component_family": "chassis_and_other",
+        "component_role": "enclosure_kit",
         "supported_platforms": [
           "workstation"
         ]
@@ -2178,6 +2209,7 @@
         "archetype_code": "COMP-CHASSIS_AND_OTHER",
         "demand_class": "regular",
         "component_family": "chassis_and_other",
+        "component_role": "enclosure_kit",
         "supported_platforms": [
           "server"
         ]
@@ -2193,6 +2225,7 @@
         "archetype_code": "COMP-CHASSIS_AND_OTHER",
         "demand_class": "regular",
         "component_family": "chassis_and_other",
+        "component_role": "enclosure_kit",
         "supported_platforms": [
           "server"
         ]
@@ -2208,6 +2241,7 @@
         "archetype_code": "COMP-CHASSIS_AND_OTHER",
         "demand_class": "regular",
         "component_family": "chassis_and_other",
+        "component_role": "enclosure_kit",
         "supported_platforms": [
           "server"
         ]
@@ -2223,6 +2257,7 @@
         "archetype_code": "COMP-CHASSIS_AND_OTHER",
         "demand_class": "regular",
         "component_family": "chassis_and_other",
+        "component_role": "enclosure_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -2238,6 +2273,7 @@
         "archetype_code": "COMP-CHASSIS_AND_OTHER",
         "demand_class": "regular",
         "component_family": "chassis_and_other",
+        "component_role": "enclosure_kit",
         "supported_platforms": [
           "storage_system"
         ]
@@ -2781,8 +2817,8 @@
       "bom_line_id": "BOM-001-1",
       "bom_id": "BOM-001",
       "component_product_id": "COMP-COMPUTE-001",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2801,8 +2837,8 @@
       "bom_line_id": "BOM-001-3",
       "bom_id": "BOM-001",
       "component_product_id": "COMP-NETWORK_AND_POWER-001",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": "NETWORK_OPTION",
       "priority": 0,
       "is_mandatory": true
@@ -2821,8 +2857,8 @@
       "bom_line_id": "BOM-001-NETWORK-ALT",
       "bom_id": "BOM-001",
       "component_product_id": "COMP-NETWORK_AND_POWER-002",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": "NETWORK_OPTION",
       "priority": 1,
       "is_mandatory": true
@@ -2831,8 +2867,8 @@
       "bom_line_id": "BOM-002-1",
       "bom_id": "BOM-002",
       "component_product_id": "COMP-COMPUTE-002",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2851,8 +2887,8 @@
       "bom_line_id": "BOM-002-3",
       "bom_id": "BOM-002",
       "component_product_id": "COMP-NETWORK_AND_POWER-002",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2871,8 +2907,8 @@
       "bom_line_id": "BOM-003-1",
       "bom_id": "BOM-003",
       "component_product_id": "COMP-COMPUTE-003",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2891,8 +2927,8 @@
       "bom_line_id": "BOM-003-3",
       "bom_id": "BOM-003",
       "component_product_id": "COMP-NETWORK_AND_POWER-001",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2911,8 +2947,8 @@
       "bom_line_id": "BOM-004-1",
       "bom_id": "BOM-004",
       "component_product_id": "COMP-COMPUTE-001",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2931,8 +2967,8 @@
       "bom_line_id": "BOM-004-3",
       "bom_id": "BOM-004",
       "component_product_id": "COMP-NETWORK_AND_POWER-001",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2951,8 +2987,8 @@
       "bom_line_id": "BOM-005-1",
       "bom_id": "BOM-005",
       "component_product_id": "COMP-COMPUTE-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2971,8 +3007,8 @@
       "bom_line_id": "BOM-005-3",
       "bom_id": "BOM-005",
       "component_product_id": "COMP-NETWORK_AND_POWER-003",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -2991,8 +3027,8 @@
       "bom_line_id": "BOM-006-1",
       "bom_id": "BOM-006",
       "component_product_id": "COMP-COMPUTE-005",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3011,8 +3047,8 @@
       "bom_line_id": "BOM-006-3",
       "bom_id": "BOM-006",
       "component_product_id": "COMP-NETWORK_AND_POWER-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3031,8 +3067,8 @@
       "bom_line_id": "BOM-007-1",
       "bom_id": "BOM-007",
       "component_product_id": "COMP-COMPUTE-006",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3051,8 +3087,8 @@
       "bom_line_id": "BOM-007-3",
       "bom_id": "BOM-007",
       "component_product_id": "COMP-NETWORK_AND_POWER-005",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3071,8 +3107,8 @@
       "bom_line_id": "BOM-008-1",
       "bom_id": "BOM-008",
       "component_product_id": "COMP-COMPUTE-007",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3091,8 +3127,8 @@
       "bom_line_id": "BOM-008-3",
       "bom_id": "BOM-008",
       "component_product_id": "COMP-NETWORK_AND_POWER-006",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3111,8 +3147,8 @@
       "bom_line_id": "BOM-009-1",
       "bom_id": "BOM-009",
       "component_product_id": "COMP-COMPUTE-008",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3131,8 +3167,8 @@
       "bom_line_id": "BOM-009-3",
       "bom_id": "BOM-009",
       "component_product_id": "COMP-NETWORK_AND_POWER-003",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3151,8 +3187,8 @@
       "bom_line_id": "BOM-010-1",
       "bom_id": "BOM-010",
       "component_product_id": "COMP-COMPUTE-009",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3171,8 +3207,8 @@
       "bom_line_id": "BOM-010-3",
       "bom_id": "BOM-010",
       "component_product_id": "COMP-NETWORK_AND_POWER-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3191,8 +3227,8 @@
       "bom_line_id": "BOM-011-1",
       "bom_id": "BOM-011",
       "component_product_id": "COMP-COMPUTE-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3211,8 +3247,8 @@
       "bom_line_id": "BOM-011-3",
       "bom_id": "BOM-011",
       "component_product_id": "COMP-NETWORK_AND_POWER-003",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3231,8 +3267,8 @@
       "bom_line_id": "BOM-012-1",
       "bom_id": "BOM-012",
       "component_product_id": "COMP-COMPUTE-005",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3251,8 +3287,8 @@
       "bom_line_id": "BOM-012-3",
       "bom_id": "BOM-012",
       "component_product_id": "COMP-NETWORK_AND_POWER-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3271,8 +3307,8 @@
       "bom_line_id": "BOM-013-1",
       "bom_id": "BOM-013",
       "component_product_id": "COMP-COMPUTE-006",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3291,8 +3327,8 @@
       "bom_line_id": "BOM-013-3",
       "bom_id": "BOM-013",
       "component_product_id": "COMP-NETWORK_AND_POWER-003",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3311,8 +3347,8 @@
       "bom_line_id": "BOM-014-1",
       "bom_id": "BOM-014",
       "component_product_id": "COMP-COMPUTE-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3331,8 +3367,8 @@
       "bom_line_id": "BOM-014-3",
       "bom_id": "BOM-014",
       "component_product_id": "COMP-NETWORK_AND_POWER-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3351,8 +3387,8 @@
       "bom_line_id": "BOM-015-1",
       "bom_id": "BOM-015",
       "component_product_id": "COMP-COMPUTE-005",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3371,8 +3407,8 @@
       "bom_line_id": "BOM-015-3",
       "bom_id": "BOM-015",
       "component_product_id": "COMP-NETWORK_AND_POWER-003",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3391,8 +3427,8 @@
       "bom_line_id": "BOM-016-1",
       "bom_id": "BOM-016",
       "component_product_id": "COMP-COMPUTE-006",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3411,8 +3447,8 @@
       "bom_line_id": "BOM-016-3",
       "bom_id": "BOM-016",
       "component_product_id": "COMP-NETWORK_AND_POWER-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3431,8 +3467,8 @@
       "bom_line_id": "BOM-017-1",
       "bom_id": "BOM-017",
       "component_product_id": "COMP-COMPUTE-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3451,8 +3487,8 @@
       "bom_line_id": "BOM-017-3",
       "bom_id": "BOM-017",
       "component_product_id": "COMP-NETWORK_AND_POWER-003",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3471,8 +3507,8 @@
       "bom_line_id": "BOM-018-1",
       "bom_id": "BOM-018",
       "component_product_id": "COMP-COMPUTE-005",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3491,8 +3527,8 @@
       "bom_line_id": "BOM-018-3",
       "bom_id": "BOM-018",
       "component_product_id": "COMP-NETWORK_AND_POWER-004",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3511,8 +3547,8 @@
       "bom_line_id": "BOM-019-1",
       "bom_id": "BOM-019",
       "component_product_id": "COMP-COMPUTE-010",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3531,8 +3567,8 @@
       "bom_line_id": "BOM-019-3",
       "bom_id": "BOM-019",
       "component_product_id": "COMP-NETWORK_AND_POWER-007",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3551,8 +3587,8 @@
       "bom_line_id": "BOM-020-1",
       "bom_id": "BOM-020",
       "component_product_id": "COMP-COMPUTE-011",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3571,8 +3607,8 @@
       "bom_line_id": "BOM-020-3",
       "bom_id": "BOM-020",
       "component_product_id": "COMP-NETWORK_AND_POWER-008",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3591,8 +3627,8 @@
       "bom_line_id": "BOM-021-1",
       "bom_id": "BOM-021",
       "component_product_id": "COMP-COMPUTE-012",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3611,8 +3647,8 @@
       "bom_line_id": "BOM-021-3",
       "bom_id": "BOM-021",
       "component_product_id": "COMP-NETWORK_AND_POWER-009",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3631,8 +3667,8 @@
       "bom_line_id": "BOM-022-1",
       "bom_id": "BOM-022",
       "component_product_id": "COMP-COMPUTE-010",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3651,8 +3687,8 @@
       "bom_line_id": "BOM-022-3",
       "bom_id": "BOM-022",
       "component_product_id": "COMP-NETWORK_AND_POWER-007",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3671,8 +3707,8 @@
       "bom_line_id": "BOM-023-1",
       "bom_id": "BOM-023",
       "component_product_id": "COMP-COMPUTE-010",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3691,8 +3727,8 @@
       "bom_line_id": "BOM-023-3",
       "bom_id": "BOM-023",
       "component_product_id": "COMP-NETWORK_AND_POWER-007",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3711,8 +3747,8 @@
       "bom_line_id": "BOM-024-1",
       "bom_id": "BOM-024",
       "component_product_id": "COMP-COMPUTE-010",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
@@ -3731,8 +3767,8 @@
       "bom_line_id": "BOM-024-3",
       "bom_id": "BOM-024",
       "component_product_id": "COMP-NETWORK_AND_POWER-007",
-      "required_quantity_per_output": 2,
-      "scrap_pct": 1,
+      "required_quantity_per_output": 1,
+      "scrap_pct": 0,
       "substitute_group_code": null,
       "priority": 0,
       "is_mandatory": true
