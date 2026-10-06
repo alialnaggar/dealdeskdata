@@ -83,6 +83,28 @@ remaining field reviews and source/price checks stay open.
 precise 10/6/2 mix, detailed part compatibility, component identity/cost and price
 bands are still open. No database setup is required for this structural pass.
 
-Next: validate costs and representative master-data rows, then consider whether
-the fictional part catalogue needs more detailed compatibility fields. Keep
-the dataset-generation gate closed until those checks pass.
+Next: extend cost checks to the other buildable SKUs and representative
+master-data rows, then consider whether the fictional part catalogue needs
+more detailed compatibility fields. Keep the dataset-generation gate closed.
+
+## Variant cost boundary
+
+The schema has one `list_price` and one `standard_cost` per product, even when
+the product has two configured BOMs. `validate_phase1c_variant_cost_pilot.py`
+therefore requires one standard cost to stay within the configured 5% rollup
+tolerance for **both** BOMs and to be at least the higher BOM cost. This is the
+documented conservative-cost route in the current calibration rule; a
+materially larger variant cost would need another priced SKU or a schema and
+pricing-design change.
+
+The explicit **illustrative** workstation pilot uses €30 per workforce hour,
+10% overhead, and component costs supplied in
+`phase1c_variant_cost_pilot.json`. It calculates €688.56 and €710.78 for the
+two configurations. A single €715 standard cost is conservative and fits
+both within 5%. Its €1,050 list price is the draft category median anchor,
+**not a verified comparable current workstation price**. The resulting
+31.90% catalogue margin is arithmetic only, not an achieved market margin.
+Negative tests reject an undercosted shared standard cost, a materially
+more expensive option, a missing part cost, and an unresolved substitute.
+Only this one product has cost inputs; the other 17 buildable SKUs and price
+comparability remain open before dataset generation.

@@ -35,6 +35,9 @@ on:
       - build_phase1c_portfolio_draft.py
       - test_build_phase1c_portfolio_draft.py
       - phase1c_portfolio_draft.json
+      - phase1c_variant_cost_pilot.json
+      - validate_phase1c_variant_cost_pilot.py
+      - test_validate_phase1c_variant_cost_pilot.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -76,6 +79,9 @@ on:
       - build_phase1c_portfolio_draft.py
       - test_build_phase1c_portfolio_draft.py
       - phase1c_portfolio_draft.json
+      - phase1c_variant_cost_pilot.json
+      - validate_phase1c_variant_cost_pilot.py
+      - test_validate_phase1c_variant_cost_pilot.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -147,6 +153,8 @@ jobs:
         run: |
           python -m unittest -v test_build_phase1c_portfolio_draft
           python validate_phase1c_bom_portfolio.py phase1c_portfolio_draft.json
+          python -m unittest -v test_validate_phase1c_variant_cost_pilot
+          python validate_phase1c_variant_cost_pilot.py phase1c_variant_cost_pilot.json
           python -m unittest -v test_validate_phase1c_bom_portfolio
           python -m unittest -v test_phase1c_component_units
           python -m unittest -v test_phase1c_horizon
