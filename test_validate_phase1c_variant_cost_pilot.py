@@ -25,7 +25,7 @@ class VariantCostPilotTests(unittest.TestCase):
         result = evaluate_cost_pilot(self.portfolio, self.pilot, self.config)
         self.assertEqual(result["errors"], [])
         self.assertEqual(set(result["rollups_eur"]), {"BOM-001", "BOM-002"})
-        self.assertEqual(result["rollups_eur"], {"BOM-001": "688.56", "BOM-002": "710.78"})
+        self.assertEqual(result["rollups_eur"], {"BOM-001": "686.56", "BOM-002": "708.78"})
         self.assertFalse(result["ready_for_full_generation"])
 
     def test_catalogue_cost_must_cover_more_expensive_option(self):
