@@ -68,15 +68,20 @@ class DraftPortfolioTests(unittest.TestCase):
                       if line["bom_id"] == header["bom_id"]}
             self.assertEqual(actual, expected, header["bom_id"])
 
-    def test_each_draft_build_uses_one_enclosure(self):
+    def test_component_roles_have_explicit_per_build_quantities(self):
         draft = build(self.config)
-        families = {row["product_id"]: row["attributes_json"]["component_family"]
+        roles = {row["product_id"]: row["attributes_json"]["component_role"]
                     for row in draft["products"] if row["fulfillment_mode"] == "component"}
-        chassis_lines = [row for row in draft["bom_lines"]
-                         if families[row["component_product_id"]] == "chassis_and_other"]
-        self.assertEqual(len(chassis_lines), 24)
-        self.assertTrue(all(row["required_quantity_per_output"] == 1 and row["scrap_pct"] == 0
-                            for row in chassis_lines))
+        expected = {"compute_kit": (1, 0), "storage_drive": (2, 1),
+                    "network_power_kit": (1, 0), "enclosure_kit": (1, 0)}
+        for header in draft["bom_headers"]:
+            by_role = {}
+            for line in (row for row in draft["bom_lines"] if row["bom_id"] == header["bom_id"]):
+                role = roles[line["component_product_id"]]
+                self.assertEqual((line["required_quantity_per_output"], line["scrap_pct"]), expected[role])
+                by_role.setdefault(role, []).append(line)
+            self.assertEqual(set(by_role), set(expected))
+            self.assertEqual(len(by_role["enclosure_kit"]), 1)
 
     def test_one_network_option_group_selects_one_of_two_same_family_parts(self):
         draft = build(self.config)
@@ -111,14 +116,14 @@ class DraftPortfolioTests(unittest.TestCase):
             "production_capacity": [{"location_id": "WH-EU-CENTRAL"}],
             "inventory": [{"inventory_id": "INV-ALT", "location_id": "WH-EU-CENTRAL",
                            "product_id": alternative["component_product_id"],
-                           "quantity_on_hand": Decimal("3"), "quantity_allocated": Decimal("0"),
+                           "quantity_on_hand": Decimal("1"), "quantity_allocated": Decimal("0"),
                            "snapshot_at": as_of}],
             "inbound_supply": [],
         }
         selected, groups = select_bom_components(bom, lines, Decimal("1"), bundle, as_of)
         self.assertEqual(len(selected), 4)
         self.assertEqual(groups[0]["selected_component_product_id"], alternative["component_product_id"])
-        self.assertEqual(groups[0]["required_units_for_build"], Decimal("3"))
+        self.assertEqual(groups[0]["required_units_for_build"], Decimal("1"))
 
 
 if __name__ == "__main__":
