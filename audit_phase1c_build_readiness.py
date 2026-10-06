@@ -25,15 +25,15 @@ def audit(portfolio, costs, config):
     # Platform membership is already checked by validate_portfolio. Actual
     # electrical/mechanical fit needs explicit per-part specifications.
     required_specs = {
-        "compute": ("socket_or_controller_interface", "rated_watts"),
-        "storage": ("host_interface", "form_factor"),
-        "network_and_power": ("host_interface", "rated_watts"),
-        "chassis_and_other": ("supported_form_factor", "power_budget_watts"),
+        "compute_kit": ("storage_host_interface", "rated_watts"),
+        "storage_drive": ("host_interface", "form_factor"),
+        "network_power_kit": ("network_interface", "psu_output_watts"),
+        "enclosure_kit": ("supported_form_factor", "power_budget_watts"),
     }
     missing = {}
     for component in (p for p in products.values() if p["fulfillment_mode"] == "component"):
         attrs = component["attributes_json"]
-        fields = required_specs.get(attrs.get("component_family"), ())
+        fields = required_specs.get(attrs.get("component_role"), ())
         absent = [name for name in fields if attrs.get(name) is None]
         if absent:
             missing[component["product_id"]] = absent
