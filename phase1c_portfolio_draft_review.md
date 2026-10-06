@@ -101,7 +101,7 @@ pricing-design change.
 
 The explicit **illustrative** workstation pilot uses €30 per workforce hour,
 10% overhead, and component costs supplied in
-`phase1c_variant_cost_pilot.json`. It calculates €688.56 and €710.78 for the
+`phase1c_variant_cost_pilot.json`. After the enclosure-quantity correction, it calculates €686.56 and €708.78 for the
 two configurations. A single €715 standard cost is conservative and fits
 both within 5%. Its €1,050 list price is the draft category median anchor,
 **not a verified comparable current workstation price**. The resulting
@@ -176,3 +176,17 @@ alternatives (CPU/socket or controller, storage interface/form factor, power
 draw and supply budget), plus a comparable dated price excluding or including
 tax consistently. Then test actual cross-part fit before extending this to
 the other 23 BOMs. Full generation remains gated.
+
+## Enclosure quantity correction — 6 October 2026
+
+The first draft assigned two units to every component family, including the
+`chassis_and_other` family. For this proposal that family represents one
+enclosure or assembly kit per finished system. Its 24 BOM lines now use one
+unit with zero scrap. The six **synthetic** enclosure unit costs were doubled
+to keep the arithmetic pilot roughly comparable, not to claim market cost
+evidence. The workstation option rollups changed from €688.56/€710.78 to
+€686.56/€708.78; its €715 standard cost and €1,050 list price are unchanged.
+The draft JSON and representative SQL slice were regenerated, and the batch
+cost rule still passes 18 products and 24 BOMs. The compute, storage and
+network/power quantities remain illustrative until the part roles are named;
+the entire portfolio still awaits technical compatibility and price sourcing.
