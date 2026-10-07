@@ -30,6 +30,10 @@ class SellableCatalogueTests(unittest.TestCase):
                           "scheduled_service"})
         self.assertEqual(len({row[0] for row in rows}), 102)
         self.assertTrue(all(Decimal(row[7]) > Decimal(row[8]) >= 0 for row in rows))
+        digital = [row for row in rows if row[12] == "digital_activation"]
+        self.assertTrue(digital)
+        self.assertTrue(all(row[10] in {"instance_month", "protected_tb_month", "licence_year"}
+                            for row in digital))
         self.assertEqual(render(rows), (HERE / "phase1c_sellable_catalogue.sql").read_text())
 
     def test_missing_buildable_cost_is_rejected(self):
