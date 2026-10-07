@@ -84,7 +84,7 @@ BEGIN
     SELECT count(*) INTO bom_count FROM bom_headers;
     SELECT count(*) INTO component_count FROM products WHERE fulfillment_mode = 'component';
     IF product_count <> 3 OR bom_count <> 5 OR component_count <> 19 THEN
-        RAISE EXCEPTION 'representative master slice counts differ: %, %, %',
+        RAISE EXCEPTION 'buildable master fixture counts differ: %, %, %',
             product_count, bom_count, component_count;
     END IF;
 
@@ -98,14 +98,19 @@ BEGIN
         RAISE EXCEPTION 'component platform mismatch in master slice';
     END IF;
 
+    SELECT count(*) INTO bad_count FROM bom_lines
+    WHERE bom_line_id IN ('BOM-001-1', 'BOM-001-2', 'BOM-001-3', 'BOM-001-4', 'BOM-002-1', 'BOM-002-2', 'BOM-002-3', 'BOM-002-4', 'BOM-005-1', 'BOM-005-2', 'BOM-005-3', 'BOM-005-4', 'BOM-006-1', 'BOM-006-2', 'BOM-006-3', 'BOM-006-4', 'BOM-019-1', 'BOM-019-2', 'BOM-019-3', 'BOM-019-4');
+    IF bad_count <> 20 THEN
+        RAISE EXCEPTION 'selected BOM lines missing from master fixture';
+    END IF;
+
     WITH selected_material AS (
         SELECT h.bom_id, h.finished_product_id,
                sum(l.required_quantity_per_output / h.output_quantity /
                    (1 - l.scrap_pct / 100) * part.standard_cost) AS material
         FROM bom_headers h JOIN bom_lines l USING (bom_id)
           JOIN products part ON part.product_id = l.component_product_id
-        WHERE l.substitute_group_code IS NULL
-           OR (h.bom_id = 'BOM-001' AND l.component_product_id = 'COMP-NETWORK_AND_POWER-001')
+        WHERE l.bom_line_id IN ('BOM-001-1', 'BOM-001-2', 'BOM-001-3', 'BOM-001-4', 'BOM-002-1', 'BOM-002-2', 'BOM-002-3', 'BOM-002-4', 'BOM-005-1', 'BOM-005-2', 'BOM-005-3', 'BOM-005-4', 'BOM-006-1', 'BOM-006-2', 'BOM-006-3', 'BOM-006-4', 'BOM-019-1', 'BOM-019-2', 'BOM-019-3', 'BOM-019-4')
         GROUP BY h.bom_id, h.finished_product_id
     ), labor AS (
         SELECT bom_id, sum(setup_hours + hours_per_unit) * 30 AS labor_cost
