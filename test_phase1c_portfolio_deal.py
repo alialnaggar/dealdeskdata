@@ -212,6 +212,80 @@ class PortfolioDealReaderTests(unittest.TestCase):
                 self.assertEqual(decision["status"], "needs_commitment")
                 self.assertEqual(decision["required_approvals"], [])
 
+    def test_combined_portfolio_deal_competes_for_shared_capacity(self):
+        portfolio = json.loads((HERE / "phase1c_portfolio_draft.json").read_text())
+        costs = json.loads((HERE / "phase1c_build_cost_draft.json").read_text())
+        prices = {p["product_id"]: p["product_list_price_eur"] for p in costs["products"]}
+        boms = portfolio["bom_headers"]
+        self.assertEqual(len(boms), 24)
+
+        # Remove material scarcity to isolate the six free hours in each of
+        # the two workshop operation rows. No stock or capacity is committed.
+        self.conn.execute("UPDATE inventory SET quantity_on_hand = 100, quantity_allocated = 0 "
+                          "WHERE inventory_id LIKE 'SYN-STOCK-%'")
+        existing = {'COMP-COMPUTE-001', 'COMP-STORAGE-001',
+                    'COMP-NETWORK_AND_POWER-001', 'COMP-CHASSIS_AND_OTHER-001'}
+        for component_id in sorted({line["component_product_id"]
+                                    for line in portfolio["bom_lines"]} - existing):
+            self.conn.execute("""INSERT INTO inventory (inventory_id, product_id, location_id,
+                quantity_on_hand, quantity_allocated, snapshot_at)
+                VALUES (%s, %s, 'WH-EU-CENTRAL', 100, 0, '2026-10-07T09:00:00Z')""",
+                (f"SYN-BATCH-STOCK-{component_id}", component_id))
+        self.conn.execute("""INSERT INTO customers (customer_id, customer_code, customer_name,
+            size_segment, strategic_account, industry, country_code, region, customer_since,
+            account_status) VALUES ('SYN-CUST-BATCH', 'SYN-CUST-BATCH',
+            'Fictional Batch Buyer', 'Enterprise', FALSE, 'manufacturing', 'DE', 'DE-NW',
+            '2025-01-01', 'Active')""")
+        self.conn.execute("""INSERT INTO customer_credit_profiles (customer_id, credit_limit,
+            unbilled_committed_amount, commitments_as_of_at, commitment_evidence_ref,
+            risk_rating, credit_status, default_payment_terms_days, last_review_date)
+            VALUES ('SYN-CUST-BATCH', 1000000, 0, '2026-10-07T09:00:00Z',
+            'SYN-BATCH-CREDIT', 'Low', 'Active', 30, '2026-10-01')""")
+        self.conn.execute("""INSERT INTO deals (deal_id, customer_id, salesperson_id,
+            deal_name, submitted_at, currency_code, catalog_version, policy_set_code,
+            requested_delivery_date, destination_country_code, destination_region,
+            shipping_service_code, terms_json, requirements_json, evidence_refs_json,
+            deal_status, dataset_type) VALUES ('SYN-DEAL-BATCH', 'SYN-CUST-BATCH',
+            'SYN-SALES-001', 'Synthetic portfolio capacity contention',
+            '2026-10-07T10:00:00Z', 'EUR', 'CATALOGUE_2026_V1', 'BASELINE_2026',
+            '2026-10-15', 'DE', 'DE-NW', 'standard', %s, '{}', '[]', 'Draft',
+            'generated_test')""", (Jsonb({"payment_terms_days": 30,
+                                            "contract_clause_codes": ["standard"],
+                                            "allow_partial_delivery": False}),))
+        for number, bom in enumerate(boms, 1):
+            product_id = bom["finished_product_id"]
+            self.conn.execute("""INSERT INTO deal_lines (deal_line_id, deal_id, line_number,
+                product_id, quantity, quoted_unit_price, configuration_json)
+                VALUES (%s, 'SYN-DEAL-BATCH', %s, %s, 1, %s, %s)""",
+                (f"SYN-BATCH-LINE-{number:02d}", number, product_id, prices[product_id],
+                 Jsonb(bom["configuration_signature_json"])))
+        self.conn.execute("UPDATE deals SET deal_status = 'Submitted' "
+                          "WHERE deal_id = 'SYN-DEAL-BATCH'")
+        run_id = "00000000-0000-4000-8000-000000260001"
+        self.conn.execute("""INSERT INTO deal_runs (run_id, deal_id,
+            original_policy_set_code, applied_policy_set_code, catalog_version_used,
+            as_of_at, data_snapshot_ref, input_snapshot_json, config_hash,
+            run_status, started_at, completed_at)
+            VALUES (%s, 'SYN-DEAL-BATCH', 'BASELINE_2026', 'BASELINE_2026',
+            'CATALOGUE_2026_V1', '2026-10-07T12:00:00Z', 'SYN-BATCH-SNAPSHOT', %s,
+            'synthetic-fixture', 'completed', '2026-10-07T12:00:00Z',
+            '2026-10-07T12:01:00Z')""",
+            (run_id, Jsonb({"fixture": "portfolio_capacity_contention"})))
+
+        bundle = read_run(self.conn, run_id,
+                          cost_parameters={"workforce_cost_eur_per_hour": 30,
+                                           "overhead_fraction": "0.1"},
+                          commercial_rule_mode="compiled")
+        plans = bundle["facts"]["supply"]["assembly_by_bom"]
+        statuses = [fact.get("production_status") for fact in bundle["facts"]["lines"]]
+        decision = assemble_deal_decision(bundle)
+        self.assertEqual(len(plans), 24)
+        self.assertEqual(statuses.count("feasible_uncommitted"), 6)
+        self.assertEqual(statuses.count("infeasible_without_replenishment"), 18)
+        self.assertEqual(len(decision["revision_reasons"]), 18)
+        self.assertEqual(decision["status"], "needs_revision")
+        self.assertEqual(decision["required_approvals"], [])
+
 
 if __name__ == "__main__":
     unittest.main()
