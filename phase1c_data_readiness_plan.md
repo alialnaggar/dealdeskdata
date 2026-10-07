@@ -56,9 +56,8 @@ technical alternatives; these are not being reopened.
 At each stage, record the command, seed, commit, row counts, achieved metrics,
 failed checks and remaining blockers in this file or a linked run report.
 Treat a pilot as **development usable** after stage 2. Treat the dataset as
-**evaluation usable** only after stage 5. The immediate next work item is
-the scenario matrix and deterministic 10–20-deal vertical generator; the
-evidence review can proceed in parallel.
+**evaluation usable** only after stage 5. The evidence review can proceed
+in parallel with pilot engineering.
 
 ## Progress — 7 October 2026
 
@@ -72,3 +71,14 @@ pins hashes of the schema, calibration, field and JSON contracts, portfolio,
 cost draft and matrix. These are targets, not generated rows or validated
 outcomes. Stage 2's vertical data generator remains the next implementation
 step; the four calibration and 22 field reviews remain open.
+
+The first stage 2 master-data increment is `render_phase1c_sellable_catalogue.py`.
+It renders 102 additional sellable products from the draft portfolio and
+joins the existing 18 buildable products and 36 components in one disposable
+PostgreSQL check. Every sellable fulfillment mode is present. Category price
+draws use the configured p10/p50/p90 anchors and p50 synthetic cost margins;
+these values are provisional and will be regenerated after sourcing review.
+This is catalogue coverage, **not** the 18-deal pilot or operational data.
+Next: independently generate supplier, stock, capacity, digital, shipping and
+credit evidence, then the 18 scenario deals/runs on the 1 September 2026
+configuration as-of date and read their results.
