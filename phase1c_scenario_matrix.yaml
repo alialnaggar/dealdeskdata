@@ -1,0 +1,107 @@
+# Coverage contract for the synthetic generator, not agent-visible deal data.
+version: 1
+status: pilot_design_provisional
+random_seed: 22495
+catalog_version: CATALOGUE_2026_V1
+policy_set_code: BASELINE_2026
+evaluation:
+  variants_per_archetype: 2
+  target_cases: 36
+  separate_output: true
+  answer_keys_agent_visible: false
+  oracle_rule: independently_review_expected_findings_from_frozen_facts
+pilot:
+  target_deals: 18
+  one_deal_per_archetype: true
+  dataset_type: generated_test
+archetypes:
+  - id: STOCK-READY
+    mode: stocked_finished
+    setup: fresh_free_finished_stock_and_valid_shipping_lane
+    check: stock_and_arrival_sources_identified_without_reservation
+    target_bucket: feasible_uncommitted
+  - id: STOCK-ALLOCATED
+    mode: stocked_finished
+    setup: aggregate_allocation_consumes_available_stock
+    check: allocated_units_cannot_support_proposed_quantity
+    target_bucket: revision
+  - id: STOCK-STALE
+    mode: stocked_finished
+    setup: inventory_snapshot_older_than_freshness_limit
+    check: stale_stock_cannot_confirm_availability
+    target_bucket: unknown
+  - id: SUPPLY-CONFIRMED
+    mode: supplier_finished
+    setup: valid_offer_confirmed_po_and_unexpired_inbound
+    check: dated_supply_uses_po_and_receipt_evidence
+    target_bucket: feasible_uncommitted
+  - id: SUPPLY-OFFER-ONLY
+    mode: supplier_finished
+    setup: valid_supplier_offer_without_confirmed_commitment
+    check: supplier_offer_is_not_binding_supply
+    target_bucket: unknown
+  - id: SUPPLY-CANCELLED
+    mode: supplier_finished
+    setup: formerly_confirmed_receipt_and_po_cancelled
+    check: cancelled_supply_excluded_from_free_inbound
+    target_bucket: revision
+  - id: BUILD-READY
+    mode: make_to_order
+    setup: offered_bom_fresh_component_stock_and_ordered_capacity
+    check: exact_bom_rollup_and_capacity_days_identified
+    target_bucket: feasible_uncommitted
+  - id: BUILD-SUBSTITUTE
+    mode: make_to_order
+    setup: preferred_kit_allocated_and_alternate_confirmed_inbound
+    check: one_alternative_selected_without_double_counting
+    target_bucket: feasible_uncommitted
+  - id: BUILD-CAPACITY-STALE
+    mode: make_to_order
+    setup: fresh_material_but_capacity_snapshot_stale
+    check: no_production_promise_from_stale_capacity
+    target_bucket: unknown
+  - id: BUILD-HORIZON
+    mode: make_to_order
+    setup: confirmed_component_eta_beyond_represented_capacity_window
+    check: capacity_after_window_is_unknown_not_inferred
+    target_bucket: unknown
+  - id: DIGITAL-PROVED
+    mode: digital_activation
+    setup: binding_pool_and_matching_independent_provider_manifest
+    check: full_term_quantity_and_proof_match
+    target_bucket: feasible_uncommitted
+  - id: DIGITAL-NO-PROOF
+    mode: digital_activation
+    setup: binding_pool_without_trusted_provider_manifest
+    check: deal_supplied_reference_cannot_confirm_provider_capacity
+    target_bucket: unknown
+  - id: DIGITAL-EXPIRED
+    mode: digital_activation
+    setup: provider_proof_expires_before_full_quoted_term
+    check: partial_term_proof_cannot_bind_full_commitment
+    target_bucket: unknown
+  - id: SERVICE-COVERED
+    mode: scheduled_service
+    setup: eligible_region_and_valid_service_window
+    check: installation_coverage_evidence_and_date_identified
+    target_bucket: feasible_uncommitted
+  - id: SERVICE-OUTSIDE
+    mode: scheduled_service
+    setup: destination_outside_explicit_eligible_regions
+    check: ineligible_coverage_does_not_become_a_service_promise
+    target_bucket: revision
+  - id: CREDIT-LIMIT
+    mode: cross_cutting
+    setup: as_of_ar_plus_unbilled_commitments_plus_quote_exceeds_credit_limit
+    check: no_double_counting_of_historical_invoices_or_current_deal
+    target_bucket: commercial_exception
+  - id: PRICE-FLOOR
+    mode: cross_cutting
+    setup: quoted_price_below_compiled_margin_floor
+    check: compiled_policy_applied_to_full_term_billable_quantity
+    target_bucket: commercial_exception
+  - id: POLICY-CLAUSE
+    mode: cross_cutting
+    setup: legal_review_contract_clause_with_complete_fulfillment_evidence
+    check: approval_route_attributed_to_policy_without_claiming_approval
+    target_bucket: commercial_exception
