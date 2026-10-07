@@ -50,6 +50,9 @@ on:
       - render_phase1c_master_slice.py
       - phase1c_master_slice.sql
       - phase1c_buildable_master.sql
+      - render_phase1c_sellable_catalogue.py
+      - test_render_phase1c_sellable_catalogue.py
+      - phase1c_sellable_catalogue.sql
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
@@ -109,6 +112,9 @@ on:
       - render_phase1c_master_slice.py
       - phase1c_master_slice.sql
       - phase1c_buildable_master.sql
+      - render_phase1c_sellable_catalogue.py
+      - test_render_phase1c_sellable_catalogue.py
+      - phase1c_sellable_catalogue.sql
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
@@ -169,6 +175,13 @@ jobs:
           psql -X -v ON_ERROR_STOP=1 -f phase1c_master_slice.sql
           python render_phase1c_master_slice.py --all-buildable --check
           psql -X -v ON_ERROR_STOP=1 -f phase1c_buildable_master.sql
+      - name: Check all 156 provisional catalogue products
+        run: |
+          python -m unittest -v test_render_phase1c_sellable_catalogue
+          python render_phase1c_sellable_catalogue.py --check
+          psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 \
+            -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
+            -c ROLLBACK
       - name: Check connected workstation stock, inbound and capacity rows
         run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
