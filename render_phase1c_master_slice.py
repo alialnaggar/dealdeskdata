@@ -1,7 +1,4 @@
-"""Render a rollback-only PostgreSQL fixture from the structural/cost drafts.
-
-The three products are examples, not a generated catalogue or calibrated prices.
-"""
+"""Render rollback-only PostgreSQL fixtures from structural and synthetic cost drafts."""
 
 from pathlib import Path
 import argparse
@@ -34,14 +31,18 @@ def insert(table, columns, rows):
             ",\n".join(" (" + ", ".join(sql(row[col]) for col in columns) + ")" for row in rows) + ";\n")
 
 
-def render(portfolio, costs, config):
+def render(portfolio, costs, config, all_buildable=False):
     result = evaluate_build_cost_draft(portfolio, costs, config)
     if result["errors"]:
         raise ValueError("cost draft must pass before rendering: " + "; ".join(result["errors"]))
-    chosen = [next(row for row in portfolio["products"]
-                   if row["fulfillment_mode"] == "make_to_order" and
-                   row["attributes_json"]["category"] == category)
-              for category in SELECTED_CATEGORIES]
+    if all_buildable:
+        chosen = [row for row in portfolio["products"]
+                  if row["fulfillment_mode"] == "make_to_order"]
+    else:
+        chosen = [next(row for row in portfolio["products"]
+                       if row["fulfillment_mode"] == "make_to_order" and
+                       row["attributes_json"]["category"] == category)
+                  for category in SELECTED_CATEGORIES]
     selected_ids = {row["product_id"] for row in chosen}
     headers = [row for row in portfolio["bom_headers"] if row["finished_product_id"] in selected_ids]
     bom_ids = {row["bom_id"] for row in headers}
@@ -50,6 +51,17 @@ def render(portfolio, costs, config):
     component_ids = {row["component_product_id"] for row in lines}
     components = [row for row in portfolio["products"] if row["product_id"] in component_ids]
     price_by_id = {row["product_id"]: row for row in costs["products"]}
+    substitutions = {
+        (bom_id, group): component_id
+        for row in costs["products"] if row["product_id"] in selected_ids
+        for bom_id, groups in row["selected_substitutes"].items()
+        for group, component_id in groups.items()
+    }
+    selected_lines = [row["bom_line_id"] for row in lines
+                      if row["substitute_group_code"] is None or
+                      substitutions[(row["bom_id"], row["substitute_group_code"])] ==
+                      row["component_product_id"]]
+    selected_line_sql = ", ".join(sql(line_id) for line_id in selected_lines)
     product_rows = []
     for row in chosen + components:
         pid = row["product_id"]
@@ -90,8 +102,8 @@ BEGIN
     SELECT count(*) INTO product_count FROM products WHERE fulfillment_mode = 'make_to_order';
     SELECT count(*) INTO bom_count FROM bom_headers;
     SELECT count(*) INTO component_count FROM products WHERE fulfillment_mode = 'component';
-    IF product_count <> 3 OR bom_count <> 5 OR component_count <> COMPONENT_COUNT THEN
-        RAISE EXCEPTION 'representative master slice counts differ: %, %, %',
+    IF product_count <> PRODUCT_COUNT OR bom_count <> BOM_COUNT OR component_count <> COMPONENT_COUNT THEN
+        RAISE EXCEPTION 'buildable master fixture counts differ: %, %, %',
             product_count, bom_count, component_count;
     END IF;
 
@@ -105,14 +117,19 @@ BEGIN
         RAISE EXCEPTION 'component platform mismatch in master slice';
     END IF;
 
+    SELECT count(*) INTO bad_count FROM bom_lines
+    WHERE bom_line_id IN (SELECTED_LINES);
+    IF bad_count <> SELECTED_LINE_COUNT THEN
+        RAISE EXCEPTION 'selected BOM lines missing from master fixture';
+    END IF;
+
     WITH selected_material AS (
         SELECT h.bom_id, h.finished_product_id,
                sum(l.required_quantity_per_output / h.output_quantity /
                    (1 - l.scrap_pct / 100) * part.standard_cost) AS material
         FROM bom_headers h JOIN bom_lines l USING (bom_id)
           JOIN products part ON part.product_id = l.component_product_id
-        WHERE l.substitute_group_code IS NULL
-           OR (h.bom_id = 'BOM-001' AND l.component_product_id = 'COMP-NETWORK_AND_POWER-001')
+        WHERE l.bom_line_id IN (SELECTED_LINES)
         GROUP BY h.bom_id, h.finished_product_id
     ), labor AS (
         SELECT bom_id, sum(setup_hours + hours_per_unit) * 30 AS labor_cost
@@ -127,29 +144,35 @@ BEGIN
     )
     SELECT count(*) FILTER (WHERE abs(standard_cost - rollup) / rollup > 0.05)
            + count(*) FILTER (WHERE standard_cost < rollup)
-           + CASE WHEN count(*) = 5 THEN 0 ELSE 1 END INTO bad_count FROM rolled;
+           + CASE WHEN count(*) = BOM_COUNT THEN 0 ELSE 1 END INTO bad_count FROM rolled;
     IF bad_count <> 0 THEN
         RAISE EXCEPTION 'BOM rollup or shared conservative cost failed in PostgreSQL';
     END IF;
 END
 $fixture$;
 ROLLBACK;
-""".replace("COMPONENT_COUNT", str(len(components))))
+""".replace("PRODUCT_COUNT", str(len(chosen)))
+   .replace("BOM_COUNT", str(len(headers)))
+   .replace("COMPONENT_COUNT", str(len(components)))
+   .replace("SELECTED_LINE_COUNT", str(len(selected_lines)))
+   .replace("SELECTED_LINES", selected_line_sql))
     return "\n".join(statements)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="fail if the checked-in SQL is stale")
+    parser.add_argument("--all-buildable", action="store_true",
+                        help="render all 18 buildable products and their BOMs")
     args = parser.parse_args()
     portfolio = json.loads((HERE / "phase1c_portfolio_draft.json").read_text())
     costs = json.loads((HERE / "phase1c_build_cost_draft.json").read_text())
     config = yaml.safe_load((HERE / "calibration_config.yaml").read_text())
-    output = HERE / "phase1c_master_slice.sql"
-    result = render(portfolio, costs, config)
+    output = HERE / ("phase1c_buildable_master.sql" if args.all_buildable else "phase1c_master_slice.sql")
+    result = render(portfolio, costs, config, all_buildable=args.all_buildable)
     if args.check:
         if not output.exists() or output.read_text() != result:
-            raise SystemExit("representative master SQL is stale; rerun render_phase1c_master_slice.py")
+            raise SystemExit(f"{output.name} is stale; rerun render_phase1c_master_slice.py with the same options")
     else:
         output.write_text(result)
 
