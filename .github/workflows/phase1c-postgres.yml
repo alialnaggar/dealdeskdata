@@ -199,14 +199,14 @@ jobs:
           python -m unittest -v test_validate_phase1c_assembly_pilot
       - name: Compare reader results with 14 reference scenarios
         run: python -m unittest -v test_phase1c_reader
-      - name: Read the configured portfolio workstation deal
-        run: python -m unittest -v test_phase1c_portfolio_deal
       - name: Validate and compile synthetic policy profiles
         run: |
           python -m unittest -v test_phase1c_policy_compiler
           python compile_phase1c_policy.py --output /tmp/phase1c_compiled_rules.sql
           psql -X -v ON_ERROR_STOP=1 -f /tmp/phase1c_compiled_rules.sql
           psql -X -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF (SELECT count(*) FROM deal_desk.pricing_rules) <> 33 OR (SELECT count(*) FROM deal_desk.policy_rules) <> 51 OR (SELECT count(*) FROM deal_desk.approval_rules) <> 21 THEN RAISE EXCEPTION 'Incomplete compiled policy rows'; END IF; END \$\$;"
+      - name: Gate the configured portfolio workstation deal
+        run: python -m unittest -v test_phase1c_portfolio_deal
       - name: Test full commercial decisions using compiled rows
         run: python -m unittest -v test_phase1c_policy_decision
       - name: Test deal decision gates against 14 reference runs
