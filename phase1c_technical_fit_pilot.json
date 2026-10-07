@@ -1,0 +1,33 @@
+{
+  "purpose": "synthetic interface and power rule demonstration; no sourced component identities",
+  "bom_id": "BOM-001",
+  "component_specs": {
+    "COMP-COMPUTE-001": {
+      "storage_host_interface": "M2_NVME",
+      "network_slot_interface": "PCIE_X4",
+      "board_form_factor": "MICRO_ATX",
+      "rated_watts": 180
+    },
+    "COMP-STORAGE-001": {
+      "host_interface": "M2_NVME",
+      "form_factor": "M2_2280",
+      "rated_watts": 7
+    },
+    "COMP-NETWORK_AND_POWER-001": {
+      "network_interface": "PCIE_X4",
+      "psu_output_watts": 450,
+      "rated_watts": 20
+    },
+    "COMP-NETWORK_AND_POWER-002": {
+      "network_interface": "PCIE_X4",
+      "psu_output_watts": 500,
+      "rated_watts": 25
+    },
+    "COMP-CHASSIS_AND_OTHER-001": {
+      "supported_board_form_factors": ["MICRO_ATX"],
+      "supported_drive_form_factors": ["M2_2280"],
+      "drive_slots": 2,
+      "power_budget_watts": 500
+    }
+  }
+}
