@@ -61,10 +61,9 @@ def product_rows(portfolio, costs, config, contract):
             billing, unit, stock_unit = "fixed_service_fee", "service_package", "not_applicable"
         else:
             billing, stock_unit = "recurring", "not_applicable"
-            unit = "service_month" if category == "cloud_services_and_subscriptions" else (
-                "device_year" if category in {"networking_and_connectivity", "cybersecurity"}
-                else "licence_year" if category == "enterprise_software_and_licensing"
-                else "coverage_year")
+            unit = ("protected_tb_month" if attrs["subcategory"] == "cloud_storage_backup" else
+                    "instance_month" if category == "cloud_services_and_subscriptions" else
+                    "licence_year")
         if mode == "scheduled_service" and product_type != "service":
             raise ValueError(f"scheduled service type mismatch {product_id}")
         rows.append((product_id, product_id, portfolio["catalog_version"],
