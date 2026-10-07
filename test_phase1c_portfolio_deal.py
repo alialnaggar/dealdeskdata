@@ -2,6 +2,7 @@
 
 import os
 import re
+import json
 import unittest
 from datetime import date
 from pathlib import Path
@@ -14,6 +15,7 @@ except ImportError:
 if psycopg is not None:
     from phase1c_reader import read_run
     from phase1c_deal_decision import assemble_deal_decision
+    from psycopg.types.json import Jsonb
 
 
 HERE = Path(__file__).resolve().parent
@@ -131,6 +133,84 @@ class PortfolioDealReaderTests(unittest.TestCase):
         decision = assemble_deal_decision(bundle)
         self.assertEqual(decision["status"], "needs_evidence")
         self.assertEqual(decision["required_approvals"], [])
+
+    def test_every_offered_buildable_configuration_reaches_an_uncommitted_gate(self):
+        portfolio = json.loads((HERE / "phase1c_portfolio_draft.json").read_text())
+        costs = json.loads((HERE / "phase1c_build_cost_draft.json").read_text())
+        prices = {p["product_id"]: p["product_list_price_eur"] for p in costs["products"]}
+        boms = portfolio["bom_headers"]
+        self.assertEqual(len(boms), 24)
+        self.assertEqual(len({b["finished_product_id"] for b in boms}), 18)
+
+        self.conn.execute("""INSERT INTO customers (customer_id, customer_code, customer_name,
+            size_segment, strategic_account, industry, country_code, region, customer_since,
+            account_status) VALUES ('SYN-CUST-PORTFOLIO', 'SYN-CUST-PORTFOLIO',
+            'Fictional Portfolio Buyer', 'Enterprise', FALSE, 'manufacturing', 'DE', 'DE-NW',
+            '2025-01-01', 'Active')""")
+        self.conn.execute("""INSERT INTO customer_credit_profiles (customer_id, credit_limit,
+            unbilled_committed_amount, commitments_as_of_at, commitment_evidence_ref,
+            risk_rating, credit_status, default_payment_terms_days, last_review_date,
+            next_review_date) VALUES ('SYN-CUST-PORTFOLIO', 1000000, 0,
+            '2026-10-07T09:00:00Z', 'SYN-PORTFOLIO-CREDIT', 'Low', 'Active', 30,
+            '2026-10-01', '2027-01-01')""")
+        existing = {'COMP-COMPUTE-001', 'COMP-STORAGE-001',
+                    'COMP-NETWORK_AND_POWER-001', 'COMP-CHASSIS_AND_OTHER-001'}
+        component_ids = {line["component_product_id"] for line in portfolio["bom_lines"]}
+        self.assertEqual(len(component_ids), 36)
+        for component_id in sorted(component_ids - existing):
+            self.conn.execute("""INSERT INTO inventory (inventory_id, product_id, location_id,
+                quantity_on_hand, quantity_allocated, snapshot_at)
+                VALUES (%s, %s, 'WH-EU-CENTRAL', 10, 0, '2026-10-07T09:00:00Z')""",
+                (f"SYN-PORTFOLIO-STOCK-{component_id}", component_id))
+
+        for index, bom in enumerate(boms, 1):
+            deal_id = f"SYN-PORTFOLIO-{bom['bom_id']}"
+            run_id = f"00000000-0000-4000-8000-{250000 + index:012d}"
+            product_id = bom["finished_product_id"]
+            self.conn.execute("""INSERT INTO deals (deal_id, customer_id, salesperson_id,
+                deal_name, submitted_at, currency_code, catalog_version, policy_set_code,
+                requested_delivery_date, destination_country_code, destination_region,
+                shipping_service_code, terms_json, requirements_json, evidence_refs_json,
+                deal_status, dataset_type) VALUES (%s, 'SYN-CUST-PORTFOLIO', 'SYN-SALES-001',
+                %s, '2026-10-07T10:00:00Z', 'EUR', 'CATALOGUE_2026_V1', 'BASELINE_2026',
+                '2026-10-15', 'DE', 'DE-NW', 'standard', %s, '{}', '[]', 'Draft',
+                'generated_test')""", (deal_id, f"Synthetic {bom['bom_id']} quote",
+                                     Jsonb({"payment_terms_days": 30,
+                                            "contract_clause_codes": ["standard"],
+                                            "allow_partial_delivery": False})))
+            self.conn.execute("""INSERT INTO deal_lines (deal_line_id, deal_id, line_number,
+                product_id, quantity, quoted_unit_price, configuration_json)
+                VALUES (%s, %s, 1, %s, 1, %s, %s)""",
+                (f"SYN-DL-{bom['bom_id']}", deal_id, product_id, prices[product_id],
+                 Jsonb(bom["configuration_signature_json"])))
+            self.conn.execute("UPDATE deals SET deal_status = 'Submitted' WHERE deal_id = %s",
+                              (deal_id,))
+            self.conn.execute("""INSERT INTO deal_runs (run_id, deal_id,
+                original_policy_set_code, applied_policy_set_code, catalog_version_used,
+                as_of_at, data_snapshot_ref, input_snapshot_json, config_hash,
+                run_status, started_at, completed_at)
+                VALUES (%s, %s, 'BASELINE_2026', 'BASELINE_2026', 'CATALOGUE_2026_V1',
+                '2026-10-07T12:00:00Z', 'SYN-PORTFOLIO-SNAPSHOT', %s,
+                'synthetic-fixture', 'completed', '2026-10-07T12:00:00Z',
+                '2026-10-07T12:01:00Z')""",
+                (run_id, deal_id, Jsonb({"fixture": "portfolio_coverage", "bom_id": bom["bom_id"]})))
+
+            bundle = read_run(self.conn, run_id,
+                              cost_parameters={"workforce_cost_eur_per_hour": 30,
+                                               "overhead_fraction": "0.1"},
+                              commercial_rule_mode="compiled")
+            line = bundle["facts"]["lines"][0]
+            plan = bundle["facts"]["supply"]["assembly_by_bom"][bom["bom_id"]]
+            decision = assemble_deal_decision(bundle)
+            with self.subTest(bom_id=bom["bom_id"]):
+                self.assertEqual(line["selected_bom_id"], bom["bom_id"])
+                self.assertEqual(line["fulfillment_status"], "feasible_uncommitted")
+                self.assertTrue(line["shipping_by_request"])
+                self.assertEqual(len(plan["component_stock_required"]), 4)
+                self.assertEqual(sum(plan["component_stock_required"].values()), 6)
+                self.assertTrue(plan["cost_rollup"]["within_5_pct"])
+                self.assertEqual(decision["status"], "needs_commitment")
+                self.assertEqual(decision["required_approvals"], [])
 
 
 if __name__ == "__main__":
