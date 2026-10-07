@@ -103,6 +103,8 @@ class PortfolioDealReaderTests(unittest.TestCase):
     def test_cancelled_po_cannot_rescue_a_component_shortage(self):
         self.conn.execute("UPDATE inventory SET quantity_allocated = 1 "
                           "WHERE inventory_id = 'SYN-STOCK-NET'")
+        self.conn.execute("UPDATE inbound_supply SET status = 'Cancelled' "
+                          "WHERE supply_id = 'SYN-INBOUND-NET-ALT'")
         self.conn.execute("UPDATE purchase_orders SET status = 'Cancelled' "
                           "WHERE purchase_order_id = 'SYN-PO-NET-ALT'")
         bundle = self.read()
