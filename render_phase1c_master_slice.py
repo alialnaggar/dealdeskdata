@@ -150,7 +150,10 @@ BEGIN
     END IF;
 END
 $fixture$;
+\\if :{?phase1c_keep_transaction}
+\\else
 ROLLBACK;
+\\endif
 """.replace("PRODUCT_COUNT", str(len(chosen)))
    .replace("BOM_COUNT", str(len(headers)))
    .replace("COMPONENT_COUNT", str(len(components)))
