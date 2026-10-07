@@ -25,13 +25,14 @@ VALUES ('SYN-DEAL-WORKSTATION', NULL, 'SYN-CUST-WORKSTATION', 'SYN-SALES-001',
         'Synthetic workstation quote', '2026-10-07T10:00:00Z', 'EUR', 'CATALOGUE_2026_V1',
         'BASELINE_2026', '2026-10-15', 'DE', 'DE-NW', 'standard',
         '{"payment_terms_days":30,"contract_clause_codes":["standard"],"allow_partial_delivery":false}',
-        NULL, '{}', '[]', NULL, 'Submitted', 'generated_test', NULL, NULL, NULL);
+        NULL, '{}', '[]', NULL, 'Draft', 'generated_test', NULL, NULL, NULL);
 INSERT INTO deal_lines (deal_line_id, deal_id, line_number, product_id, quantity,
     quoted_unit_price, configuration_json, fulfillment_group_code,
     requested_activation_date, installation_requested)
 VALUES ('SYN-DL-WORKSTATION', 'SYN-DEAL-WORKSTATION', 1,
         'SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009', 1, 1050,
         '{"selected_options":["standard"]}', NULL, NULL, FALSE);
+UPDATE deals SET deal_status = 'Submitted' WHERE deal_id = 'SYN-DEAL-WORKSTATION';
 INSERT INTO deal_runs (run_id, deal_id, original_policy_set_code,
     applied_policy_set_code, catalog_version_used, as_of_at, data_snapshot_ref,
     input_snapshot_json, config_hash, run_status, started_at, completed_at)
