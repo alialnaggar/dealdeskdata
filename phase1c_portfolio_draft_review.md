@@ -211,3 +211,24 @@ standard cost still covers both within the proposed 5% tolerance. The
 buildable products and 24 BOM cost rollups pass locally. Full generation
 stays gated on sourced kit specifications, cross-kit interfaces and power,
 and comparable price/cost evidence.
+
+## One-workstation technical fit pilot — 7 October 2026
+
+`phase1c_technical_fit_pilot.json` names **synthetic** interfaces, form
+factors and power ratings for the five candidate parts of BOM-001. The
+validator checks both network/power substitutes independently. In the
+illustrative case, two M.2 NVMe drives fit the compute kit and enclosure,
+the network interfaces match, and calculated loads of 214 W and 219 W fit
+the respective 450 W and 500 W kit supplies and the 500 W enclosure budget.
+Negative cases reject a drive interface mismatch, an underpowered alternate,
+a missing candidate specification and a changed drive quantity. The check
+always reports `ready_for_full_generation: false`.
+
+This demonstrates a small mechanical compatibility rule. The five component
+IDs still have no real manufacturer/model identity or verified specification.
+No evidence yet establishes that the compute kit itself is internally valid,
+that its storage slots or network slot are physically available in the needed
+count, that thermal limits are met, or that any quoted costs and prices apply.
+The remaining 23 BOMs have no detailed fit pilot. Before generation, source
+realistic comparable component archetypes, model those remaining constraints
+where material to the deal decisions, and check the achieved generated mix.
