@@ -296,4 +296,7 @@ BEGIN
     END IF;
 END
 $fixture$;
+\if :{?phase1c_keep_transaction}
+\else
 ROLLBACK;
+\endif
