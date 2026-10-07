@@ -47,6 +47,7 @@ on:
       - render_phase1c_master_slice.py
       - phase1c_master_slice.sql
       - phase1c_buildable_master.sql
+      - phase1c_supply_rows.sql
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -100,6 +101,7 @@ on:
       - render_phase1c_master_slice.py
       - phase1c_master_slice.sql
       - phase1c_buildable_master.sql
+      - phase1c_supply_rows.sql
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -157,6 +159,8 @@ jobs:
           psql -X -v ON_ERROR_STOP=1 -f phase1c_master_slice.sql
           python render_phase1c_master_slice.py --all-buildable --check
           psql -X -v ON_ERROR_STOP=1 -f phase1c_buildable_master.sql
+      - name: Check connected workstation stock, inbound and capacity rows
+        run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
         run: |
           python -m unittest -v test_validate_phase1c_calibration
