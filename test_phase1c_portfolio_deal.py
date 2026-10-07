@@ -13,6 +13,7 @@ except ImportError:
 
 if psycopg is not None:
     from phase1c_reader import read_run
+    from phase1c_deal_decision import assemble_deal_decision
 
 
 HERE = Path(__file__).resolve().parent
@@ -54,7 +55,8 @@ class PortfolioDealReaderTests(unittest.TestCase):
     def read(self):
         return read_run(self.conn, RUN_ID,
                         cost_parameters={"workforce_cost_eur_per_hour": 30,
-                                         "overhead_fraction": "0.1"})
+                                         "overhead_fraction": "0.1"},
+                        commercial_rule_mode="compiled")
 
     def test_selected_kit_stock_and_ordered_capacity(self):
         bundle = self.read()
@@ -68,6 +70,14 @@ class PortfolioDealReaderTests(unittest.TestCase):
         self.assertEqual(line["fulfillment_status"], "feasible_uncommitted")
         self.assertTrue(line["shipping_by_request"])
         self.assertTrue(plan["cost_rollup"]["within_5_pct"])
+        decision = assemble_deal_decision(bundle)
+        self.assertEqual(decision["status"], "needs_commitment")
+        self.assertEqual(decision["required_approvals"], [])
+        self.assertEqual(decision["uncommitted_paths"],
+                         [{"line_id": "SYN-DL-WORKSTATION",
+                           "code": "supply_or_production_not_committed"}])
+        self.assertEqual(decision["specialists"]["configuration"][0]["bom_ids"], ["BOM-001"])
+        self.assertTrue(decision["specialists"]["approval_routing"]["route_withheld"])
 
     def test_confirmed_inbound_alternate_when_selected_kit_is_unavailable(self):
         self.conn.execute("UPDATE inventory SET quantity_allocated = 1 "
@@ -79,6 +89,9 @@ class PortfolioDealReaderTests(unittest.TestCase):
         self.assertEqual(plan["component_stock_required"]["COMP-NETWORK_AND_POWER-002"], 1)
         self.assertEqual(bundle["facts"]["lines"][0]["fulfillment_status"],
                          "feasible_uncommitted")
+        decision = assemble_deal_decision(bundle)
+        self.assertEqual(decision["status"], "needs_commitment")
+        self.assertEqual(decision["required_approvals"], [])
 
 
 if __name__ == "__main__":
