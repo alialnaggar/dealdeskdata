@@ -100,6 +100,36 @@ class PortfolioDealReaderTests(unittest.TestCase):
         self.assertIn("SYN-PO-NET-ALT", sources)
         self.assertNotIn("SYN-STOCK-NET", sources)
 
+    def test_cancelled_po_cannot_rescue_a_component_shortage(self):
+        self.conn.execute("UPDATE inventory SET quantity_allocated = 1 "
+                          "WHERE inventory_id = 'SYN-STOCK-NET'")
+        self.conn.execute("UPDATE purchase_orders SET status = 'Cancelled' "
+                          "WHERE purchase_order_id = 'SYN-PO-NET-ALT'")
+        bundle = self.read()
+        group = bundle["facts"]["supply"]["assembly_by_bom"]["BOM-001"]["substitution_groups"][0]
+        self.assertEqual(group["selection_reason"],
+                         "lowest_priority_candidate; no_candidate_has_sufficient_selectable_units")
+        self.assertEqual(bundle["facts"]["lines"][0]["production_status"],
+                         "infeasible_without_replenishment")
+        decision = assemble_deal_decision(bundle)
+        self.assertEqual(decision["status"], "needs_revision")
+        self.assertEqual(decision["required_approvals"], [])
+        self.assertNotIn("SYN-INBOUND-NET-ALT",
+                         decision["specialists"]["availability"][0]["source_ids"])
+
+    def test_stale_capacity_is_unknown_instead_of_a_promise(self):
+        self.conn.execute("UPDATE production_capacity "
+                          "SET snapshot_at = '2026-10-05T09:00:00Z' "
+                          "WHERE capacity_id IN ('SYN-CAP-ASM', 'SYN-CAP-TEST')")
+        bundle = self.read()
+        line = bundle["facts"]["lines"][0]
+        self.assertEqual(line["production_status"], "unknown")
+        self.assertEqual(line["production_unknown_reason"],
+                         "production_capacity_evidence_missing_or_stale")
+        decision = assemble_deal_decision(bundle)
+        self.assertEqual(decision["status"], "needs_evidence")
+        self.assertEqual(decision["required_approvals"], [])
+
 
 if __name__ == "__main__":
     unittest.main()
