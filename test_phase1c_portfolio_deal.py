@@ -78,6 +78,9 @@ class PortfolioDealReaderTests(unittest.TestCase):
                            "code": "supply_or_production_not_committed"}])
         self.assertEqual(decision["specialists"]["configuration"][0]["bom_ids"], ["BOM-001"])
         self.assertTrue(decision["specialists"]["approval_routing"]["route_withheld"])
+        self.assertEqual(set(decision["specialists"]["availability"][0]["source_ids"]), {
+            "BOM-001", "SYN-STOCK-COMPUTE", "SYN-STOCK-STORAGE", "SYN-STOCK-NET",
+            "SYN-STOCK-ENCLOSURE", "SYN-CAP-ASM", "SYN-CAP-TEST"})
 
     def test_confirmed_inbound_alternate_when_selected_kit_is_unavailable(self):
         self.conn.execute("UPDATE inventory SET quantity_allocated = 1 "
@@ -92,6 +95,10 @@ class PortfolioDealReaderTests(unittest.TestCase):
         decision = assemble_deal_decision(bundle)
         self.assertEqual(decision["status"], "needs_commitment")
         self.assertEqual(decision["required_approvals"], [])
+        sources = set(decision["specialists"]["availability"][0]["source_ids"])
+        self.assertIn("SYN-INBOUND-NET-ALT", sources)
+        self.assertIn("SYN-PO-NET-ALT", sources)
+        self.assertNotIn("SYN-STOCK-NET", sources)
 
 
 if __name__ == "__main__":
