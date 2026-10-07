@@ -439,12 +439,33 @@ def _supply_findings(bundle, as_of):
         if best:
             for key, need in best[2]:
                 reserved_hours[(best[1], *key)] += need
+        evidence_ids = set()
+        if best:
+            location = best[1]
+            first_operation_day = min(key[2] for key, _ in best[2])
+            for component in plan["components"]:
+                evidence_ids.update(x["inventory_id"] for x in by_product[component]
+                                    if x["location_id"] == location and _fresh(x, as_of)
+                                    and x["quantity_on_hand"] > x["quantity_allocated"])
+                for receipt in bindings[component]:
+                    if (receipt["location_id"] == location and
+                            receipt["expected_date"] <= first_operation_day and
+                            receipt["quantity"] > receipt["quantity_allocated"]):
+                        evidence_ids.add(receipt["supply_id"])
+                        if receipt["purchase_order_id"]:
+                            evidence_ids.add(receipt["purchase_order_id"])
+            scheduled_keys = {key for key, _ in best[2]}
+            evidence_ids.update(c["capacity_id"] for c in bundle["production_capacity"]
+                                if c["location_id"] == location and _fresh(c, as_of) and
+                                (c["capability_code"], c["resource_type"], c["capacity_date"])
+                                in scheduled_keys)
         record = {"bom_id": b["bom_id"], "product_id": product, "line_ids": sorted(plan["line_ids"]),
             "build_units": build,
             "component_demand": plan["components"], "component_stock_required": stock_required,
             "substitution_groups": plan["substitution_groups"],
             "required_hours": plan["hours"],
             "operation_days": [key[2] for key, _ in best[2]] if best else [],
+            "candidate_evidence_ids": sorted(evidence_ids),
             "first_fitting_day": best[0] if best else None,
             "capacity_horizon_limited_components": horizon_limited,
             "material_cost_per_unit": plan["material_cost_per_unit"],
