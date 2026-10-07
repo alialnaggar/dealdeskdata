@@ -59,3 +59,16 @@ Treat a pilot as **development usable** after stage 2. Treat the dataset as
 **evaluation usable** only after stage 5. The immediate next work item is
 the scenario matrix and deterministic 10–20-deal vertical generator; the
 evidence review can proceed in parallel.
+
+## Progress — 7 October 2026
+
+Stage 1's provisional coverage contract is now executable. The matrix has 18
+scenario archetypes across all five fulfillment modes and credit, pricing and
+policy conflicts. It specifies one case per archetype for an 18-deal pilot and
+two independently reviewed variants per archetype for a 36-case evaluation
+target. `validate_phase1c_scenario_matrix.py` checks the seed and baseline
+against calibration, coverage, counts, and answer-key isolation. Its manifest
+pins hashes of the schema, calibration, field and JSON contracts, portfolio,
+cost draft and matrix. These are targets, not generated rows or validated
+outcomes. Stage 2's vertical data generator remains the next implementation
+step; the four calibration and 22 field reviews remain open.
