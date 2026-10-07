@@ -70,6 +70,9 @@ def assemble_deal_decision(bundle):
                           + option.get("supply_ids", [])]
             if fact.get("selected_bom_id"):
                 source_ids.append(fact["selected_bom_id"])
+                plan = bundle["facts"]["supply"].get("assembly_by_bom", {}).get(
+                    fact["selected_bom_id"], {})
+                source_ids.extend(plan.get("candidate_evidence_ids", []))
             date = fact.get("earliest_full_date")
             if status == "late_alternative" or (status == "feasible_uncommitted"
                                                  and fact.get("shipping_by_request") is False):
