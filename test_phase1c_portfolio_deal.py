@@ -31,7 +31,8 @@ class PortfolioDealReaderTests(unittest.TestCase):
                          "phase1c_portfolio_deal_rows.sql"):
                 content = (HERE / name).read_text()
                 # Use the exact fixture inserts in the test's uncommitted transaction.
-                for statement in re.findall(r"^INSERT INTO .*?;", content, re.M | re.S):
+                for statement in re.findall(r"^(?:INSERT INTO|UPDATE deals SET) .*?;",
+                                            content, re.M | re.S):
                     cls.conn.execute(statement)
         except Exception:
             cls.conn.rollback()
