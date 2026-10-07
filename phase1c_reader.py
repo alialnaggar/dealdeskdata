@@ -9,6 +9,7 @@ from calendar import monthrange
 from datetime import datetime, timedelta
 from decimal import Decimal, ROUND_CEILING
 from phase1c_component_units import whole_component_requirements
+from phase1c_digital_units import digital_demand, digital_signature
 from phase1c_bom_selection import select_bom_components
 from phase1c_compatibility import evaluate_compatibility
 from phase1c_horizon import (
@@ -575,12 +576,13 @@ def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=No
         if line["fulfillment_mode"] == "digital_activation":
             months = deal["terms_json"].get("contract_months")
             per_period = line["configuration_json"].get("units_per_period")
-            if not months or not per_period or line["quantity"] != months * per_period:
+            valid, billed, unit = digital_demand(line["unit_of_measure"], months, per_period)
+            if not valid or line["quantity"] != billed:
                 fact["digital"] = {"status": "invalid_quantity"}
             else:
                 term = f"{months}m"
-                unit = line["unit_of_measure"].removesuffix("_month")
-                pools = [p for p in digital if p["product_id"] == line["product_id"] and p["configuration_signature_json"] == line["attributes_json"]
+                signature = digital_signature(line["attributes_json"], line["configuration_json"])
+                pools = [p for p in digital if p["product_id"] == line["product_id"] and p["configuration_signature_json"] == signature
                          and p["region_code"] == deal["destination_country_code"] and p["term_code"] == term
                          and p["capacity_unit"] == unit]
                 selected = []
