@@ -82,3 +82,13 @@ This is catalogue coverage, **not** the 18-deal pilot or operational data.
 Next: independently generate supplier, stock, capacity, digital, shipping and
 credit evidence, then the 18 scenario deals/runs on the 1 September 2026
 configuration as-of date and read their results.
+
+The catalogue integration exposed a digital reader mismatch before any pilot
+deal was generated: monthly quantities and whole product attributes had been
+assumed for every provider pool. The reader now derives concurrent demand for
+monthly or annual billable units and compares only the declared digital
+configuration identity (edition, tier and features). The provisional
+catalogue uses pool-compatible `instance_month`, `protected_tb_month` and
+`licence_year` units. Existing monthly reference checks and focused annual
+unit tests pass; a connected rich-attribute digital row is still required
+in the operational pilot.
