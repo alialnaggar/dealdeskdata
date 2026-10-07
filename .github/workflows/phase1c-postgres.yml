@@ -48,6 +48,8 @@ on:
       - phase1c_master_slice.sql
       - phase1c_buildable_master.sql
       - phase1c_supply_rows.sql
+      - phase1c_portfolio_deal_rows.sql
+      - test_phase1c_portfolio_deal.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -102,6 +104,8 @@ on:
       - phase1c_master_slice.sql
       - phase1c_buildable_master.sql
       - phase1c_supply_rows.sql
+      - phase1c_portfolio_deal_rows.sql
+      - test_phase1c_portfolio_deal.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -195,6 +199,8 @@ jobs:
           python -m unittest -v test_validate_phase1c_assembly_pilot
       - name: Compare reader results with 14 reference scenarios
         run: python -m unittest -v test_phase1c_reader
+      - name: Read the configured portfolio workstation deal
+        run: python -m unittest -v test_phase1c_portfolio_deal
       - name: Validate and compile synthetic policy profiles
         run: |
           python -m unittest -v test_phase1c_policy_compiler
