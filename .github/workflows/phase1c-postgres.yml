@@ -22,6 +22,9 @@ on:
       - test_validate_phase1c_column_rules.py
       - render_phase1c_column_rules.py
       - phase1c_data_contract.yaml
+      - phase1c_scenario_matrix.yaml
+      - validate_phase1c_scenario_matrix.py
+      - test_validate_phase1c_scenario_matrix.py
       - validate_phase1c_data_contract.py
       - test_validate_phase1c_data_contract.py
       - phase1c_pilot_slice.json
@@ -78,6 +81,9 @@ on:
       - test_validate_phase1c_column_rules.py
       - render_phase1c_column_rules.py
       - phase1c_data_contract.yaml
+      - phase1c_scenario_matrix.yaml
+      - validate_phase1c_scenario_matrix.py
+      - test_validate_phase1c_scenario_matrix.py
       - validate_phase1c_data_contract.py
       - test_validate_phase1c_data_contract.py
       - phase1c_pilot_slice.json
@@ -177,6 +183,10 @@ jobs:
         run: |
           python -m unittest -v test_validate_phase1c_data_contract
           python validate_phase1c_data_contract.py
+      - name: Check pilot scenario coverage and evaluation isolation
+        run: |
+          python -m unittest -v test_validate_phase1c_scenario_matrix
+          python validate_phase1c_scenario_matrix.py
       - name: Preflight connected pilot rows and SQL constraints
         run: |
           python validate_phase1c_pilot.py
