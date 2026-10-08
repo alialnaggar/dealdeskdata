@@ -67,6 +67,7 @@ on:
       - phase1c_stress_pilot.sql
       - phase1c_stress_pilot_report.json
       - test_phase1c_stress_pilot.py
+      - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
@@ -144,6 +145,7 @@ on:
       - phase1c_stress_pilot.sql
       - phase1c_stress_pilot_report.json
       - test_phase1c_stress_pilot.py
+      - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
@@ -291,6 +293,13 @@ jobs:
         run: python -m unittest -v test_phase1c_conflict_pilot.ConflictReaderTests
       - name: Check mixed pilot replay and contention
         run: python -m unittest -v test_phase1c_stress_pilot.StressReaderTests
+      - name: Measure pilot decisions and source provenance
+        run: python audit_phase1c_pilot_distribution.py --output /tmp/phase1c_pilot_distribution.json
+      - name: Preserve pilot diagnostic report
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase1c-pilot-distribution
+          path: /tmp/phase1c_pilot_distribution.json
       - name: Test full commercial decisions using compiled rows
         run: python -m unittest -v test_phase1c_policy_decision
       - name: Test deal decision gates against 14 reference runs
