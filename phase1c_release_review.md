@@ -2,6 +2,8 @@
 
 **8 October 2026.** This is the compact review sheet for the generation freeze. The 36-deal development pilot passes PostgreSQL, but the full 80-customer / 400-history / 100-test release and separate 36-case evaluation set have not been generated. `ready_for_generation` remains false.
 
+[PostgreSQL Actions run 37821625969](https://github.com/alialnaggar/dealdeskdata/actions/runs/37821625969) passed the typed-row, manifest, provider-reader, and full decision workflow after aligning the reader with the new evidence record shape. The local suite has 165 tests, with 35 database cases exercised in CI rather than locally.
+
 ## Decisions already bounded by executable evidence
 
 | Decision | Current rule and evidence | Limit |
