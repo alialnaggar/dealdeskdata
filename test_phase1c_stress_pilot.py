@@ -81,8 +81,9 @@ class StressReaderTests(unittest.TestCase):
         stock_sources = Counter()
         for index in range(1, 19):
             bundle = self.read(270000 + index)
-            self.assertEqual(bundle["deal"]["dataset_type"], "generated_test")
-            self.assertEqual(bundle["deal"]["deal_status"], "Submitted")
+            row = self.conn.execute("SELECT dataset_type, deal_status FROM deal_desk.deals WHERE deal_id=%s",
+                                    (bundle["deal"]["deal_id"],)).fetchone()
+            self.assertEqual(row, ("generated_test", "Submitted"))
             decision = assemble_deal_decision(bundle)
             self.assertNotEqual(decision["status"], "approved")
             status[decision["status"]] += 1
