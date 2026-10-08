@@ -77,6 +77,25 @@ class GeneratedRowTests(unittest.TestCase):
         self.assertTrue(any("compatibility condition" in error or "installation condition" in error
                             for error in errors))
 
+    def test_requirements_cannot_carry_an_expected_decision(self):
+        rows = example()
+        rows["deals"][0]["requirements_json"] = {"expected_decision": "Approved"}
+        self.assertTrue(any("requirements contain unknown keys" in error
+                            for error in validate_rows(rows, CONTRACT)["errors"]))
+
+    def test_digital_full_term_quantity_is_checked(self):
+        rows = example()
+        rows["products"][0].update(fulfillment_mode="digital_activation",
+                                    unit_of_measure="instance_month",
+                                    attributes_json={"archetype_code": "cloud", "demand_class": "regular",
+                                                     "edition": "business"})
+        rows["bom_headers"] = []
+        rows["deals"][0]["terms_json"]["contract_months"] = 12
+        rows["deal_lines"][0].update(configuration_json={"edition": "business", "units_per_period": 2},
+                                      requested_activation_date="2026-09-03", quantity=12)
+        errors = validate_rows(rows, CONTRACT)["errors"]
+        self.assertTrue(any("digital full-term quantity/date invalid" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()
