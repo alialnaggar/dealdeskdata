@@ -1,0 +1,25 @@
+{
+  "as_of_at": "2026-09-01T14:00:00Z",
+  "limitations": [
+    "development_pilot_not_distribution_calibration",
+    "read_only_runs_do_not_reserve_supply_across_deals"
+  ],
+  "line_mode_counts": {
+    "digital_activation": 10,
+    "make_to_order": 9,
+    "scheduled_service": 8,
+    "stocked_finished": 11,
+    "supplier_finished": 9
+  },
+  "lines_per_deal": {
+    "2": 8,
+    "3": 9,
+    "4": 1
+  },
+  "pilot_deals_total": 36,
+  "schema_version": 1,
+  "seed": 22531,
+  "sql_sha256": "1bc0ce984d2a34295015009cc51bcf167a30f689e1352bcafa05e798b6328134",
+  "stress_deals": 18,
+  "stress_lines": 47
+}
