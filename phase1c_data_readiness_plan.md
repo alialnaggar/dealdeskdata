@@ -313,3 +313,5 @@ stock at most 24 hours old. Reader integration samples early, middle and
 late queued runs. This provisional source has no inbound receipts, production
 slots or digital commitments, so those paths must stay conditional/unknown;
 it is not the complete release operational distribution.
+
+The next operational slice adds 441 independently generated dated inbound receipt events for 63 products across seven months, with exact-cutoff PO header or supplier proof validation and SHA-256 source digests. All 400 historical operational views now include the relevant dated receipt rows. The reader only counts unexpired confirmed receipts as binding. Production capacity and digital commitments are next, followed by baseline decision derivation, independent evaluation and release gates; no historical outcome or execution log is claimed.
