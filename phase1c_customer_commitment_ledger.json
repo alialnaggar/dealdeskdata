@@ -5,6 +5,9 @@
   "commitments": [
     {
       "customer_id": "SYN-CUST-001",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-001",
       "amount_eur": "39381.22",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -12,6 +15,9 @@
     },
     {
       "customer_id": "SYN-CUST-002",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Review",
       "evidence_ref": "SYN-COMMIT-002",
       "amount_eur": "12881.29",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -19,6 +25,9 @@
     },
     {
       "customer_id": "SYN-CUST-003",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-003",
       "amount_eur": "12470.00",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -26,6 +35,9 @@
     },
     {
       "customer_id": "SYN-CUST-004",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-004",
       "amount_eur": "13673.88",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -33,6 +45,9 @@
     },
     {
       "customer_id": "SYN-CUST-005",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-005",
       "amount_eur": "312057.51",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -40,6 +55,9 @@
     },
     {
       "customer_id": "SYN-CUST-006",
+      "size_segment": "SMB",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-006",
       "amount_eur": "16067.89",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -47,6 +65,9 @@
     },
     {
       "customer_id": "SYN-CUST-007",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-007",
       "amount_eur": "8760.70",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -54,6 +75,9 @@
     },
     {
       "customer_id": "SYN-CUST-008",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-008",
       "amount_eur": "9059.96",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -61,6 +85,9 @@
     },
     {
       "customer_id": "SYN-CUST-009",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-009",
       "amount_eur": "26166.24",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -68,6 +95,9 @@
     },
     {
       "customer_id": "SYN-CUST-010",
+      "size_segment": "Mid-Market",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-010",
       "amount_eur": "55073.31",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -75,6 +105,9 @@
     },
     {
       "customer_id": "SYN-CUST-011",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-011",
       "amount_eur": "1233.63",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -82,6 +115,9 @@
     },
     {
       "customer_id": "SYN-CUST-012",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-012",
       "amount_eur": "17634.81",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -89,6 +125,9 @@
     },
     {
       "customer_id": "SYN-CUST-013",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-013",
       "amount_eur": "21223.40",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -96,6 +135,9 @@
     },
     {
       "customer_id": "SYN-CUST-014",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-014",
       "amount_eur": "7467.78",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -103,6 +145,9 @@
     },
     {
       "customer_id": "SYN-CUST-015",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-015",
       "amount_eur": "41083.88",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -110,6 +155,9 @@
     },
     {
       "customer_id": "SYN-CUST-016",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-016",
       "amount_eur": "60486.61",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -117,6 +165,9 @@
     },
     {
       "customer_id": "SYN-CUST-017",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-017",
       "amount_eur": "6445.28",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -124,6 +175,9 @@
     },
     {
       "customer_id": "SYN-CUST-018",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-018",
       "amount_eur": "7297.55",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -131,6 +185,9 @@
     },
     {
       "customer_id": "SYN-CUST-019",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-019",
       "amount_eur": "28806.50",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -138,6 +195,9 @@
     },
     {
       "customer_id": "SYN-CUST-020",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-020",
       "amount_eur": "84777.57",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -145,6 +205,9 @@
     },
     {
       "customer_id": "SYN-CUST-021",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-021",
       "amount_eur": "31777.50",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -152,6 +215,9 @@
     },
     {
       "customer_id": "SYN-CUST-022",
+      "size_segment": "SMB",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-022",
       "amount_eur": "16074.48",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -159,6 +225,9 @@
     },
     {
       "customer_id": "SYN-CUST-023",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Review",
       "evidence_ref": "SYN-COMMIT-023",
       "amount_eur": "117468.48",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -166,6 +235,9 @@
     },
     {
       "customer_id": "SYN-CUST-024",
+      "size_segment": "Enterprise",
+      "risk_rating": "Medium",
+      "credit_status": "On-Hold",
       "evidence_ref": "SYN-COMMIT-024",
       "amount_eur": "391662.37",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -173,6 +245,9 @@
     },
     {
       "customer_id": "SYN-CUST-025",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Review",
       "evidence_ref": "SYN-COMMIT-025",
       "amount_eur": "4990.69",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -180,6 +255,9 @@
     },
     {
       "customer_id": "SYN-CUST-026",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-026",
       "amount_eur": "19786.82",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -187,6 +265,9 @@
     },
     {
       "customer_id": "SYN-CUST-027",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-027",
       "amount_eur": "60558.52",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -194,6 +275,9 @@
     },
     {
       "customer_id": "SYN-CUST-028",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-028",
       "amount_eur": "3396.45",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -201,6 +285,9 @@
     },
     {
       "customer_id": "SYN-CUST-029",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-029",
       "amount_eur": "21857.15",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -208,6 +295,9 @@
     },
     {
       "customer_id": "SYN-CUST-030",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-030",
       "amount_eur": "19079.94",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -215,6 +305,9 @@
     },
     {
       "customer_id": "SYN-CUST-031",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-031",
       "amount_eur": "22804.07",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -222,6 +315,9 @@
     },
     {
       "customer_id": "SYN-CUST-032",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-032",
       "amount_eur": "31010.96",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -229,6 +325,9 @@
     },
     {
       "customer_id": "SYN-CUST-033",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-033",
       "amount_eur": "8461.76",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -236,6 +335,9 @@
     },
     {
       "customer_id": "SYN-CUST-034",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-034",
       "amount_eur": "1238.54",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -243,6 +345,9 @@
     },
     {
       "customer_id": "SYN-CUST-035",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-035",
       "amount_eur": "12570.37",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -250,6 +355,9 @@
     },
     {
       "customer_id": "SYN-CUST-036",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-036",
       "amount_eur": "2498.82",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -257,6 +365,9 @@
     },
     {
       "customer_id": "SYN-CUST-037",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-037",
       "amount_eur": "174007.95",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -264,6 +375,9 @@
     },
     {
       "customer_id": "SYN-CUST-038",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-038",
       "amount_eur": "15966.18",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -271,6 +385,9 @@
     },
     {
       "customer_id": "SYN-CUST-039",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-039",
       "amount_eur": "225244.65",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -278,6 +395,9 @@
     },
     {
       "customer_id": "SYN-CUST-040",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-040",
       "amount_eur": "312.26",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -285,6 +405,9 @@
     },
     {
       "customer_id": "SYN-CUST-041",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-041",
       "amount_eur": "9206.13",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -292,6 +415,9 @@
     },
     {
       "customer_id": "SYN-CUST-042",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-042",
       "amount_eur": "40818.81",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -299,6 +425,9 @@
     },
     {
       "customer_id": "SYN-CUST-043",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-043",
       "amount_eur": "232245.65",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -306,6 +435,9 @@
     },
     {
       "customer_id": "SYN-CUST-044",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-044",
       "amount_eur": "42269.32",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -313,6 +445,9 @@
     },
     {
       "customer_id": "SYN-CUST-045",
+      "size_segment": "SMB",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-045",
       "amount_eur": "26728.63",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -320,6 +455,9 @@
     },
     {
       "customer_id": "SYN-CUST-046",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-046",
       "amount_eur": "288491.56",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -327,6 +465,9 @@
     },
     {
       "customer_id": "SYN-CUST-047",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-047",
       "amount_eur": "24984.80",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -334,6 +475,9 @@
     },
     {
       "customer_id": "SYN-CUST-048",
+      "size_segment": "SMB",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-048",
       "amount_eur": "11901.21",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -341,6 +485,9 @@
     },
     {
       "customer_id": "SYN-CUST-049",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-049",
       "amount_eur": "12142.35",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -348,6 +495,9 @@
     },
     {
       "customer_id": "SYN-CUST-050",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-050",
       "amount_eur": "3237.83",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -355,6 +505,9 @@
     },
     {
       "customer_id": "SYN-CUST-051",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-051",
       "amount_eur": "14389.48",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -362,6 +515,9 @@
     },
     {
       "customer_id": "SYN-CUST-052",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-052",
       "amount_eur": "1049.95",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -369,6 +525,9 @@
     },
     {
       "customer_id": "SYN-CUST-053",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-053",
       "amount_eur": "86800.68",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -376,6 +535,9 @@
     },
     {
       "customer_id": "SYN-CUST-054",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-054",
       "amount_eur": "5472.04",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -383,6 +545,9 @@
     },
     {
       "customer_id": "SYN-CUST-055",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Review",
       "evidence_ref": "SYN-COMMIT-055",
       "amount_eur": "249438.92",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -390,6 +555,9 @@
     },
     {
       "customer_id": "SYN-CUST-056",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-056",
       "amount_eur": "56287.35",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -397,6 +565,9 @@
     },
     {
       "customer_id": "SYN-CUST-057",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-057",
       "amount_eur": "14751.59",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -404,6 +575,9 @@
     },
     {
       "customer_id": "SYN-CUST-058",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-058",
       "amount_eur": "151.33",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -411,6 +585,9 @@
     },
     {
       "customer_id": "SYN-CUST-059",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "On-Hold",
       "evidence_ref": "SYN-COMMIT-059",
       "amount_eur": "5526.98",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -418,6 +595,9 @@
     },
     {
       "customer_id": "SYN-CUST-060",
+      "size_segment": "Enterprise",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-060",
       "amount_eur": "1019.34",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -425,6 +605,9 @@
     },
     {
       "customer_id": "SYN-CUST-061",
+      "size_segment": "Enterprise",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-061",
       "amount_eur": "449895.02",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -432,6 +615,9 @@
     },
     {
       "customer_id": "SYN-CUST-062",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-062",
       "amount_eur": "89798.59",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -439,6 +625,9 @@
     },
     {
       "customer_id": "SYN-CUST-063",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-063",
       "amount_eur": "7334.28",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -446,6 +635,9 @@
     },
     {
       "customer_id": "SYN-CUST-064",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-064",
       "amount_eur": "47780.02",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -453,6 +645,9 @@
     },
     {
       "customer_id": "SYN-CUST-065",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-065",
       "amount_eur": "32190.47",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -460,6 +655,9 @@
     },
     {
       "customer_id": "SYN-CUST-066",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-066",
       "amount_eur": "58644.53",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -467,6 +665,9 @@
     },
     {
       "customer_id": "SYN-CUST-067",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-067",
       "amount_eur": "140424.64",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -474,6 +675,9 @@
     },
     {
       "customer_id": "SYN-CUST-068",
+      "size_segment": "Enterprise",
+      "risk_rating": "Low",
+      "credit_status": "On-Hold",
       "evidence_ref": "SYN-COMMIT-068",
       "amount_eur": "151555.76",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -481,6 +685,9 @@
     },
     {
       "customer_id": "SYN-CUST-069",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-069",
       "amount_eur": "2753.63",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -488,6 +695,9 @@
     },
     {
       "customer_id": "SYN-CUST-070",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-070",
       "amount_eur": "931.15",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -495,6 +705,9 @@
     },
     {
       "customer_id": "SYN-CUST-071",
+      "size_segment": "Enterprise",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-071",
       "amount_eur": "124322.40",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -502,6 +715,9 @@
     },
     {
       "customer_id": "SYN-CUST-072",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Review",
       "evidence_ref": "SYN-COMMIT-072",
       "amount_eur": "24873.13",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -509,6 +725,9 @@
     },
     {
       "customer_id": "SYN-CUST-073",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-073",
       "amount_eur": "13775.27",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -516,6 +735,9 @@
     },
     {
       "customer_id": "SYN-CUST-074",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-074",
       "amount_eur": "4095.61",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -523,6 +745,9 @@
     },
     {
       "customer_id": "SYN-CUST-075",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-075",
       "amount_eur": "9274.94",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -530,6 +755,9 @@
     },
     {
       "customer_id": "SYN-CUST-076",
+      "size_segment": "SMB",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-076",
       "amount_eur": "8039.38",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -537,6 +765,9 @@
     },
     {
       "customer_id": "SYN-CUST-077",
+      "size_segment": "Mid-Market",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-077",
       "amount_eur": "32901.21",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -544,6 +775,9 @@
     },
     {
       "customer_id": "SYN-CUST-078",
+      "size_segment": "Mid-Market",
+      "risk_rating": "Low",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-078",
       "amount_eur": "60583.42",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -551,6 +785,9 @@
     },
     {
       "customer_id": "SYN-CUST-079",
+      "size_segment": "SMB",
+      "risk_rating": "High",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-079",
       "amount_eur": "3999.79",
       "recorded_at": "2026-09-01T09:00:00Z",
@@ -558,6 +795,9 @@
     },
     {
       "customer_id": "SYN-CUST-080",
+      "size_segment": "SMB",
+      "risk_rating": "Medium",
+      "credit_status": "Active",
       "evidence_ref": "SYN-COMMIT-080",
       "amount_eur": "13157.98",
       "recorded_at": "2026-09-01T09:00:00Z",
