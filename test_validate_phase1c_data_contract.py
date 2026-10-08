@@ -119,7 +119,9 @@ class DataContractTests(unittest.TestCase):
         requirements = {"constraints": [{"code": "installation_region", "value": ["DE-BE"]}]}
         self.assertEqual(validate_payload("requirements", requirements, CONTRACT), [])
         provider = {
-            "evidence_ref": "E-1", "product_id": "P-1", "provider_id": None,
+            "evidence_ref": "E-1", "evidence_type": "provider_proof",
+            "source_class": "synthetic_provider_manifest", "issued_at": "2026-09-01T10:00:00Z",
+            "product_id": "P-1", "provider_id": None,
             "configuration_signature_json": {}, "region_code": "DE-BE", "term_code": "12m",
             "capacity_unit": "instance", "capacity_total": 10, "quantity_allocated": 2,
             "commitment_status": "binding", "verified_at": "2026-09-01T10:00:00Z",
