@@ -78,8 +78,9 @@ def build(config, contract):
         commitment = (limit * Decimal(str(rng.uniform(0, .22)))).quantize(Decimal("0.01"))
         reference = f"SYN-COMMIT-{number:03d}"
         status = statuses[index]
-        ledger["commitments"].append(dict(customer_id=customer_id, evidence_ref=reference,
-            amount_eur=str(commitment), recorded_at=SNAPSHOT,
+        ledger["commitments"].append(dict(customer_id=customer_id, size_segment=segment,
+            risk_rating=risks[index], credit_status=status,
+            evidence_ref=reference, amount_eur=str(commitment), recorded_at=SNAPSHOT,
             adverse_signal=("synthetic_account_hold" if status == "On-Hold" else None)))
         review = date(2026, 6, 1) + timedelta(days=rng.randrange(60))
         output.append(insert("customer_credit_profiles", dict(customer_id=customer_id,
