@@ -182,3 +182,27 @@ Next: compare pilot metrics with explicit tolerances, resolve the four calibrati
 and 22 field reviews, and only then freeze the release generator and hidden
 independent evaluation cases. Cross-deal allocation needs an explicit
 reservation or replay rule before claims of portfolio-wide availability.
+
+## Calibration and field-gate triage — 8 October 2026
+
+The field coverage checker had parsed `TIMESTAMPTZ` as `TIME`; the corrected
+parser and ledger now distinguish 18 timestamp-with-zone columns from the
+single shipping cutoff `TIME`. The conflict pilot also exposed two invented
+workshop locations outside the controlled two-site vocabulary and a West
+origin time-zone mismatch. The fixtures now use only Central/West and the
+configured Berlin/Amsterdam zones. [PostgreSQL run 37774188041](https://github.com/alialnaggar/dealdeskdata/actions/runs/37774188041)
+passed the corrected 36-deal load and reader checks.
+
+Five field review marks with direct executable pilot evidence have been
+closed: offered BOM signature coverage, late-component/supplier-offer
+classification, stale and horizon-limited capacity, independent digital
+full-term proof, and origin-local shipping. The explicit horizon rule is
+`unknown_no_inferred_production_date`. Product-popularity shape is a declared
+synthetic target; no unverified Olist mirror rate is claimed as an enterprise
+statistic. [PostgreSQL run 37774640395](https://github.com/alialnaggar/dealdeskdata/actions/runs/37774640395)
+passed the updated calibration and 266-column checks. Both generation gates
+remain false: **two calibration reviews and 17 field marks** remain. The
+[release review sheet](https://drive.google.com/file/d/15w7ayUuyfYJn-cvTLKTgbEnw18Y_RDtf/view)
+lists their evidence and closure order. The two calibration choices are the
+provisional 36-component/156-product mix and comparable catalogue price
+basis; neither is frozen by the pilot.
