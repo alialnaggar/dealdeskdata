@@ -80,6 +80,10 @@ on:
       - test_phase1c_customer_master.py
       - phase1c_customer_master.sql
       - phase1c_customer_commitment_ledger.json
+      - render_phase1c_historical_inputs.py
+      - test_phase1c_historical_inputs.py
+      - phase1c_historical_inputs_report.json
+      - 'phase1c_historical_inputs_*.sql'
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -171,6 +175,10 @@ on:
       - test_phase1c_customer_master.py
       - phase1c_customer_master.sql
       - phase1c_customer_commitment_ledger.json
+      - render_phase1c_historical_inputs.py
+      - test_phase1c_historical_inputs.py
+      - phase1c_historical_inputs_report.json
+      - 'phase1c_historical_inputs_*.sql'
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -336,6 +344,8 @@ jobs:
         run: python -m unittest -v test_phase1c_vertical_pilot.VerticalPilotReaderTests
       - name: Check provisional customer and credit master
         run: python -m unittest -v test_phase1c_customer_master
+      - name: Check 400 provisional historical input deals
+        run: python -m unittest -v test_phase1c_historical_inputs
       - name: Read thirteen source conflict cases
         run: python -m unittest -v test_phase1c_conflict_pilot.ConflictReaderTests
       - name: Check mixed pilot replay and contention
