@@ -25,7 +25,8 @@ def _instant(value, label):
     return parsed
 
 
-def validate_provider_manifest(manifest, contract, *, evaluation_at=None):
+def validate_provider_manifest(manifest, contract, *, evaluation_at=None,
+                               requested_from=None, requested_until=None):
     errors = []
     if not isinstance(manifest, dict) or manifest.get("schema_version") != 1:
         return ["provider manifest schema_version must be 1"]
@@ -37,6 +38,8 @@ def validate_provider_manifest(manifest, contract, *, evaluation_at=None):
     allowed = required | {"confirmed_at", "valid_until"}
     seen = set()
     cutoff = _instant(evaluation_at, "evaluation_at") if evaluation_at else None
+    requested_start = requested_from
+    requested_end = requested_until
     for index, record in enumerate(records):
         label = f"records[{index}]"
         if not isinstance(record, dict):
@@ -66,12 +69,21 @@ def validate_provider_manifest(manifest, contract, *, evaluation_at=None):
             end = datetime.fromisoformat(str(record.get("covers_until"))).date()
             if start >= end:
                 errors.append(f"{label}: covers_until must be after covers_from")
-            if verified.date() > start:
-                errors.append(f"{label}: verified_at is after coverage start")
+            issued = _instant(record.get("issued_at"), f"{label}.issued_at")
+            if issued > verified:
+                errors.append(f"{label}: issued_at is after verified_at")
             if cutoff and verified > cutoff:
                 errors.append(f"{label}: verified_at is after evaluation_at")
-            if cutoff and (start > cutoff.date() or end <= cutoff.date()) and status == "binding":
-                errors.append(f"{label}: binding record does not cover evaluation_at")
+            if cutoff and issued > cutoff:
+                errors.append(f"{label}: issued_at is after evaluation_at")
+            if status == "binding" and requested_start and requested_end and (
+                    start > requested_start or end < requested_end):
+                errors.append(f"{label}: binding record does not cover requested term")
+            if status == "binding":
+                confirmed = _instant(record.get("confirmed_at"), f"{label}.confirmed_at")
+                valid_until = _instant(record.get("valid_until"), f"{label}.valid_until")
+                if confirmed > issued or valid_until.date() <= end:
+                    errors.append(f"{label}: binding confirmation or expiry is inconsistent")
         except (TypeError, ValueError):
             errors.append(f"{label}: invalid coverage dates")
         if status == "binding" and any(record.get(key) in (None, "") for key in ("confirmed_at", "valid_until")):
