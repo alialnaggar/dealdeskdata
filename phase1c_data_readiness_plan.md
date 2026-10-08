@@ -196,13 +196,49 @@ passed the corrected 36-deal load and reader checks.
 Five field review marks with direct executable pilot evidence have been
 closed: offered BOM signature coverage, late-component/supplier-offer
 classification, stale and horizon-limited capacity, independent digital
-full-term proof, and origin-local shipping. The explicit horizon rule is
+full-term proof, and origin-local shipping. The typed generated-row validator
+also closes the location mapping, deal requirement, and per-mode line
+configuration marks. The explicit horizon rule is
 `unknown_no_inferred_production_date`. Product-popularity shape is a declared
 synthetic target; no unverified Olist mirror rate is claimed as an enterprise
 statistic. [PostgreSQL run 37774640395](https://github.com/alialnaggar/dealdeskdata/actions/runs/37774640395)
 passed the updated calibration and 266-column checks. Both generation gates
-remain false: **two calibration reviews and 17 field marks** remain. The
+remain false: **two calibration reviews and 14 field marks** remain. The
 [release review sheet](https://drive.google.com/file/d/15w7ayUuyfYJn-cvTLKTgbEnw18Y_RDtf/view)
 lists their evidence and closure order. The two calibration choices are the
 provisional 36-component/156-product mix and comparable catalogue price
 basis; neither is frozen by the pilot.
+
+The validator checks configured locations and origin time zones, supplier
+calendars, country/region predicates, requirement keys and types,
+evidence-reference metadata, active sellable lines, per-mode configuration,
+full-term digital units, and exact active make-to-order BOM signatures. Pure
+negative tests cover unknown locations, zone drift, unoffered options,
+unresolved or future evidence, expected-decision leakage, bad installation
+predicates, and incorrect recurring quantities. The disposable PostgreSQL
+workflow passed all 156 products, 36 deals and 65 lines with zero typed-row
+errors. Evidence manifest resolution, compatibility dependency coverage,
+historical as-of replay, runtime output contracts, distribution calibration,
+product fit, and comparable price basis remain open.
+
+`validate_phase1c_evidence_manifests.py` adds the next manifest boundary:
+provider records must carry typed evidence metadata and full-term dates;
+binding capacity must cover the evaluation as-of; deal references must match
+the independent record; and replay snapshots can be verified by SHA-256 and
+as-of time. The current vertical and conflict provider manifests pass this
+contract. Credit, no-PO inbound and historical AR manifests still need to be
+generated and connected before those field marks can close.
+
+`phase1c_pilot_snapshot_manifest.json` now pins the pilot schema, six SQL
+inputs, contracts, calibration/scenario configuration, and provider manifests
+under `PILOT-OPERATIONS-SNAPSHOT`. Its SHA-256 entries and 1 September 2026
+as-of timestamp pass the validator. This makes the development pilot
+reproducible; the full historical dataset still needs separate frozen credit,
+AR, inbound and snapshot manifests.
+
+`validate_phase1c_runtime_outputs.py` also checks the execution-log boundary:
+unique attempts, valid agent/status pairs, outcome-free input snapshots,
+typed output envelopes, matching agent identities, and evidence IDs that exist
+in the independent manifest. The current dataset has no populated execution
+log, so this validator is a gate for the later runtime sample rather than a
+release closure.
