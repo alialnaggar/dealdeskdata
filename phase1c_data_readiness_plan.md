@@ -255,3 +255,12 @@ the manifest's historical account status in the policy gate. Nonhistorical
 pilot reads retain their existing database path. This is a fail-closed
 contract, not generated historical evidence; the credit/AR field marks remain
 open until manifests and actual historical rows exist.
+
+The deterministic `render_phase1c_customer_master.py` now emits 80 synthetic
+customer and credit rows plus a matching commitment ledger. It allocates the
+configured segment, industry, country, risk, status and payment-term counts
+exactly, marks three On-Hold customers with synthetic adverse signals, and
+uses the configured 1 September as-of time. `test_phase1c_customer_master.py`
+checks reproducibility and PostgreSQL constraints/distributions in CI. This
+is provisional generated input, not independently sourced historical credit
+or AR evidence; no historical deal or field mark is closed by it.
