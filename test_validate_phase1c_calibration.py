@@ -17,7 +17,7 @@ class CalibrationContractTests(unittest.TestCase):
         result = validate(CONFIG)
         self.assertEqual(result["errors"], [])
         self.assertFalse(result["ready_for_generation"])
-        self.assertTrue(any("capacity horizon" in x for x in result["review_before_freeze"]))
+        self.assertEqual(len(result["review_before_freeze"]), 2)
 
     def test_broken_counts_and_price_order_are_rejected(self):
         changed = deepcopy(CONFIG)
@@ -70,6 +70,12 @@ class CalibrationContractTests(unittest.TestCase):
         changed = deepcopy(CONFIG)
         changed["dataset"]["product_popularity"]["basis"] = "unverified_olist_mirror"
         self.assertIn("product popularity must identify its synthetic rather than unverified observed basis",
+                      validate(changed)["errors"])
+
+    def test_capacity_horizon_cannot_silently_promise_later_production(self):
+        changed = deepcopy(CONFIG)
+        changed["fulfillment_production_calibration"]["proposed_parameters"]["production_capacity"]["confirmed_component_after_capacity_window"] = "feasible"
+        self.assertIn("capacity horizon must not imply production after its represented window",
                       validate(changed)["errors"])
 
 
