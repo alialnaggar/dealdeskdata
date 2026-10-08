@@ -67,6 +67,8 @@ on:
       - phase1c_stress_pilot.sql
       - phase1c_stress_pilot_report.json
       - test_phase1c_stress_pilot.py
+      - validate_phase1c_generated_rows.py
+      - test_validate_phase1c_generated_rows.py
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -145,6 +147,8 @@ on:
       - phase1c_stress_pilot.sql
       - phase1c_stress_pilot_report.json
       - test_phase1c_stress_pilot.py
+      - validate_phase1c_generated_rows.py
+      - test_validate_phase1c_generated_rows.py
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -236,6 +240,10 @@ jobs:
             -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
             -f phase1c_vertical_pilot.sql -f phase1c_conflict_pilot.sql \
             -f phase1c_stress_pilot.sql -c ROLLBACK
+      - name: Validate typed pilot rows and controlled locations
+        run: |
+          python -m unittest -v test_validate_phase1c_generated_rows
+          python validate_phase1c_generated_rows.py --load-pilot
       - name: Check connected workstation stock, inbound and capacity rows
         run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
