@@ -66,6 +66,12 @@ class CalibrationContractTests(unittest.TestCase):
         self.assertIn("historical line-count sampling weights", errors)
         self.assertIn("historical line-count expected mean differs from target", errors)
 
+    def test_popularity_provenance_cannot_silently_become_empirical(self):
+        changed = deepcopy(CONFIG)
+        changed["dataset"]["product_popularity"]["basis"] = "unverified_olist_mirror"
+        self.assertIn("product popularity must identify its synthetic rather than unverified observed basis",
+                      validate(changed)["errors"])
+
 
 if __name__ == "__main__":
     unittest.main()
