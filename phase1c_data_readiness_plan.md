@@ -285,3 +285,11 @@ share is within the configured 18–28% band, and paid/open invoice counts use
 the segment bands. These are synthetic dated source records, with no derived
 historical decision or full operational snapshot yet. Do not use the current
 customer credit/AR tables as historical truth.
+
+`render_phase1c_historical_runs.py` now links the 400 submitted deals to
+those registered cutoffs as **queued** baseline runs, with an input/config
+hash and no outcome or agent output. The PostgreSQL gate loads the run rows
+and reads early, middle and late samples through `read_run` with the dated
+resolver. Operational availability, supplier, capacity, digital and shipping
+evidence are still missing for these cutoffs; queued reads must not be treated
+as completed or correct business decisions.
