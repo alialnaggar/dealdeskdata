@@ -247,3 +247,11 @@ release closure.
 passed the complete pilot after the provider reader and its reference fixture
 were aligned with typed metadata and full-term confirmation dates. The local
 suite reports 165 tests, with 35 PostgreSQL-dependent cases run in CI.
+
+The next reader increment requires a complete frozen credit/AR manifest for
+historical deals. It matches the run snapshot ID, customer and as-of time;
+rejects future invoices/payments and unmatched commitment evidence; and uses
+the manifest's historical account status in the policy gate. Nonhistorical
+pilot reads retain their existing database path. This is a fail-closed
+contract, not generated historical evidence; the credit/AR field marks remain
+open until manifests and actual historical rows exist.
