@@ -11,7 +11,8 @@ import yaml
 HERE = Path(__file__).resolve().parent
 MODES = {"stocked_finished", "supplier_finished", "make_to_order",
          "digital_activation", "scheduled_service", "cross_cutting"}
-BUCKETS = {"feasible_uncommitted", "revision", "unknown", "commercial_exception"}
+BUCKETS = {"feasible_uncommitted", "conditional_uncommitted", "revision", "unknown",
+           "commercial_exception"}
 SOURCES = ("schema.sql", "calibration_config.yaml", "phase1c_column_rules.yaml",
            "phase1c_data_contract.yaml", "phase1c_portfolio_draft.json",
            "phase1c_build_cost_draft.json", "phase1c_scenario_matrix.yaml")
