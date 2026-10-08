@@ -274,3 +274,14 @@ records no historical decisions, specialist runs, or source evidence; each
 header remains an unlabelled Submitted row. PostgreSQL loading and measured
 distribution are checked in CI. This is the input skeleton for the frozen
 operational/credit/AR snapshot work, not a usable historical training set.
+
+`render_phase1c_historical_credit.py` generates a separate synthetic dated
+credit and AR source ledger for the 80 customers, with 400 registered as-of
+cutoffs. Eight customer source shards are SHA-256 pinned by the index. The
+resolver constructs each complete credit/AR view using only commitment events,
+invoices and payments known by that cutoff; all 400 views pass the historical
+reader's fail-closed credit validator. The September 1 open-invoice overdue
+share is within the configured 18–28% band, and paid/open invoice counts use
+the segment bands. These are synthetic dated source records, with no derived
+historical decision or full operational snapshot yet. Do not use the current
+customer credit/AR tables as historical truth.
