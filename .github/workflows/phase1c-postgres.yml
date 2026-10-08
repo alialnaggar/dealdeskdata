@@ -69,6 +69,11 @@ on:
       - test_phase1c_stress_pilot.py
       - validate_phase1c_generated_rows.py
       - test_validate_phase1c_generated_rows.py
+      - validate_phase1c_evidence_manifests.py
+      - test_validate_phase1c_evidence_manifests.py
+      - phase1c_pilot_snapshot_manifest.json
+      - validate_phase1c_runtime_outputs.py
+      - test_validate_phase1c_runtime_outputs.py
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -149,6 +154,11 @@ on:
       - test_phase1c_stress_pilot.py
       - validate_phase1c_generated_rows.py
       - test_validate_phase1c_generated_rows.py
+      - validate_phase1c_evidence_manifests.py
+      - test_validate_phase1c_evidence_manifests.py
+      - phase1c_pilot_snapshot_manifest.json
+      - validate_phase1c_runtime_outputs.py
+      - test_validate_phase1c_runtime_outputs.py
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -244,6 +254,19 @@ jobs:
         run: |
           python -m unittest -v test_validate_phase1c_generated_rows
           python validate_phase1c_generated_rows.py --load-pilot
+      - name: Validate independent evidence manifest contracts
+        run: |
+          python -m unittest -v test_validate_phase1c_evidence_manifests
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from validate_phase1c_evidence_manifests import validate_snapshot_manifest
+          errors = validate_snapshot_manifest(json.loads(Path('phase1c_pilot_snapshot_manifest.json').read_text()), base_dir=Path('.'), evaluation_at='2026-09-02T00:00:00Z')
+          if errors:
+              raise SystemExit('; '.join(errors))
+          PY
+      - name: Validate typed runtime output envelopes
+        run: python -m unittest -v test_validate_phase1c_runtime_outputs
       - name: Check connected workstation stock, inbound and capacity rows
         run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
