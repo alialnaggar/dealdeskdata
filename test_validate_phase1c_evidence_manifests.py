@@ -1,4 +1,5 @@
 import copy
+from datetime import date
 from pathlib import Path
 import unittest
 
@@ -30,7 +31,9 @@ PROVIDER = {
 class EvidenceManifestTests(unittest.TestCase):
     def test_provider_manifest_and_reference_resolution(self):
         self.assertEqual(validate_provider_manifest(PROVIDER, CONTRACT,
-                                                    evaluation_at="2026-09-10T00:00:00Z"), [])
+                                                    evaluation_at="2026-09-01T12:00:00Z",
+                                                    requested_from=date(2026, 9, 4),
+                                                    requested_until=date(2027, 9, 4)), [])
         ref = {"evidence_ref": "PROOF-1", "evidence_type": "provider_proof",
                "source_class": "synthetic_provider_manifest", "issued_at": "2026-09-01T09:00:00Z"}
         self.assertEqual(resolve_references([ref], PROVIDER["records"]), [])
@@ -42,6 +45,13 @@ class EvidenceManifestTests(unittest.TestCase):
         errors = validate_provider_manifest(bad, CONTRACT, evaluation_at="2026-09-10T00:00:00Z")
         self.assertTrue(any("within capacity" in e for e in errors))
         self.assertTrue(any("after evaluation" in e for e in errors))
+
+    def test_partial_term_is_not_a_binding_proof(self):
+        errors = validate_provider_manifest(PROVIDER, CONTRACT,
+            evaluation_at="2026-09-01T12:00:00Z",
+            requested_from=date(2026, 9, 4),
+            requested_until=date(2027, 10, 4))
+        self.assertTrue(any("does not cover requested term" in e for e in errors))
 
     def test_snapshot_manifest_checks_hashes_and_as_of(self):
         p = HERE / "phase1c_data_contract.yaml"
