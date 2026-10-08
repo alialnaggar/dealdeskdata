@@ -242,3 +242,8 @@ typed output envelopes, matching agent identities, and evidence IDs that exist
 in the independent manifest. The current dataset has no populated execution
 log, so this validator is a gate for the later runtime sample rather than a
 release closure.
+
+[PostgreSQL Actions run 37821625969](https://github.com/alialnaggar/dealdeskdata/actions/runs/37821625969)
+passed the complete pilot after the provider reader and its reference fixture
+were aligned with typed metadata and full-term confirmation dates. The local
+suite reports 165 tests, with 35 PostgreSQL-dependent cases run in CI.
