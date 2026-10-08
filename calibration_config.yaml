@@ -99,6 +99,7 @@ dataset:
   historical_lines_per_deal_achieved_mean_range: [2.8, 3.2]
   historical_lines_per_deal_bin_tolerance_percentage_points: 4
   product_popularity:
+    basis: synthetic_scenario_target_not_empirical_olist
     top_product_share: 0.2
     target_historical_line_share_range:
     - 0.6
