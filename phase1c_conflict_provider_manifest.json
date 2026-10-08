@@ -1,0 +1,39 @@
+{
+  "records": [
+    {
+      "capacity_total": 10,
+      "capacity_unit": "instance",
+      "commitment_status": "binding",
+      "configuration_signature_json": {
+        "edition": "business"
+      },
+      "covers_from": "2026-09-03",
+      "covers_until": "2027-09-04",
+      "evidence_ref": "PILOT-PROVIDER-PROOF-001",
+      "product_id": "SELL-CLOUD_SERVICES_AND_SUBSCRIPTIONS-001",
+      "provider_id": "PILOT-SUP-001",
+      "quantity_allocated": 2,
+      "region_code": "DE",
+      "term_code": "12m",
+      "verified_at": "2026-09-01T09:00:00Z"
+    },
+    {
+      "capacity_total": 10,
+      "capacity_unit": "instance",
+      "commitment_status": "binding",
+      "configuration_signature_json": {
+        "edition": "business"
+      },
+      "covers_from": "2026-09-03",
+      "covers_until": "2027-01-01",
+      "evidence_ref": "CONFLICT-PROOF-11",
+      "product_id": "SELL-CLOUD_SERVICES_AND_SUBSCRIPTIONS-003",
+      "provider_id": "PILOT-SUP-001",
+      "quantity_allocated": 2,
+      "region_code": "DE",
+      "term_code": "12m",
+      "verified_at": "2026-09-01T09:00:00Z"
+    }
+  ],
+  "schema_version": 1
+}
