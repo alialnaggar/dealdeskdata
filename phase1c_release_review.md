@@ -30,5 +30,5 @@ The two remaining calibration-level review items are the provisional **36 compon
 
 1. Generate independent credit, no-PO inbound and historical AR manifests; replay historical rows at their frozen as-of times and validate actual runtime output envelopes.
 2. Finish product fit and comparable price/cost evidence, or explicitly label any unresolved values as bounded synthetic assumptions for thesis scope.
-3. Generate the 80 customers and 400 chronological historical deals; measure the configured distributions and source provenance. Fix or document deviations before constructing the 100 generated tests.
+3. The provisional 80-customer identity/credit master and synthetic commitment ledger are generated with exact configured quotas. Verify the PostgreSQL load, then generate 400 chronological historical deals and independent frozen credit/AR evidence; measure product, line-count and provenance distributions. Fix or document deviations before constructing the 100 generated tests.
 4. Author the 36 evaluation variants and expected findings independently, keep them outside agent-visible inputs, then run fresh import, repeat-seed checksum and decision gates. Only then freeze the dataset version.
