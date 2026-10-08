@@ -33,6 +33,10 @@ class ConflictRenderTests(unittest.TestCase):
         self.assertEqual(sql.count("INSERT INTO deals "), len(CASE_MAP))
         self.assertEqual(sql.count("INSERT INTO deal_runs "), len(CASE_MAP))
         self.assertNotIn("target_bucket", sql)
+        locations = set(re.findall(r"'(WH-EU-[A-Z]+)'", sql))
+        self.assertTrue(locations)
+        self.assertLessEqual(locations, set(args[3]["controlled_vocabularies"]["location_codes"]))
+        self.assertIn("'WH-EU-WEST', 'Europe/Amsterdam'", sql)
 
 
 @unittest.skipUnless(psycopg is not None and os.environ.get("DATABASE_URL"),
