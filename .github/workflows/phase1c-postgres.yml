@@ -58,6 +58,7 @@ on:
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
+      - test_phase1c_service_pilot.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -122,6 +123,7 @@ on:
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
+      - test_phase1c_service_pilot.py
       - compile_phase1c_policy.py
       - test_phase1c_policy_compiler.py
       - phase1c_policy_decision.py
@@ -235,6 +237,8 @@ jobs:
           psql -X -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF (SELECT count(*) FROM deal_desk.pricing_rules) <> 33 OR (SELECT count(*) FROM deal_desk.policy_rules) <> 51 OR (SELECT count(*) FROM deal_desk.approval_rules) <> 21 THEN RAISE EXCEPTION 'Incomplete compiled policy rows'; END IF; END \$\$;"
       - name: Gate the configured portfolio workstation deal
         run: python -m unittest -v test_phase1c_portfolio_deal
+      - name: Check bounded scheduled service coverage
+        run: python -m unittest -v test_phase1c_service_pilot
       - name: Test full commercial decisions using compiled rows
         run: python -m unittest -v test_phase1c_policy_decision
       - name: Test deal decision gates against 14 reference runs
