@@ -146,11 +146,14 @@ def build(portfolio, costs, config, contract):
     out.append("DO $pilot$ BEGIN IF (SELECT count(*) FROM deals WHERE deal_id LIKE 'PILOT-DEAL-%') <> 5 "
                "THEN RAISE EXCEPTION 'Five-mode pilot deals missing'; END IF; END $pilot$;\n")
     proof = {"schema_version": 1, "records": [{
-        "evidence_ref": "PILOT-PROVIDER-PROOF-001", "product_id": digital_id,
+        "evidence_ref": "PILOT-PROVIDER-PROOF-001", "evidence_type": "provider_proof",
+        "source_class": "synthetic_provider_manifest", "issued_at": SNAPSHOT,
+        "product_id": digital_id,
         "provider_id": supplier, "configuration_signature_json": signature,
         "region_code": "DE", "term_code": "12m", "capacity_unit": "instance",
         "capacity_total": 10, "quantity_allocated": 2, "commitment_status": "binding",
-        "verified_at": SNAPSHOT, "covers_from": "2026-09-03",
+        "verified_at": SNAPSHOT, "confirmed_at": "2026-08-31T09:00:00Z",
+        "valid_until": "2027-09-05T00:00:00Z", "covers_from": "2026-09-03",
         "covers_until": "2027-09-04"}]}
     return "".join(out), proof
 
