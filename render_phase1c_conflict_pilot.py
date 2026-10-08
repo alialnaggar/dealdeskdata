@@ -55,11 +55,12 @@ def build(portfolio, costs, config, contract):
             quantity_allocated=allocated, snapshot_at=snapshot)
 
     def capacity(index, location, snapshot):
-        for operation, capability, resource, day in ((1, "assembly", "workforce", "2026-09-02"),
-                                                     (2, "test", "equipment", "2026-09-03")):
+        days = ("2026-09-04", "2026-09-07") if index == 18 else ("2026-09-02", "2026-09-03")
+        for operation, capability, resource, day in ((1, "assembly", "workforce", days[0]),
+                                                     (2, "test", "equipment", days[1])):
             add("production_capacity", capacity_id=f"CONFLICT-CAP-{index:02d}-{operation}",
                 location_id=location, capability_code=capability, resource_type=resource,
-                capacity_date=day, time_zone="Europe/Berlin", available_capacity_hours=8,
+                capacity_date=day, time_zone="Europe/Amsterdam" if location == "WH-EU-WEST" else "Europe/Berlin", available_capacity_hours=8,
                 allocated_capacity_hours=2, snapshot_at=snapshot, status="active",
                 evidence_ref=f"CONFLICT-CAP-PROOF-{index:02d}-{operation}")
 
@@ -150,8 +151,7 @@ def build(portfolio, costs, config, contract):
                 condition_json={"country_code": "DE", "region": "DE-NW", "eligible": False},
                 severity="blocker", message="Service unavailable in region", priority=1)
         if mode == "make_to_order":
-            location = ("WH-EU-WEST" if case == "BUILD-SUBSTITUTE" else
-                        "WH-EU-NORTH" if case == "BUILD-HORIZON" else "WH-EU-EAST")
+            location = "WH-EU-CENTRAL" if case == "BUILD-CAPACITY-STALE" else "WH-EU-WEST"
             source_at = "2026-09-01T04:00:00Z" if case == "BUILD-CAPACITY-STALE" else "2026-09-01T06:00:00Z"
             bom = {"BUILD-SUBSTITUTE": "BOM-001", "BUILD-CAPACITY-STALE": "BOM-006",
                    "BUILD-HORIZON": "BOM-005"}[case]
@@ -166,9 +166,9 @@ def build(portfolio, costs, config, contract):
                       source_at, 4 if case == "BUILD-SUBSTITUTE" and
                       component == "COMP-NETWORK_AND_POWER-001" else 0)
             capacity(index, location, "2026-08-30T04:00:00Z" if case == "BUILD-CAPACITY-STALE" else source_at)
-            if location != "WH-EU-CENTRAL":
+            if case == "BUILD-SUBSTITUTE":
                 add("shipping_lanes", lane_id=f"CONFLICT-LANE-{index:02d}",
-                    origin_location_id=location, origin_time_zone="Europe/Berlin",
+                    origin_location_id=location, origin_time_zone="Europe/Amsterdam",
                     destination_country_code="DE", destination_region="DE-NW",
                     shipping_service_code="standard", transit_workdays=2,
                     dispatch_weekdays_json=[1, 2, 3, 4, 5], cutoff_local_time="15:00:00")
