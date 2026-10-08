@@ -15,7 +15,7 @@ import yaml
 TABLE_RE = re.compile(r"CREATE TABLE (\w+) \((.*?)\n\);", re.S)
 COLUMN_RE = re.compile(
     r"^    ([a-z]\w+)\s+"
-    r"(TEXT|CHAR\(\d+\)|DATE|TIME|TIMESTAMPTZ|"
+    r"(TEXT|CHAR\(\d+\)|TIMESTAMPTZ|TIME|DATE|"
     r"NUMERIC\(\d+,\d+\)|INTEGER|BIGINT|UUID|BOOLEAN|JSONB)(.*)$",
     re.M,
 )
