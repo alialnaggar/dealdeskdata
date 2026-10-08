@@ -81,6 +81,9 @@ class HistoricalInputDatabaseTests(unittest.TestCase):
                 WHERE deal_id LIKE 'HIST-DEAL-%' AND submitted_at >= '2026-09-01'""").fetchone()[0], 0)
             from validate_phase1c_generated_rows import load_rows, validate_rows
             rows = load_rows(conn)
+            product_ids = {p["product_id"] for p in json.loads(
+                (HERE / "phase1c_portfolio_draft.json").read_text())["products"]}
+            rows["products"] = [row for row in rows["products"] if row["product_id"] in product_ids]
             rows["deals"] = [row for row in rows["deals"] if row["deal_id"].startswith("HIST-DEAL-")]
             rows["deal_lines"] = [row for row in rows["deal_lines"] if row["deal_id"].startswith("HIST-DEAL-")]
             for table in ("suppliers", "inventory", "purchase_orders", "inbound_supply",
