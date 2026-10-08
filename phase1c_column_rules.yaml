@@ -5,7 +5,6 @@ basis_codes:
   SYS: generated/system observation
   SYN: fictional company assumption
   CAT: catalogue taxonomy/visible anchor, transformed to brand-neutral synthetic product
-  OBS: transformed shape of Olist observations, never copied rows
   CFG: declared policy/catalogue configuration
   DER: computed from other facts
   SUB: submitted deal input, synthetically sampled in generated rows
@@ -1285,8 +1284,8 @@ tables:
     customer_id:
       sql_type: TEXT
       nullable: false
-      basis: SUB+SYN+OBS
-      generation: Selected existing customer; customer repeat activity uses an explicitly transformed popularity shape
+      basis: SUB+SYN
+      generation: Selected existing customer; repeat activity follows a declared synthetic coverage target
       validation: FK; account/credit owner and submitted customer frozen
     salesperson_id:
       sql_type: TEXT
@@ -1432,10 +1431,10 @@ tables:
     product_id:
       sql_type: TEXT
       nullable: false
-      basis: SUB+SYN+OBS
+      basis: SUB+SYN
       generation: Active sellable SKU of deal catalogue
-      validation: FK and trigger; historical popularity target 60-70% top fifth
-      review_before_generation: Verify transformed popularity target and tolerance in a pilot; source-mirror checksum is still unverified.
+      validation: FK and trigger; declared synthetic historical popularity target 60-70% top fifth
+      review_before_generation: Verify synthetic historical popularity target and tolerance on generated history; pilot scenario counts do not measure it.
     quantity:
       sql_type: INTEGER
       nullable: false
