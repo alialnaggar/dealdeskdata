@@ -303,3 +303,13 @@ confirmed no-PO inbound needs a matching independent supplier proof. A test
 with explicitly empty complete evidence remains unknown, while a missing
 resolver fails closed. This is a safeguard, not a generated operational
 source; actual dated operational snapshots remain to be built.
+
+The first operational source slice now provides **daily aggregate stock for
+12 stocked sellables and 36 components**, plus 38 dated standard shipping
+lanes and rolling 90-day offers covering 32/36 components and 22/27
+supplier-finished SKUs. It is generated independently of submitted deal
+choices, SHA-256 pinned, and resolves across all 400 registered cutoffs with
+stock at most 24 hours old. Reader integration samples early, middle and
+late queued runs. This provisional source has no inbound receipts, production
+slots or digital commitments, so those paths must stay conditional/unknown;
+it is not the complete release operational distribution.
