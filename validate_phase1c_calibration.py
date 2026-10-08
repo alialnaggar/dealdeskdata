@@ -123,6 +123,8 @@ def validate(config):
     for key in ("setup_hours_per_batch", "workforce_hours_per_finished_unit", "equipment_hours_per_finished_unit"):
         triplet(p["production_requirements"][key], key)
     capacity = p["production_capacity"]
+    check(capacity.get("confirmed_component_after_capacity_window") == "unknown_no_inferred_production_date",
+          "capacity horizon must not imply production after its represented window")
     for key in ("equipment_daily_available_hours", "workforce_daily_available_hours",
                 "existing_allocation_to_available_ratio", "downtime_reduction_fraction"):
         triplet(capacity[key], key)
@@ -146,10 +148,8 @@ def validate(config):
           == "synthetic_operational_assumptions_unless_specific_independent_source_is_profiled",
           "operational parameters must retain synthetic provenance")
 
-    # A planning horizon can be shorter than a supplier lead; this is a
-    # coverage limit, never a reason to invent a confirmed production date.
-    if capacity["horizon_calendar_days"] < p["suppliers"]["component_lead_workdays"][2] * 7 / 5:
-        review.append("30-workday supplier lead can exceed the capacity horizon: reader marks confirmed supply beyond represented capacity dates unknown; test generated rows and do not extend the horizon without evidence")
+    # The represented planning window is deliberately bounded. BUILD-HORIZON
+    # exercises a confirmed late receipt without inferring later capacity.
     if ds["component_products_target"] is None or ds["total_product_rows_target"] is None:
         review.append("36 components/156 total products are proposals; top-level generation targets remain unset until BOM coverage review")
     review.append("Validate visible catalogue price dates and category/unit comparability before freezing EUR bands")
