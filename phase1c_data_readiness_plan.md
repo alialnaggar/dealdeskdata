@@ -120,3 +120,31 @@ dated delivery; the selected BOM reaches an uncommitted build path; the
 separate provider proof confirms the digital term; and explicit service
 coverage remains conditional until a slot is committed. The matrix's other
 13 conflict cases are still designs, not generated rows.
+
+## Eighteen-case source conflict pilot — 8 October 2026
+
+`render_phase1c_conflict_pilot.py` adds 13 source-connected cases to the five
+mode baselines, one for every archetype in the provisional matrix. Each case
+has a separate generated-test submission and immutable run; the case-to-run
+map stays in test code, outside submitted rows. The examples cover allocated
+and stale stock, an uncommitted supplier offer, cancelled inbound, an
+alternate BOM kit, stale capacity, a component ETA beyond the represented
+capacity window, absent and partial-term digital proof, out-of-region service,
+and credit, price and contract-clause exceptions. The partial-term provider
+record is stored separately from the deal; a reference string alone never
+confirms digital capacity.
+
+[PostgreSQL Actions run 37771255791](https://github.com/alialnaggar/dealdeskdata/actions/runs/37771255791)
+passed the full schema/load/reader/compiled-policy workflow with the five
+baselines and 13 conflicts. This establishes an **18-deal development pilot**,
+not a calibrated distribution or independent evaluation answer key. The
+supplier-offer-only case is conditional operationally, but its final gate
+needs evidence because a dated delivery commitment is absent. This makes
+the matrix's `unknown` target a gate/evidence bucket, not a claim that no
+offer exists. No outcome labels are in the agent-visible SQL.
+
+Next: build the seeded 30–50-deal mixed stress pilot with shared capacity and
+inventory contention, as-of replay, a provenance manifest and achieved
+distribution report. In parallel, disposition the four calibration reviews
+and 22 field marks; only then freeze tolerances, independently author the
+36-case evaluation oracle, and generate the 80/400/100 release targets.
