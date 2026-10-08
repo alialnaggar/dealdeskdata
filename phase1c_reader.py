@@ -17,6 +17,7 @@ from phase1c_horizon import (
     components_waiting_beyond_capacity_horizon,
     has_fresh_capacity_evidence,
 )
+from phase1c_historical_credit import select_historical_credit
 from zoneinfo import ZoneInfo
 import json
 from pathlib import Path
@@ -522,7 +523,8 @@ def _supply_findings(bundle, as_of):
     return result
 
 
-def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=None,
+def read_run(conn, run_id, *, digital_evidence_resolver=None, historical_credit_resolver=None,
+             cost_parameters=None,
              commercial_rule_mode="auto"):
     """Return run context, selected evidence and derived facts. No writes.
 
@@ -544,9 +546,17 @@ def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=No
         raise ValueError("Missing lines or mismatched catalogue version")
     products = [x["product_id"] for x in lines]
     customer = _one(conn, "SELECT * FROM deal_desk.customers WHERE customer_id=%s", (deal["customer_id"],))
-    credit = _one(conn, "SELECT * FROM deal_desk.customer_credit_profiles WHERE customer_id=%s", (deal["customer_id"],))
-    ar = _latest(_rows(conn, "SELECT * FROM deal_desk.accounts_receivable WHERE customer_id=%s AND as_of_date<=%s::date", (deal["customer_id"], as_of)), ("invoice_number",), as_of.date(), "as_of_date")
-    payments = _rows(conn, "SELECT * FROM deal_desk.payment_history WHERE customer_id=%s AND paid_date<=%s::date", (deal["customer_id"], as_of))
+    partition = _one(conn, "SELECT dataset_type FROM deal_desk.deals WHERE deal_id=%s", (deal["deal_id"],))["dataset_type"]
+    if partition == "historical":
+        if historical_credit_resolver is None:
+            raise ValueError("historical run needs frozen credit/AR manifest")
+        snapshot = historical_credit_resolver(run["data_snapshot_ref"], deal["customer_id"])
+        credit, ar, payments, account_status = select_historical_credit(snapshot, run, deal["customer_id"])
+        customer = dict(customer, account_status=account_status)
+    else:
+        credit = _one(conn, "SELECT * FROM deal_desk.customer_credit_profiles WHERE customer_id=%s", (deal["customer_id"],))
+        ar = _latest(_rows(conn, "SELECT * FROM deal_desk.accounts_receivable WHERE customer_id=%s AND as_of_date<=%s::date", (deal["customer_id"], as_of)), ("invoice_number",), as_of.date(), "as_of_date")
+        payments = _rows(conn, "SELECT * FROM deal_desk.payment_history WHERE customer_id=%s AND paid_date<=%s::date", (deal["customer_id"], as_of))
     rules = {}
     for table in ("pricing_rules", "policy_rules", "approval_rules"):
         rules[table] = _rows(conn, f"SELECT * FROM deal_desk.{table} WHERE policy_set_code=%s AND is_active ORDER BY priority, {table[:-1]}_id", (run["applied_policy_set_code"],))
