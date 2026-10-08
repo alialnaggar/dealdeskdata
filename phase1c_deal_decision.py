@@ -45,6 +45,8 @@ def assemble_deal_decision(bundle):
         elif line["fulfillment_mode"] == "digital_activation":
             if fact.get("digital", {}).get("status") == "invalid_quantity":
                 config_reasons.append("digital_billable_quantity_invalid")
+        elif line["fulfillment_mode"] == "scheduled_service":
+            pass  # Coverage and an uncommitted slot are evaluated below.
         elif line["fulfillment_mode"] not in PHYSICAL_MODES:
             config_reasons.append("unsupported_fulfillment_mode")
         for reason in config_reasons:
@@ -63,6 +65,17 @@ def assemble_deal_decision(bundle):
                 evidence_gaps.append(f"digital_confirmation_missing:{line_id}")
             elif status == "conditional":
                 commitments.append({"line_id": line_id, "code": "digital_offer_not_binding"})
+        elif line["fulfillment_mode"] == "scheduled_service":
+            service = fact.get("service", {})
+            status = service.get("status", "unknown")
+            source_ids = service.get("coverage_rule_ids", [])
+            date = None  # Coverage does not establish an available service slot.
+            if status == "infeasible":
+                revisions.append({"line_id": line_id, "code": "service_coverage_or_date_unsupported"})
+            elif status == "conditional":
+                commitments.append({"line_id": line_id, "code": "service_slot_uncommitted"})
+            else:
+                evidence_gaps.append(f"service_coverage_missing:{line_id}")
         else:
             status = fact.get("fulfillment_status", "unknown")
             source_ids = [s for option in fact.get("shipping_options", [])
