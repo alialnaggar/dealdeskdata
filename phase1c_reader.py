@@ -126,7 +126,8 @@ def load_provider_evidence(path):
     if set(payload) != {"schema_version", "records"} or payload["schema_version"] != 1:
         raise ValueError("Unsupported provider evidence manifest")
     records = {}
-    required = {"evidence_ref", "product_id", "provider_id", "configuration_signature_json", "region_code",
+    required = {"evidence_ref", "evidence_type", "source_class", "issued_at", "confirmed_at", "valid_until",
+                "product_id", "provider_id", "configuration_signature_json", "region_code",
                 "term_code", "capacity_unit", "capacity_total", "quantity_allocated",
                 "commitment_status", "verified_at", "covers_from", "covers_until"}
     for raw in payload["records"]:
@@ -139,9 +140,19 @@ def load_provider_evidence(path):
         record["capacity_total"] = Decimal(str(raw["capacity_total"]))
         record["quantity_allocated"] = Decimal(str(raw["quantity_allocated"]))
         record["verified_at"] = datetime.fromisoformat(raw["verified_at"].replace("Z", "+00:00"))
+        record["issued_at"] = datetime.fromisoformat(raw["issued_at"].replace("Z", "+00:00"))
+        record["confirmed_at"] = datetime.fromisoformat(raw["confirmed_at"].replace("Z", "+00:00"))
+        record["valid_until"] = datetime.fromisoformat(raw["valid_until"].replace("Z", "+00:00"))
         record["covers_from"] = datetime.fromisoformat(raw["covers_from"]).date()
         record["covers_until"] = datetime.fromisoformat(raw["covers_until"]).date()
-        if (record["verified_at"].tzinfo is None or record["covers_until"] < record["covers_from"]
+        if (record["verified_at"].tzinfo is None or record["issued_at"].tzinfo is None
+                or record["confirmed_at"].tzinfo is None or record["valid_until"].tzinfo is None
+                or record["evidence_type"] != "provider_proof"
+                or record["source_class"] != "synthetic_provider_manifest"
+                or record["confirmed_at"] > record["issued_at"]
+                or record["issued_at"] > record["verified_at"]
+                or record["valid_until"].date() <= record["covers_until"]
+                or record["covers_until"] < record["covers_from"]
                 or record["quantity_allocated"] < 0 or record["capacity_total"] < record["quantity_allocated"]
                 or record["commitment_status"] != "binding"):
             raise ValueError("Invalid provider evidence values")
