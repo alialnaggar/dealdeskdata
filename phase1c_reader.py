@@ -573,6 +573,19 @@ def read_run(conn, run_id, *, digital_evidence_resolver=None, cost_parameters=No
                 "margin_pct": (line["quoted_unit_price"] - line["standard_cost"]) * 100 / line["quoted_unit_price"]}
         if line["installation_requested"]:
             fact["installation"], fact["installation_evidence"] = _installation(line, deal, compatibility)
+        if line["fulfillment_mode"] == "scheduled_service":
+            coverage, source_ids = _installation(line, deal, compatibility)
+            requested = deal["requested_delivery_date"]
+            if coverage == "ineligible" or requested is not None and requested < as_of.date():
+                status = "infeasible"
+            elif coverage == "eligible" and requested is not None:
+                status = "conditional"
+            else:
+                status = "unknown"
+            fact["service"] = {"status": status, "coverage": coverage,
+                               "coverage_rule_ids": source_ids,
+                               "requested_date": requested,
+                               "slot_committed": False}
         if line["fulfillment_mode"] == "digital_activation":
             months = deal["terms_json"].get("contract_months")
             per_period = line["configuration_json"].get("units_per_period")
