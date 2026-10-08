@@ -88,6 +88,8 @@ on:
       - test_render_phase1c_historical_credit.py
       - phase1c_historical_credit_index.json
       - 'phase1c_historical_credit_source_*.json'
+      - render_phase1c_historical_runs.py
+      - 'phase1c_historical_run_rows_*.sql'
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -187,6 +189,8 @@ on:
       - test_render_phase1c_historical_credit.py
       - phase1c_historical_credit_index.json
       - 'phase1c_historical_credit_source_*.json'
+      - render_phase1c_historical_runs.py
+      - 'phase1c_historical_run_rows_*.sql'
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
