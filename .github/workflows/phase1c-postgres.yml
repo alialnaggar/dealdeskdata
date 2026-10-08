@@ -55,6 +55,10 @@ on:
       - render_phase1c_sellable_catalogue.py
       - test_render_phase1c_sellable_catalogue.py
       - phase1c_sellable_catalogue.sql
+      - render_phase1c_vertical_pilot.py
+      - phase1c_vertical_pilot.sql
+      - phase1c_vertical_provider_manifest.json
+      - test_phase1c_vertical_pilot.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
@@ -120,6 +124,10 @@ on:
       - render_phase1c_sellable_catalogue.py
       - test_render_phase1c_sellable_catalogue.py
       - phase1c_sellable_catalogue.sql
+      - render_phase1c_vertical_pilot.py
+      - phase1c_vertical_pilot.sql
+      - phase1c_vertical_provider_manifest.json
+      - test_phase1c_vertical_pilot.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
       - test_phase1c_portfolio_deal.py
@@ -188,6 +196,13 @@ jobs:
           psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 \
             -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
             -c ROLLBACK
+      - name: Load five connected provisional deal paths
+        run: |
+          python -m unittest -v test_phase1c_vertical_pilot.VerticalPilotRenderTests
+          python render_phase1c_vertical_pilot.py --check
+          psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 \
+            -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
+            -f phase1c_vertical_pilot.sql -c ROLLBACK
       - name: Check connected workstation stock, inbound and capacity rows
         run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
@@ -239,6 +254,8 @@ jobs:
         run: python -m unittest -v test_phase1c_portfolio_deal
       - name: Check bounded scheduled service coverage
         run: python -m unittest -v test_phase1c_service_pilot
+      - name: Read five connected generated pilot modes
+        run: python -m unittest -v test_phase1c_vertical_pilot.VerticalPilotReaderTests
       - name: Test full commercial decisions using compiled rows
         run: python -m unittest -v test_phase1c_policy_decision
       - name: Test deal decision gates against 14 reference runs
