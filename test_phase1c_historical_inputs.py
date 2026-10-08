@@ -107,13 +107,23 @@ class HistoricalInputDatabaseTests(unittest.TestCase):
                     conn.execute(statement)
             from phase1c_reader import read_run
             from render_phase1c_historical_credit import load_resolver
+            from phase1c_historical_operational import TABLES
             resolver = load_resolver()
             for n in (1, 200, 400):
                 run_id = f"00000000-0000-4000-8000-{280000+n:012d}"
-                bundle = read_run(conn, run_id, historical_credit_resolver=resolver)
+                with self.assertRaisesRegex(ValueError, "frozen operational manifest"):
+                    read_run(conn, run_id, historical_credit_resolver=resolver)
+                item = json.loads((HERE / "phase1c_historical_credit_index.json").read_text())["snapshots"][n-1]
+                empty = {"schema_version": 1, "snapshot_id": item["snapshot_id"],
+                         "as_of_at": item["as_of_at"], "complete": True, "inbound_evidence": [],
+                         **{table: [] for table in TABLES}}
+                bundle = read_run(conn, run_id, historical_credit_resolver=resolver,
+                                  historical_operational_resolver=lambda ref: empty)
                 self.assertEqual(bundle["run"]["data_snapshot_ref"], f"HIST-CREDIT-{n:04d}")
                 self.assertEqual(bundle["credit"]["customer_id"], bundle["customer"]["customer_id"])
                 self.assertLessEqual(bundle["credit"]["commitments_as_of_at"], bundle["run"]["as_of_at"])
+                self.assertEqual(bundle["inventory"], [])
+                self.assertEqual(bundle["shipping_lanes"], [])
         finally:
             conn.rollback()
             conn.close()
