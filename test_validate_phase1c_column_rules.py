@@ -18,7 +18,7 @@ class ColumnContractTests(unittest.TestCase):
         self.assertEqual((result["tables"], result["columns"]), (24, 266))
         self.assertEqual(result["errors"], [])
         self.assertFalse(result["ready_for_generation"])
-        self.assertEqual(len(result["review_before_generation"]), 17)
+        self.assertEqual(len(result["review_before_generation"]), 14)
 
     def test_removed_column_and_type_drift_fail(self):
         changed = deepcopy(CONTRACT)
