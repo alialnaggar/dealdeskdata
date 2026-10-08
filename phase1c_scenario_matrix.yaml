@@ -82,9 +82,9 @@ archetypes:
     target_bucket: unknown
   - id: SERVICE-COVERED
     mode: scheduled_service
-    setup: eligible_region_and_valid_service_window
-    check: installation_coverage_evidence_and_date_identified
-    target_bucket: feasible_uncommitted
+    setup: explicit_eligible_region_and_future_requested_service_date
+    check: eligible_coverage_identified_without_claiming_a_committed_slot
+    target_bucket: conditional_uncommitted
   - id: SERVICE-OUTSIDE
     mode: scheduled_service
     setup: destination_outside_explicit_eligible_regions
