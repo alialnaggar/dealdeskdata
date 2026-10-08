@@ -291,6 +291,13 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
             elif mode == "make_to_order":
                 if set(payload) - set(spec["make_to_order_allowed_keys"]):
                     errors.append("make-to-order configuration contains unknown keys")
+                options = payload.get("selected_options")
+                if (not isinstance(options, list) or len(options) != 1 or
+                    not isinstance(options[0], str) or
+                    options[0] not in contract["configured_builds"]["offered_option_codes"] or
+                    (product_attributes is not None and options[0] not in
+                     product_attributes.get("offered_options", product_attributes.get("option_codes", [])))):
+                    errors.append("make-to-order selected option must be one offered code")
             elif set(payload) - set(spec["physical_allowed_keys"]):
                 errors.append("physical configuration contains unknown keys")
     elif kind == "configuration_signature":
@@ -323,7 +330,11 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
                     errors.append("constraints must be an array")
                 else:
                     for item in constraints:
-                        if not isinstance(item, dict) or not _is_nonempty_string(item.get("code")) or "value" not in item:
+                        if (not isinstance(item, dict) or set(item) != {"code", "value"} or
+                            not _is_nonempty_string(item.get("code")) or
+                            not (type(item.get("value")) in (str, int, float, bool) or
+                                 isinstance(item.get("value"), list) and
+                                 all(isinstance(value, str) for value in item["value"]))):
                             errors.append("constraint must contain code and value")
             if "customer_notes" in payload and not isinstance(payload["customer_notes"], str):
                 errors.append("customer_notes must be a string")
@@ -344,6 +355,13 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
                 allowed_operators = spec.get("allowed_operators_by_rule_type", {}).get(rule_type, [])
                 if payload["operator"] not in allowed_operators:
                     errors.append("compatibility condition operator is invalid")
+            if rule_type == "installation_eligibility":
+                country = payload.get("country_code")
+                if (country not in contract["controlled_vocabularies"]["countries"] or
+                    payload.get("region") not in contract["controlled_vocabularies"]["destination_regions"].get(country, [])):
+                    errors.append("installation condition country/region is invalid")
+                if type(payload.get("eligible")) is not bool:
+                    errors.append("installation condition eligible must be boolean")
     elif kind == "provider_evidence":
         spec = jc["provider_evidence_record"]
         if not isinstance(payload, dict):
@@ -369,18 +387,26 @@ def validate_payload(kind, payload, contract, *, mode=None, product_attributes=N
                 if not isinstance(item, dict):
                     errors.append("evidence reference item must be an object")
                     continue
+                if set(item) - set(spec["item_keys"]):
+                    errors.append("evidence reference contains unknown keys")
                 for key in spec["item_keys"]:
                     if key not in item:
                         errors.append(f"evidence reference missing {key}")
+                if not _is_nonempty_string(item.get("evidence_ref")):
+                    errors.append("evidence reference ID is invalid")
                 if item.get("evidence_type") not in spec["evidence_type"]:
                     errors.append("evidence type is invalid")
                 if item.get("source_class") not in spec["source_class"]:
                     errors.append("evidence source class is invalid")
                 if isinstance(item.get("issued_at"), str):
                     try:
-                        datetime.fromisoformat(item["issued_at"].replace("Z", "+00:00"))
+                        issued = datetime.fromisoformat(item["issued_at"].replace("Z", "+00:00"))
+                        if issued.tzinfo is None or issued.utcoffset() is None:
+                            errors.append("evidence issued_at needs a time zone")
                     except ValueError:
                         errors.append("evidence issued_at is not ISO datetime")
+                else:
+                    errors.append("evidence issued_at must be ISO datetime")
     elif kind == "agent_output":
         spec = jc["agent_output_json"]
         if not isinstance(payload, dict):
