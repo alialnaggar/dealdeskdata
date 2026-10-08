@@ -92,3 +92,31 @@ catalogue uses pool-compatible `instance_month`, `protected_tb_month` and
 `licence_year` units. Existing monthly reference checks and focused annual
 unit tests pass; a connected rich-attribute digital row is still required
 in the operational pilot.
+
+## Progress — 8 October 2026
+
+The reader and gate now treat `scheduled_service` as a bounded coverage check:
+an explicit eligible region with a future requested date is conditional and
+the service slot remains uncommitted; an ineligible region needs revision and
+missing coverage needs evidence. There is no service-worker calendar or booked
+appointment table, so the pilot must never claim a confirmed service slot.
+The `SERVICE-COVERED` matrix bucket was corrected to
+`conditional_uncommitted`.
+
+`render_phase1c_vertical_pilot.py` now renders five source-connected
+generated-test deals at the configured 1 September as-of date. The five
+paths use catalogue rows, confirmed supplier inbound, fresh stock, dated
+workshop capacity, a trusted digital provider manifest, explicit service
+coverage, shipping and customer credit. It emits source evidence before the
+deals and omits expected decisions from submitted rows. The output is a
+disposable pilot fixture, not the intended 18-deal varied pilot or the full
+dataset. PostgreSQL reader verification is the next gate, followed by the
+13 remaining scenario archetypes and distribution checks.
+
+[PostgreSQL Actions run 37770210410](https://github.com/alialnaggar/dealdeskdata/actions/runs/37770210410)
+passed the full workflow, including the five generated deal reads and the
+service coverage negative cases. The stock and confirmed inbound paths reach
+dated delivery; the selected BOM reaches an uncommitted build path; the
+separate provider proof confirms the digital term; and explicit service
+coverage remains conditional until a slot is committed. The matrix's other
+13 conflict cases are still designs, not generated rows.
