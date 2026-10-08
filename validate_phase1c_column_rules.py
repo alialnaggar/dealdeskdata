@@ -19,7 +19,7 @@ COLUMN_RE = re.compile(
     r"NUMERIC\(\d+,\d+\)|INTEGER|BIGINT|UUID|BOOLEAN|JSONB)(.*)$",
     re.M,
 )
-BASIS = {"SYS", "SYN", "CAT", "OBS", "CFG", "DER", "SUB"}
+BASIS = {"SYS", "SYN", "CAT", "CFG", "DER", "SUB"}
 
 
 def schema_columns(sql):
