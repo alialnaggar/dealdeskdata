@@ -257,7 +257,10 @@ def evaluate_compiled_policy(bundle):
     requested = bundle["deal"]["requested_delivery_date"]
     if requested:
         for line, fact in zip(lines, facts["lines"]):
-            if line["fulfillment_mode"] == "digital_activation":
+            if line["fulfillment_mode"] in ("digital_activation", "scheduled_service"):
+                # Digital activation and service coverage have their own
+                # dated evidence checks. An eligible service region does not
+                # claim a booked slot; the deal gate keeps it uncommitted.
                 continue
             earliest = fact.get("earliest_full_date")
             if earliest and earliest > requested:
