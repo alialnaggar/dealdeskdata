@@ -74,6 +74,8 @@ on:
       - phase1c_pilot_snapshot_manifest.json
       - validate_phase1c_runtime_outputs.py
       - test_validate_phase1c_runtime_outputs.py
+      - phase1c_historical_credit.py
+      - test_phase1c_historical_credit.py
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -159,6 +161,8 @@ on:
       - phase1c_pilot_snapshot_manifest.json
       - validate_phase1c_runtime_outputs.py
       - test_validate_phase1c_runtime_outputs.py
+      - phase1c_historical_credit.py
+      - test_phase1c_historical_credit.py
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -267,6 +271,8 @@ jobs:
           PY
       - name: Validate typed runtime output envelopes
         run: python -m unittest -v test_validate_phase1c_runtime_outputs
+      - name: Fail closed on missing historical credit and AR snapshots
+        run: python -m unittest -v test_phase1c_historical_credit
       - name: Check connected workstation stock, inbound and capacity rows
         run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
