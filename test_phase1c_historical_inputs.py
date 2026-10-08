@@ -107,23 +107,22 @@ class HistoricalInputDatabaseTests(unittest.TestCase):
                     conn.execute(statement)
             from phase1c_reader import read_run
             from render_phase1c_historical_credit import load_resolver
-            from phase1c_historical_operational import TABLES
+            from render_phase1c_historical_stock_lanes import load_resolver as load_operational
             resolver = load_resolver()
+            operational_resolver = load_operational()
             for n in (1, 200, 400):
                 run_id = f"00000000-0000-4000-8000-{280000+n:012d}"
                 with self.assertRaisesRegex(ValueError, "frozen operational manifest"):
                     read_run(conn, run_id, historical_credit_resolver=resolver)
-                item = json.loads((HERE / "phase1c_historical_credit_index.json").read_text())["snapshots"][n-1]
-                empty = {"schema_version": 1, "snapshot_id": item["snapshot_id"],
-                         "as_of_at": item["as_of_at"], "complete": True, "inbound_evidence": [],
-                         **{table: [] for table in TABLES}}
                 bundle = read_run(conn, run_id, historical_credit_resolver=resolver,
-                                  historical_operational_resolver=lambda ref: empty)
+                                  historical_operational_resolver=operational_resolver)
                 self.assertEqual(bundle["run"]["data_snapshot_ref"], f"HIST-CREDIT-{n:04d}")
                 self.assertEqual(bundle["credit"]["customer_id"], bundle["customer"]["customer_id"])
                 self.assertLessEqual(bundle["credit"]["commitments_as_of_at"], bundle["run"]["as_of_at"])
-                self.assertEqual(bundle["inventory"], [])
-                self.assertEqual(bundle["shipping_lanes"], [])
+                self.assertTrue(all(row["snapshot_at"] <= bundle["run"]["as_of_at"]
+                                    for row in bundle["inventory"]))
+                self.assertEqual(len(bundle["shipping_lanes"]),
+                                 2 if bundle["deal"]["shipping_service_code"] == "standard" else 0)
         finally:
             conn.rollback()
             conn.close()
