@@ -187,7 +187,7 @@ json_contracts:
       excludes_product: [operator]
       attribute_constraint: [attribute, operator, expected]
       required_deal_field: [field]
-      installation_eligibility: [country_code, region_codes, eligible]
+      installation_eligibility: [country_code, region, eligible]
     allowed_operators_by_rule_type:
       requires_product: [present]
       excludes_product: [present]
