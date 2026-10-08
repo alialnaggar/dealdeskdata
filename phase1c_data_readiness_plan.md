@@ -264,3 +264,13 @@ uses the configured 1 September as-of time. `test_phase1c_customer_master.py`
 checks reproducibility and PostgreSQL constraints/distributions in CI. This
 is provisional generated input, not independently sourced historical credit
 or AR evidence; no historical deal or field mark is closed by it.
+
+`render_phase1c_historical_inputs.py` now emits eight chronological SQL shards
+with **400 provisional historical submission headers and 1,200 sellable lines**.
+The configured line-count bins are exact (50/87/135/80/40/6/1/1), mean is
+3.0, every one of 120 sellable products appears at least four times, and the
+top 24 account for 768 lines (64%). All 80 customers appear. The generator
+records no historical decisions, specialist runs, or source evidence; each
+header remains an unlabelled Submitted row. PostgreSQL loading and measured
+distribution are checked in CI. This is the input skeleton for the frozen
+operational/credit/AR snapshot work, not a usable historical training set.
