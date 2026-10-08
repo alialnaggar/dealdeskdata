@@ -1474,6 +1474,7 @@ fulfillment_production_calibration:
     production_capacity:
       workshop_location: WH-EU-CENTRAL
       horizon_calendar_days: 30
+      confirmed_component_after_capacity_window: unknown_no_inferred_production_date
       working_weekdays: [Mon, Tue, Wed, Thu, Fri]
       equipment_daily_available_hours: [8, 8, 16]
       workforce_daily_available_hours: [8, 16, 32]
