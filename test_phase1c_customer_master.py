@@ -47,6 +47,7 @@ class CustomerMasterDatabaseTests(unittest.TestCase):
     def test_constraints_and_exact_distributions(self):
         conn = psycopg.connect(os.environ["DATABASE_URL"])
         try:
+            conn.execute("SET search_path TO deal_desk, public")
             for statement in re.findall(r"^INSERT INTO .*?;", (HERE / "phase1c_customer_master.sql").read_text(), re.M):
                 conn.execute(statement)
             config = yaml.safe_load((HERE / "calibration_config.yaml").read_text())
