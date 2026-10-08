@@ -1,6 +1,7 @@
 """Check provisional historical input quotas and transaction-safe SQL loading."""
 
 from collections import Counter
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -10,6 +11,7 @@ import unittest
 import yaml
 
 from render_phase1c_historical_inputs import build, PREFIX
+from render_phase1c_historical_runs import build as build_runs
 
 try:
     import psycopg
@@ -47,6 +49,14 @@ class HistoricalInputTests(unittest.TestCase):
         self.assertEqual(sql.count("INSERT INTO deals "), 400)
         self.assertEqual(sql.count("INSERT INTO deal_lines "), 1200)
         self.assertEqual(sql.count("UPDATE deals SET deal_status='Submitted'"), 400)
+
+    def test_run_rows_follow_registered_cutoffs(self):
+        index = json.loads((HERE / "phase1c_historical_credit_index.json").read_text())
+        digest = hashlib.sha256((HERE / "calibration_config.yaml").read_bytes()).hexdigest()
+        shards = build_runs(index, digest)
+        self.assertEqual(shards, [(HERE / f"phase1c_historical_run_rows_{n:02d}.sql").read_text()
+                                  for n in range(1, 5)])
+        self.assertEqual("".join(shards).count("INSERT INTO deal_runs "), 400)
 
 
 @unittest.skipUnless(psycopg is not None and os.environ.get("DATABASE_URL"),
@@ -91,6 +101,19 @@ class HistoricalInputDatabaseTests(unittest.TestCase):
                 rows[table] = []
             contract = yaml.safe_load((HERE / "phase1c_data_contract.yaml").read_text())
             self.assertEqual(validate_rows(rows, contract)["errors"], [])
+            for n in range(1, 5):
+                for statement in re.findall(r"^INSERT INTO .*?;",
+                    (HERE / f"phase1c_historical_run_rows_{n:02d}.sql").read_text(), re.M):
+                    conn.execute(statement)
+            from phase1c_reader import read_run
+            from render_phase1c_historical_credit import load_resolver
+            resolver = load_resolver()
+            for n in (1, 200, 400):
+                run_id = f"00000000-0000-4000-8000-{280000+n:012d}"
+                bundle = read_run(conn, run_id, historical_credit_resolver=resolver)
+                self.assertEqual(bundle["run"]["data_snapshot_ref"], f"HIST-CREDIT-{n:04d}")
+                self.assertEqual(bundle["credit"]["customer_id"], bundle["customer"]["customer_id"])
+                self.assertLessEqual(bundle["credit"]["commitments_as_of_at"], bundle["run"]["as_of_at"])
         finally:
             conn.rollback()
             conn.close()
