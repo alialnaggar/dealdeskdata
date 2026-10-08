@@ -195,7 +195,7 @@ json_contracts:
       required_deal_field: [present]
     unknown_keys: reject
   provider_evidence_record:
-    required_keys: [evidence_ref, product_id, provider_id, configuration_signature_json, region_code, term_code, capacity_unit, capacity_total, quantity_allocated, commitment_status, verified_at, covers_from, covers_until]
+    required_keys: [evidence_ref, evidence_type, source_class, issued_at, product_id, provider_id, configuration_signature_json, region_code, term_code, capacity_unit, capacity_total, quantity_allocated, commitment_status, verified_at, covers_from, covers_until]
     commitment_status: [binding, provisional, unknown]
     full_term_required_for_binding: true
     verification_age_calendar_days_max: 7
