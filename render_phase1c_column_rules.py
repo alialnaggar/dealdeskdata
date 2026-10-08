@@ -20,7 +20,7 @@ def render(contract):
         "",
         "**Basis codes:** SYS = generated ID/observation; SYN = fictional-company assumption; "
         "CAT = catalogue taxonomy/visible price anchor adapted to brand-neutral SKUs; "
-        "OBS = transformed Olist shape, not copied rows or B2B norms; CFG = chosen config/policy; "
+        "CFG = chosen config/policy; "
         "DER = computed from other facts; SUB = submitted input sampled synthetically. "
         "Microsoft's fictional samples support structural and calculation patterns, not empirical rates.",
         "",
