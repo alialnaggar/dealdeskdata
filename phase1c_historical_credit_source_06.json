@@ -1,0 +1,2476 @@
+{
+  "customers": [
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "12458.03",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-051-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "10623.37",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-051-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "466.00",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-051-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "12072.98",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-051-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "6705.30",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-051-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "7475.85",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-051-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "6363.63",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-051-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "71689.12",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-051",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2026-11-12",
+          "invoice_date": "2026-08-14",
+          "invoice_number": "HIST-OPEN-SYN-CUST-051-01",
+          "original_amount": "2602.86",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-051-01"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2026-11-20",
+          "invoice_date": "2026-08-22",
+          "invoice_number": "HIST-OPEN-SYN-CUST-051-02",
+          "original_amount": "672.65",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-051-02"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-05-01",
+          "invoice_amount": "2480.02",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-01",
+          "paid_amount": "2480.02",
+          "paid_date": "2025-05-02",
+          "payment_id": "HIST-PAY-SYN-CUST-051-01"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-05-31",
+          "invoice_amount": "538.75",
+          "invoice_date": "2025-05-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-02",
+          "paid_amount": "538.75",
+          "paid_date": "2025-05-28",
+          "payment_id": "HIST-PAY-SYN-CUST-051-02"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-06-30",
+          "invoice_amount": "303.27",
+          "invoice_date": "2025-05-31",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-03",
+          "paid_amount": "303.27",
+          "paid_date": "2025-06-30",
+          "payment_id": "HIST-PAY-SYN-CUST-051-03"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-07-30",
+          "invoice_amount": "480.22",
+          "invoice_date": "2025-06-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-04",
+          "paid_amount": "480.22",
+          "paid_date": "2025-08-08",
+          "payment_id": "HIST-PAY-SYN-CUST-051-04"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-08-29",
+          "invoice_amount": "2780.51",
+          "invoice_date": "2025-07-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-05",
+          "paid_amount": "2780.51",
+          "paid_date": "2025-09-07",
+          "payment_id": "HIST-PAY-SYN-CUST-051-05"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-09-28",
+          "invoice_amount": "2960.72",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-06",
+          "paid_amount": "2960.72",
+          "paid_date": "2025-09-21",
+          "payment_id": "HIST-PAY-SYN-CUST-051-06"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-10-28",
+          "invoice_amount": "290.33",
+          "invoice_date": "2025-09-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-07",
+          "paid_amount": "290.33",
+          "paid_date": "2025-10-28",
+          "payment_id": "HIST-PAY-SYN-CUST-051-07"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-11-27",
+          "invoice_amount": "390.15",
+          "invoice_date": "2025-10-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-08",
+          "paid_amount": "390.15",
+          "paid_date": "2025-11-21",
+          "payment_id": "HIST-PAY-SYN-CUST-051-08"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2025-12-27",
+          "invoice_amount": "1205.44",
+          "invoice_date": "2025-11-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-09",
+          "paid_amount": "1205.44",
+          "paid_date": "2025-12-27",
+          "payment_id": "HIST-PAY-SYN-CUST-051-09"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2026-01-26",
+          "invoice_amount": "383.37",
+          "invoice_date": "2025-12-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-10",
+          "paid_amount": "383.37",
+          "paid_date": "2026-01-21",
+          "payment_id": "HIST-PAY-SYN-CUST-051-10"
+        },
+        {
+          "customer_id": "SYN-CUST-051",
+          "due_date": "2026-02-25",
+          "invoice_amount": "572.53",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-051-11",
+          "paid_amount": "572.53",
+          "paid_date": "2026-02-19",
+          "payment_id": "HIST-PAY-SYN-CUST-051-11"
+        }
+      ],
+      "risk_rating": "Low",
+      "size_segment": "SMB"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "43248.61",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-052-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "24762.23",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-052-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "4138.36",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-052-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "24867.68",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-052-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "44859.42",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-052-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "10809.49",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-052-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "30081.63",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-052-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "384445.08",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-052",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-11-09",
+          "invoice_date": "2026-08-11",
+          "invoice_number": "HIST-OPEN-SYN-CUST-052-01",
+          "original_amount": "2877.29",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-052-01"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-10-13",
+          "invoice_date": "2026-07-15",
+          "invoice_number": "HIST-OPEN-SYN-CUST-052-02",
+          "original_amount": "9004.87",
+          "partial_paid_amount": "2251.22",
+          "partial_paid_date": "2026-07-22",
+          "receivable_id": "HIST-AR-SYN-CUST-052-02"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-11-10",
+          "invoice_date": "2026-08-12",
+          "invoice_number": "HIST-OPEN-SYN-CUST-052-03",
+          "original_amount": "4126.45",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-052-03"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-10-29",
+          "invoice_date": "2026-07-31",
+          "invoice_number": "HIST-OPEN-SYN-CUST-052-04",
+          "original_amount": "1245.49",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-052-04"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-11-05",
+          "invoice_date": "2026-08-07",
+          "invoice_number": "HIST-OPEN-SYN-CUST-052-05",
+          "original_amount": "5661.29",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-052-05"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-05-01",
+          "invoice_amount": "4582.77",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-01",
+          "paid_amount": "4582.77",
+          "paid_date": "2025-04-28",
+          "payment_id": "HIST-PAY-SYN-CUST-052-01"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-05-18",
+          "invoice_amount": "1499.20",
+          "invoice_date": "2025-04-18",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-02",
+          "paid_amount": "1499.20",
+          "paid_date": "2025-06-26",
+          "payment_id": "HIST-PAY-SYN-CUST-052-02"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-06-03",
+          "invoice_amount": "4305.96",
+          "invoice_date": "2025-05-04",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-03",
+          "paid_amount": "4305.96",
+          "paid_date": "2025-06-03",
+          "payment_id": "HIST-PAY-SYN-CUST-052-03"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-06-20",
+          "invoice_amount": "4975.55",
+          "invoice_date": "2025-05-21",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-04",
+          "paid_amount": "4975.55",
+          "paid_date": "2025-06-20",
+          "payment_id": "HIST-PAY-SYN-CUST-052-04"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-07-07",
+          "invoice_amount": "6147.12",
+          "invoice_date": "2025-06-07",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-05",
+          "paid_amount": "6147.12",
+          "paid_date": "2025-07-25",
+          "payment_id": "HIST-PAY-SYN-CUST-052-05"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-07-23",
+          "invoice_amount": "1881.42",
+          "invoice_date": "2025-06-23",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-06",
+          "paid_amount": "1881.42",
+          "paid_date": "2025-08-04",
+          "payment_id": "HIST-PAY-SYN-CUST-052-06"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-08-09",
+          "invoice_amount": "4859.20",
+          "invoice_date": "2025-07-10",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-07",
+          "paid_amount": "4859.20",
+          "paid_date": "2025-08-08",
+          "payment_id": "HIST-PAY-SYN-CUST-052-07"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-08-26",
+          "invoice_amount": "7243.80",
+          "invoice_date": "2025-07-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-08",
+          "paid_amount": "7243.80",
+          "paid_date": "2025-08-25",
+          "payment_id": "HIST-PAY-SYN-CUST-052-08"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-09-11",
+          "invoice_amount": "2694.58",
+          "invoice_date": "2025-08-12",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-09",
+          "paid_amount": "2694.58",
+          "paid_date": "2025-09-11",
+          "payment_id": "HIST-PAY-SYN-CUST-052-09"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-09-28",
+          "invoice_amount": "8522.38",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-10",
+          "paid_amount": "8522.38",
+          "paid_date": "2025-11-26",
+          "payment_id": "HIST-PAY-SYN-CUST-052-10"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-10-15",
+          "invoice_amount": "7772.22",
+          "invoice_date": "2025-09-15",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-11",
+          "paid_amount": "7772.22",
+          "paid_date": "2025-10-13",
+          "payment_id": "HIST-PAY-SYN-CUST-052-11"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-10-31",
+          "invoice_amount": "5178.22",
+          "invoice_date": "2025-10-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-12",
+          "paid_amount": "5178.22",
+          "paid_date": "2025-11-15",
+          "payment_id": "HIST-PAY-SYN-CUST-052-12"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-11-17",
+          "invoice_amount": "1387.35",
+          "invoice_date": "2025-10-18",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-13",
+          "paid_amount": "1387.35",
+          "paid_date": "2025-11-27",
+          "payment_id": "HIST-PAY-SYN-CUST-052-13"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-12-04",
+          "invoice_amount": "3213.94",
+          "invoice_date": "2025-11-04",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-14",
+          "paid_amount": "3213.94",
+          "paid_date": "2025-12-02",
+          "payment_id": "HIST-PAY-SYN-CUST-052-14"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2025-12-20",
+          "invoice_amount": "1886.34",
+          "invoice_date": "2025-11-20",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-15",
+          "paid_amount": "1886.34",
+          "paid_date": "2026-02-02",
+          "payment_id": "HIST-PAY-SYN-CUST-052-15"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-01-06",
+          "invoice_amount": "5401.72",
+          "invoice_date": "2025-12-07",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-16",
+          "paid_amount": "5401.72",
+          "paid_date": "2026-01-09",
+          "payment_id": "HIST-PAY-SYN-CUST-052-16"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-01-23",
+          "invoice_amount": "8105.25",
+          "invoice_date": "2025-12-24",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-17",
+          "paid_amount": "8105.25",
+          "paid_date": "2026-01-22",
+          "payment_id": "HIST-PAY-SYN-CUST-052-17"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-02-08",
+          "invoice_amount": "6230.82",
+          "invoice_date": "2026-01-09",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-18",
+          "paid_amount": "6230.82",
+          "paid_date": "2026-02-02",
+          "payment_id": "HIST-PAY-SYN-CUST-052-18"
+        },
+        {
+          "customer_id": "SYN-CUST-052",
+          "due_date": "2026-02-25",
+          "invoice_amount": "2587.94",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-052-19",
+          "paid_amount": "2587.94",
+          "paid_date": "2026-02-19",
+          "payment_id": "HIST-PAY-SYN-CUST-052-19"
+        }
+      ],
+      "risk_rating": "Medium",
+      "size_segment": "Mid-Market"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "46903.93",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-053-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "80381.87",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-053-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "84892.12",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-053-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "18726.55",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-053-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "55716.35",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-053-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "67148.37",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-053-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "50193.83",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-053-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "494235.08",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-053",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2026-11-07",
+          "invoice_date": "2026-08-09",
+          "invoice_number": "HIST-OPEN-SYN-CUST-053-01",
+          "original_amount": "5371.44",
+          "partial_paid_amount": "1342.86",
+          "partial_paid_date": "2026-08-16",
+          "receivable_id": "HIST-AR-SYN-CUST-053-01"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2026-10-13",
+          "invoice_date": "2026-07-15",
+          "invoice_number": "HIST-OPEN-SYN-CUST-053-02",
+          "original_amount": "8482.16",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-053-02"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2026-07-20",
+          "invoice_date": "2026-06-20",
+          "invoice_number": "HIST-OPEN-SYN-CUST-053-03",
+          "original_amount": "5512.09",
+          "partial_paid_amount": "2756.04",
+          "partial_paid_date": "2026-06-27",
+          "receivable_id": "HIST-AR-SYN-CUST-053-03"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2026-10-23",
+          "invoice_date": "2026-07-25",
+          "invoice_number": "HIST-OPEN-SYN-CUST-053-04",
+          "original_amount": "3176.69",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-053-04"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-05-01",
+          "invoice_amount": "8844.07",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-01",
+          "paid_amount": "8844.07",
+          "paid_date": "2025-04-28",
+          "payment_id": "HIST-PAY-SYN-CUST-053-01"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-05-21",
+          "invoice_amount": "6399.39",
+          "invoice_date": "2025-04-21",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-02",
+          "paid_amount": "6399.39",
+          "paid_date": "2025-05-16",
+          "payment_id": "HIST-PAY-SYN-CUST-053-02"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-06-10",
+          "invoice_amount": "8706.33",
+          "invoice_date": "2025-05-11",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-03",
+          "paid_amount": "8706.33",
+          "paid_date": "2025-06-10",
+          "payment_id": "HIST-PAY-SYN-CUST-053-03"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-06-30",
+          "invoice_amount": "5794.62",
+          "invoice_date": "2025-05-31",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-04",
+          "paid_amount": "5794.62",
+          "paid_date": "2025-07-20",
+          "payment_id": "HIST-PAY-SYN-CUST-053-04"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-07-20",
+          "invoice_amount": "5763.51",
+          "invoice_date": "2025-06-20",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-05",
+          "paid_amount": "5763.51",
+          "paid_date": "2025-07-13",
+          "payment_id": "HIST-PAY-SYN-CUST-053-05"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-08-09",
+          "invoice_amount": "4668.56",
+          "invoice_date": "2025-07-10",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-06",
+          "paid_amount": "4668.56",
+          "paid_date": "2025-08-09",
+          "payment_id": "HIST-PAY-SYN-CUST-053-06"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-08-29",
+          "invoice_amount": "6057.37",
+          "invoice_date": "2025-07-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-07",
+          "paid_amount": "6057.37",
+          "paid_date": "2025-09-04",
+          "payment_id": "HIST-PAY-SYN-CUST-053-07"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-09-18",
+          "invoice_amount": "2341.90",
+          "invoice_date": "2025-08-19",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-08",
+          "paid_amount": "2341.90",
+          "paid_date": "2025-09-13",
+          "payment_id": "HIST-PAY-SYN-CUST-053-08"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-10-08",
+          "invoice_amount": "2582.76",
+          "invoice_date": "2025-09-08",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-09",
+          "paid_amount": "2582.76",
+          "paid_date": "2025-11-07",
+          "payment_id": "HIST-PAY-SYN-CUST-053-09"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-10-28",
+          "invoice_amount": "1560.71",
+          "invoice_date": "2025-09-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-10",
+          "paid_amount": "1560.71",
+          "paid_date": "2025-11-06",
+          "payment_id": "HIST-PAY-SYN-CUST-053-10"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-11-17",
+          "invoice_amount": "5705.37",
+          "invoice_date": "2025-10-18",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-11",
+          "paid_amount": "5705.37",
+          "paid_date": "2025-11-26",
+          "payment_id": "HIST-PAY-SYN-CUST-053-11"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-12-07",
+          "invoice_amount": "2224.40",
+          "invoice_date": "2025-11-07",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-12",
+          "paid_amount": "2224.40",
+          "paid_date": "2025-12-05",
+          "payment_id": "HIST-PAY-SYN-CUST-053-12"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2025-12-27",
+          "invoice_amount": "2189.11",
+          "invoice_date": "2025-11-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-13",
+          "paid_amount": "2189.11",
+          "paid_date": "2026-01-07",
+          "payment_id": "HIST-PAY-SYN-CUST-053-13"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2026-01-16",
+          "invoice_amount": "7034.19",
+          "invoice_date": "2025-12-17",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-14",
+          "paid_amount": "7034.19",
+          "paid_date": "2026-01-11",
+          "payment_id": "HIST-PAY-SYN-CUST-053-14"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2026-02-05",
+          "invoice_amount": "3704.22",
+          "invoice_date": "2026-01-06",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-15",
+          "paid_amount": "3704.22",
+          "paid_date": "2026-02-02",
+          "payment_id": "HIST-PAY-SYN-CUST-053-15"
+        },
+        {
+          "customer_id": "SYN-CUST-053",
+          "due_date": "2026-02-25",
+          "invoice_amount": "4974.87",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-053-16",
+          "paid_amount": "4974.87",
+          "paid_date": "2026-03-11",
+          "payment_id": "HIST-PAY-SYN-CUST-053-16"
+        }
+      ],
+      "risk_rating": "Medium",
+      "size_segment": "Mid-Market"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "11687.65",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-054-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "11061.63",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-054-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "19510.82",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-054-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "1981.29",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-054-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "9020.35",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-054-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "12339.18",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-054-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "15256.10",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-054-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "111505.98",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-054",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2026-10-29",
+          "invoice_date": "2026-07-31",
+          "invoice_number": "HIST-OPEN-SYN-CUST-054-01",
+          "original_amount": "2844.06",
+          "partial_paid_amount": "711.02",
+          "partial_paid_date": "2026-08-07",
+          "receivable_id": "HIST-AR-SYN-CUST-054-01"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2026-10-20",
+          "invoice_date": "2026-07-22",
+          "invoice_number": "HIST-OPEN-SYN-CUST-054-02",
+          "original_amount": "805.49",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-054-02"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2026-11-16",
+          "invoice_date": "2026-08-18",
+          "invoice_number": "HIST-OPEN-SYN-CUST-054-03",
+          "original_amount": "2812.57",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-054-03"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-05-01",
+          "invoice_amount": "2266.75",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-01",
+          "paid_amount": "2266.75",
+          "paid_date": "2025-05-05",
+          "payment_id": "HIST-PAY-SYN-CUST-054-01"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-05-26",
+          "invoice_amount": "1438.24",
+          "invoice_date": "2025-04-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-02",
+          "paid_amount": "1438.24",
+          "paid_date": "2025-05-20",
+          "payment_id": "HIST-PAY-SYN-CUST-054-02"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-06-20",
+          "invoice_amount": "1199.89",
+          "invoice_date": "2025-05-21",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-03",
+          "paid_amount": "1199.89",
+          "paid_date": "2025-06-20",
+          "payment_id": "HIST-PAY-SYN-CUST-054-03"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-07-15",
+          "invoice_amount": "1727.54",
+          "invoice_date": "2025-06-15",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-04",
+          "paid_amount": "1727.54",
+          "paid_date": "2025-07-17",
+          "payment_id": "HIST-PAY-SYN-CUST-054-04"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-08-09",
+          "invoice_amount": "2392.47",
+          "invoice_date": "2025-07-10",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-05",
+          "paid_amount": "2392.47",
+          "paid_date": "2025-08-05",
+          "payment_id": "HIST-PAY-SYN-CUST-054-05"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-09-03",
+          "invoice_amount": "1706.33",
+          "invoice_date": "2025-08-04",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-06",
+          "paid_amount": "1706.33",
+          "paid_date": "2025-09-05",
+          "payment_id": "HIST-PAY-SYN-CUST-054-06"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-09-28",
+          "invoice_amount": "1833.16",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-07",
+          "paid_amount": "1833.16",
+          "paid_date": "2025-09-25",
+          "payment_id": "HIST-PAY-SYN-CUST-054-07"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-10-23",
+          "invoice_amount": "1638.68",
+          "invoice_date": "2025-09-23",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-08",
+          "paid_amount": "1638.68",
+          "paid_date": "2025-10-30",
+          "payment_id": "HIST-PAY-SYN-CUST-054-08"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-11-17",
+          "invoice_amount": "2946.65",
+          "invoice_date": "2025-10-18",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-09",
+          "paid_amount": "2946.65",
+          "paid_date": "2025-11-11",
+          "payment_id": "HIST-PAY-SYN-CUST-054-09"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2025-12-12",
+          "invoice_amount": "2464.37",
+          "invoice_date": "2025-11-12",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-10",
+          "paid_amount": "2464.37",
+          "paid_date": "2025-12-10",
+          "payment_id": "HIST-PAY-SYN-CUST-054-10"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2026-01-06",
+          "invoice_amount": "1805.05",
+          "invoice_date": "2025-12-07",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-11",
+          "paid_amount": "1805.05",
+          "paid_date": "2026-01-12",
+          "payment_id": "HIST-PAY-SYN-CUST-054-11"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2026-01-31",
+          "invoice_amount": "992.95",
+          "invoice_date": "2026-01-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-12",
+          "paid_amount": "992.95",
+          "paid_date": "2026-01-31",
+          "payment_id": "HIST-PAY-SYN-CUST-054-12"
+        },
+        {
+          "customer_id": "SYN-CUST-054",
+          "due_date": "2026-02-25",
+          "invoice_amount": "1753.20",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-054-13",
+          "paid_amount": "1753.20",
+          "paid_date": "2026-02-23",
+          "payment_id": "HIST-PAY-SYN-CUST-054-13"
+        }
+      ],
+      "risk_rating": "Medium",
+      "size_segment": "SMB"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "168078.87",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-055-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "97915.35",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-055-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "154105.32",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-055-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "37187.41",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-055-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "222512.27",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-055-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "138886.42",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-055-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "133761.61",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-055-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "1352234.78",
+      "credit_status": "Review",
+      "customer_id": "SYN-CUST-055",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-11-17",
+          "invoice_date": "2026-08-19",
+          "invoice_number": "HIST-OPEN-SYN-CUST-055-01",
+          "original_amount": "14254.87",
+          "partial_paid_amount": "3563.72",
+          "partial_paid_date": "2026-08-26",
+          "receivable_id": "HIST-AR-SYN-CUST-055-01"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-10-13",
+          "invoice_date": "2026-07-15",
+          "invoice_number": "HIST-OPEN-SYN-CUST-055-02",
+          "original_amount": "19136.99",
+          "partial_paid_amount": "4784.25",
+          "partial_paid_date": "2026-07-22",
+          "receivable_id": "HIST-AR-SYN-CUST-055-02"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-10-10",
+          "invoice_date": "2026-07-12",
+          "invoice_number": "HIST-OPEN-SYN-CUST-055-03",
+          "original_amount": "15276.17",
+          "partial_paid_amount": "7638.08",
+          "partial_paid_date": "2026-07-19",
+          "receivable_id": "HIST-AR-SYN-CUST-055-03"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-10-09",
+          "invoice_date": "2026-07-11",
+          "invoice_number": "HIST-OPEN-SYN-CUST-055-04",
+          "original_amount": "19372.19",
+          "partial_paid_amount": "9686.10",
+          "partial_paid_date": "2026-07-18",
+          "receivable_id": "HIST-AR-SYN-CUST-055-04"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-11-07",
+          "invoice_date": "2026-08-09",
+          "invoice_number": "HIST-OPEN-SYN-CUST-055-05",
+          "original_amount": "22022.75",
+          "partial_paid_amount": "5505.69",
+          "partial_paid_date": "2026-08-16",
+          "receivable_id": "HIST-AR-SYN-CUST-055-05"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-06-17",
+          "invoice_date": "2026-05-18",
+          "invoice_number": "HIST-OPEN-SYN-CUST-055-06",
+          "original_amount": "23688.91",
+          "partial_paid_amount": "11844.46",
+          "partial_paid_date": "2026-05-25",
+          "receivable_id": "HIST-AR-SYN-CUST-055-06"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-05-01",
+          "invoice_amount": "5207.04",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-01",
+          "paid_amount": "5207.04",
+          "paid_date": "2025-05-03",
+          "payment_id": "HIST-PAY-SYN-CUST-055-01"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-05-12",
+          "invoice_amount": "4593.79",
+          "invoice_date": "2025-04-12",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-02",
+          "paid_amount": "4593.79",
+          "paid_date": "2025-05-11",
+          "payment_id": "HIST-PAY-SYN-CUST-055-02"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-05-22",
+          "invoice_amount": "18440.27",
+          "invoice_date": "2025-04-22",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-03",
+          "paid_amount": "18440.27",
+          "paid_date": "2025-05-19",
+          "payment_id": "HIST-PAY-SYN-CUST-055-03"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-06-02",
+          "invoice_amount": "24295.33",
+          "invoice_date": "2025-05-03",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-04",
+          "paid_amount": "24295.33",
+          "paid_date": "2025-05-25",
+          "payment_id": "HIST-PAY-SYN-CUST-055-04"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-06-13",
+          "invoice_amount": "8304.53",
+          "invoice_date": "2025-05-14",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-05",
+          "paid_amount": "8304.53",
+          "paid_date": "2025-06-07",
+          "payment_id": "HIST-PAY-SYN-CUST-055-05"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-06-24",
+          "invoice_amount": "19847.86",
+          "invoice_date": "2025-05-25",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-06",
+          "paid_amount": "19847.86",
+          "paid_date": "2025-06-24",
+          "payment_id": "HIST-PAY-SYN-CUST-055-06"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-07-04",
+          "invoice_amount": "10382.70",
+          "invoice_date": "2025-06-04",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-07",
+          "paid_amount": "10382.70",
+          "paid_date": "2025-06-26",
+          "payment_id": "HIST-PAY-SYN-CUST-055-07"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-07-15",
+          "invoice_amount": "11673.66",
+          "invoice_date": "2025-06-15",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-08",
+          "paid_amount": "11673.66",
+          "paid_date": "2025-07-13",
+          "payment_id": "HIST-PAY-SYN-CUST-055-08"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-07-26",
+          "invoice_amount": "11802.45",
+          "invoice_date": "2025-06-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-09",
+          "paid_amount": "11802.45",
+          "paid_date": "2025-07-26",
+          "payment_id": "HIST-PAY-SYN-CUST-055-09"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-08-05",
+          "invoice_amount": "9935.48",
+          "invoice_date": "2025-07-06",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-10",
+          "paid_amount": "9935.48",
+          "paid_date": "2025-08-05",
+          "payment_id": "HIST-PAY-SYN-CUST-055-10"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-08-16",
+          "invoice_amount": "23178.92",
+          "invoice_date": "2025-07-17",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-11",
+          "paid_amount": "23178.92",
+          "paid_date": "2025-08-15",
+          "payment_id": "HIST-PAY-SYN-CUST-055-11"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-08-27",
+          "invoice_amount": "23782.75",
+          "invoice_date": "2025-07-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-12",
+          "paid_amount": "23782.75",
+          "paid_date": "2025-08-18",
+          "payment_id": "HIST-PAY-SYN-CUST-055-12"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-09-07",
+          "invoice_amount": "14087.82",
+          "invoice_date": "2025-08-08",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-13",
+          "paid_amount": "14087.82",
+          "paid_date": "2025-08-30",
+          "payment_id": "HIST-PAY-SYN-CUST-055-13"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-09-17",
+          "invoice_amount": "20982.00",
+          "invoice_date": "2025-08-18",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-14",
+          "paid_amount": "20982.00",
+          "paid_date": "2025-09-13",
+          "payment_id": "HIST-PAY-SYN-CUST-055-14"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-09-28",
+          "invoice_amount": "23465.09",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-15",
+          "paid_amount": "23465.09",
+          "paid_date": "2025-09-23",
+          "payment_id": "HIST-PAY-SYN-CUST-055-15"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-10-09",
+          "invoice_amount": "26031.45",
+          "invoice_date": "2025-09-09",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-16",
+          "paid_amount": "26031.45",
+          "paid_date": "2025-10-09",
+          "payment_id": "HIST-PAY-SYN-CUST-055-16"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-10-19",
+          "invoice_amount": "26407.70",
+          "invoice_date": "2025-09-19",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-17",
+          "paid_amount": "26407.70",
+          "paid_date": "2025-10-13",
+          "payment_id": "HIST-PAY-SYN-CUST-055-17"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-10-30",
+          "invoice_amount": "26751.35",
+          "invoice_date": "2025-09-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-18",
+          "paid_amount": "26751.35",
+          "paid_date": "2025-10-23",
+          "payment_id": "HIST-PAY-SYN-CUST-055-18"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-11-10",
+          "invoice_amount": "22939.79",
+          "invoice_date": "2025-10-11",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-19",
+          "paid_amount": "22939.79",
+          "paid_date": "2025-11-07",
+          "payment_id": "HIST-PAY-SYN-CUST-055-19"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-11-21",
+          "invoice_amount": "19858.51",
+          "invoice_date": "2025-10-22",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-20",
+          "paid_amount": "19858.51",
+          "paid_date": "2025-11-12",
+          "payment_id": "HIST-PAY-SYN-CUST-055-20"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-12-01",
+          "invoice_amount": "24049.14",
+          "invoice_date": "2025-11-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-21",
+          "paid_amount": "24049.14",
+          "paid_date": "2025-11-26",
+          "payment_id": "HIST-PAY-SYN-CUST-055-21"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-12-12",
+          "invoice_amount": "21959.72",
+          "invoice_date": "2025-11-12",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-22",
+          "paid_amount": "21959.72",
+          "paid_date": "2025-12-08",
+          "payment_id": "HIST-PAY-SYN-CUST-055-22"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2025-12-23",
+          "invoice_amount": "18637.49",
+          "invoice_date": "2025-11-23",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-23",
+          "paid_amount": "18637.49",
+          "paid_date": "2025-12-21",
+          "payment_id": "HIST-PAY-SYN-CUST-055-23"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-01-02",
+          "invoice_amount": "14494.52",
+          "invoice_date": "2025-12-03",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-24",
+          "paid_amount": "14494.52",
+          "paid_date": "2025-12-24",
+          "payment_id": "HIST-PAY-SYN-CUST-055-24"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-01-13",
+          "invoice_amount": "26977.08",
+          "invoice_date": "2025-12-14",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-25",
+          "paid_amount": "26977.08",
+          "paid_date": "2026-01-08",
+          "payment_id": "HIST-PAY-SYN-CUST-055-25"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-01-24",
+          "invoice_amount": "25675.31",
+          "invoice_date": "2025-12-25",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-26",
+          "paid_amount": "25675.31",
+          "paid_date": "2026-01-20",
+          "payment_id": "HIST-PAY-SYN-CUST-055-26"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-02-04",
+          "invoice_amount": "2837.66",
+          "invoice_date": "2026-01-05",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-27",
+          "paid_amount": "2837.66",
+          "paid_date": "2026-02-02",
+          "payment_id": "HIST-PAY-SYN-CUST-055-27"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-02-14",
+          "invoice_amount": "10544.11",
+          "invoice_date": "2026-01-15",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-28",
+          "paid_amount": "10544.11",
+          "paid_date": "2026-02-08",
+          "payment_id": "HIST-PAY-SYN-CUST-055-28"
+        },
+        {
+          "customer_id": "SYN-CUST-055",
+          "due_date": "2026-02-25",
+          "invoice_amount": "2508.85",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-055-29",
+          "paid_amount": "2508.85",
+          "paid_date": "2026-02-17",
+          "payment_id": "HIST-PAY-SYN-CUST-055-29"
+        }
+      ],
+      "risk_rating": "Low",
+      "size_segment": "Enterprise"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "35886.00",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-056-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "42448.31",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-056-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "29732.00",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-056-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "10895.16",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-056-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "10952.83",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-056-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "25864.46",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-056-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "28541.39",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-056-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "285566.61",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-056",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-11-17",
+          "invoice_date": "2026-08-19",
+          "invoice_number": "HIST-OPEN-SYN-CUST-056-01",
+          "original_amount": "7004.82",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-056-01"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-07-30",
+          "invoice_date": "2026-06-30",
+          "invoice_number": "HIST-OPEN-SYN-CUST-056-02",
+          "original_amount": "7965.57",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-056-02"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-11-15",
+          "invoice_date": "2026-08-17",
+          "invoice_number": "HIST-OPEN-SYN-CUST-056-03",
+          "original_amount": "4378.98",
+          "partial_paid_amount": "2189.49",
+          "partial_paid_date": "2026-08-24",
+          "receivable_id": "HIST-AR-SYN-CUST-056-03"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-07-26",
+          "invoice_date": "2026-06-26",
+          "invoice_number": "HIST-OPEN-SYN-CUST-056-04",
+          "original_amount": "4638.24",
+          "partial_paid_amount": "2319.12",
+          "partial_paid_date": "2026-07-03",
+          "receivable_id": "HIST-AR-SYN-CUST-056-04"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-07-13",
+          "invoice_date": "2026-06-13",
+          "invoice_number": "HIST-OPEN-SYN-CUST-056-05",
+          "original_amount": "6589.26",
+          "partial_paid_amount": "1647.32",
+          "partial_paid_date": "2026-06-20",
+          "receivable_id": "HIST-AR-SYN-CUST-056-05"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-05-01",
+          "invoice_amount": "5747.31",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-01",
+          "paid_amount": "5747.31",
+          "paid_date": "2025-04-24",
+          "payment_id": "HIST-PAY-SYN-CUST-056-01"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-05-22",
+          "invoice_amount": "6754.79",
+          "invoice_date": "2025-04-22",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-02",
+          "paid_amount": "6754.79",
+          "paid_date": "2025-05-16",
+          "payment_id": "HIST-PAY-SYN-CUST-056-02"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-06-13",
+          "invoice_amount": "1773.07",
+          "invoice_date": "2025-05-14",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-03",
+          "paid_amount": "1773.07",
+          "paid_date": "2025-07-23",
+          "payment_id": "HIST-PAY-SYN-CUST-056-03"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-07-04",
+          "invoice_amount": "903.28",
+          "invoice_date": "2025-06-04",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-04",
+          "paid_amount": "903.28",
+          "paid_date": "2025-06-27",
+          "payment_id": "HIST-PAY-SYN-CUST-056-04"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-07-26",
+          "invoice_amount": "5946.60",
+          "invoice_date": "2025-06-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-05",
+          "paid_amount": "5946.60",
+          "paid_date": "2025-07-23",
+          "payment_id": "HIST-PAY-SYN-CUST-056-05"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-08-16",
+          "invoice_amount": "8537.68",
+          "invoice_date": "2025-07-17",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-06",
+          "paid_amount": "8537.68",
+          "paid_date": "2025-08-12",
+          "payment_id": "HIST-PAY-SYN-CUST-056-06"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-09-07",
+          "invoice_amount": "2333.08",
+          "invoice_date": "2025-08-08",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-07",
+          "paid_amount": "2333.08",
+          "paid_date": "2025-09-25",
+          "payment_id": "HIST-PAY-SYN-CUST-056-07"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-09-28",
+          "invoice_amount": "3467.16",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-08",
+          "paid_amount": "3467.16",
+          "paid_date": "2025-10-01",
+          "payment_id": "HIST-PAY-SYN-CUST-056-08"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-10-19",
+          "invoice_amount": "7985.80",
+          "invoice_date": "2025-09-19",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-09",
+          "paid_amount": "7985.80",
+          "paid_date": "2025-10-16",
+          "payment_id": "HIST-PAY-SYN-CUST-056-09"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-11-10",
+          "invoice_amount": "3398.88",
+          "invoice_date": "2025-10-11",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-10",
+          "paid_amount": "3398.88",
+          "paid_date": "2025-11-15",
+          "payment_id": "HIST-PAY-SYN-CUST-056-10"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-12-01",
+          "invoice_amount": "5081.75",
+          "invoice_date": "2025-11-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-11",
+          "paid_amount": "5081.75",
+          "paid_date": "2025-12-05",
+          "payment_id": "HIST-PAY-SYN-CUST-056-11"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2025-12-23",
+          "invoice_amount": "3817.50",
+          "invoice_date": "2025-11-23",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-12",
+          "paid_amount": "3817.50",
+          "paid_date": "2025-12-23",
+          "payment_id": "HIST-PAY-SYN-CUST-056-12"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-01-13",
+          "invoice_amount": "1938.43",
+          "invoice_date": "2025-12-14",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-13",
+          "paid_amount": "1938.43",
+          "paid_date": "2026-02-18",
+          "payment_id": "HIST-PAY-SYN-CUST-056-13"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-02-04",
+          "invoice_amount": "7119.99",
+          "invoice_date": "2026-01-05",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-14",
+          "paid_amount": "7119.99",
+          "paid_date": "2026-02-01",
+          "payment_id": "HIST-PAY-SYN-CUST-056-14"
+        },
+        {
+          "customer_id": "SYN-CUST-056",
+          "due_date": "2026-02-25",
+          "invoice_amount": "5752.48",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-056-15",
+          "paid_amount": "5752.48",
+          "paid_date": "2026-03-02",
+          "payment_id": "HIST-PAY-SYN-CUST-056-15"
+        }
+      ],
+      "risk_rating": "Medium",
+      "size_segment": "Mid-Market"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "8108.05",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-057-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "7724.14",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-057-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "11542.90",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-057-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "11322.45",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-057-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "7227.03",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-057-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "2503.71",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-057-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "1924.21",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-057-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "70202.71",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-057",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2026-10-09",
+          "invoice_date": "2026-07-11",
+          "invoice_number": "HIST-OPEN-SYN-CUST-057-01",
+          "original_amount": "620.84",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-057-01"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2026-07-23",
+          "invoice_date": "2026-06-23",
+          "invoice_number": "HIST-OPEN-SYN-CUST-057-02",
+          "original_amount": "2641.27",
+          "partial_paid_amount": "660.32",
+          "partial_paid_date": "2026-06-30",
+          "receivable_id": "HIST-AR-SYN-CUST-057-02"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-05-01",
+          "invoice_amount": "2720.95",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-01",
+          "paid_amount": "2720.95",
+          "paid_date": "2025-05-07",
+          "payment_id": "HIST-PAY-SYN-CUST-057-01"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-05-31",
+          "invoice_amount": "944.74",
+          "invoice_date": "2025-05-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-02",
+          "paid_amount": "944.74",
+          "paid_date": "2025-05-30",
+          "payment_id": "HIST-PAY-SYN-CUST-057-02"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-06-30",
+          "invoice_amount": "2531.19",
+          "invoice_date": "2025-05-31",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-03",
+          "paid_amount": "2531.19",
+          "paid_date": "2025-06-23",
+          "payment_id": "HIST-PAY-SYN-CUST-057-03"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-07-30",
+          "invoice_amount": "2114.80",
+          "invoice_date": "2025-06-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-04",
+          "paid_amount": "2114.80",
+          "paid_date": "2025-07-29",
+          "payment_id": "HIST-PAY-SYN-CUST-057-04"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-08-29",
+          "invoice_amount": "846.02",
+          "invoice_date": "2025-07-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-05",
+          "paid_amount": "846.02",
+          "paid_date": "2025-08-26",
+          "payment_id": "HIST-PAY-SYN-CUST-057-05"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-09-28",
+          "invoice_amount": "2943.88",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-06",
+          "paid_amount": "2943.88",
+          "paid_date": "2025-10-07",
+          "payment_id": "HIST-PAY-SYN-CUST-057-06"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-10-28",
+          "invoice_amount": "546.59",
+          "invoice_date": "2025-09-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-07",
+          "paid_amount": "546.59",
+          "paid_date": "2025-11-02",
+          "payment_id": "HIST-PAY-SYN-CUST-057-07"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-11-27",
+          "invoice_amount": "2973.10",
+          "invoice_date": "2025-10-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-08",
+          "paid_amount": "2973.10",
+          "paid_date": "2025-11-21",
+          "payment_id": "HIST-PAY-SYN-CUST-057-08"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2025-12-27",
+          "invoice_amount": "2978.70",
+          "invoice_date": "2025-11-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-09",
+          "paid_amount": "2978.70",
+          "paid_date": "2025-12-17",
+          "payment_id": "HIST-PAY-SYN-CUST-057-09"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2026-01-26",
+          "invoice_amount": "1700.64",
+          "invoice_date": "2025-12-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-10",
+          "paid_amount": "1700.64",
+          "paid_date": "2026-03-09",
+          "payment_id": "HIST-PAY-SYN-CUST-057-10"
+        },
+        {
+          "customer_id": "SYN-CUST-057",
+          "due_date": "2026-02-25",
+          "invoice_amount": "556.04",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-057-11",
+          "paid_amount": "556.04",
+          "paid_date": "2026-03-19",
+          "payment_id": "HIST-PAY-SYN-CUST-057-11"
+        }
+      ],
+      "risk_rating": "Low",
+      "size_segment": "SMB"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "5865.72",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-058-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "11777.06",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-058-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "8396.88",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-058-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "14416.93",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-058-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "7604.52",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-058-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "5269.48",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-058-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "6959.18",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-058-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "85710.44",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-058",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2026-11-17",
+          "invoice_date": "2026-08-19",
+          "invoice_number": "HIST-OPEN-SYN-CUST-058-01",
+          "original_amount": "1204.05",
+          "partial_paid_amount": "301.01",
+          "partial_paid_date": "2026-08-26",
+          "receivable_id": "HIST-AR-SYN-CUST-058-01"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2026-11-01",
+          "invoice_date": "2026-08-03",
+          "invoice_number": "HIST-OPEN-SYN-CUST-058-02",
+          "original_amount": "943.22",
+          "partial_paid_amount": "235.80",
+          "partial_paid_date": "2026-08-10",
+          "receivable_id": "HIST-AR-SYN-CUST-058-02"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-05-01",
+          "invoice_amount": "2047.52",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-01",
+          "paid_amount": "2047.52",
+          "paid_date": "2025-04-30",
+          "payment_id": "HIST-PAY-SYN-CUST-058-01"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-05-31",
+          "invoice_amount": "701.89",
+          "invoice_date": "2025-05-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-02",
+          "paid_amount": "701.89",
+          "paid_date": "2025-06-09",
+          "payment_id": "HIST-PAY-SYN-CUST-058-02"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-06-30",
+          "invoice_amount": "1813.62",
+          "invoice_date": "2025-05-31",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-03",
+          "paid_amount": "1813.62",
+          "paid_date": "2025-06-26",
+          "payment_id": "HIST-PAY-SYN-CUST-058-03"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-07-30",
+          "invoice_amount": "2984.48",
+          "invoice_date": "2025-06-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-04",
+          "paid_amount": "2984.48",
+          "paid_date": "2025-08-06",
+          "payment_id": "HIST-PAY-SYN-CUST-058-04"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-08-29",
+          "invoice_amount": "1443.51",
+          "invoice_date": "2025-07-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-05",
+          "paid_amount": "1443.51",
+          "paid_date": "2025-08-28",
+          "payment_id": "HIST-PAY-SYN-CUST-058-05"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-09-28",
+          "invoice_amount": "1435.17",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-06",
+          "paid_amount": "1435.17",
+          "paid_date": "2025-09-27",
+          "payment_id": "HIST-PAY-SYN-CUST-058-06"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-10-28",
+          "invoice_amount": "2085.34",
+          "invoice_date": "2025-09-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-07",
+          "paid_amount": "2085.34",
+          "paid_date": "2025-10-21",
+          "payment_id": "HIST-PAY-SYN-CUST-058-07"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-11-27",
+          "invoice_amount": "1817.57",
+          "invoice_date": "2025-10-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-08",
+          "paid_amount": "1817.57",
+          "paid_date": "2025-11-21",
+          "payment_id": "HIST-PAY-SYN-CUST-058-08"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2025-12-27",
+          "invoice_amount": "2296.19",
+          "invoice_date": "2025-11-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-09",
+          "paid_amount": "2296.19",
+          "paid_date": "2025-12-17",
+          "payment_id": "HIST-PAY-SYN-CUST-058-09"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2026-01-26",
+          "invoice_amount": "1857.22",
+          "invoice_date": "2025-12-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-10",
+          "paid_amount": "1857.22",
+          "paid_date": "2026-01-25",
+          "payment_id": "HIST-PAY-SYN-CUST-058-10"
+        },
+        {
+          "customer_id": "SYN-CUST-058",
+          "due_date": "2026-02-25",
+          "invoice_amount": "1870.99",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-058-11",
+          "paid_amount": "1870.99",
+          "paid_date": "2026-02-18",
+          "payment_id": "HIST-PAY-SYN-CUST-058-11"
+        }
+      ],
+      "risk_rating": "Low",
+      "size_segment": "SMB"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": "synthetic_account_hold",
+      "commitments": [
+        {
+          "amount_eur": "4924.58",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-059-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "6897.15",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-059-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "10175.05",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-059-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "10238.46",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-059-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "7370.83",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-059-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "617.13",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-059-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "5310.80",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-059-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "58661.58",
+      "credit_status": "On-Hold",
+      "customer_id": "SYN-CUST-059",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2026-10-21",
+          "invoice_date": "2026-07-23",
+          "invoice_number": "HIST-OPEN-SYN-CUST-059-01",
+          "original_amount": "1741.01",
+          "partial_paid_amount": "870.50",
+          "partial_paid_date": "2026-07-30",
+          "receivable_id": "HIST-AR-SYN-CUST-059-01"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-05-01",
+          "invoice_amount": "2341.28",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-01",
+          "paid_amount": "2341.28",
+          "paid_date": "2025-04-28",
+          "payment_id": "HIST-PAY-SYN-CUST-059-01"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-05-31",
+          "invoice_amount": "2723.62",
+          "invoice_date": "2025-05-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-02",
+          "paid_amount": "2723.62",
+          "paid_date": "2025-05-30",
+          "payment_id": "HIST-PAY-SYN-CUST-059-02"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-06-30",
+          "invoice_amount": "983.19",
+          "invoice_date": "2025-05-31",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-03",
+          "paid_amount": "983.19",
+          "paid_date": "2025-06-25",
+          "payment_id": "HIST-PAY-SYN-CUST-059-03"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-07-30",
+          "invoice_amount": "2112.27",
+          "invoice_date": "2025-06-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-04",
+          "paid_amount": "2112.27",
+          "paid_date": "2025-07-29",
+          "payment_id": "HIST-PAY-SYN-CUST-059-04"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-08-29",
+          "invoice_amount": "1277.53",
+          "invoice_date": "2025-07-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-05",
+          "paid_amount": "1277.53",
+          "paid_date": "2025-08-23",
+          "payment_id": "HIST-PAY-SYN-CUST-059-05"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-09-28",
+          "invoice_amount": "2761.43",
+          "invoice_date": "2025-08-29",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-06",
+          "paid_amount": "2761.43",
+          "paid_date": "2025-09-18",
+          "payment_id": "HIST-PAY-SYN-CUST-059-06"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-10-28",
+          "invoice_amount": "2008.21",
+          "invoice_date": "2025-09-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-07",
+          "paid_amount": "2008.21",
+          "paid_date": "2025-11-03",
+          "payment_id": "HIST-PAY-SYN-CUST-059-07"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-11-27",
+          "invoice_amount": "2954.38",
+          "invoice_date": "2025-10-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-08",
+          "paid_amount": "2954.38",
+          "paid_date": "2025-11-24",
+          "payment_id": "HIST-PAY-SYN-CUST-059-08"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2025-12-27",
+          "invoice_amount": "1836.84",
+          "invoice_date": "2025-11-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-09",
+          "paid_amount": "1836.84",
+          "paid_date": "2025-12-17",
+          "payment_id": "HIST-PAY-SYN-CUST-059-09"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2026-01-26",
+          "invoice_amount": "857.75",
+          "invoice_date": "2025-12-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-10",
+          "paid_amount": "857.75",
+          "paid_date": "2026-01-20",
+          "payment_id": "HIST-PAY-SYN-CUST-059-10"
+        },
+        {
+          "customer_id": "SYN-CUST-059",
+          "due_date": "2026-02-25",
+          "invoice_amount": "2260.91",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-059-11",
+          "paid_amount": "2260.91",
+          "paid_date": "2026-02-22",
+          "payment_id": "HIST-PAY-SYN-CUST-059-11"
+        }
+      ],
+      "risk_rating": "Low",
+      "size_segment": "SMB"
+    },
+    {
+      "account_status": "Active",
+      "adverse_signal": null,
+      "commitments": [
+        {
+          "amount_eur": "292454.24",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-060-02",
+          "recorded_at": "2026-02-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "258829.81",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-060-03",
+          "recorded_at": "2026-03-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "233467.25",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-060-04",
+          "recorded_at": "2026-04-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "281588.43",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-060-05",
+          "recorded_at": "2026-05-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "156245.28",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-060-06",
+          "recorded_at": "2026-06-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "249655.20",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-060-07",
+          "recorded_at": "2026-07-01T08:00:00+00:00"
+        },
+        {
+          "amount_eur": "155314.63",
+          "evidence_ref": "HIST-COMMIT-SYN-CUST-060-08",
+          "recorded_at": "2026-08-01T08:00:00+00:00"
+        }
+      ],
+      "credit_limit": "1741117.45",
+      "credit_status": "Active",
+      "customer_id": "SYN-CUST-060",
+      "open_invoices": [
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-10-21",
+          "invoice_date": "2026-07-23",
+          "invoice_number": "HIST-OPEN-SYN-CUST-060-01",
+          "original_amount": "28722.27",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-060-01"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-11-05",
+          "invoice_date": "2026-08-07",
+          "invoice_number": "HIST-OPEN-SYN-CUST-060-02",
+          "original_amount": "23956.45",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-060-02"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-10-09",
+          "invoice_date": "2026-07-11",
+          "invoice_number": "HIST-OPEN-SYN-CUST-060-03",
+          "original_amount": "10434.30",
+          "partial_paid_amount": "5217.15",
+          "partial_paid_date": "2026-07-18",
+          "receivable_id": "HIST-AR-SYN-CUST-060-03"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-10-11",
+          "invoice_date": "2026-07-13",
+          "invoice_number": "HIST-OPEN-SYN-CUST-060-04",
+          "original_amount": "25026.05",
+          "partial_paid_amount": "12513.02",
+          "partial_paid_date": "2026-07-20",
+          "receivable_id": "HIST-AR-SYN-CUST-060-04"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-11-05",
+          "invoice_date": "2026-08-07",
+          "invoice_number": "HIST-OPEN-SYN-CUST-060-05",
+          "original_amount": "5087.52",
+          "partial_paid_amount": "0.00",
+          "partial_paid_date": null,
+          "receivable_id": "HIST-AR-SYN-CUST-060-05"
+        }
+      ],
+      "paid_invoices": [
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-05-01",
+          "invoice_amount": "19512.81",
+          "invoice_date": "2025-04-01",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-01",
+          "paid_amount": "19512.81",
+          "paid_date": "2025-04-30",
+          "payment_id": "HIST-PAY-SYN-CUST-060-01"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-05-13",
+          "invoice_amount": "5783.40",
+          "invoice_date": "2025-04-13",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-02",
+          "paid_amount": "5783.40",
+          "paid_date": "2025-05-14",
+          "payment_id": "HIST-PAY-SYN-CUST-060-02"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-05-25",
+          "invoice_amount": "3820.14",
+          "invoice_date": "2025-04-25",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-03",
+          "paid_amount": "3820.14",
+          "paid_date": "2025-06-03",
+          "payment_id": "HIST-PAY-SYN-CUST-060-03"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-06-06",
+          "invoice_amount": "21213.83",
+          "invoice_date": "2025-05-07",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-04",
+          "paid_amount": "21213.83",
+          "paid_date": "2025-06-18",
+          "payment_id": "HIST-PAY-SYN-CUST-060-04"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-06-18",
+          "invoice_amount": "14740.85",
+          "invoice_date": "2025-05-19",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-05",
+          "paid_amount": "14740.85",
+          "paid_date": "2025-06-12",
+          "payment_id": "HIST-PAY-SYN-CUST-060-05"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-06-30",
+          "invoice_amount": "9403.01",
+          "invoice_date": "2025-05-31",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-06",
+          "paid_amount": "9403.01",
+          "paid_date": "2025-06-25",
+          "payment_id": "HIST-PAY-SYN-CUST-060-06"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-07-12",
+          "invoice_amount": "18290.19",
+          "invoice_date": "2025-06-12",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-07",
+          "paid_amount": "18290.19",
+          "paid_date": "2025-07-13",
+          "payment_id": "HIST-PAY-SYN-CUST-060-07"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-07-24",
+          "invoice_amount": "17638.07",
+          "invoice_date": "2025-06-24",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-08",
+          "paid_amount": "17638.07",
+          "paid_date": "2025-07-22",
+          "payment_id": "HIST-PAY-SYN-CUST-060-08"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-08-05",
+          "invoice_amount": "4523.44",
+          "invoice_date": "2025-07-06",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-09",
+          "paid_amount": "4523.44",
+          "paid_date": "2025-07-30",
+          "payment_id": "HIST-PAY-SYN-CUST-060-09"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-08-17",
+          "invoice_amount": "23281.91",
+          "invoice_date": "2025-07-18",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-10",
+          "paid_amount": "23281.91",
+          "paid_date": "2025-08-25",
+          "payment_id": "HIST-PAY-SYN-CUST-060-10"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-08-29",
+          "invoice_amount": "15063.33",
+          "invoice_date": "2025-07-30",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-11",
+          "paid_amount": "15063.33",
+          "paid_date": "2025-09-07",
+          "payment_id": "HIST-PAY-SYN-CUST-060-11"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-09-10",
+          "invoice_amount": "7102.86",
+          "invoice_date": "2025-08-11",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-12",
+          "paid_amount": "7102.86",
+          "paid_date": "2025-09-04",
+          "payment_id": "HIST-PAY-SYN-CUST-060-12"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-09-22",
+          "invoice_amount": "4165.07",
+          "invoice_date": "2025-08-23",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-13",
+          "paid_amount": "4165.07",
+          "paid_date": "2025-09-19",
+          "payment_id": "HIST-PAY-SYN-CUST-060-13"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-10-04",
+          "invoice_amount": "14315.15",
+          "invoice_date": "2025-09-04",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-14",
+          "paid_amount": "14315.15",
+          "paid_date": "2025-10-01",
+          "payment_id": "HIST-PAY-SYN-CUST-060-14"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-10-16",
+          "invoice_amount": "26214.95",
+          "invoice_date": "2025-09-16",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-15",
+          "paid_amount": "26214.95",
+          "paid_date": "2025-10-22",
+          "payment_id": "HIST-PAY-SYN-CUST-060-15"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-10-28",
+          "invoice_amount": "4219.91",
+          "invoice_date": "2025-09-28",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-16",
+          "paid_amount": "4219.91",
+          "paid_date": "2025-11-09",
+          "payment_id": "HIST-PAY-SYN-CUST-060-16"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-11-09",
+          "invoice_amount": "23633.59",
+          "invoice_date": "2025-10-10",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-17",
+          "paid_amount": "23633.59",
+          "paid_date": "2025-11-16",
+          "payment_id": "HIST-PAY-SYN-CUST-060-17"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-11-21",
+          "invoice_amount": "5136.94",
+          "invoice_date": "2025-10-22",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-18",
+          "paid_amount": "5136.94",
+          "paid_date": "2025-11-19",
+          "payment_id": "HIST-PAY-SYN-CUST-060-18"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-12-03",
+          "invoice_amount": "14642.61",
+          "invoice_date": "2025-11-03",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-19",
+          "paid_amount": "14642.61",
+          "paid_date": "2025-11-26",
+          "payment_id": "HIST-PAY-SYN-CUST-060-19"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-12-15",
+          "invoice_amount": "25706.69",
+          "invoice_date": "2025-11-15",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-20",
+          "paid_amount": "25706.69",
+          "paid_date": "2025-12-14",
+          "payment_id": "HIST-PAY-SYN-CUST-060-20"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2025-12-27",
+          "invoice_amount": "18291.99",
+          "invoice_date": "2025-11-27",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-21",
+          "paid_amount": "18291.99",
+          "paid_date": "2026-01-31",
+          "payment_id": "HIST-PAY-SYN-CUST-060-21"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-01-08",
+          "invoice_amount": "9845.94",
+          "invoice_date": "2025-12-09",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-22",
+          "paid_amount": "9845.94",
+          "paid_date": "2026-01-02",
+          "payment_id": "HIST-PAY-SYN-CUST-060-22"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-01-20",
+          "invoice_amount": "7638.62",
+          "invoice_date": "2025-12-21",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-23",
+          "paid_amount": "7638.62",
+          "paid_date": "2026-02-28",
+          "payment_id": "HIST-PAY-SYN-CUST-060-23"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-02-01",
+          "invoice_amount": "10004.79",
+          "invoice_date": "2026-01-02",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-24",
+          "paid_amount": "10004.79",
+          "paid_date": "2026-01-29",
+          "payment_id": "HIST-PAY-SYN-CUST-060-24"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-02-13",
+          "invoice_amount": "5669.87",
+          "invoice_date": "2026-01-14",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-25",
+          "paid_amount": "5669.87",
+          "paid_date": "2026-02-16",
+          "payment_id": "HIST-PAY-SYN-CUST-060-25"
+        },
+        {
+          "customer_id": "SYN-CUST-060",
+          "due_date": "2026-02-25",
+          "invoice_amount": "9824.32",
+          "invoice_date": "2026-01-26",
+          "invoice_number": "HIST-PAID-SYN-CUST-060-26",
+          "paid_amount": "9824.32",
+          "paid_date": "2026-03-08",
+          "payment_id": "HIST-PAY-SYN-CUST-060-26"
+        }
+      ],
+      "risk_rating": "Medium",
+      "size_segment": "Enterprise"
+    }
+  ],
+  "provenance": "synthetic_historical_credit_source",
+  "schema_version": 1
+}
