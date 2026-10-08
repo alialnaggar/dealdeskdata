@@ -11,7 +11,8 @@ RUN = {"data_snapshot_ref": "HIST-CREDIT-0001",
        "as_of_at": datetime(2026, 3, 1, 9, tzinfo=timezone.utc)}
 EMPTY = {"schema_version": 1, "snapshot_id": "HIST-CREDIT-0001",
          "as_of_at": "2026-03-01T09:00:00Z", "complete": True,
-         "inbound_evidence": [], **{table: [] for table in TABLES}}
+         "inbound_evidence": [], "purchase_order_evidence": [],
+         **{table: [] for table in TABLES}}
 
 
 class HistoricalOperationalTests(unittest.TestCase):
@@ -68,10 +69,31 @@ class HistoricalOperationalTests(unittest.TestCase):
             "source_class": "synthetic_supplier_manifest", "product_id": "P",
             "location_id": "WH-EU-CENTRAL", "quantity": 3,
             "expected_date": "2026-03-03", "issued_at": "2026-02-28T08:00:00Z",
+            "confirmed_at": "2026-02-28T08:00:00Z",
             "valid_until": "2026-03-04T00:00:00Z"}]
         self.assertEqual(len(select_historical_operational(case, RUN)["inbound_supply"]), 1)
         case["inbound_evidence"][0]["quantity"] = 2
         with self.assertRaisesRegex(ValueError, "independent proof"):
+            select_historical_operational(case, RUN)
+
+    def test_po_receipt_requires_matching_dated_header(self):
+        case = deepcopy(EMPTY)
+        case["inbound_supply"] = [{"supply_id": "PO-R1", "purchase_order_id": "PO-1",
+            "product_id": "P", "location_id": "WH-EU-CENTRAL", "quantity": 3,
+            "quantity_allocated": 0, "expected_date": "2026-03-03", "status": "Confirmed",
+            "confirmed_at": "2026-02-28T08:00:00Z", "observed_at": "2026-02-28T09:00:00Z",
+            "valid_until": "2026-03-04T00:00:00Z", "evidence_ref": "PO-CONFIRM-1",
+            "po_status": "Confirmed", "po_confirmed_at": "2026-02-28T08:00:00Z",
+            "destination_location_id": "WH-EU-CENTRAL"}]
+        with self.assertRaisesRegex(ValueError, "independent header"):
+            select_historical_operational(case, RUN)
+        case["purchase_order_evidence"] = [{"purchase_order_id": "PO-1",
+            "status": "Confirmed", "confirmed_at": "2026-02-28T08:00:00Z",
+            "issued_at": "2026-02-28T08:00:00Z",
+            "destination_location_id": "WH-EU-CENTRAL"}]
+        self.assertEqual(len(select_historical_operational(case, RUN)["inbound_supply"]), 1)
+        case["purchase_order_evidence"][0]["destination_location_id"] = "WH-EU-WEST"
+        with self.assertRaisesRegex(ValueError, "independent header"):
             select_historical_operational(case, RUN)
 
 
