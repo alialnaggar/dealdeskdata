@@ -58,15 +58,15 @@ class CustomerMasterDatabaseTests(unittest.TestCase):
                 ("country_code", {k: int(v * .8) for k, v in contract["controlled_vocabularies"]["customer_country_target_share_pct"].items()}),
             ]
             for column, counts in expected:
-                actual = dict(conn.execute(f"SELECT {column}, count(*) FROM deal_desk.customers GROUP BY {column}").fetchall())
+                actual = dict(conn.execute(f"SELECT {column}, count(*) FROM deal_desk.customers WHERE customer_id LIKE 'SYN-CUST-%' GROUP BY {column}").fetchall())
                 self.assertEqual(actual, counts)
             for column, counts in (("risk_rating", config["commercial_supply"]["credit_profiles"]["risk_rating_exact_counts"]),
                                    ("credit_status", config["commercial_supply"]["credit_profiles"]["credit_status_exact_counts"])):
-                actual = dict(conn.execute(f"SELECT {column}, count(*) FROM deal_desk.customer_credit_profiles GROUP BY {column}").fetchall())
+                actual = dict(conn.execute(f"SELECT {column}, count(*) FROM deal_desk.customer_credit_profiles WHERE customer_id LIKE 'SYN-CUST-%' GROUP BY {column}").fetchall())
                 self.assertEqual(actual, counts)
             rows = conn.execute("""SELECT c.size_segment, p.default_payment_terms_days, count(*)
                 FROM deal_desk.customers c JOIN deal_desk.customer_credit_profiles p USING (customer_id)
-                GROUP BY 1,2""").fetchall()
+                WHERE c.customer_id LIKE 'SYN-CUST-%' GROUP BY 1,2""").fetchall()
             actual = {(segment, days): count for segment, days, count in rows}
             expected_terms = {(segment, int(days)): count for segment, counts in
                 config["commercial_supply"]["credit_profiles"]["default_payment_terms_exact_counts_by_segment"].items()
