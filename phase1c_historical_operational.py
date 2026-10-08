@@ -57,7 +57,8 @@ def select_historical_operational(manifest, run):
         raise ValueError("missing or incomplete historical operational snapshot")
     as_of = run["as_of_at"]
     proofs = manifest.get("inbound_evidence")
-    if not isinstance(proofs, list):
+    purchase_orders = manifest.get("purchase_order_evidence")
+    if not isinstance(proofs, list) or not isinstance(purchase_orders, list):
         raise ValueError("historical operational snapshot missing inbound evidence registry")
     by_ref = {}
     for proof in proofs:
@@ -66,6 +67,15 @@ def select_historical_operational(manifest, run):
         if _instant(proof["issued_at"]) > as_of:
             raise ValueError("future inbound evidence")
         by_ref[proof["evidence_ref"]] = proof
+    by_po = {}
+    for proof in purchase_orders:
+        if not isinstance(proof, dict) or not proof.get("purchase_order_id") or proof["purchase_order_id"] in by_po:
+            raise ValueError("duplicate or malformed purchase order evidence")
+        if _instant(proof["issued_at"]) > as_of:
+            raise ValueError("future purchase order evidence")
+        if proof.get("confirmed_at") and _instant(proof["confirmed_at"]) > as_of:
+            raise ValueError("future purchase order confirmation")
+        by_po[proof["purchase_order_id"]] = proof
     result = {}
     for table in TABLES:
         rows = manifest.get(table)
@@ -104,9 +114,22 @@ def select_historical_operational(manifest, run):
                     if (not proof or proof.get("source_class") != "synthetic_supplier_manifest" or
                             any(str(proof.get(key)) != str(value.get(key)) for key in
                                 ("product_id", "location_id", "quantity", "expected_date")) or
-                            _instant(proof["valid_until"]) <= as_of or
+                            _instant(proof["confirmed_at"]) != value.get("confirmed_at") or
+                            _instant(proof["valid_until"]) != value.get("valid_until") or
+                            _instant(proof["issued_at"]) > _instant(proof["confirmed_at"]) or
+                            _instant(proof["valid_until"]) <= value.get("confirmed_at") or
                             not value.get("confirmed_at") or value["confirmed_at"] > as_of):
                         raise ValueError("no-PO confirmed inbound lacks matching independent proof")
+                if value.get("purchase_order_id") is not None:
+                    proof = by_po.get(value["purchase_order_id"])
+                    if (not proof or proof.get("status") != value.get("po_status") or
+                            proof.get("destination_location_id") != value.get("destination_location_id") or
+                            proof.get("destination_location_id") != value.get("location_id") or
+                            (_instant(proof["confirmed_at"]) if proof.get("confirmed_at") else None) !=
+                            value.get("po_confirmed_at")):
+                        raise ValueError("PO inbound lacks matching independent header")
+                    if value.get("status") == "Confirmed" and proof["status"] != "Confirmed":
+                        raise ValueError("confirmed inbound has no confirmed PO")
             elif value.get("snapshot_at") is None or value["snapshot_at"] > as_of:
                 raise ValueError(f"{table} snapshot is future or missing")
             if value.get("confirmed_at") and value["confirmed_at"] > as_of:
