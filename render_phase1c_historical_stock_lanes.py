@@ -1,7 +1,6 @@
 """Synthetic daily inventory and dated lane source, independent of deal inputs.
 
-This first operational source slice deliberately has no supplier receipts,
-production slots, or digital commitments. It cannot make those promises.
+Production slots and digital commitments remain absent from this source.
 """
 
 from datetime import date, datetime, time, timedelta, timezone
@@ -13,6 +12,7 @@ import random
 import yaml
 
 from phase1c_historical_operational import select_historical_operational
+from render_phase1c_historical_inbound import load_resolver as load_inbound_resolver
 
 
 HERE = Path(__file__).resolve().parent
@@ -136,6 +136,7 @@ def load_resolver(base_dir=HERE):
             stock.extend(payload["products"])
     if len(stock) != 48 or lanes is None or offers is None:
         raise ValueError("incomplete historical stock/lane/offer source")
+    inbound_resolver = load_inbound_resolver(base_dir)
     lookup = {entry["snapshot_id"]: entry for entry in index["snapshots"]}
     def resolve(snapshot_id):
         if snapshot_id not in lookup:
@@ -158,9 +159,9 @@ def load_resolver(base_dir=HERE):
                          "snapshot_at": observed})
         manifest = {"schema_version": 1, "snapshot_id": snapshot_id,
                     "as_of_at": entry["as_of_at"], "complete": True,
-                    "coverage_label": "provisional_stock_lanes_offers_only",
+                    "coverage_label": "provisional_stock_lanes_offers_inbound",
                     "inventory": rows, "shipping_lanes": lanes,
-                    "inbound_supply": [], "inbound_evidence": [],
+                    **inbound_resolver(snapshot_id),
                     "supplier_offers": [item for item in offers
                         if date.fromisoformat(item["valid_from"]) <= as_of.date() <=
                            date.fromisoformat(item["valid_to"]) and
