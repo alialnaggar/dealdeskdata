@@ -148,3 +148,27 @@ inventory contention, as-of replay, a provenance manifest and achieved
 distribution report. In parallel, disposition the four calibration reviews
 and 22 field marks; only then freeze tolerances, independently author the
 36-case evaluation oracle, and generate the 80/400/100 release targets.
+
+## Seeded 36-deal stress increment — 8 October 2026
+
+`render_phase1c_stress_pilot.py` adds 18 seeded mixed deals and 47 lines to
+the 18-archetype pilot. The added deals have eight two-line, nine three-line
+and one four-line submissions; line mode counts are 11 stocked, nine
+supplier-finished, nine make-to-order, ten digital and eight scheduled service.
+`phase1c_stress_pilot_report.json` records seed `22531`, these achieved input
+counts and SHA-256 of the rendered SQL. The added records use later source
+snapshots, so the reader can replay earlier baseline decisions at their
+original as-of timestamp. At least two runs cite the same stock source,
+exposing the current read-only model's cross-deal reservation limit; the
+intra-run build quantity cases also exercise capacity shortfall.
+
+[PostgreSQL Actions run 37772292678](https://github.com/alialnaggar/dealdeskdata/actions/runs/37772292678)
+passed the 36-deal SQL import, deterministic rendering, reader/gate checks,
+as-of isolation and prior workflow. This is a development stress increment,
+**not** an achieved calibrated business distribution. The diagnostic report
+currently covers input mix, not a persisted aggregate decision/outcome report.
+Next: add that decision distribution and broader source-provenance manifest;
+compare pilot metrics with explicit tolerances, resolve the four calibration
+and 22 field reviews, and only then freeze the release generator and hidden
+independent evaluation cases. Cross-deal allocation needs an explicit
+reservation or replay rule before claims of portfolio-wide availability.
