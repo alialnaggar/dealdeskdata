@@ -293,3 +293,13 @@ and reads early, middle and late samples through `read_run` with the dated
 resolver. Operational availability, supplier, capacity, digital and shipping
 evidence are still missing for these cutoffs; queued reads must not be treated
 as completed or correct business decisions.
+
+Historical reads now also require a complete **operational** snapshot resolver.
+This closes a replay leak: current inventory, supplier, capacity and digital
+tables, plus undated shipping lanes, cannot silently provide facts for an
+earlier run. The validator rejects future stock, inbound, PO confirmations,
+offers, capacity, digital observations and unverified/future shipping lanes;
+confirmed no-PO inbound needs a matching independent supplier proof. A test
+with explicitly empty complete evidence remains unknown, while a missing
+resolver fails closed. This is a safeguard, not a generated operational
+source; actual dated operational snapshots remain to be built.
