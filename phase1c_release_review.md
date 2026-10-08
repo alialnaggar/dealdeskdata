@@ -28,6 +28,13 @@ The two remaining calibration-level review items are the provisional **36 compon
 
 ## Immediate build order
 
+Historical operational replay now fails closed without a complete dated
+manifest. This prevents later stock, supplier, capacity, digital or undated
+shipping lane rows from leaking into a past run. No-PO confirmed receipts
+require matching supplier evidence. The 400 queued runs therefore still need
+their actual operational source ledger before baseline decisions can be
+derived; the field marks remain open.
+
 1. Generate independent credit, no-PO inbound and historical AR manifests; replay historical rows at their frozen as-of times and validate actual runtime output envelopes.
 2. Finish product fit and comparable price/cost evidence, or explicitly label any unresolved values as bounded synthetic assumptions for thesis scope.
 3. The provisional 80-customer master and 400 chronological historical input deals / 1,200 lines are generated. Their configured line bins and product share are exact. A separate synthetic source ledger resolves 400 SHA-pinned dated credit/AR views, and 400 queued baseline runs link to them. Generate and connect operational snapshots, derive documented baseline decisions and measure source provenance before constructing the 100 generated tests.
