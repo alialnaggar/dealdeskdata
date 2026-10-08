@@ -64,6 +64,8 @@ def validate(config):
     check(abs(sum(n * pct for n, pct in line_weights.items()) / 100 -
               ds["historical_lines_per_deal_target"]) < 1e-8,
           "historical line-count expected mean differs from target")
+    check(ds["product_popularity"].get("basis") == "synthetic_scenario_target_not_empirical_olist",
+          "product popularity must identify its synthetic rather than unverified observed basis")
     bounds = ds["historical_lines_per_deal_achieved_mean_range"]
     check(len(bounds) == 2 and bounds[0] <= ds["historical_lines_per_deal_target"] <= bounds[1],
           "historical achieved mean band must contain target")
@@ -150,7 +152,6 @@ def validate(config):
         review.append("30-workday supplier lead can exceed the capacity horizon: reader marks confirmed supply beyond represented capacity dates unknown; test generated rows and do not extend the horizon without evidence")
     if ds["component_products_target"] is None or ds["total_product_rows_target"] is None:
         review.append("36 components/156 total products are proposals; top-level generation targets remain unset until BOM coverage review")
-    review.append("Olist mirror checksums have not been matched to the canonical download; do not call derived rates enterprise statistics")
     review.append("Validate visible catalogue price dates and category/unit comparability before freezing EUR bands")
     return {"errors": errors, "review_before_freeze": review,
             "ready_for_generation": not errors and not review}
