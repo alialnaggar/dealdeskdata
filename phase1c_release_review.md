@@ -35,6 +35,12 @@ require matching supplier evidence. The 400 queued runs therefore still need
 their actual operational source ledger before baseline decisions can be
 derived; the field marks remain open.
 
+The provisional operational source now has daily dated stock for 48 products,
+38 standard lanes and 54 supplier/component offer SKUs across all 400 cutoffs.
+It is hash pinned and does not make binding inbound, production or digital
+claims. Generate those remaining source classes and measure their configured
+distributions before deriving historical outcome labels.
+
 1. Generate independent credit, no-PO inbound and historical AR manifests; replay historical rows at their frozen as-of times and validate actual runtime output envelopes.
 2. Finish product fit and comparable price/cost evidence, or explicitly label any unresolved values as bounded synthetic assumptions for thesis scope.
 3. The provisional 80-customer master and 400 chronological historical input deals / 1,200 lines are generated. Their configured line bins and product share are exact. A separate synthetic source ledger resolves 400 SHA-pinned dated credit/AR views, and 400 queued baseline runs link to them. Generate and connect operational snapshots, derive documented baseline decisions and measure source provenance before constructing the 100 generated tests.
