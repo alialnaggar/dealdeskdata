@@ -767,8 +767,7 @@ tables:
       nullable: false
       basis: SYN
       generation: Declared warehouse/site code
-      validation: Matches inbound/production/shipping origin vocabulary
-      review_before_generation: Warehouse/site vocabulary and time zones are defined in phase1c_data_contract.yaml; enforce location mapping across generated rows.
+      validation: Configured location vocabulary across stock, inbound, production and shipping rows; applicable origin time zones match the location mapping
     quantity_on_hand:
       sql_type: NUMERIC(14,3)
       nullable: false
@@ -1359,8 +1358,7 @@ tables:
       nullable: false
       basis: SUB+SYN
       generation: Structured customer needs, no expected answer
-      validation: JSON object; whitelisted keys/types before agent visibility
-      review_before_generation: Allowed keys/types are defined in phase1c_data_contract.yaml; implement row-level rejection and leakage tests.
+      validation: Typed JSON object with whitelisted keys and constraints; reject expected-decision leakage before agent visibility
     evidence_refs_json:
       sql_type: JSONB
       nullable: false
@@ -1447,8 +1445,7 @@ tables:
       nullable: false
       basis: SUB+CAT
       generation: Product-specific selected options and units_per_period for recurring
-      validation: Typed JSON object; catalogue signature, dependencies and unit consistency
-      review_before_generation: Per-mode configuration keys and signature mapping are defined in phase1c_data_contract.yaml; implement row-level enforcement.
+      validation: Per-mode typed keys, offered option and edition signatures, exact active BOM for MTO, and full-term billable units for recurring lines
     fulfillment_group_code:
       sql_type: TEXT
       nullable: true
