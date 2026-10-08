@@ -76,6 +76,10 @@ on:
       - test_validate_phase1c_runtime_outputs.py
       - phase1c_historical_credit.py
       - test_phase1c_historical_credit.py
+      - render_phase1c_customer_master.py
+      - test_phase1c_customer_master.py
+      - phase1c_customer_master.sql
+      - phase1c_customer_commitment_ledger.json
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -163,6 +167,10 @@ on:
       - test_validate_phase1c_runtime_outputs.py
       - phase1c_historical_credit.py
       - test_phase1c_historical_credit.py
+      - render_phase1c_customer_master.py
+      - test_phase1c_customer_master.py
+      - phase1c_customer_master.sql
+      - phase1c_customer_commitment_ledger.json
       - audit_phase1c_pilot_distribution.py
       - phase1c_supply_rows.sql
       - phase1c_portfolio_deal_rows.sql
@@ -326,6 +334,8 @@ jobs:
         run: python -m unittest -v test_phase1c_service_pilot
       - name: Read five connected generated pilot modes
         run: python -m unittest -v test_phase1c_vertical_pilot.VerticalPilotReaderTests
+      - name: Check provisional customer and credit master
+        run: python -m unittest -v test_phase1c_customer_master
       - name: Read thirteen source conflict cases
         run: python -m unittest -v test_phase1c_conflict_pilot.ConflictReaderTests
       - name: Check mixed pilot replay and contention
