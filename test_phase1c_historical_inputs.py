@@ -79,6 +79,15 @@ class HistoricalInputDatabaseTests(unittest.TestCase):
             self.assertGreaterEqual(min(occurrences), 3)
             self.assertEqual(conn.execute("""SELECT count(*) FROM deal_desk.deals
                 WHERE deal_id LIKE 'HIST-DEAL-%' AND submitted_at >= '2026-09-01'""").fetchone()[0], 0)
+            from validate_phase1c_generated_rows import load_rows, validate_rows
+            rows = load_rows(conn)
+            rows["deals"] = [row for row in rows["deals"] if row["deal_id"].startswith("HIST-DEAL-")]
+            rows["deal_lines"] = [row for row in rows["deal_lines"] if row["deal_id"].startswith("HIST-DEAL-")]
+            for table in ("suppliers", "inventory", "purchase_orders", "inbound_supply",
+                          "production_capacity", "shipping_lanes", "compatibility_rules"):
+                rows[table] = []
+            contract = yaml.safe_load((HERE / "phase1c_data_contract.yaml").read_text())
+            self.assertEqual(validate_rows(rows, contract)["errors"], [])
         finally:
             conn.rollback()
             conn.close()
