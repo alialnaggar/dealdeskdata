@@ -78,6 +78,12 @@ on:
       - test_phase1c_historical_credit.py
       - phase1c_historical_operational.py
       - test_phase1c_historical_operational.py
+      - render_phase1c_historical_stock_lanes.py
+      - test_render_phase1c_historical_stock_lanes.py
+      - phase1c_historical_operational_index.json
+      - 'phase1c_historical_stock_source_*.json'
+      - phase1c_historical_lane_source.json
+      - phase1c_historical_offer_source.json
       - render_phase1c_customer_master.py
       - test_phase1c_customer_master.py
       - phase1c_customer_master.sql
@@ -181,6 +187,12 @@ on:
       - test_phase1c_historical_credit.py
       - phase1c_historical_operational.py
       - test_phase1c_historical_operational.py
+      - render_phase1c_historical_stock_lanes.py
+      - test_render_phase1c_historical_stock_lanes.py
+      - phase1c_historical_operational_index.json
+      - 'phase1c_historical_stock_source_*.json'
+      - phase1c_historical_lane_source.json
+      - phase1c_historical_offer_source.json
       - render_phase1c_customer_master.py
       - test_phase1c_customer_master.py
       - phase1c_customer_master.sql
@@ -307,6 +319,8 @@ jobs:
         run: python -m unittest -v test_phase1c_historical_credit
       - name: Fail closed on missing historical operational snapshots
         run: python -m unittest -v test_phase1c_historical_operational
+      - name: Replay provisional daily stock lanes and offers
+        run: python -m unittest -v test_render_phase1c_historical_stock_lanes
       - name: Check connected workstation stock, inbound and capacity rows
         run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
