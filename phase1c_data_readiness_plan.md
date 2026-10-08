@@ -165,10 +165,20 @@ intra-run build quantity cases also exercise capacity shortfall.
 [PostgreSQL Actions run 37772292678](https://github.com/alialnaggar/dealdeskdata/actions/runs/37772292678)
 passed the 36-deal SQL import, deterministic rendering, reader/gate checks,
 as-of isolation and prior workflow. This is a development stress increment,
-**not** an achieved calibrated business distribution. The diagnostic report
-currently covers input mix, not a persisted aggregate decision/outcome report.
-Next: add that decision distribution and broader source-provenance manifest;
-compare pilot metrics with explicit tolerances, resolve the four calibration
+**not** an achieved calibrated business distribution. The input diagnostic is
+versioned beside the generated SQL. A separate database audit now records
+aggregate reader decisions and source hashes in a CI artifact: 36 deals,
+65 total lines (mean 1.81), with nine `approval_required`, two `blocked`,
+12 `needs_commitment`, nine `needs_evidence` and four `needs_revision`.
+Five distinct stock evidence IDs appear in more than one read-only run.
+[The measured report from run 37772681168](https://github.com/alialnaggar/dealdeskdata/actions/runs/37772681168)
+also captures line mode/category counts, as-of counts and SHA-256 of five SQL
+inputs plus configuration, matrix and provider manifest. The diagnostic
+is separate from deal inputs and expires with GitHub's CI artifact retention;
+the code reproduces it from a fresh database. These pilot frequencies are
+design-induced and must not be presented as target business rates.
+
+Next: compare pilot metrics with explicit tolerances, resolve the four calibration
 and 22 field reviews, and only then freeze the release generator and hidden
 independent evaluation cases. Cross-deal allocation needs an explicit
 reservation or replay rule before claims of portfolio-wide availability.
