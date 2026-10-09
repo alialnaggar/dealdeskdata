@@ -58,8 +58,23 @@ def select_historical_operational(manifest, run):
     as_of = run["as_of_at"]
     proofs = manifest.get("inbound_evidence")
     purchase_orders = manifest.get("purchase_order_evidence")
+    provider_records = manifest.get("provider_evidence")
     if not isinstance(proofs, list) or not isinstance(purchase_orders, list):
         raise ValueError("historical operational snapshot missing inbound evidence registry")
+    if not isinstance(provider_records, list):
+        raise ValueError("historical operational snapshot missing provider evidence registry")
+    provider_by_ref = {}
+    for proof in provider_records:
+        if not isinstance(proof, dict) or not proof.get("evidence_ref") or proof["evidence_ref"] in provider_by_ref:
+            raise ValueError("duplicate or malformed provider evidence")
+        issued, confirmed, verified = (_instant(proof[key]) for key in
+                                        ("issued_at", "confirmed_at", "verified_at"))
+        if not confirmed <= issued <= verified <= as_of:
+            raise ValueError("future or unordered provider evidence")
+        if (_date(proof["covers_from"]) > _date(proof["covers_until"]) or
+                _instant(proof["valid_until"]).date() <= _date(proof["covers_until"])):
+            raise ValueError("invalid provider term coverage")
+        provider_by_ref[proof["evidence_ref"]] = proof
     by_ref = {}
     for proof in proofs:
         if not isinstance(proof, dict) or not proof.get("evidence_ref") or proof["evidence_ref"] in by_ref:
@@ -130,6 +145,20 @@ def select_historical_operational(manifest, run):
                         raise ValueError("PO inbound lacks matching independent header")
                     if value.get("status") == "Confirmed" and proof["status"] != "Confirmed":
                         raise ValueError("confirmed inbound has no confirmed PO")
+            elif table == "digital_capacity" and value["commitment_status"] == "binding":
+                proof = provider_by_ref.get(value.get("evidence_ref"))
+                if (not proof or proof.get("evidence_type") != "provider_proof" or
+                        proof.get("source_class") != "synthetic_provider_manifest" or
+                        any(proof.get(key) != value.get(key) for key in (
+                            "product_id", "configuration_signature_json", "provider_id",
+                            "region_code", "term_code", "capacity_unit", "commitment_status")) or
+                        any(Decimal(str(proof.get(key))) != Decimal(str(value.get(key))) for key in (
+                            "capacity_total", "quantity_allocated")) or
+                        _instant(proof["confirmed_at"]) != value["confirmed_at"] or
+                        _instant(proof["valid_until"]) != value["valid_until"]):
+                    raise ValueError("binding digital pool lacks matching independent provider proof")
+                if value.get("snapshot_at") is None or value["snapshot_at"] > as_of:
+                    raise ValueError("digital snapshot is future or missing")
             elif value.get("snapshot_at") is None or value["snapshot_at"] > as_of:
                 raise ValueError(f"{table} snapshot is future or missing")
             if value.get("confirmed_at") and value["confirmed_at"] > as_of:
