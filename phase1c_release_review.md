@@ -37,9 +37,10 @@ derived; the field marks remain open.
 
 The provisional operational source has daily dated stock for 48 products,
 38 standard lanes, 54 supplier/component offer SKUs, independently proved
-inbound receipts and a dated workshop plan across all 400 cutoffs. It is hash
-pinned. Digital commitments remain absent; workshop feasibility does not book
-a slot. Measure source distributions before deriving historical outcome labels.
+inbound receipts, a dated workshop plan and synthetic digital provider pools
+across all 400 cutoffs. They are hash pinned. Workshop feasibility does not
+book a slot. Measure source distributions before deriving historical outcome
+labels.
 
 1. Generate independent credit, no-PO inbound and historical AR manifests; replay historical rows at their frozen as-of times and validate actual runtime output envelopes.
 2. Finish product fit and comparable price/cost evidence, or explicitly label any unresolved values as bounded synthetic assumptions for thesis scope.
@@ -55,8 +56,23 @@ of each run cutoff; weekends have zero available hours. Existing allocations
 and downtime follow provisional ranges. The resolver rejects missing days and
 source digest changes; selection rejects future snapshots. This supports a
 **feasible, uncommitted** build path, not a booked production slot. Capacity
-beyond the window remains unknown. Digital commitments, baseline decisions,
-14 field marks and two calibration reviews remain open.
+beyond the window remains unknown. Baseline decisions, 14 field marks and two
+calibration reviews remain open.
+
+## Dated digital provider increment — 9 October 2026
+
+A synthetic independent pool ledger now covers 36 of 41 digital SKUs in the
+five configured countries, with daily as-of observations and six-day proof
+refreshes. Across 5,580 pool epochs, the configured binding/provisional/unknown
+mix is exactly 70/20/10%. Binding rows have separately hash-pinned provider
+proof for the exact product, configuration, region, 12-month term, unit,
+capacity and allocation; the proof states a full-term coverage interval.
+Missing, changed or future proof fails closed. This is **synthetic test
+evidence**, not a real provider promise. The five SKUs without exact pool
+coverage remain unknown. The provisional protected-TB pool totals use the
+instance range pending calibration review. The source resolves at all 400
+historical cutoffs; generated historical decisions and actual agent execution
+still have not been run.
 
 ## Dated inbound source increment — 8 October 2026
 
