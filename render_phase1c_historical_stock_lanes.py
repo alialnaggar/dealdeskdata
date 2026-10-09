@@ -13,6 +13,7 @@ import yaml
 
 from phase1c_historical_operational import select_historical_operational
 from render_phase1c_historical_inbound import load_resolver as load_inbound_resolver
+from render_phase1c_historical_capacity import load_resolver as load_capacity_resolver
 
 
 HERE = Path(__file__).resolve().parent
@@ -137,6 +138,7 @@ def load_resolver(base_dir=HERE):
     if len(stock) != 48 or lanes is None or offers is None:
         raise ValueError("incomplete historical stock/lane/offer source")
     inbound_resolver = load_inbound_resolver(base_dir)
+    capacity_resolver = load_capacity_resolver(base_dir)
     lookup = {entry["snapshot_id"]: entry for entry in index["snapshots"]}
     def resolve(snapshot_id):
         if snapshot_id not in lookup:
@@ -166,7 +168,8 @@ def load_resolver(base_dir=HERE):
                         if date.fromisoformat(item["valid_from"]) <= as_of.date() <=
                            date.fromisoformat(item["valid_to"]) and
                            datetime.fromisoformat(item["verified_at"]) <= as_of],
-                    "production_capacity": [], "digital_capacity": []}
+                    "production_capacity": capacity_resolver(snapshot_id),
+                    "digital_capacity": []}
         select_historical_operational(manifest, {"data_snapshot_ref": snapshot_id,
                                                   "as_of_at": as_of})
         return manifest
