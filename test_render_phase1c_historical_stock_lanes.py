@@ -52,7 +52,7 @@ class HistoricalStockLaneTests(unittest.TestCase):
             self.assertTrue(all(0 <= (datetime.fromisoformat(entry["as_of_at"]) - row["snapshot_at"]).total_seconds() < 86400
                                 for row in typed["inventory"]))
             self.assertEqual(len(typed["production_capacity"]), 180)
-            self.assertEqual(len(typed["digital_capacity"]), 0)
+            self.assertEqual(len(typed["digital_capacity"]), 180)
             self.assertTrue(all(row["observed_at"] <= datetime.fromisoformat(entry["as_of_at"])
                                 for row in typed["inbound_supply"]))
             self.assertTrue(all(row["valid_from"] <= datetime.fromisoformat(entry["as_of_at"]).date()
