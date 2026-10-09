@@ -133,7 +133,8 @@ def main():
     Path(args.output).write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     print(json.dumps({"historical_deals": report["historical_deals"],
                       "status_counts": report["status_counts"],
-                      "evidence_gap_counts": report["evidence_gap_counts"]}, sort_keys=True))
+                      "evidence_gap_counts": report["evidence_gap_counts"],
+                      "fulfillment_counts": report["fulfillment_counts"]}, sort_keys=True))
 
 
 if __name__ == "__main__":
