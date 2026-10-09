@@ -28,6 +28,7 @@ INPUTS = [
     "phase1c_buildable_master.sql",
     "phase1c_sellable_catalogue.sql",
     "phase1c_customer_master.sql",
+    "phase1c_historical_service_coverage.sql",
     *[f"phase1c_historical_inputs_{n:02d}.sql" for n in range(1, 9)],
     *[f"phase1c_historical_run_rows_{n:02d}.sql" for n in range(1, 5)],
 ]
