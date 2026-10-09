@@ -82,6 +82,10 @@ on:
       - test_render_phase1c_historical_stock_lanes.py
       - render_phase1c_historical_inbound.py
       - test_render_phase1c_historical_inbound.py
+      - render_phase1c_historical_capacity.py
+      - test_render_phase1c_historical_capacity.py
+      - phase1c_historical_capacity_index.json
+      - phase1c_historical_capacity_source.json
       - phase1c_historical_inbound_index.json
       - 'phase1c_historical_inbound_source_*.json'
       - phase1c_historical_operational_index.json
@@ -195,6 +199,10 @@ on:
       - test_render_phase1c_historical_stock_lanes.py
       - render_phase1c_historical_inbound.py
       - test_render_phase1c_historical_inbound.py
+      - render_phase1c_historical_capacity.py
+      - test_render_phase1c_historical_capacity.py
+      - phase1c_historical_capacity_index.json
+      - phase1c_historical_capacity_source.json
       - phase1c_historical_inbound_index.json
       - 'phase1c_historical_inbound_source_*.json'
       - phase1c_historical_operational_index.json
@@ -331,6 +339,8 @@ jobs:
         run: python -m unittest -v test_render_phase1c_historical_stock_lanes
       - name: Replay independently proved historical inbound receipts
         run: python -m unittest -v test_render_phase1c_historical_inbound
+      - name: Replay bounded historical workshop capacity
+        run: python -m unittest -v test_render_phase1c_historical_capacity
       - name: Check connected workstation stock, inbound and capacity rows
         run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
       - name: Validate calibration relationships before generation
