@@ -2,7 +2,7 @@
 
 from collections import Counter
 from copy import deepcopy
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import hashlib
 import json
 from pathlib import Path
@@ -46,6 +46,7 @@ class HistoricalCreditSourceTests(unittest.TestCase):
         self.assertEqual(len(index["snapshots"]), 400)
         resolver = load_resolver()
         status = Counter()
+        freshness = Counter()
         for item in index["snapshots"]:
             manifest = resolver(item["snapshot_id"], item["customer_id"])
             profile, receivables, payments, account = select_historical_credit(
@@ -53,12 +54,15 @@ class HistoricalCreditSourceTests(unittest.TestCase):
                            "as_of_at": datetime.fromisoformat(item["as_of_at"])}, item["customer_id"])
             self.assertEqual(account, "Active")
             self.assertEqual(profile["customer_id"], item["customer_id"])
+            age = datetime.fromisoformat(item["as_of_at"]) - profile["commitments_as_of_at"]
+            freshness["fresh" if age <= timedelta(hours=24) else "stale"] += 1
             self.assertTrue(all(invoice["as_of_date"] <= datetime.fromisoformat(item["as_of_at"]).date()
                                 for invoice in receivables))
             self.assertTrue(all(payment["paid_date"] <= datetime.fromisoformat(item["as_of_at"]).date()
                                 for payment in payments))
             status.update(invoice["status"] for invoice in receivables)
         self.assertGreater(status["Overdue"], 0)
+        self.assertEqual(freshness, {"fresh": 329, "stale": 71})
         with self.assertRaises(ValueError):
             resolver("HIST-CREDIT-0001", "SYN-CUST-002")
         with self.assertRaises(ValueError):
