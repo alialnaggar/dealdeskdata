@@ -95,6 +95,7 @@ def run(database_url):
     operational = load_operational()
     digital = load_digital()
     decisions = []
+    mto = Counter()
     with psycopg.connect(database_url) as conn:
         try:
             load_inputs(conn)
@@ -109,10 +110,23 @@ def run(database_url):
                     commercial_rule_mode="compiled")
                 if bundle["run"]["data_snapshot_ref"] != snapshot_id:
                     raise ValueError(f"run/snapshot mismatch: {n}")
+                for line, fact in zip(bundle["lines"], bundle["facts"]["lines"]):
+                    if line["fulfillment_mode"] == "make_to_order":
+                        mto["lines"] += 1
+                        if any(b["finished_product_id"] == line["product_id"]
+                               and b["configuration_signature_json"] == line["configuration_json"]
+                               for b in bundle["bom"]):
+                            mto["matching_bom"] += 1
+                        if fact.get("selected_bom_id"):
+                            mto["selected_bom"] += 1
+                        mto[f"production:{fact.get('production_status', 'absent')}"] += 1
+                        if fact.get("production_unknown_reason"):
+                            mto[f"unknown:{fact['production_unknown_reason']}"] += 1
                 decisions.append(assemble_deal_decision(bundle))
         finally:
             conn.rollback()
     result = summarize(decisions)
+    result["make_to_order_diagnostics"] = dict(sorted(mto.items()))
     result["source_sha256"] = {
         name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()
         for name in ("calibration_config.yaml", "phase1c_historical_credit_index.json",
@@ -134,7 +148,8 @@ def main():
     print(json.dumps({"historical_deals": report["historical_deals"],
                       "status_counts": report["status_counts"],
                       "evidence_gap_counts": report["evidence_gap_counts"],
-                      "fulfillment_counts": report["fulfillment_counts"]}, sort_keys=True))
+                      "fulfillment_counts": report["fulfillment_counts"],
+                      "make_to_order_diagnostics": report["make_to_order_diagnostics"]}, sort_keys=True))
 
 
 if __name__ == "__main__":
