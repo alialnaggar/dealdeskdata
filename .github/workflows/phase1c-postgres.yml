@@ -89,6 +89,9 @@ on:
       - render_phase1c_historical_digital.py
       - test_render_phase1c_historical_digital.py
       - audit_phase1c_historical_baseline.py
+      - render_phase1c_historical_service_coverage.py
+      - test_render_phase1c_historical_service_coverage.py
+      - phase1c_historical_service_coverage.sql
       - phase1c_historical_digital_index.json
       - phase1c_historical_digital_pool_source.json
       - 'phase1c_historical_digital_proof_*.json'
@@ -212,6 +215,9 @@ on:
       - render_phase1c_historical_digital.py
       - test_render_phase1c_historical_digital.py
       - audit_phase1c_historical_baseline.py
+      - render_phase1c_historical_service_coverage.py
+      - test_render_phase1c_historical_service_coverage.py
+      - phase1c_historical_service_coverage.sql
       - phase1c_historical_digital_index.json
       - phase1c_historical_digital_pool_source.json
       - 'phase1c_historical_digital_proof_*.json'
@@ -403,7 +409,9 @@ jobs:
           psql -X -v ON_ERROR_STOP=1 -f /tmp/phase1c_compiled_rules.sql
           psql -X -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF (SELECT count(*) FROM deal_desk.pricing_rules) <> 33 OR (SELECT count(*) FROM deal_desk.policy_rules) <> 51 OR (SELECT count(*) FROM deal_desk.approval_rules) <> 21 THEN RAISE EXCEPTION 'Incomplete compiled policy rows'; END IF; END \$\$;"
       - name: Diagnose 400 historical baseline decisions
-        run: python audit_phase1c_historical_baseline.py --output /tmp/phase1c_historical_baseline.json
+        run: |
+          python -m unittest -v test_render_phase1c_historical_service_coverage
+          python audit_phase1c_historical_baseline.py --output /tmp/phase1c_historical_baseline.json
       - name: Preserve provisional historical diagnostic
         if: always()
         uses: actions/upload-artifact@v4
