@@ -35,17 +35,29 @@ require matching supplier evidence. The 400 queued runs therefore still need
 their actual operational source ledger before baseline decisions can be
 derived; the field marks remain open.
 
-The provisional operational source now has daily dated stock for 48 products,
-38 standard lanes and 54 supplier/component offer SKUs across all 400 cutoffs.
-It is hash pinned and does not make binding inbound, production or digital
-claims. Generate those remaining source classes and measure their configured
-distributions before deriving historical outcome labels.
+The provisional operational source has daily dated stock for 48 products,
+38 standard lanes, 54 supplier/component offer SKUs, independently proved
+inbound receipts and a dated workshop plan across all 400 cutoffs. It is hash
+pinned. Digital commitments remain absent; workshop feasibility does not book
+a slot. Measure source distributions before deriving historical outcome labels.
 
 1. Generate independent credit, no-PO inbound and historical AR manifests; replay historical rows at their frozen as-of times and validate actual runtime output envelopes.
 2. Finish product fit and comparable price/cost evidence, or explicitly label any unresolved values as bounded synthetic assumptions for thesis scope.
 3. The provisional 80-customer master and 400 chronological historical input deals / 1,200 lines are generated. Their configured line bins and product share are exact. A separate synthetic source ledger resolves 400 SHA-pinned dated credit/AR views, and 400 queued baseline runs link to them. Generate and connect operational snapshots, derive documented baseline decisions and measure source provenance before constructing the 100 generated tests.
 4. Author the 36 evaluation variants and expected findings independently, keep them outside agent-visible inputs, then run fresh import, repeat-seed checksum and decision gates. Only then freeze the dataset version.
 
+## Dated workshop capacity increment — 9 October 2026
+
+A separate hash-pinned synthetic workshop plan resolves 180 resource/day rows
+per historical cutoff: 30 represented days across assembly, configuration and
+test, each with equipment and workforce. Daily observations are within 24 hours
+of each run cutoff; weekends have zero available hours. Existing allocations
+and downtime follow provisional ranges. The resolver rejects missing days and
+source digest changes; selection rejects future snapshots. This supports a
+**feasible, uncommitted** build path, not a booked production slot. Capacity
+beyond the window remains unknown. Digital commitments, baseline decisions,
+14 field marks and two calibration reviews remain open.
+
 ## Dated inbound source increment — 8 October 2026
 
-The independent provisional inbound ledger now has 441 supplier/component receipts across 63 products and seven monthly observation dates. Its Confirmed/Planned/Delayed/Cancelled mix follows the configured 70/20/8/2% target within 0.5 percentage points. Four SHA-256-pinned shards and a matching 400-cutoff index supply dated PO headers or independent supplier proofs for confirmed no-PO receipts. The historical resolver validates all 400 views; expired confirmations remain historical records but are not binding. Production capacity and digital commitments, historical baseline decisions, actual execution logs, detailed product fit and comparable prices remain pending. The 14 field marks and two calibration reviews stay open.
+The independent provisional inbound ledger now has 441 supplier/component receipts across 63 products and seven monthly observation dates. Its Confirmed/Planned/Delayed/Cancelled mix follows the configured 70/20/8/2% target within 0.5 percentage points. Four SHA-256-pinned shards and a matching 400-cutoff index supply dated PO headers or independent supplier proofs for confirmed no-PO receipts. The historical resolver validates all 400 views; expired confirmations remain historical records but are not binding. Digital commitments, historical baseline decisions, actual execution logs, detailed product fit and comparable prices remain pending. The 14 field marks and two calibration reviews stay open.
