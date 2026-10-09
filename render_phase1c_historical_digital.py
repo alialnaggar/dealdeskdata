@@ -185,9 +185,9 @@ def load_resolver(base_dir=HERE):
     return resolve
 
 
-def load_provider_resolver(snapshot_id, base_dir=HERE):
+def load_provider_resolver(snapshot_id, base_dir=HERE, *, resolver=None):
     """Supply the reader with proof visible at one registered cutoff only."""
-    view = load_resolver(base_dir)(snapshot_id)
+    view = (resolver or load_resolver(base_dir))(snapshot_id)
     records = {}
     for raw in view["provider_evidence"]:
         record = dict(raw)
