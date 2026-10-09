@@ -11,7 +11,7 @@ RUN = {"data_snapshot_ref": "HIST-CREDIT-0001",
        "as_of_at": datetime(2026, 3, 1, 9, tzinfo=timezone.utc)}
 EMPTY = {"schema_version": 1, "snapshot_id": "HIST-CREDIT-0001",
          "as_of_at": "2026-03-01T09:00:00Z", "complete": True,
-         "inbound_evidence": [], "purchase_order_evidence": [],
+         "inbound_evidence": [], "purchase_order_evidence": [], "provider_evidence": [],
          **{table: [] for table in TABLES}}
 
 
