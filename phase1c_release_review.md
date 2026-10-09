@@ -74,6 +74,32 @@ instance range pending calibration review. The source resolves at all 400
 historical cutoffs; generated historical decisions and actual agent execution
 still have not been run.
 
+## Historical baseline diagnostic — 9 October 2026
+
+The disposable PostgreSQL pass read all 400 queued runs with compiled baseline
+policy and frozen credit, operational and provider evidence. It wrote a
+separate provisional diagnostic artifact and rolled back the imported rows;
+no expected outcome or agent execution was written to deal inputs.
+
+The first pass exposed a source-cadence mismatch: monthly commitment
+observations made 386 of 400 credit views stale under the existing 24-hour
+freshness rule. A provisional independent daily observation schedule at 85%
+capture now yields 329 fresh and 71 stale views. The agreed calibration file
+and threshold were not changed. Service coverage rules for 22 products now
+cover DE, NL and BE with one explicit excluded region in each; FR and AT
+remain unknown, and no service slot is claimed. Missing service coverage
+fell from 184 to 52 line findings.
+
+[PostgreSQL diagnostic run 37956989726](https://github.com/alialnaggar/dealdeskdata/actions/runs/37956989726)
+passed all 400 reads. Its provisional gate distribution is 6
+`approval_required`, 30 `needs_commitment`, 129 `needs_evidence`, 211
+`needs_revision` and 24 `blocked`. Evidence-gap counts include 71 stale
+credit commitments, 438 missing delivery findings, 185 missing digital
+confirmations and 52 missing service coverage findings. These are overlapping
+line/run findings, not exclusive deal counts. Delivery gaps need a per-mode
+review before any historical labels are materialized or used for training.
+The 14 field marks and two calibration reviews remain open.
+
 ## Dated inbound source increment — 8 October 2026
 
 The independent provisional inbound ledger now has 441 supplier/component receipts across 63 products and seven monthly observation dates. Its Confirmed/Planned/Delayed/Cancelled mix follows the configured 70/20/8/2% target within 0.5 percentage points. Four SHA-256-pinned shards and a matching 400-cutoff index supply dated PO headers or independent supplier proofs for confirmed no-PO receipts. The historical resolver validates all 400 views; expired confirmations remain historical records but are not binding. Digital commitments, historical baseline decisions, actual execution logs, detailed product fit and comparable prices remain pending. The 14 field marks and two calibration reviews stay open.
