@@ -40,6 +40,10 @@ def build(config, customers):
     rng = random.Random(config["random_seed"] + 905)
     settings = config["commercial_supply"]
     credit = settings["credit_profiles"]
+    # Provisional source-cadence assumption; review before calibration freeze.
+    capture_rate = 0.85
+    if not 0 < capture_rate <= 1:
+        raise ValueError("invalid historical credit observation rate")
     payments = settings["payment_history"]
     ar = settings["accounts_receivable"]
     source = []
@@ -55,6 +59,14 @@ def build(config, customers):
             commitments.append({"evidence_ref": f"HIST-COMMIT-{cid}-{month:02d}",
                                 "recorded_at": recorded.isoformat(),
                                 "amount_eur": money(limit * Decimal(str(rng.uniform(0, .18))))})
+        first_day, last_day = date(2026, 2, 28), date(2026, 8, 31)
+        observation_rng = random.Random(config["random_seed"] + 2000 + int(cid[-3:]))
+        observation_days = []
+        day = first_day
+        while day <= last_day:
+            if day == first_day or observation_rng.random() < capture_rate:
+                observation_days.append(day.isoformat())
+            day += timedelta(days=1)
         count_band = payments["paid_invoice_count_by_segment"][segment]
         paid_count = round(rng.triangular(count_band["minimum"], count_band["maximum"], count_band["mode"]))
         paid = []
@@ -97,6 +109,7 @@ def build(config, customers):
         source.append({"customer_id": cid, "size_segment": segment, "risk_rating": risk,
                        "credit_status": customer["credit_status"], "credit_limit": money(limit),
                        "account_status": "Active", "commitments": commitments,
+                       "commitment_observation_days": observation_days,
                        "paid_invoices": paid, "open_invoices": invoices,
                        "adverse_signal": customer["adverse_signal"]})
     all_open = [invoice for customer in source for invoice in customer["open_invoices"]]
@@ -129,11 +142,19 @@ def freeze_snapshot(index, sources, snapshot_id):
     customer = sources.get(entry["customer_id"])
     if not customer:
         raise ValueError("missing historical credit source customer")
+    observations = [datetime.combine(date.fromisoformat(day), datetime.min.time(),
+                    timezone.utc) + timedelta(hours=8)
+                    for day in customer["commitment_observation_days"]]
+    known = [moment for moment in observations if moment <= as_of]
+    if not known:
+        raise ValueError("no contemporaneous commitment observation")
+    observed = max(known)
     events = [event for event in customer["commitments"]
-              if datetime.fromisoformat(event["recorded_at"]) <= as_of]
+              if datetime.fromisoformat(event["recorded_at"]) <= observed]
     if not events:
-        raise ValueError("no contemporaneous commitment record")
+        raise ValueError("no commitment amount known at observation")
     event = max(events, key=lambda item: item["recorded_at"])
+    evidence_ref = f"HIST-COMMIT-OBS-{customer['customer_id']}-{observed:%Y%m%d}"
     cutoff = as_of.date()
     receivables = []
     payment_rows = [row for row in customer["paid_invoices"]
@@ -164,12 +185,12 @@ def freeze_snapshot(index, sources, snapshot_id):
             "account_status": customer["account_status"],
             "credit_profile": {"customer_id": cid, "credit_limit": customer["credit_limit"],
                 "unbilled_committed_amount": event["amount_eur"],
-                "commitments_as_of_at": event["recorded_at"],
-                "commitment_evidence_ref": event["evidence_ref"],
+                "commitments_as_of_at": observed.isoformat(),
+                "commitment_evidence_ref": evidence_ref,
                 "risk_rating": customer["risk_rating"], "credit_status": customer["credit_status"]},
-            "commitment_evidence": {"evidence_ref": event["evidence_ref"],
+            "commitment_evidence": {"evidence_ref": evidence_ref,
                 "customer_id": cid, "amount": event["amount_eur"],
-                "issued_at": event["recorded_at"],
+                "issued_at": observed.isoformat(),
                 "adverse_signal": customer["adverse_signal"]},
             "receivables": receivables, "payments": payment_rows}
 
