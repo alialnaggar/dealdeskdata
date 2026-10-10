@@ -122,3 +122,21 @@ gaps require review before any labels or execution logs are authored.
 ## Dated inbound source increment — 8 October 2026
 
 The independent provisional inbound ledger now has 441 supplier/component receipts across 63 products and seven monthly observation dates. Its Confirmed/Planned/Delayed/Cancelled mix follows the configured 70/20/8/2% target within 0.5 percentage points. Four SHA-256-pinned shards and a matching 400-cutoff index supply dated PO headers or independent supplier proofs for confirmed no-PO receipts. The historical resolver validates all 400 views; expired confirmations remain historical records but are not binding. Historical labels, actual execution logs, detailed product fit and comparable prices remain pending. The 14 field marks and two calibration reviews stay open.
+
+## Remaining gap classification — 10 October 2026
+
+[PostgreSQL run 38024615223](https://github.com/alialnaggar/dealdeskdata/actions/runs/38024615223)
+passed the full workflow with a per-mode diagnostic and a corrected digital
+gate. Of 185 previously reported digital confirmation gaps, 108 have fresh,
+full-term provider proof and enough capacity but cannot meet the requested
+activation date. They now receive a date revision; the other 77 have no
+matching pool and remain evidence gaps. The provisional 400-deal mix is 6
+`approval_required`, 24 `blocked`, 69 `needs_commitment`, 142
+`needs_evidence`, and 159 `needs_revision`.
+
+The 238 delivery evidence findings comprise 213 supplier-finished, 20
+make-to-order, and five stocked-finished lines. Supplier-finished lines
+include 168 conditional offers and 45 infeasible supply findings; an offer
+is not a binding receipt. The remaining evidence findings are 71 stale
+credit commitments, 77 digital pool gaps, and 52 service coverage gaps.
+These counts overlap across deals and do not establish final labels.
