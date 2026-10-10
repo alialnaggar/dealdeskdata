@@ -27,20 +27,26 @@ def build(portfolio, config, credit_index):
     if len(products) != 63:
         raise ValueError("inbound product coverage drift")
     rng = random.Random(config["random_seed"] + 1400)
-    count = len(products) * 7
+    # Keep independent supplier observations in step with the configured
+    # seven-day confirmation evidence recheck, rather than leaving a monthly
+    # gap behind each short-lived confirmation.
+    first_observation = date(2026, 2, 20)
+    last_observation = date(2026, 8, 31)
+    observations = [first_observation + timedelta(days=7 * n)
+                    for n in range((last_observation - first_observation).days // 7 + 1)]
+    count = len(products) * len(observations)
     targets = config["commercial_supply"]["availability"]["inbound_status_target_share"]
     counts = {status: round(count * share) for status, share in targets.items()}
     counts["Confirmed"] += count - sum(counts.values())
     statuses = [status for status, amount in counts.items() for _ in range(amount)]
     rng.shuffle(statuses)
     locations = config["commercial_supply"]["availability"]["inventory_locations"]
-    months = [(2026, month, 20) for month in range(2, 9)]
     events = []
-    for month_index, (year, month, day) in enumerate(months):
+    for observation_index, observation_day in enumerate(observations):
         for product_index, product in enumerate(products):
-            sequence = month_index * len(products) + product_index
+            sequence = observation_index * len(products) + product_index
             status = statuses[sequence]
-            observed = datetime.combine(date(year, month, day), time(8), timezone.utc)
+            observed = datetime.combine(observation_day, time(8), timezone.utc)
             expected = (observed + timedelta(days=rng.randint(3, 12))).date()
             valid_until = observed + timedelta(days=9)
             location = locations[product_index % len(locations)]
@@ -71,9 +77,10 @@ def build(portfolio, config, credit_index):
                     "issued_at": (observed - timedelta(hours=2)).isoformat(),
                     "confirmed_at": confirmation, "valid_until": valid_until.isoformat()}
                     if no_po else None)})
+    shard_size = (len(events) + 3) // 4
     files = {f"{PREFIX}{n+1:02d}.json": encode({"schema_version": 1,
         "provenance": "synthetic_provisional_supplier_receipts",
-        "events": events[n*112:(n+1)*112]}) for n in range(4)}
+        "events": events[n*shard_size:(n+1)*shard_size]}) for n in range(4)}
     index = {"schema_version": 1, "provenance": "synthetic_provisional_inbound_source",
              "source_sha256": {name: hashlib.sha256(content.encode()).hexdigest()
                                for name, content in files.items()}, "snapshots": snapshots}
@@ -94,7 +101,7 @@ def load_resolver(base_dir=HERE):
         if payload.get("schema_version") != 1:
             raise ValueError("historical inbound source schema drift")
         events.extend(payload["events"])
-    if len(events) != 441 or len({x["supply_id"] for x in events}) != 441:
+    if len(events) != 1764 or len({x["supply_id"] for x in events}) != 1764:
         raise ValueError("incomplete historical inbound source")
     lookup = {entry["snapshot_id"]: entry for entry in index["snapshots"]}
 
