@@ -18,7 +18,13 @@ class ColumnContractTests(unittest.TestCase):
         self.assertEqual((result["tables"], result["columns"]), (24, 266))
         self.assertEqual(result["errors"], [])
         self.assertFalse(result["ready_for_generation"])
-        self.assertEqual(len(result["review_before_generation"]), 14)
+        self.assertEqual(len(result["review_before_generation"]), 7)
+        self.assertEqual({item.split(":", 1)[0] for item in result["review_before_generation"]}, {
+            "products.attributes_json", "products.list_price", "products.standard_cost",
+            "suppliers.order_calendar_json", "compatibility_rules.condition_json",
+            "deals.evidence_refs_json", "agent_execution_log.output_json"})
+        self.assertEqual(sum(bool(row.get("resolved_by")) for table in CONTRACT["tables"].values()
+                             for row in table.values()), 7)
 
     def test_removed_column_and_type_drift_fail(self):
         changed = deepcopy(CONTRACT)
