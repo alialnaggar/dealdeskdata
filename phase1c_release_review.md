@@ -100,6 +100,25 @@ line/run findings, not exclusive deal counts. Delivery gaps need a per-mode
 review before any historical labels are materialized or used for training.
 The 14 field marks and two calibration reviews remain open.
 
+## Historical workshop alignment — 10 October 2026
+
+The provisional source now locates all 36 component SKUs at the configured
+Central workshop. Finished stock continues to use the configured locations.
+The reader also reports an unschedulable build as `infeasible` or `unknown`
+according to its production classification, rather than leaving a
+`pending_production_check` fulfillment status after the check has run.
+
+[PostgreSQL run 38022399576](https://github.com/alialnaggar/dealdeskdata/actions/runs/38022399576)
+passed the full workflow. All 220 historical make-to-order lines have matching,
+selected BOMs; 200 now have feasible but uncommitted builds and 20 are
+infeasible without replenishment. The 400-deal provisional gate mix is 6
+`approval_required`, 24 `blocked`, 69 `needs_commitment`, 212
+`needs_evidence` and 89 `needs_revision`. Evidence-gap findings are 71 stale
+credit commitments, 238 missing delivery findings, 185 missing digital
+confirmations and 52 missing service coverage findings. These findings can
+overlap within a deal. The 20 material shortfalls and the remaining evidence
+gaps require review before any labels or execution logs are authored.
+
 ## Dated inbound source increment — 8 October 2026
 
-The independent provisional inbound ledger now has 441 supplier/component receipts across 63 products and seven monthly observation dates. Its Confirmed/Planned/Delayed/Cancelled mix follows the configured 70/20/8/2% target within 0.5 percentage points. Four SHA-256-pinned shards and a matching 400-cutoff index supply dated PO headers or independent supplier proofs for confirmed no-PO receipts. The historical resolver validates all 400 views; expired confirmations remain historical records but are not binding. Digital commitments, historical baseline decisions, actual execution logs, detailed product fit and comparable prices remain pending. The 14 field marks and two calibration reviews stay open.
+The independent provisional inbound ledger now has 441 supplier/component receipts across 63 products and seven monthly observation dates. Its Confirmed/Planned/Delayed/Cancelled mix follows the configured 70/20/8/2% target within 0.5 percentage points. Four SHA-256-pinned shards and a matching 400-cutoff index supply dated PO headers or independent supplier proofs for confirmed no-PO receipts. The historical resolver validates all 400 views; expired confirmations remain historical records but are not binding. Historical labels, actual execution logs, detailed product fit and comparable prices remain pending. The 14 field marks and two calibration reviews stay open.
