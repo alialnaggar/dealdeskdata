@@ -357,3 +357,16 @@ alternatives, 60 conditional offers and nine infeasible; all-mode missing
 delivery findings fell from 238 to 82. This is a source cadence adjustment,
 not an outcome target or training label. Review cadence and achieved mix
 alongside the remaining field marks before final freeze.
+
+## Field-ledger checkpoint — 10 October 2026
+
+Seven previously open marks now cite the exact passing distribution and
+historical replay checks in `phase1c_column_rules.yaml`: customer industry
+and country, credit commitment evidence, frozen AR, no-PO inbound proof,
+historical product popularity and run snapshot isolation. Seven marks stay
+open for product attributes/price/cost, supplier calendars, compatibility
+predicates, deal document references and actual agent output. The 24-table,
+266-column coverage check passes, while `ready_for_generation` remains false.
+The independent 100-test set and 36 evaluation variants are still a separate
+generation and review stage; the 400-deal diagnostic cannot act as their
+answer key.
