@@ -170,6 +170,7 @@ class ReaderReferenceTests(unittest.TestCase):
                          + sum(x["free"] for x in s["binding_receipts"]["two_lines_share_component-C"]), 13)
         self.assertIsNone(s["assembly"]["two_lines_share_component-P"]["first_fitting_day"])
         self.assertEqual(self.read(14)["facts"]["lines"][0]["production_status"], "infeasible_without_replenishment")
+        self.assertEqual(self.read(14)["facts"]["lines"][0]["fulfillment_status"], "infeasible")
 
 
 if __name__ == "__main__":
