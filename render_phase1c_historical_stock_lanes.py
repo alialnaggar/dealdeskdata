@@ -49,7 +49,12 @@ def build(portfolio, config, contract, credit_index):
     stock = []
     for i, product in enumerate(products):
         pid = product["product_id"]
-        location = availability["inventory_locations"][i % 2]
+        # This synthetic operating model has one build workshop. Component
+        # stock must be co-located there to be selectable for a build.
+        location = (config["fulfillment_production_calibration"]["proposed_parameters"]
+                    ["production_capacity"]["workshop_location"]
+                    if product["fulfillment_mode"] == "component"
+                    else availability["inventory_locations"][i % 2])
         if product["fulfillment_mode"] == "component":
             band = config["fulfillment_production_calibration"]["proposed_parameters"]["aggregate_inventory"]
             baseline = round(rng.triangular(*band["component_on_hand_units"][::2], band["component_on_hand_units"][1]))
