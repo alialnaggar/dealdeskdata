@@ -24,7 +24,7 @@
 | Row and relationship checks | `suppliers.order_calendar_json`, `compatibility_rules.condition_json` | Execute typed row checks on all generated rows, dependency and installation predicates, and supplier lead/dispatch calendars. The pilot validator now closes the location, requirements, and per-mode line-configuration checks on 36 deals / 65 lines; dependency coverage remains open. |
 | Runtime output | `agent_execution_log.output_json` | `validate_phase1c_runtime_outputs.py` now checks unique attempts, outcome-free inputs, typed output envelopes, agent identity and manifest evidence IDs. Populate and validate actual specialist runs; never fabricate execution logs as source data. |
 
-The two remaining calibration-level review items are the provisional **36 components / 156 products** mix (structural BOM coverage exists, detailed sourcing/fit does not) and comparable **catalogue price dates, currencies, units and tax bases**. The ledger now has **seven field marks** open after evidence-backed disposition of seven historical-source and distribution marks. No final threshold, source claim, distribution tolerance or release target is frozen by this sheet.
+The two remaining calibration-level review items are the provisional **36 components / 156 products** mix (structural BOM coverage exists, detailed sourcing/fit does not) and comparable **catalogue price dates, currencies, units and tax bases**. The ledger now has **six field marks** open after evidence-backed disposition of eight marks. No final threshold, source claim, distribution tolerance or release target is frozen by this sheet.
 
 ## Immediate build order
 
@@ -179,3 +179,21 @@ reviews need an explicit synthetic-scope or sourced-fit/price decision;
 actual agent outputs must come from execution, never generated as source
 rows. The independent 100-test and 36-case evaluation release still needs
 construction and its own answer-key review.
+
+## Deal document scope — 10 October 2026
+
+The typed deal reference validator now rejects a trusted customer document
+unless its independent record names the same deal. A matching, timely
+document passes; missing, future, altered or cross-deal references fail.
+Historical deals have empty reference arrays and make no document-proof
+claim. `deals.evidence_refs_json` now has a `resolved_by` entry, leaving
+six open field marks: product attributes, list price, standard cost,
+supplier calendars, compatibility predicates and actual agent output.
+Supplier calendar and receipt/offer linkage are not inferred where the
+schema has no specific supplier-item reference on an inbound receipt.
+
+The compatibility evaluator now checks `requires_product` and
+`excludes_product` within each declared line or configured group. A target
+product in another group no longer satisfies a same-group dependency. The
+regression covers both separated and shared groups. The field mark remains
+open for full generated-rule coverage and product-fit evidence.
