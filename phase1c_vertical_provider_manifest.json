@@ -1,0 +1,27 @@
+{
+  "records": [
+    {
+      "capacity_total": 10,
+      "capacity_unit": "instance",
+      "commitment_status": "binding",
+      "configuration_signature_json": {
+        "edition": "business"
+      },
+      "confirmed_at": "2026-08-31T09:00:00Z",
+      "covers_from": "2026-09-03",
+      "covers_until": "2027-09-04",
+      "evidence_ref": "PILOT-PROVIDER-PROOF-001",
+      "evidence_type": "provider_proof",
+      "issued_at": "2026-09-01T09:00:00Z",
+      "product_id": "SELL-CLOUD_SERVICES_AND_SUBSCRIPTIONS-001",
+      "provider_id": "PILOT-SUP-001",
+      "quantity_allocated": 2,
+      "region_code": "DE",
+      "source_class": "synthetic_provider_manifest",
+      "term_code": "12m",
+      "valid_until": "2027-09-05T00:00:00Z",
+      "verified_at": "2026-09-01T09:00:00Z"
+    }
+  ],
+  "schema_version": 1
+}

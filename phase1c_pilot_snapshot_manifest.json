@@ -1,0 +1,62 @@
+{
+  "as_of_at": "2026-09-01T12:00:00Z",
+  "entries": [
+    {
+      "path": "schema.sql",
+      "role": "schema",
+      "sha256": "637a8d78ef8ec15e912c02209ccac2ab04623aa37c44595eeed9df33d36bca0f"
+    },
+    {
+      "path": "phase1c_buildable_master.sql",
+      "role": "pilot_sql",
+      "sha256": "9e661692cc6d39017b317cfe5110cf759a7dff3c87f41e2c438468739c390336"
+    },
+    {
+      "path": "phase1c_sellable_catalogue.sql",
+      "role": "pilot_sql",
+      "sha256": "adf25015e67f99e594492e634f9c8cd558eec7b259c076cad13cb4625917c540"
+    },
+    {
+      "path": "phase1c_vertical_pilot.sql",
+      "role": "pilot_sql",
+      "sha256": "1507790596acd9712d03a8d88d3fdda4c521a08cc008354bc28fa3660928f4e6"
+    },
+    {
+      "path": "phase1c_conflict_pilot.sql",
+      "role": "pilot_sql",
+      "sha256": "b8ccc2c1e5dad05be8975a6b4e76602e0900e090e5ed89c263926bef8211fca8"
+    },
+    {
+      "path": "phase1c_stress_pilot.sql",
+      "role": "pilot_sql",
+      "sha256": "1bc0ce984d2a34295015009cc51bcf167a30f689e1352bcafa05e798b6328134"
+    },
+    {
+      "path": "calibration_config.yaml",
+      "role": "calibration",
+      "sha256": "dda3df36a6bdbf802cc135e7ed54b966f9b573d6c1efd97e3d4ea31716e039b2"
+    },
+    {
+      "path": "phase1c_data_contract.yaml",
+      "role": "contract",
+      "sha256": "492e18f7583a84949d2b4efeafc3e53d0b7f32647e76d1b90493c4e283b211d9"
+    },
+    {
+      "path": "phase1c_scenario_matrix.yaml",
+      "role": "scenario_matrix",
+      "sha256": "ebf98a7823c6d82f9d8c46ba1750a13e705e6f4f7cd28c0709fd4cbdefef86b6"
+    },
+    {
+      "path": "phase1c_vertical_provider_manifest.json",
+      "role": "provider_manifest",
+      "sha256": "e539d02bbcf97292616c46b60ac788078c3d982208dcd7eae9f2626cfc2e94be"
+    },
+    {
+      "path": "phase1c_conflict_provider_manifest.json",
+      "role": "provider_manifest",
+      "sha256": "d948a5c372e64cfe119bd2ed2f2c4409ebbd183b24a749bd0585acc15a2cf3c5"
+    }
+  ],
+  "schema_version": 1,
+  "snapshot_id": "PILOT-OPERATIONS-SNAPSHOT"
+}

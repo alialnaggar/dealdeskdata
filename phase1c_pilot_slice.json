@@ -1,0 +1,86 @@
+{
+  "as_of_at": "2026-10-04T12:00:00+02:00",
+  "rows": {
+    "products": [
+      {
+        "product_id": "PILOT-P-DEVICE", "product_code": "SYN-DEVICE-001",
+        "catalog_version": "CATALOGUE_2026_V1", "product_name": "Synthetic Office Device",
+        "category": "end_user_computing_and_digital_workplace", "product_type": "physical",
+        "attributes_json": {"archetype_code": "generic_device", "demand_class": "core"},
+        "list_price": 1200, "standard_cost": 840, "billing_model": "one_time",
+        "unit_of_measure": "device", "is_active": true, "is_sellable": true,
+        "fulfillment_mode": "stocked_finished", "stock_uom": "each"
+      }
+    ],
+    "customers": [
+      {
+        "customer_id": "PILOT-C-001", "customer_code": "SYN-CUST-001",
+        "customer_name": "Fictional Workshop One", "size_segment": "SMB",
+        "strategic_account": false, "industry": "manufacturing", "country_code": "DE",
+        "region": "DE-NW", "customer_since": "2024-01-01", "account_status": "Active"
+      }
+    ],
+    "suppliers": [
+      {
+        "supplier_id": "PILOT-S-001", "supplier_code": "SYN-SUP-001",
+        "supplier_name": "Fictional Component Supply", "country_code": "NL", "status": "active",
+        "order_calendar_json": {
+          "working_weekdays": [1, 2, 3, 4, 5], "holiday_dates": [],
+          "time_zone": "Europe/Amsterdam"
+        }
+      }
+    ],
+    "inventory": [
+      {
+        "inventory_id": "PILOT-I-001", "product_id": "PILOT-P-DEVICE",
+        "location_id": "WH-EU-CENTRAL", "quantity_on_hand": 10,
+        "quantity_allocated": 2, "snapshot_at": "2026-10-04T10:00:00+02:00"
+      }
+    ],
+    "supplier_items": [
+      {
+        "supplier_item_id": "PILOT-O-001", "supplier_id": "PILOT-S-001",
+        "product_id": "PILOT-P-DEVICE", "supplier_sku": "SYN-SUP-SKU-001",
+        "minimum_order_qty": 1, "order_multiple": 1, "lead_days_min": 5,
+        "lead_days_mode": 10, "lead_days_max": 30, "unit_cost": 800,
+        "currency_code": "EUR", "valid_from": "2026-09-01", "valid_to": null,
+        "is_active": true
+      }
+    ],
+    "shipping_lanes": [
+      {
+        "lane_id": "PILOT-LANE-001", "origin_location_id": "WH-EU-CENTRAL",
+        "origin_time_zone": "Europe/Berlin", "destination_country_code": "DE",
+        "destination_region": "DE-NW", "shipping_service_code": "standard",
+        "transit_workdays": 2, "dispatch_weekdays_json": [1, 2, 3, 4, 5],
+        "cutoff_local_time": "15:00:00", "is_active": true
+      }
+    ],
+    "deals": [
+      {
+        "deal_id": "PILOT-D-001", "supersedes_deal_id": null,
+        "customer_id": "PILOT-C-001", "salesperson_id": "SALES-001",
+        "deal_name": "Synthetic Device Pilot", "submitted_at": "2026-10-04T10:00:00+02:00",
+        "currency_code": "EUR", "catalog_version": "CATALOGUE_2026_V1",
+        "policy_set_code": "BASELINE_2026", "requested_delivery_date": "2026-10-15",
+        "destination_country_code": "DE", "destination_region": "DE-NW",
+        "shipping_service_code": "standard",
+        "terms_json": {"payment_terms_days": 30, "contract_clause_codes": ["standard"],
+                       "allow_partial_delivery": false},
+        "exception_justification": null, "requirements_json": {}, "evidence_refs_json": [],
+        "salesperson_comments": null, "deal_status": "Submitted",
+        "dataset_type": "generated_test", "historical_decision": null,
+        "decision_reason": null, "approved_by_roles_json": null
+      }
+    ],
+    "deal_lines": [
+      {
+        "deal_line_id": "PILOT-DL-001", "deal_id": "PILOT-D-001",
+        "line_number": 1, "product_id": "PILOT-P-DEVICE", "quantity": 3,
+        "quoted_unit_price": 1170, "configuration_json": {},
+        "fulfillment_group_code": null, "requested_activation_date": null,
+        "installation_requested": false
+      }
+    ]
+  }
+}

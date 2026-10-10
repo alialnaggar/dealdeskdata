@@ -1,0 +1,47 @@
+{
+  "base": "phase1c_pilot_slice.json",
+  "product_rows": [
+    {
+      "product_id": "PILOT-P-BUILD", "product_code": "SYN-BUILD-001", "catalog_version": "CATALOGUE_2026_V1",
+      "product_name": "Synthetic Configured Server", "category": "servers_and_compute_infrastructure",
+      "product_type": "physical", "attributes_json": {"archetype_code": "configured_server", "demand_class": "regular", "option_codes": ["standard", "enhanced"]},
+      "list_price": 650, "standard_cost": 430, "billing_model": "one_time", "unit_of_measure": "device",
+      "is_active": true, "is_sellable": true, "fulfillment_mode": "make_to_order", "stock_uom": "each"
+    },
+    {
+      "product_id": "PILOT-P-COMP-A", "product_code": "SYN-COMP-A", "catalog_version": "CATALOGUE_2026_V1",
+      "product_name": "Synthetic Compute Component", "category": "servers_and_compute_infrastructure",
+      "product_type": "component", "attributes_json": {"archetype_code": "compute_part", "demand_class": "regular", "component_family": "compute"},
+      "list_price": 0, "standard_cost": 100, "billing_model": "not_applicable", "unit_of_measure": "component_unit",
+      "is_active": true, "is_sellable": false, "fulfillment_mode": "component", "stock_uom": "component_unit"
+    },
+    {
+      "product_id": "PILOT-P-COMP-B", "product_code": "SYN-COMP-B", "catalog_version": "CATALOGUE_2026_V1",
+      "product_name": "Synthetic Storage Component", "category": "servers_and_compute_infrastructure",
+      "product_type": "component", "attributes_json": {"archetype_code": "storage_part", "demand_class": "regular", "component_family": "storage"},
+      "list_price": 0, "standard_cost": 150, "billing_model": "not_applicable", "unit_of_measure": "component_unit",
+      "is_active": true, "is_sellable": false, "fulfillment_mode": "component", "stock_uom": "component_unit"
+    }
+  ],
+  "inventory_rows": [
+    {"inventory_id": "PILOT-I-COMP-A", "product_id": "PILOT-P-COMP-A", "location_id": "WH-EU-CENTRAL", "quantity_on_hand": 12, "quantity_allocated": 2, "snapshot_at": "2026-10-04T10:00:00+02:00"},
+    {"inventory_id": "PILOT-I-COMP-B", "product_id": "PILOT-P-COMP-B", "location_id": "WH-EU-CENTRAL", "quantity_on_hand": 10, "quantity_allocated": 1, "snapshot_at": "2026-10-04T10:00:00+02:00"}
+  ],
+  "deal_line": {"deal_line_id": "PILOT-DL-001", "deal_id": "PILOT-D-001", "line_number": 1, "product_id": "PILOT-P-BUILD", "quantity": 3, "quoted_unit_price": 630, "configuration_json": {"selected_options": ["standard"]}, "fulfillment_group_code": null, "requested_activation_date": null, "installation_requested": false},
+  "bom_headers": [
+    {"bom_id": "PILOT-BOM-001", "finished_product_id": "PILOT-P-BUILD", "catalog_version": "CATALOGUE_2026_V1", "bom_version": "V1", "configuration_signature_json": {"selected_options": ["standard"]}, "output_quantity": 1, "effective_from": "2026-09-01T00:00:00+02:00", "effective_to": null, "status": "active"}
+  ],
+  "bom_lines": [
+    {"bom_line_id": "PILOT-BL-A", "bom_id": "PILOT-BOM-001", "component_product_id": "PILOT-P-COMP-A", "required_quantity_per_output": 2, "scrap_pct": 1, "substitute_group_code": null, "priority": 0, "is_mandatory": true},
+    {"bom_line_id": "PILOT-BL-B", "bom_id": "PILOT-BOM-001", "component_product_id": "PILOT-P-COMP-B", "required_quantity_per_output": 1, "scrap_pct": 0, "substitute_group_code": null, "priority": 0, "is_mandatory": true}
+  ],
+  "production_requirements": [
+    {"requirement_id": "PILOT-R-ASM", "bom_id": "PILOT-BOM-001", "operation_seq": 1, "capability_code": "assembly", "resource_type": "equipment", "setup_hours": 0.5, "hours_per_unit": 0.5, "batch_size": 4, "status": "active"},
+    {"requirement_id": "PILOT-R-TEST", "bom_id": "PILOT-BOM-001", "operation_seq": 2, "capability_code": "test", "resource_type": "workforce", "setup_hours": 0.5, "hours_per_unit": 0.75, "batch_size": 4, "status": "active"}
+  ],
+  "production_capacity": [
+    {"capacity_id": "PILOT-CAP-ASM", "location_id": "WH-EU-CENTRAL", "capability_code": "assembly", "resource_type": "equipment", "capacity_date": "2026-10-05", "time_zone": "Europe/Berlin", "available_capacity_hours": 8, "allocated_capacity_hours": 2, "snapshot_at": "2026-10-04T10:00:00+02:00", "status": "active", "evidence_ref": "SYN-CAP-ASM-001"},
+    {"capacity_id": "PILOT-CAP-TEST", "location_id": "WH-EU-CENTRAL", "capability_code": "test", "resource_type": "workforce", "capacity_date": "2026-10-06", "time_zone": "Europe/Berlin", "available_capacity_hours": 8, "allocated_capacity_hours": 2, "snapshot_at": "2026-10-04T10:00:00+02:00", "status": "active", "evidence_ref": "SYN-CAP-TEST-001"}
+  ],
+  "cost_parameters": {"workforce_cost_eur_per_hour": 30, "overhead_fraction": 0.1}
+}

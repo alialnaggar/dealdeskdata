@@ -1,0 +1,197 @@
+{
+  "purpose": "synthetic arithmetic feasibility only; not validated component sourcing or market prices",
+  "component_standard_costs_eur": {
+    "COMP-COMPUTE-001": "240",
+    "COMP-COMPUTE-002": "260",
+    "COMP-COMPUTE-003": "242.40",
+    "COMP-COMPUTE-004": "3800.00",
+    "COMP-COMPUTE-005": "3819.00",
+    "COMP-COMPUTE-006": "3838.00",
+    "COMP-COMPUTE-007": "3800.00",
+    "COMP-COMPUTE-008": "3819.00",
+    "COMP-COMPUTE-009": "3838.00",
+    "COMP-COMPUTE-010": "1800.00",
+    "COMP-COMPUTE-011": "1809.00",
+    "COMP-COMPUTE-012": "1818.00",
+    "COMP-STORAGE-001": "60",
+    "COMP-STORAGE-002": "60",
+    "COMP-STORAGE-003": "909.00",
+    "COMP-STORAGE-004": "900.00",
+    "COMP-STORAGE-005": "904.50",
+    "COMP-STORAGE-006": "909.00",
+    "COMP-STORAGE-007": "1300.00",
+    "COMP-STORAGE-008": "1306.50",
+    "COMP-STORAGE-009": "1313.00",
+    "COMP-NETWORK_AND_POWER-001": "50",
+    "COMP-NETWORK_AND_POWER-002": "50",
+    "COMP-NETWORK_AND_POWER-003": "707.00",
+    "COMP-NETWORK_AND_POWER-004": "700.00",
+    "COMP-NETWORK_AND_POWER-005": "703.50",
+    "COMP-NETWORK_AND_POWER-006": "707.00",
+    "COMP-NETWORK_AND_POWER-007": "600.00",
+    "COMP-NETWORK_AND_POWER-008": "603.00",
+    "COMP-NETWORK_AND_POWER-009": "606.00",
+    "COMP-CHASSIS_AND_OTHER-001": "180.0",
+    "COMP-CHASSIS_AND_OTHER-002": "1005.0",
+    "COMP-CHASSIS_AND_OTHER-003": "1010.0",
+    "COMP-CHASSIS_AND_OTHER-004": "1000.0",
+    "COMP-CHASSIS_AND_OTHER-005": "1005.0",
+    "COMP-CHASSIS_AND_OTHER-006": "1010.0"
+  },
+  "workforce_cost_eur_per_hour": 30,
+  "overhead_fraction": 0.1,
+  "products": [
+    {
+      "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009",
+      "selected_substitutes": {
+        "BOM-001": {
+          "NETWORK_OPTION": "COMP-NETWORK_AND_POWER-001"
+        },
+        "BOM-002": {}
+      },
+      "product_standard_cost_eur": 715,
+      "product_list_price_eur": 1050
+    },
+    {
+      "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-010",
+      "selected_substitutes": {
+        "BOM-003": {},
+        "BOM-004": {}
+      },
+      "product_standard_cost_eur": 692,
+      "product_list_price_eur": 850
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-001",
+      "selected_substitutes": {
+        "BOM-005": {},
+        "BOM-006": {}
+      },
+      "product_standard_cost_eur": 8178,
+      "product_list_price_eur": 9740
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-002",
+      "selected_substitutes": {
+        "BOM-007": {},
+        "BOM-008": {}
+      },
+      "product_standard_cost_eur": 8201,
+      "product_list_price_eur": 9770
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-003",
+      "selected_substitutes": {
+        "BOM-009": {},
+        "BOM-010": {}
+      },
+      "product_standard_cost_eur": 8205,
+      "product_list_price_eur": 9770
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-004",
+      "selected_substitutes": {
+        "BOM-011": {},
+        "BOM-012": {}
+      },
+      "product_standard_cost_eur": 8183,
+      "product_list_price_eur": 9750
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-005",
+      "selected_substitutes": {
+        "BOM-013": {}
+      },
+      "product_standard_cost_eur": 8226,
+      "product_list_price_eur": 9800
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-006",
+      "selected_substitutes": {
+        "BOM-014": {}
+      },
+      "product_standard_cost_eur": 8150,
+      "product_list_price_eur": 9710
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-007",
+      "selected_substitutes": {
+        "BOM-015": {}
+      },
+      "product_standard_cost_eur": 8205,
+      "product_list_price_eur": 9770
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-008",
+      "selected_substitutes": {
+        "BOM-016": {}
+      },
+      "product_standard_cost_eur": 8192,
+      "product_list_price_eur": 9760
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-009",
+      "selected_substitutes": {
+        "BOM-017": {}
+      },
+      "product_standard_cost_eur": 8183,
+      "product_list_price_eur": 9750
+    },
+    {
+      "product_id": "SELL-SERVERS_AND_COMPUTE_INFRASTRUCTURE-010",
+      "selected_substitutes": {
+        "BOM-018": {}
+      },
+      "product_standard_cost_eur": 8171,
+      "product_list_price_eur": 9730
+    },
+    {
+      "product_id": "SELL-STORAGE_AND_DATA_PROTECTION-001",
+      "selected_substitutes": {
+        "BOM-019": {}
+      },
+      "product_standard_cost_eur": 6706,
+      "product_list_price_eur": 8280
+    },
+    {
+      "product_id": "SELL-STORAGE_AND_DATA_PROTECTION-002",
+      "selected_substitutes": {
+        "BOM-020": {}
+      },
+      "product_standard_cost_eur": 6739,
+      "product_list_price_eur": 8320
+    },
+    {
+      "product_id": "SELL-STORAGE_AND_DATA_PROTECTION-003",
+      "selected_substitutes": {
+        "BOM-021": {}
+      },
+      "product_standard_cost_eur": 6761,
+      "product_list_price_eur": 8350
+    },
+    {
+      "product_id": "SELL-STORAGE_AND_DATA_PROTECTION-004",
+      "selected_substitutes": {
+        "BOM-022": {}
+      },
+      "product_standard_cost_eur": 6706,
+      "product_list_price_eur": 8280
+    },
+    {
+      "product_id": "SELL-STORAGE_AND_DATA_PROTECTION-005",
+      "selected_substitutes": {
+        "BOM-023": {}
+      },
+      "product_standard_cost_eur": 6706,
+      "product_list_price_eur": 8280
+    },
+    {
+      "product_id": "SELL-STORAGE_AND_DATA_PROTECTION-006",
+      "selected_substitutes": {
+        "BOM-024": {}
+      },
+      "product_standard_cost_eur": 6706,
+      "product_list_price_eur": 8280
+    }
+  ]
+}

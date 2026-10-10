@@ -1,0 +1,33 @@
+{
+  "customers_used": 80,
+  "deal_lines": 1200,
+  "fulfillment_mode_lines": {
+    "digital_activation": 459,
+    "make_to_order": 220,
+    "scheduled_service": 184,
+    "stocked_finished": 80,
+    "supplier_finished": 257
+  },
+  "historical_deals": 400,
+  "historical_decisions_recorded": 0,
+  "historical_evidence_snapshots_recorded": 0,
+  "lines_per_deal": {
+    "1": 50,
+    "2": 87,
+    "3": 135,
+    "4": 80,
+    "5": 40,
+    "6": 6,
+    "7": 1,
+    "8": 1
+  },
+  "mean_lines_per_deal": 3.0,
+  "minimum_product_occurrences": 4,
+  "provenance": "synthetic_provisional_inputs",
+  "schema_version": 1,
+  "seed": 22895,
+  "sellable_products": 120,
+  "top_product_count": 24,
+  "top_product_line_count": 768,
+  "top_product_line_share": 0.64
+}

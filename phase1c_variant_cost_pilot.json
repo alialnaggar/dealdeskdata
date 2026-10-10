@@ -1,0 +1,22 @@
+{
+  "product_id": "SELL-END_USER_COMPUTING_AND_DIGITAL_WORKPLACE-009",
+  "component_standard_costs_eur": {
+    "COMP-COMPUTE-001": 240,
+    "COMP-COMPUTE-002": 260,
+    "COMP-STORAGE-001": 60,
+    "COMP-STORAGE-002": 60,
+    "COMP-NETWORK_AND_POWER-001": 50,
+    "COMP-NETWORK_AND_POWER-002": 50,
+    "COMP-CHASSIS_AND_OTHER-001": 180
+  },
+  "selected_substitutes": {
+    "BOM-001": {
+      "NETWORK_OPTION": "COMP-NETWORK_AND_POWER-001"
+    },
+    "BOM-002": {}
+  },
+  "workforce_cost_eur_per_hour": 30,
+  "overhead_fraction": 0.1,
+  "product_standard_cost_eur": 715,
+  "product_list_price_eur": 1050
+}

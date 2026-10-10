@@ -6,12 +6,252 @@ on:
       - schema.sql
       - phase1c_schema_smoke.sql
       - phase1c_row_fixtures.sql
+      - phase1c_reader.py
+      - phase1c_horizon.py
+      - test_phase1c_horizon.py
+      - phase1c_component_units.py
+      - test_phase1c_component_units.py
+      - phase1c_digital_units.py
+      - test_phase1c_digital_units.py
+      - test_phase1c_reader.py
+      - phase1c_rule_rows.sql
+      - phase1c_provider_evidence_fixture.json
+      - calibration_config.yaml
+      - validate_phase1c_calibration.py
+      - test_validate_phase1c_calibration.py
+      - phase1c_column_rules.yaml
+      - validate_phase1c_column_rules.py
+      - test_validate_phase1c_column_rules.py
+      - render_phase1c_column_rules.py
+      - phase1c_data_contract.yaml
+      - phase1c_scenario_matrix.yaml
+      - validate_phase1c_scenario_matrix.py
+      - test_validate_phase1c_scenario_matrix.py
+      - validate_phase1c_data_contract.py
+      - test_validate_phase1c_data_contract.py
+      - phase1c_pilot_slice.json
+      - validate_phase1c_pilot.py
+      - test_validate_phase1c_pilot.py
+      - phase1c_assembly_pilot.json
+      - validate_phase1c_assembly_pilot.py
+      - test_validate_phase1c_assembly_pilot.py
+      - validate_phase1c_bom_portfolio.py
+      - test_validate_phase1c_bom_portfolio.py
+      - build_phase1c_portfolio_draft.py
+      - test_build_phase1c_portfolio_draft.py
+      - phase1c_portfolio_draft.json
+      - phase1c_variant_cost_pilot.json
+      - phase1c_build_cost_draft.json
+      - audit_phase1c_build_readiness.py
+      - test_audit_phase1c_build_readiness.py
+      - phase1c_technical_fit_pilot.json
+      - validate_phase1c_technical_fit_pilot.py
+      - test_validate_phase1c_technical_fit_pilot.py
+      - validate_phase1c_variant_cost_pilot.py
+      - test_validate_phase1c_variant_cost_pilot.py
+      - render_phase1c_master_slice.py
+      - phase1c_master_slice.sql
+      - phase1c_buildable_master.sql
+      - render_phase1c_sellable_catalogue.py
+      - test_render_phase1c_sellable_catalogue.py
+      - phase1c_sellable_catalogue.sql
+      - render_phase1c_vertical_pilot.py
+      - phase1c_vertical_pilot.sql
+      - phase1c_vertical_provider_manifest.json
+      - test_phase1c_vertical_pilot.py
+      - render_phase1c_conflict_pilot.py
+      - phase1c_conflict_pilot.sql
+      - phase1c_conflict_provider_manifest.json
+      - test_phase1c_conflict_pilot.py
+      - render_phase1c_stress_pilot.py
+      - phase1c_stress_pilot.sql
+      - phase1c_stress_pilot_report.json
+      - test_phase1c_stress_pilot.py
+      - validate_phase1c_generated_rows.py
+      - test_validate_phase1c_generated_rows.py
+      - validate_phase1c_evidence_manifests.py
+      - test_validate_phase1c_evidence_manifests.py
+      - phase1c_pilot_snapshot_manifest.json
+      - validate_phase1c_runtime_outputs.py
+      - test_validate_phase1c_runtime_outputs.py
+      - phase1c_historical_credit.py
+      - test_phase1c_historical_credit.py
+      - phase1c_historical_operational.py
+      - test_phase1c_historical_operational.py
+      - render_phase1c_historical_stock_lanes.py
+      - test_render_phase1c_historical_stock_lanes.py
+      - render_phase1c_historical_inbound.py
+      - test_render_phase1c_historical_inbound.py
+      - render_phase1c_historical_capacity.py
+      - test_render_phase1c_historical_capacity.py
+      - phase1c_historical_capacity_index.json
+      - phase1c_historical_capacity_source.json
+      - render_phase1c_historical_digital.py
+      - test_render_phase1c_historical_digital.py
+      - audit_phase1c_historical_baseline.py
+      - render_phase1c_historical_service_coverage.py
+      - test_render_phase1c_historical_service_coverage.py
+      - phase1c_historical_service_coverage.sql
+      - phase1c_historical_digital_index.json
+      - phase1c_historical_digital_pool_source.json
+      - 'phase1c_historical_digital_proof_*.json'
+      - phase1c_historical_inbound_index.json
+      - 'phase1c_historical_inbound_source_*.json'
+      - phase1c_historical_operational_index.json
+      - 'phase1c_historical_stock_source_*.json'
+      - phase1c_historical_lane_source.json
+      - phase1c_historical_offer_source.json
+      - render_phase1c_customer_master.py
+      - test_phase1c_customer_master.py
+      - phase1c_customer_master.sql
+      - phase1c_customer_commitment_ledger.json
+      - render_phase1c_historical_inputs.py
+      - test_phase1c_historical_inputs.py
+      - phase1c_historical_inputs_report.json
+      - 'phase1c_historical_inputs_*.sql'
+      - render_phase1c_historical_credit.py
+      - test_render_phase1c_historical_credit.py
+      - phase1c_historical_credit_index.json
+      - 'phase1c_historical_credit_source_*.json'
+      - render_phase1c_historical_runs.py
+      - 'phase1c_historical_run_rows_*.sql'
+      - audit_phase1c_pilot_distribution.py
+      - phase1c_supply_rows.sql
+      - phase1c_portfolio_deal_rows.sql
+      - test_phase1c_portfolio_deal.py
+      - test_phase1c_service_pilot.py
+      - compile_phase1c_policy.py
+      - test_phase1c_policy_compiler.py
+      - phase1c_policy_decision.py
+      - test_phase1c_policy_decision.py
+      - phase1c_deal_decision.py
+      - test_phase1c_deal_decision.py
       - .github/workflows/phase1c-postgres.yml
   pull_request:
     paths:
       - schema.sql
       - phase1c_schema_smoke.sql
       - phase1c_row_fixtures.sql
+      - phase1c_reader.py
+      - phase1c_horizon.py
+      - test_phase1c_horizon.py
+      - phase1c_component_units.py
+      - test_phase1c_component_units.py
+      - phase1c_digital_units.py
+      - test_phase1c_digital_units.py
+      - test_phase1c_reader.py
+      - phase1c_rule_rows.sql
+      - phase1c_provider_evidence_fixture.json
+      - calibration_config.yaml
+      - validate_phase1c_calibration.py
+      - test_validate_phase1c_calibration.py
+      - phase1c_column_rules.yaml
+      - validate_phase1c_column_rules.py
+      - test_validate_phase1c_column_rules.py
+      - render_phase1c_column_rules.py
+      - phase1c_data_contract.yaml
+      - phase1c_scenario_matrix.yaml
+      - validate_phase1c_scenario_matrix.py
+      - test_validate_phase1c_scenario_matrix.py
+      - validate_phase1c_data_contract.py
+      - test_validate_phase1c_data_contract.py
+      - phase1c_pilot_slice.json
+      - validate_phase1c_pilot.py
+      - test_validate_phase1c_pilot.py
+      - phase1c_assembly_pilot.json
+      - validate_phase1c_assembly_pilot.py
+      - test_validate_phase1c_assembly_pilot.py
+      - validate_phase1c_bom_portfolio.py
+      - test_validate_phase1c_bom_portfolio.py
+      - build_phase1c_portfolio_draft.py
+      - test_build_phase1c_portfolio_draft.py
+      - phase1c_portfolio_draft.json
+      - phase1c_variant_cost_pilot.json
+      - phase1c_build_cost_draft.json
+      - audit_phase1c_build_readiness.py
+      - test_audit_phase1c_build_readiness.py
+      - phase1c_technical_fit_pilot.json
+      - validate_phase1c_technical_fit_pilot.py
+      - test_validate_phase1c_technical_fit_pilot.py
+      - validate_phase1c_variant_cost_pilot.py
+      - test_validate_phase1c_variant_cost_pilot.py
+      - render_phase1c_master_slice.py
+      - phase1c_master_slice.sql
+      - phase1c_buildable_master.sql
+      - render_phase1c_sellable_catalogue.py
+      - test_render_phase1c_sellable_catalogue.py
+      - phase1c_sellable_catalogue.sql
+      - render_phase1c_vertical_pilot.py
+      - phase1c_vertical_pilot.sql
+      - phase1c_vertical_provider_manifest.json
+      - test_phase1c_vertical_pilot.py
+      - render_phase1c_conflict_pilot.py
+      - phase1c_conflict_pilot.sql
+      - phase1c_conflict_provider_manifest.json
+      - test_phase1c_conflict_pilot.py
+      - render_phase1c_stress_pilot.py
+      - phase1c_stress_pilot.sql
+      - phase1c_stress_pilot_report.json
+      - test_phase1c_stress_pilot.py
+      - validate_phase1c_generated_rows.py
+      - test_validate_phase1c_generated_rows.py
+      - validate_phase1c_evidence_manifests.py
+      - test_validate_phase1c_evidence_manifests.py
+      - phase1c_pilot_snapshot_manifest.json
+      - validate_phase1c_runtime_outputs.py
+      - test_validate_phase1c_runtime_outputs.py
+      - phase1c_historical_credit.py
+      - test_phase1c_historical_credit.py
+      - phase1c_historical_operational.py
+      - test_phase1c_historical_operational.py
+      - render_phase1c_historical_stock_lanes.py
+      - test_render_phase1c_historical_stock_lanes.py
+      - render_phase1c_historical_inbound.py
+      - test_render_phase1c_historical_inbound.py
+      - render_phase1c_historical_capacity.py
+      - test_render_phase1c_historical_capacity.py
+      - phase1c_historical_capacity_index.json
+      - phase1c_historical_capacity_source.json
+      - render_phase1c_historical_digital.py
+      - test_render_phase1c_historical_digital.py
+      - audit_phase1c_historical_baseline.py
+      - render_phase1c_historical_service_coverage.py
+      - test_render_phase1c_historical_service_coverage.py
+      - phase1c_historical_service_coverage.sql
+      - phase1c_historical_digital_index.json
+      - phase1c_historical_digital_pool_source.json
+      - 'phase1c_historical_digital_proof_*.json'
+      - phase1c_historical_inbound_index.json
+      - 'phase1c_historical_inbound_source_*.json'
+      - phase1c_historical_operational_index.json
+      - 'phase1c_historical_stock_source_*.json'
+      - phase1c_historical_lane_source.json
+      - phase1c_historical_offer_source.json
+      - render_phase1c_customer_master.py
+      - test_phase1c_customer_master.py
+      - phase1c_customer_master.sql
+      - phase1c_customer_commitment_ledger.json
+      - render_phase1c_historical_inputs.py
+      - test_phase1c_historical_inputs.py
+      - phase1c_historical_inputs_report.json
+      - 'phase1c_historical_inputs_*.sql'
+      - render_phase1c_historical_credit.py
+      - test_render_phase1c_historical_credit.py
+      - phase1c_historical_credit_index.json
+      - 'phase1c_historical_credit_source_*.json'
+      - render_phase1c_historical_runs.py
+      - 'phase1c_historical_run_rows_*.sql'
+      - audit_phase1c_pilot_distribution.py
+      - phase1c_supply_rows.sql
+      - phase1c_portfolio_deal_rows.sql
+      - test_phase1c_portfolio_deal.py
+      - test_phase1c_service_pilot.py
+      - compile_phase1c_policy.py
+      - test_phase1c_policy_compiler.py
+      - phase1c_policy_decision.py
+      - test_phase1c_policy_decision.py
+      - phase1c_deal_decision.py
+      - test_phase1c_deal_decision.py
       - .github/workflows/phase1c-postgres.yml
   workflow_dispatch:
 
@@ -41,6 +281,7 @@ jobs:
       PGUSER: postgres
       PGPASSWORD: phase1c_ci_only
       PGDATABASE: deal_desk_test
+      DATABASE_URL: postgresql://postgres:phase1c_ci_only@localhost:5432/deal_desk_test
     steps:
       - name: Check out project files
         uses: actions/checkout@v6
@@ -54,3 +295,154 @@ jobs:
         run: psql -X -v ON_ERROR_STOP=1 -f phase1c_schema_smoke.sql
       - name: Check 14 isolated row scenarios
         run: psql -X -v ON_ERROR_STOP=1 -f phase1c_row_fixtures.sql
+      - name: Install read layer dependency
+        run: python -m pip install 'psycopg[binary]>=3.2,<4' 'PyYAML>=6,<7'
+      - name: Check representative and full buildable catalogue master rows
+        run: |
+          python render_phase1c_master_slice.py --check
+          psql -X -v ON_ERROR_STOP=1 -f phase1c_master_slice.sql
+          python render_phase1c_master_slice.py --all-buildable --check
+          psql -X -v ON_ERROR_STOP=1 -f phase1c_buildable_master.sql
+      - name: Check all 156 provisional catalogue products
+        run: |
+          python -m unittest -v test_render_phase1c_sellable_catalogue
+          python render_phase1c_sellable_catalogue.py --check
+          psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 \
+            -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
+            -c ROLLBACK
+      - name: Load five connected provisional deal paths
+        run: |
+          python -m unittest -v test_phase1c_vertical_pilot.VerticalPilotRenderTests
+          python render_phase1c_vertical_pilot.py --check
+          psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 \
+            -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
+            -f phase1c_vertical_pilot.sql -c ROLLBACK
+      - name: Load thirteen connected conflict paths
+        run: |
+          python -m unittest -v test_phase1c_conflict_pilot.ConflictRenderTests
+          python render_phase1c_conflict_pilot.py --check
+          psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 \
+            -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
+            -f phase1c_vertical_pilot.sql -f phase1c_conflict_pilot.sql -c ROLLBACK
+      - name: Load seeded 36-deal development pilot
+        run: |
+          python -m unittest -v test_phase1c_stress_pilot.StressRenderTests
+          python render_phase1c_stress_pilot.py --check
+          psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 \
+            -f phase1c_buildable_master.sql -f phase1c_sellable_catalogue.sql \
+            -f phase1c_vertical_pilot.sql -f phase1c_conflict_pilot.sql \
+            -f phase1c_stress_pilot.sql -c ROLLBACK
+      - name: Validate typed pilot rows and controlled locations
+        run: |
+          python -m unittest -v test_validate_phase1c_generated_rows
+          python validate_phase1c_generated_rows.py --load-pilot
+      - name: Validate independent evidence manifest contracts
+        run: |
+          python -m unittest -v test_validate_phase1c_evidence_manifests
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from validate_phase1c_evidence_manifests import validate_snapshot_manifest
+          errors = validate_snapshot_manifest(json.loads(Path('phase1c_pilot_snapshot_manifest.json').read_text()), base_dir=Path('.'), evaluation_at='2026-09-02T00:00:00Z')
+          if errors:
+              raise SystemExit('; '.join(errors))
+          PY
+      - name: Validate typed runtime output envelopes
+        run: python -m unittest -v test_validate_phase1c_runtime_outputs
+      - name: Fail closed on missing historical credit and AR snapshots
+        run: python -m unittest -v test_phase1c_historical_credit
+      - name: Fail closed on missing historical operational snapshots
+        run: python -m unittest -v test_phase1c_historical_operational
+      - name: Replay provisional daily stock lanes and offers
+        run: python -m unittest -v test_render_phase1c_historical_stock_lanes
+      - name: Replay independently proved historical inbound receipts
+        run: python -m unittest -v test_render_phase1c_historical_inbound
+      - name: Replay bounded historical workshop capacity
+        run: python -m unittest -v test_render_phase1c_historical_capacity
+      - name: Replay full-term historical provider commitments
+        run: python -m unittest -v test_render_phase1c_historical_digital
+      - name: Check connected workstation stock, inbound and capacity rows
+        run: psql -X -v ON_ERROR_STOP=1 -v phase1c_keep_transaction=1 -f phase1c_buildable_master.sql -f phase1c_supply_rows.sql
+      - name: Validate calibration relationships before generation
+        run: |
+          python -m unittest -v test_validate_phase1c_calibration
+          python validate_phase1c_calibration.py
+      - name: Verify rules cover every schema column
+        run: |
+          python -m unittest -v test_validate_phase1c_column_rules
+          python validate_phase1c_column_rules.py
+      - name: Validate controlled vocabularies and JSON contracts
+        run: |
+          python -m unittest -v test_validate_phase1c_data_contract
+          python validate_phase1c_data_contract.py
+      - name: Check pilot scenario coverage and evaluation isolation
+        run: |
+          python -m unittest -v test_validate_phase1c_scenario_matrix
+          python validate_phase1c_scenario_matrix.py
+      - name: Preflight connected pilot rows and SQL constraints
+        run: |
+          python validate_phase1c_pilot.py
+          python -m unittest -v test_validate_phase1c_pilot
+      - name: Preflight configured assembly and production capacity
+        run: |
+          python -m unittest -v test_build_phase1c_portfolio_draft
+          python validate_phase1c_bom_portfolio.py phase1c_portfolio_draft.json
+          python -m unittest -v test_validate_phase1c_variant_cost_pilot
+          python validate_phase1c_variant_cost_pilot.py phase1c_variant_cost_pilot.json
+          python validate_phase1c_variant_cost_pilot.py phase1c_build_cost_draft.json
+          python -m unittest -v test_validate_phase1c_bom_portfolio
+          python -m unittest -v test_audit_phase1c_build_readiness
+          python audit_phase1c_build_readiness.py > /tmp/phase1c_build_readiness.json
+          python -m unittest -v test_validate_phase1c_technical_fit_pilot
+          python validate_phase1c_technical_fit_pilot.py
+          python -m unittest -v test_phase1c_component_units
+          python -m unittest -v test_phase1c_digital_units
+          python -m unittest -v test_phase1c_horizon
+          python validate_phase1c_assembly_pilot.py
+          python -m unittest -v test_validate_phase1c_assembly_pilot
+      - name: Compare reader results with 14 reference scenarios
+        run: python -m unittest -v test_phase1c_reader
+      - name: Validate and compile synthetic policy profiles
+        run: |
+          python -m unittest -v test_phase1c_policy_compiler
+          python compile_phase1c_policy.py --output /tmp/phase1c_compiled_rules.sql
+          psql -X -v ON_ERROR_STOP=1 -f /tmp/phase1c_compiled_rules.sql
+          psql -X -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF (SELECT count(*) FROM deal_desk.pricing_rules) <> 33 OR (SELECT count(*) FROM deal_desk.policy_rules) <> 51 OR (SELECT count(*) FROM deal_desk.approval_rules) <> 21 THEN RAISE EXCEPTION 'Incomplete compiled policy rows'; END IF; END \$\$;"
+      - name: Diagnose 400 historical baseline decisions
+        run: |
+          python -m unittest -v test_render_phase1c_historical_service_coverage
+          python audit_phase1c_historical_baseline.py --output /tmp/phase1c_historical_baseline.json
+      - name: Preserve provisional historical diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase1c-historical-baseline
+          path: /tmp/phase1c_historical_baseline.json
+          if-no-files-found: ignore
+      - name: Gate the configured portfolio workstation deal
+        run: python -m unittest -v test_phase1c_portfolio_deal
+      - name: Check bounded scheduled service coverage
+        run: python -m unittest -v test_phase1c_service_pilot
+      - name: Read five connected generated pilot modes
+        run: python -m unittest -v test_phase1c_vertical_pilot.VerticalPilotReaderTests
+      - name: Check provisional customer and credit master
+        run: python -m unittest -v test_phase1c_customer_master
+      - name: Check 400 provisional historical input deals
+        run: python -m unittest -v test_phase1c_historical_inputs
+      - name: Freeze dated historical credit and AR views
+        run: python -m unittest -v test_render_phase1c_historical_credit
+      - name: Read thirteen source conflict cases
+        run: python -m unittest -v test_phase1c_conflict_pilot.ConflictReaderTests
+      - name: Check mixed pilot replay and contention
+        run: python -m unittest -v test_phase1c_stress_pilot.StressReaderTests
+      - name: Measure pilot decisions and source provenance
+        run: python audit_phase1c_pilot_distribution.py --output /tmp/phase1c_pilot_distribution.json
+      - name: Preserve pilot diagnostic report
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase1c-pilot-distribution
+          path: /tmp/phase1c_pilot_distribution.json
+      - name: Test full commercial decisions using compiled rows
+        run: python -m unittest -v test_phase1c_policy_decision
+      - name: Test deal decision gates against 14 reference runs
+        run: python -m unittest -v test_phase1c_deal_decision

@@ -1,0 +1,83 @@
+"""Check the parameter contract catches inconsistencies before row generation."""
+
+from copy import deepcopy
+from pathlib import Path
+import unittest
+
+import yaml
+
+from validate_phase1c_calibration import validate
+
+
+CONFIG = yaml.safe_load(Path(__file__).with_name("calibration_config.yaml").read_text(encoding="utf-8"))
+
+
+class CalibrationContractTests(unittest.TestCase):
+    def test_current_config_is_consistent_but_not_frozen(self):
+        result = validate(CONFIG)
+        self.assertEqual(result["errors"], [])
+        self.assertFalse(result["ready_for_generation"])
+        self.assertEqual(len(result["review_before_freeze"]), 2)
+
+    def test_broken_counts_and_price_order_are_rejected(self):
+        changed = deepcopy(CONFIG)
+        changed["dataset"]["customer_segment_counts"]["SMB"] += 1
+        changed["product_catalogue"]["categories"]["servers_and_compute_infrastructure"]["price_eur"]["p50"] = 0
+        changed["conflict_injection"]["requested_case_mix_pct"]["clean"] -= 1
+        errors = validate(changed)["errors"]
+        self.assertIn("customer segment counts", errors)
+        self.assertIn("generated-test case counts", errors)
+        self.assertIn("price anchors are not ordered: servers_and_compute_infrastructure", errors)
+
+    def test_digital_proof_and_bom_coverage_are_enforced(self):
+        changed = deepcopy(CONFIG)
+        fields = changed["fulfillment_production_calibration"]["proposed_parameters"]["digital_capacity"]["trusted_provider_evidence_required_fields"]
+        fields.remove("provider_id")
+        changed["fulfillment_production_calibration"]["proposed_parameters"]["BOMs"]["effective_configured_BOM_variants_range"][0] = 10
+        errors = validate(changed)["errors"]
+        self.assertIn("digital proof fields differ from reader's trusted manifest", errors)
+        self.assertIn("BOM variants cannot cover the proposed assembled products", errors)
+
+    def test_component_rounding_contract_is_required(self):
+        changed = deepcopy(CONFIG)
+        changed["fulfillment_production_calibration"]["proposed_parameters"]["component_catalogue"]["component_unit_indivisible"] = False
+        self.assertIn("component stock rounding contract differs from reader", validate(changed)["errors"])
+
+    def test_multi_variant_bom_selection_contract_is_required(self):
+        changed = deepcopy(CONFIG)
+        changed["fulfillment_production_calibration"]["proposed_parameters"]["BOMs"]["same_product_variant_demand"] = "group_by_product"
+        self.assertIn("multi-variant BOM selection contract differs from reader", validate(changed)["errors"])
+
+    def test_bom_portfolio_proposal_relationships_are_checked(self):
+        changed = deepcopy(CONFIG)
+        params = changed["fulfillment_production_calibration"]["proposed_parameters"]
+        params["BOMs"]["effective_configured_BOM_variants_range"] = [36, 24]
+        params["BOMs"]["scrap_pct"] = [0, 4, 100]
+        params["component_catalogue"]["shared_across_at_least_two_BOMs_min_share"] = 1.2
+        errors = validate(changed)["errors"]
+        self.assertIn("BOM variants cannot cover the proposed assembled products", errors)
+        self.assertIn("BOM scrap percent must remain below 100", errors)
+        self.assertIn("shared component minimum share must be between zero and one", errors)
+
+    def test_historical_line_mix_mean_and_bins_are_checked(self):
+        changed = deepcopy(CONFIG)
+        changed["dataset"]["historical_lines_per_deal_sampling_percent"][8] += 1
+        errors = validate(changed)["errors"]
+        self.assertIn("historical line-count sampling weights", errors)
+        self.assertIn("historical line-count expected mean differs from target", errors)
+
+    def test_popularity_provenance_cannot_silently_become_empirical(self):
+        changed = deepcopy(CONFIG)
+        changed["dataset"]["product_popularity"]["basis"] = "unverified_olist_mirror"
+        self.assertIn("product popularity must identify its synthetic rather than unverified observed basis",
+                      validate(changed)["errors"])
+
+    def test_capacity_horizon_cannot_silently_promise_later_production(self):
+        changed = deepcopy(CONFIG)
+        changed["fulfillment_production_calibration"]["proposed_parameters"]["production_capacity"]["confirmed_component_after_capacity_window"] = "feasible"
+        self.assertIn("capacity horizon must not imply production after its represented window",
+                      validate(changed)["errors"])
+
+
+if __name__ == "__main__":
+    unittest.main()

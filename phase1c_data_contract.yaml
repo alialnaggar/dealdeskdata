@@ -1,0 +1,216 @@
+version: 1
+status: executable_contract_draft_before_row_generation
+scope: generated_rows_and_agent_facing_json
+
+# ISO weekday numbers are used in PostgreSQL JSON arrays and Python date logic.
+calendar:
+  iso_weekday_numbers:
+    Mon: 1
+    Tue: 2
+    Wed: 3
+    Thu: 4
+    Fri: 5
+    Sat: 6
+    Sun: 7
+  default_working_weekdays: [1, 2, 3, 4, 5]
+  holidays_mode: omitted_from_phase1c
+  holiday_dates_must_be_empty: true
+  date_precision_rule: a confirmed receipt on date D may support production on D; no arrival hour is claimed
+
+controlled_vocabularies:
+  catalog_version: CATALOGUE_2026_V1
+  policy_set_codes: [BASELINE_2026, LENIENT_EXPERIMENT, STRICT_EXPERIMENT]
+  countries: [DE, FR, NL, BE, AT]
+  destination_regions:
+    DE: [DE-BE, DE-NW, DE-BY, DE-BW]
+    FR: [FR-IDF, FR-ARA, FR-PAC, FR-HDF]
+    NL: [NL-NH, NL-ZH, NL-UT, NL-NB]
+    BE: [BE-BRU, BE-VLG, BE-WAL]
+    AT: [AT-9, AT-3, AT-5, AT-7]
+  installation_service_countries: [DE, FR, NL]
+  installation_service_regions:
+    DE: [DE-BE, DE-NW]
+    FR: [FR-IDF, FR-ARA]
+    NL: [NL-NH, NL-ZH]
+  customer_industry_codes:
+    - manufacturing
+    - retail
+    - financial_services
+    - healthcare
+    - education
+    - public_sector
+    - logistics
+    - professional_services
+  customer_industry_target_share_pct:
+    manufacturing: 20
+    retail: 15
+    financial_services: 12.5
+    healthcare: 10
+    education: 7.5
+    public_sector: 5
+    logistics: 10
+    professional_services: 20
+  customer_country_target_share_pct:
+    DE: 35
+    FR: 20
+    NL: 20
+    BE: 15
+    AT: 10
+  location_codes:
+    WH-EU-CENTRAL:
+      country_code: DE
+      region: DE-NW
+      time_zone: Europe/Berlin
+      working_weekdays: [1, 2, 3, 4, 5]
+    WH-EU-WEST:
+      country_code: NL
+      region: NL-NH
+      time_zone: Europe/Amsterdam
+      working_weekdays: [1, 2, 3, 4, 5]
+  salesperson_code_pattern: ^SALES-[0-9]{3}$
+  service_codes: [standard, express]
+  payment_terms_days: [15, 30, 45, 60, 90]
+  contract_clause_codes: [standard, preapproved_variant, legal_review, prohibited]
+  dataset_types: [historical, generated_test, evaluation]
+  agent_names: [Configuration, Pricing, Availability, Credit, Policy, Approval, Orchestrator]
+
+supplier_order_calendar:
+  required_keys: [working_weekdays, holiday_dates, time_zone]
+  working_weekdays: [1, 2, 3, 4, 5]
+  holiday_dates: []
+  holiday_policy: no public-holiday model in Phase 1C; do not claim holiday-aware lead times
+
+component_stock:
+  initial_unit: component_unit
+  indivisible: true
+  on_hand_and_allocated: whole_nonnegative_units
+  requirement: aggregate_scrap_adjusted_theoretical_demand_across_selected_builds_then_ceil_per_component
+  standard_cost: unrounded_expected_material_scrap_consumption_plus_labor_and_overhead
+  no_quote_reservation: true
+
+production_horizon:
+  boundary: latest_capacity_date_represented_at_the_candidate_location
+  missing_or_stale_capacity_window: unknown
+  confirmed_required_component_supply_after_boundary: unknown
+  missing_window_unknown_reason: production_capacity_evidence_missing_or_stale
+  unknown_reason: confirmed_component_supply_after_capacity_horizon
+  supplier_offer_counts_as_binding_supply: false
+  infer_capacity_after_boundary: false
+
+configured_builds:
+  build_platforms: [workstation, server, storage_system]
+  component_roles_by_family:
+    compute: compute_kit
+    storage: storage_drive
+    network_and_power: network_power_kit
+    chassis_and_other: enclosure_kit
+  offered_option_codes: [standard, alternate, enhanced]
+  line_bom_match: product_catalogue_and_exact_configuration_signature_at_run_as_of
+  same_product_variant_demand: group_by_selected_BOM
+  unconfigured_finished_stock_with_multiple_variants: visible_but_not_confirming_either_variant
+  shared_component_stock: aggregate_and_round_once_per_component_at_site
+  result_attribution: per_BOM_and_quoted_line
+  substitution_selection:
+    one_selected_line_per_bom_and_group: true
+    preference_order: sufficient_selectable_units_then_lowest_priority_then_component_product_id
+    selectable_units: fresh_component_stock_plus_confirmed_unexpired_inbound_at_active_production_locations
+    shortage_behavior: choose_lowest_priority_then_component_product_id_and_expose_group_shortfall
+    alternatives_not_double_counted: true
+
+json_contracts:
+  products_attributes_json:
+    common_required:
+      archetype_code: string
+      demand_class: [core, regular, niche]
+    common_optional:
+      fulfillment_lead_days: nonnegative_integer
+      installation_eligible: boolean
+      supported_installation_regions: region_code_array
+      category: string
+      subcategory: string
+    mode_rules:
+      digital_activation:
+        required: [edition]
+        optional: [service_tier, feature_codes]
+        configuration_identity_keys: [edition, service_tier, feature_codes]
+      scheduled_service:
+        required: [service_code]
+        optional: [fulfillment_lead_days]
+      physical:
+        required: []
+        optional: [installation_eligible, supported_installation_regions, option_codes, build_platform, offered_options]
+      component:
+        required: []
+        optional: [component_family, component_role, supported_platforms]
+  deal_terms_json:
+    required_on_submission:
+      payment_terms_days: payment_terms_days
+      contract_clause_codes: contract_clause_code_array_nonempty
+      allow_partial_delivery: boolean
+    optional:
+      contract_months: positive_integer
+    forbidden_keys: [payment_method]
+    contract_months_rule: required when any recurring line exists; annual units require a multiple of 12
+  deal_line_configuration_json:
+    physical_allowed_keys: [option_codes, selected_options, configuration_signature]
+    digital_required_keys: [edition, units_per_period]
+    digital_allowed_keys: [edition, units_per_period, service_tier, feature_codes]
+    digital_rules:
+      units_per_period: positive_integer
+      edition: must equal the product's attributes_json.edition
+    make_to_order_allowed_keys: [configuration_signature, selected_options]
+    unknown_keys: reject
+  requirements_json:
+    allowed_keys: [requested_outcomes, constraints, customer_notes]
+    requested_outcomes: string_array
+    constraints:
+      item_keys: [code, value]
+      code: nonempty_string
+      value: scalar_or_string_array
+    customer_notes: string
+    rule_inputs_must_be_typed: true
+  evidence_refs_json:
+    item_keys: [evidence_ref, evidence_type, source_class, issued_at]
+    evidence_ref: nonempty_string
+    evidence_type: [customer_document, supplier_commitment, capacity_snapshot, credit_commitment, provider_proof, installation_coverage]
+    source_class: [synthetic_sales_input, synthetic_supplier_manifest, synthetic_capacity_manifest, synthetic_credit_manifest, synthetic_provider_manifest, synthetic_catalogue_rule]
+    issued_at: iso_datetime
+    reference_alone_is_not_evidence: true
+  configuration_signature_json:
+    canonicalization: recursively sort object keys; arrays retain declared order; compact JSON for comparison
+    allowed_top_level_keys: [edition, service_tier, feature_codes, option_codes, selected_options]
+    empty_object_allowed: true
+  compatibility_condition_json:
+    allowed_rule_types: [requires_product, excludes_product, attribute_constraint, required_deal_field, installation_eligibility]
+    required_keys_by_rule_type:
+      requires_product: [operator]
+      excludes_product: [operator]
+      attribute_constraint: [attribute, operator, expected]
+      required_deal_field: [field]
+      installation_eligibility: [country_code, region, eligible]
+    allowed_operators_by_rule_type:
+      requires_product: [present]
+      excludes_product: [present]
+      attribute_constraint: [equals, not_equals, in, contains, exists]
+      required_deal_field: [present]
+    unknown_keys: reject
+  provider_evidence_record:
+    required_keys: [evidence_ref, evidence_type, source_class, issued_at, product_id, provider_id, configuration_signature_json, region_code, term_code, capacity_unit, capacity_total, quantity_allocated, commitment_status, verified_at, covers_from, covers_until]
+    commitment_status: [binding, provisional, unknown]
+    full_term_required_for_binding: true
+    verification_age_calendar_days_max: 7
+  agent_output_json:
+    required_keys: [agent_name, status, findings]
+    status: [supported, conditional, unknown, infeasible, blocked]
+    finding_keys: [code, severity, message, evidence_refs]
+    finding_severity: [info, warning, approval_required, blocker]
+    evidence_refs: string_array
+    no_private_chain_of_thought: true
+    route_is_not_approval: true
+
+generation_boundaries:
+  source_rows_must_not_be_copied: true
+  external_sources_supply: [taxonomy_shape, visible_price_anchors, transformed_frequency_shape, structural_relationships]
+  synthetic_only_fields: [ids, names, credit_limits, stock, supplier_leads, capacity_hours, policy_thresholds, test_conflicts]
+  reference_fixtures_are_test_only: true
+  actual_delivery_events_in_schema: false

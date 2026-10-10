@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "evidence_ref": "FULLTERM-digital_exact_binding_pool",
+      "evidence_type": "provider_proof",
+      "source_class": "synthetic_provider_manifest",
+      "issued_at": "2026-09-01T10:00:00Z",
+      "confirmed_at": "2026-08-31T09:00:00Z",
+      "valid_until": "2027-09-05T00:00:00Z",
+      "product_id": "digital_exact_binding_pool-P",
+      "provider_id": null,
+      "configuration_signature_json": {"edition": "business"},
+      "region_code": "DE",
+      "term_code": "12m",
+      "capacity_unit": "instance",
+      "capacity_total": 10,
+      "quantity_allocated": 4,
+      "commitment_status": "binding",
+      "verified_at": "2026-09-01T10:00:00Z",
+      "covers_from": "2026-09-04",
+      "covers_until": "2027-09-04"
+    }
+  ]
+}
