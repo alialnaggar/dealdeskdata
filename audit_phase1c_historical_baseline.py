@@ -107,6 +107,7 @@ def run(database_url):
     decisions = []
     mto = Counter()
     digital_counts = Counter()
+    supplier_counts = Counter()
     with psycopg.connect(database_url) as conn:
         try:
             load_inputs(conn)
@@ -122,6 +123,19 @@ def run(database_url):
                 if bundle["run"]["data_snapshot_ref"] != snapshot_id:
                     raise ValueError(f"run/snapshot mismatch: {n}")
                 for line, fact in zip(bundle["lines"], bundle["facts"]["lines"]):
+                    if line["fulfillment_mode"] == "supplier_finished":
+                        product = line["product_id"]
+                        status = fact.get("fulfillment_status", "absent")
+                        receipts = [r for r in bundle["inbound_supply"] if r["product_id"] == product]
+                        bindings = bundle["facts"]["supply"]["binding_receipts"].get(product, [])
+                        offers = [o for o in bundle["supplier_offers"] if o["product_id"] == product]
+                        supplier_counts[f"status:{status}"] += 1
+                        supplier_counts[f"{status}:offer_{bool(offers)}"] += 1
+                        supplier_counts[f"{status}:receipt_history_{bool(receipts)}"] += 1
+                        supplier_counts[f"{status}:confirmed_history_{any(r['status'] == 'Confirmed' for r in receipts)}"] += 1
+                        supplier_counts[f"{status}:binding_receipt_{bool(bindings)}"] += 1
+                        if bindings:
+                            supplier_counts[f"{status}:binding_free_ge_demand_{any(r['free'] >= line['quantity'] for r in bindings)}"] += 1
                     if line["fulfillment_mode"] == "digital_activation":
                         finding = fact.get("digital", {})
                         status = finding.get("status", "absent")
@@ -151,6 +165,7 @@ def run(database_url):
     result = summarize(decisions)
     result["make_to_order_diagnostics"] = dict(sorted(mto.items()))
     result["digital_diagnostics"] = dict(sorted(digital_counts.items()))
+    result["supplier_finished_diagnostics"] = dict(sorted(supplier_counts.items()))
     result["source_sha256"] = {
         name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()
         for name in ("calibration_config.yaml", "phase1c_historical_credit_index.json",
@@ -175,7 +190,8 @@ def main():
                       "evidence_gap_by_mode": report["evidence_gap_by_mode"],
                       "fulfillment_counts": report["fulfillment_counts"],
                       "make_to_order_diagnostics": report["make_to_order_diagnostics"],
-                      "digital_diagnostics": report["digital_diagnostics"]}, sort_keys=True))
+                      "digital_diagnostics": report["digital_diagnostics"],
+                      "supplier_finished_diagnostics": report["supplier_finished_diagnostics"]}, sort_keys=True))
 
 
 if __name__ == "__main__":
