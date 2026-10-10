@@ -81,6 +81,20 @@ class DecisionGateTests(unittest.TestCase):
         item["facts"]["lines"][0]["digital"]["status"] = "confirmed_by_date"
         self.assertEqual(assemble_deal_decision(item)["status"], "approval_required")
 
+    def test_verified_digital_capacity_with_late_activation_needs_date_revision(self):
+        item = complete_bundle()
+        item["lines"][0].update(fulfillment_mode="digital_activation",
+                                requested_activation_date=date(2026, 9, 3))
+        item["facts"]["lines"][0]["digital"] = {
+            "status": "binding_candidate", "concurrent_demand": Decimal(4),
+            "pools": [{"id": "D1", "full_term_verified": True,
+                       "free": Decimal(5), "activation_by_request": False}]}
+        result = assemble_deal_decision(item)
+        self.assertEqual(result["status"], "needs_revision")
+        self.assertIn({"line_id": "L1", "code": "requested_activation_date_not_supported"},
+                      result["revision_reasons"])
+        self.assertNotIn("digital_confirmation_missing:L1", result["evidence_gaps"])
+
     def test_config_and_cost_mismatch(self):
         item = complete_bundle()
         item["lines"][0]["is_active"] = False
