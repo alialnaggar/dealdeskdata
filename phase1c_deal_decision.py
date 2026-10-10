@@ -61,7 +61,13 @@ def assemble_deal_decision(bundle):
             status = fact.get("digital", {}).get("status", "unknown")
             source_ids = [p["id"] for p in fact.get("digital", {}).get("pools", [])]
             date = line["requested_activation_date"] if status == "confirmed_by_date" else None
-            if status in ("binding_candidate", "unknown"):
+            pools = fact.get("digital", {}).get("pools", [])
+            demand = fact.get("digital", {}).get("concurrent_demand")
+            if (status == "binding_candidate" and demand is not None and
+                    any(p.get("full_term_verified") and p.get("free", 0) >= demand and
+                        not p.get("activation_by_request") for p in pools)):
+                revisions.append({"line_id": line_id, "code": "requested_activation_date_not_supported"})
+            elif status in ("binding_candidate", "unknown"):
                 evidence_gaps.append(f"digital_confirmation_missing:{line_id}")
             elif status == "conditional":
                 commitments.append({"line_id": line_id, "code": "digital_offer_not_binding"})
