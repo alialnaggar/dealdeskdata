@@ -370,3 +370,14 @@ predicates, deal document references and actual agent output. The 24-table,
 The independent 100-test set and 36 evaluation variants are still a separate
 generation and review stage; the 400-deal diagnostic cannot act as their
 answer key.
+
+The deal document validator now requires a trusted customer-document record
+to be issued before submission and scoped to the same deal; a cross-deal
+reference fails. The field ledger cites the positive and negative row tests
+for this mark. Six marks remain open, and the historical inputs' empty
+document lists do not imply that a document was verified.
+
+The compatibility predicate evaluator now honors the declared configured
+group for required/excluded product checks. A dependency in another group
+cannot satisfy the source group's rule. Full generated compatibility-rule
+coverage and detailed product fit remain open.
