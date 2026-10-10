@@ -1365,7 +1365,7 @@ tables:
       basis: SUB+SYN
       generation: References to supplied documents, not proof by their string alone
       validation: JSON array of typed references; resolution and authorization required
-      review_before_generation: Typed reference metadata is defined in phase1c_data_contract.yaml; implement resolution and independent evidence checks.
+      resolved_by: validate_phase1c_generated_rows and test_validate_phase1c_generated_rows check typed references against trusted records, reject future or missing evidence and bind customer documents to their own deal. Empty historical reference lists claim no document proof.
     salesperson_comments:
       sql_type: TEXT
       nullable: true
