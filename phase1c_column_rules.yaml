@@ -145,14 +145,14 @@ tables:
       basis: SYN
       generation: Controlled fictional B2B industry mix
       validation: Nonblank and on configured industry list before freeze
-      review_before_generation: Industry vocabulary and synthetic proportions are defined in phase1c_data_contract.yaml; run pilot distribution validation.
+      resolved_by: test_phase1c_customer_master checks 80 generated customers and exact configured industry counts in PostgreSQL; synthetic proportions are not external market claims.
     country_code:
       sql_type: CHAR(2)
       nullable: false
       basis: SYN
       generation: Two-letter supported customer country
       validation: Uppercase ISO-style code; do not treat as shipping destination
-      review_before_generation: Country/region vocabulary and synthetic shares are defined in phase1c_data_contract.yaml; run pilot distribution validation.
+      resolved_by: test_phase1c_customer_master checks 80 generated customers and exact configured country counts in PostgreSQL; destination regions retain their own contract checks.
     region:
       sql_type: TEXT
       nullable: false
@@ -613,7 +613,7 @@ tables:
       basis: SYN
       generation: Controlled independent source reference
       validation: Nonblank; resolves to generator evidence manifest
-      review_before_generation: Define independent commitment evidence manifest and completeness marker.
+      resolved_by: render_phase1c_historical_credit and test_render_phase1c_historical_credit validate 400 complete cutoff manifests with independent commitment evidence and reject altered proof amounts.
     risk_rating:
       sql_type: TEXT
       nullable: false
@@ -699,7 +699,7 @@ tables:
       basis: SYS
       generation: Date that snapshot represents
       validation: At/after invoice date; select latest nonfuture snapshot per invoice
-      review_before_generation: Current unique invoice_number permits only one snapshot per invoice; historical replay needs frozen prior evidence.
+      resolved_by: phase1c_historical_credit and test_render_phase1c_historical_credit select frozen per-cutoff nonfuture invoice and payment evidence without inserting duplicate invoice rows.
   payment_history:
     payment_id:
       sql_type: TEXT
@@ -981,7 +981,7 @@ tables:
       basis: SYN
       generation: Independent binding reference if no PO
       validation: Required for confirmed no-PO; manifest resolves and is valid
-      review_before_generation: Define independently controlled no-PO binding evidence schema and validation.
+      resolved_by: phase1c_historical_operational and test_render_phase1c_historical_inbound require matching independent supplier proof at each cutoff and reject tampered or future evidence.
     valid_until:
       sql_type: TIMESTAMPTZ
       nullable: true
@@ -1427,7 +1427,7 @@ tables:
       basis: SUB+SYN
       generation: Active sellable SKU of deal catalogue
       validation: FK and trigger; declared synthetic historical popularity target 60-70% top fifth
-      review_before_generation: Verify synthetic historical popularity target and tolerance on generated history; pilot scenario counts do not measure it.
+      resolved_by: test_phase1c_historical_inputs checks 1200 loaded line rows, all 120 sellable SKUs, minimum occurrences and 768 of 1200 lines on the top 24 SKUs in PostgreSQL.
     quantity:
       sql_type: INTEGER
       nullable: false
@@ -1507,7 +1507,7 @@ tables:
       basis: SYS
       generation: Reproducible frozen data snapshot identifier
       validation: Nonblank and resolves to stored snapshot manifest
-      review_before_generation: Define reproducible snapshot manifest and historical evidence isolation.
+      resolved_by: render_phase1c_historical_runs, phase1c_historical_credit, phase1c_historical_operational and PostgreSQL historical replay require matching SHA-pinned complete cutoffs for all 400 queued runs and reject missing or future evidence.
     input_snapshot_json:
       sql_type: JSONB
       nullable: false
