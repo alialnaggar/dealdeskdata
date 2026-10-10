@@ -345,3 +345,15 @@ passes with a provisional decision mix of 6 approval routes, 24 blocks,
 69 commitments, 142 evidence needs, and 159 revisions. The next source
 review should concentrate on supplier receipt/offer coverage and distinguish
 intentional unavailable stock from accidental source gaps before calibration.
+
+The supplier review found that 205 of 213 supplier-finished lines lacking
+binding delivery had confirmed receipt history whose nine-day proof had
+expired. A provisional weekly inbound pipeline now matches the configured
+seven-day evidence recheck cadence: 1,764 independently evidenced events
+cover 63 SKUs, preserving the configured status proportions. The full
+[PostgreSQL run 38042504618](https://github.com/alialnaggar/dealdeskdata/actions/runs/38042504618)
+passes. Supplier-finished findings are 159 confirmed by date, 29 late
+alternatives, 60 conditional offers and nine infeasible; all-mode missing
+delivery findings fell from 238 to 82. This is a source cadence adjustment,
+not an outcome target or training label. Review cadence and achieved mix
+alongside the remaining field marks before final freeze.
