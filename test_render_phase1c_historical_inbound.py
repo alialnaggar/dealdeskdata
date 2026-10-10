@@ -29,8 +29,15 @@ class HistoricalInboundTests(unittest.TestCase):
             self.assertEqual(content, (HERE / name).read_text())
             self.assertEqual(hashlib.sha256(content.encode()).hexdigest(), index["source_sha256"][name])
             events.extend(json.loads(content)["events"])
-        self.assertEqual(len(events), 441)
+        self.assertEqual(len(events), 1764)
         self.assertEqual(len({x["product_id"] for x in events}), 63)
+        by_product = {}
+        for event in events:
+            by_product.setdefault(event["product_id"], []).append(
+                datetime.fromisoformat(event["observed_at"]).date())
+        self.assertTrue(all(len(dates) == 28 and all(
+            (later - earlier).days == 7 for earlier, later in zip(dates, dates[1:]))
+            for dates in by_product.values()))
         targets = config["commercial_supply"]["availability"]["inbound_status_target_share"]
         counts = Counter(x["status"] for x in events)
         for status, target in targets.items():
