@@ -314,4 +314,23 @@ late queued runs. This provisional source has no inbound receipts, production
 slots or digital commitments, so those paths must stay conditional/unknown;
 it is not the complete release operational distribution.
 
-The next operational slice adds 441 independently generated dated inbound receipt events for 63 products across seven months, with exact-cutoff PO header or supplier proof validation and SHA-256 source digests. All 400 historical operational views now include the relevant dated receipt rows. The reader only counts unexpired confirmed receipts as binding. Production capacity and digital commitments are next, followed by baseline decision derivation, independent evaluation and release gates; no historical outcome or execution log is claimed.
+The next operational slice adds 441 independently generated dated inbound receipt events for 63 products across seven months, with exact-cutoff PO header or supplier proof validation and SHA-256 source digests. All 400 historical operational views now include the relevant dated receipt rows. The reader only counts unexpired confirmed receipts as binding. No historical outcome or execution log is claimed.
+
+## Historical baseline diagnostic checkpoint — 10 October 2026
+
+The independent source now also includes dated workshop capacity, full-term
+digital provider evidence and bounded service eligibility. A disposable
+PostgreSQL pass reads all 400 queued runs with compiled policy, then rolls
+back the imported rows. Its separate diagnostic is provisional and excluded
+from agent inputs and independent evaluation. Daily observed credit evidence
+and workshop co-located component stock corrected two source mismatches.
+The final [PostgreSQL run 38022399576](https://github.com/alialnaggar/dealdeskdata/actions/runs/38022399576)
+passes: 200 of 220 make-to-order lines have feasible uncommitted builds;
+20 need replenishment. The remaining evidence-gap findings are 71 stale
+credit commitments, 238 missing delivery findings, 185 missing digital
+confirmations and 52 missing service coverage findings. These overlap.
+
+Next: inspect the remaining gaps by fulfillment mode and source state,
+calibrate the 14 open field marks and two review items, then author the
+independent answer key and execution evidence. Do not promote these
+diagnostic decisions into historical labels or training data yet.
