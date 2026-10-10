@@ -1,6 +1,6 @@
 # Phase 1C release review — provisional decisions
 
-**8 October 2026.** This is the compact review sheet for the generation freeze. The 36-deal development pilot passes PostgreSQL, but the full 80-customer / 400-history / 100-test release and separate 36-case evaluation set have not been generated. `ready_for_generation` remains false.
+**10 October 2026.** This is the compact review sheet for the generation freeze. The 36-deal development pilot passes PostgreSQL, and 80 customer masters and 400 historical inputs/runs have been generated. Historical labels, completed specialist executions, and the final independent evaluation release remain open. `ready_for_generation` remains false.
 
 [PostgreSQL Actions run 37821625969](https://github.com/alialnaggar/dealdeskdata/actions/runs/37821625969) passed the typed-row, manifest, provider-reader, and full decision workflow after aligning the reader with the new evidence record shape. The local suite has 165 tests, with 35 database cases exercised in CI rather than locally.
 
@@ -140,3 +140,23 @@ include 168 conditional offers and 45 infeasible supply findings; an offer
 is not a binding receipt. The remaining evidence findings are 71 stale
 credit commitments, 77 digital pool gaps, and 52 service coverage gaps.
 These counts overlap across deals and do not establish final labels.
+
+## Weekly provisional inbound pipeline — 10 October 2026
+
+The original monthly inbound observation schedule left 205 of 213
+supplier-finished lines without a binding receipt even though confirmed
+receipt history was visible: nine-day confirmations expired before many
+deal cutoffs. The configured evidence recheck cadence is seven days. The
+provisional independent source now records a fresh supplier pipeline each
+week, with 1,764 separately evidenced events for 63 SKUs, while preserving
+the configured 70/20/8/2% status mix and nine-day validity. It does not
+extend old confirmations or use deal outcomes to create receipts.
+
+[PostgreSQL run 38042504618](https://github.com/alialnaggar/dealdeskdata/actions/runs/38042504618)
+passed. Of 257 supplier-finished lines, 159 are confirmed by the requested
+date, 29 have a late alternative, 60 have conditional offers, and nine are
+infeasible. Total missing delivery findings across physical lines fell from
+238 to 82. The provisional 400-deal gate mix is 11 `approval_required`,
+24 `blocked`, 102 `needs_commitment`, 124 `needs_evidence`, and 139
+`needs_revision`. The weekly pipeline cadence and outcome mix remain
+subject to calibration review; no historical label is frozen.
