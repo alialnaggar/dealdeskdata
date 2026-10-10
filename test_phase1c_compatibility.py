@@ -28,6 +28,18 @@ class CompatibilityTests(unittest.TestCase):
         ])
         self.assertEqual([f["status"] for f in findings], ["pass", "fail"])
 
+    def test_product_dependencies_respect_configured_group(self):
+        separate = [dict(LINES[0]), dict(LINES[1], fulfillment_group_code="G2")]
+        required = rule("R-GROUP-REQ", "requires_product", {"operator": "present"}, "P-A", "P-B")
+        excluded = rule("R-GROUP-EX", "excludes_product", {"operator": "present"}, "P-A", "P-B")
+        required["scope_type"] = excluded["scope_type"] = "configured_group"
+        self.assertEqual([f["status"] for f in evaluate_compatibility(separate, DEAL,
+                                                                         [required, excluded])],
+                         ["fail", "pass"])
+        self.assertEqual([f["status"] for f in evaluate_compatibility(LINES, DEAL,
+                                                                         [required, excluded])],
+                         ["pass", "fail"])
+
     def test_attribute_and_required_field(self):
         findings = evaluate_compatibility(LINES, DEAL, [
             rule("R-ATTR", "attribute_constraint", {"attribute": "edition", "operator": "equals", "expected": "pro"}, "P-A"),
