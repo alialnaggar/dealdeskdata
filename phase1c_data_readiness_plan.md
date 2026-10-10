@@ -334,3 +334,14 @@ Next: inspect the remaining gaps by fulfillment mode and source state,
 calibrate the 14 open field marks and two review items, then author the
 independent answer key and execution evidence. Do not promote these
 diagnostic decisions into historical labels or training data yet.
+
+The subsequent per-mode diagnostic found 213 of 238 missing delivery
+findings on supplier-finished lines, 20 on make-to-order, and five on
+stocked-finished. Of 185 digital findings, 108 had verified capacity and
+full-term proof but missed the requested activation date. The gate now
+routes those to a date revision; 77 lines without a matching pool remain
+evidence gaps. [PostgreSQL run 38024615223](https://github.com/alialnaggar/dealdeskdata/actions/runs/38024615223)
+passes with a provisional decision mix of 6 approval routes, 24 blocks,
+69 commitments, 142 evidence needs, and 159 revisions. The next source
+review should concentrate on supplier receipt/offer coverage and distinguish
+intentional unavailable stock from accidental source gaps before calibration.
