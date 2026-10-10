@@ -84,6 +84,9 @@ def validate_rows(rows, contract, *, trusted_deal_evidence=None):
             if not trusted or any(trusted.get(key) != reference.get(key)
                                   for key in ("evidence_ref", "evidence_type", "source_class", "issued_at")):
                 errors.append(f"deals.{deal_id}: evidence reference lacks matching independent record")
+            elif (reference["evidence_type"] == "customer_document" and
+                  trusted.get("deal_id") != deal_id):
+                errors.append(f"deals.{deal_id}: customer document is not authorized for this deal")
     for row in rows["deal_lines"]:
         line_id = row["deal_line_id"]
         deal = deals.get(row["deal_id"])
