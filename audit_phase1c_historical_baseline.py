@@ -62,6 +62,14 @@ def summarize(decisions):
     status_counts = Counter(d["status"] for d in decisions)
     gap_counts = Counter(gap.split(":")[0] for d in decisions
                          for gap in d["evidence_gaps"])
+    gap_by_mode = Counter()
+    for decision in decisions:
+        mode_by_line = {line["line_id"]: line["mode"]
+                        for line in decision["specialists"]["availability"]}
+        for gap in decision["evidence_gaps"]:
+            code, _, line_id = gap.partition(":")
+            if line_id in mode_by_line:
+                gap_by_mode[(code, mode_by_line[line_id])] += 1
     fulfillment = Counter((item["mode"], item["status"]) for d in decisions
                           for item in d["specialists"]["availability"])
     records = []
@@ -84,6 +92,8 @@ def summarize(decisions):
         "historical_deals": len(decisions),
         "status_counts": dict(sorted(status_counts.items())),
         "evidence_gap_counts": dict(sorted(gap_counts.items())),
+        "evidence_gap_by_mode": [{"code": code, "mode": mode, "count": count}
+                                 for (code, mode), count in sorted(gap_by_mode.items())],
         "fulfillment_counts": [{"mode": mode, "status": status, "count": count}
                                for (mode, status), count in sorted(fulfillment.items())],
         "records": records,
@@ -93,9 +103,10 @@ def summarize(decisions):
 def run(database_url):
     credit = load_credit()
     operational = load_operational()
-    digital = load_digital()
+    digital_resolver = load_digital()
     decisions = []
     mto = Counter()
+    digital_counts = Counter()
     with psycopg.connect(database_url) as conn:
         try:
             load_inputs(conn)
@@ -106,11 +117,23 @@ def run(database_url):
                     conn, run_id, historical_credit_resolver=credit,
                     historical_operational_resolver=operational,
                     digital_evidence_resolver=load_provider_resolver(
-                        snapshot_id, resolver=digital),
+                        snapshot_id, resolver=digital_resolver),
                     commercial_rule_mode="compiled")
                 if bundle["run"]["data_snapshot_ref"] != snapshot_id:
                     raise ValueError(f"run/snapshot mismatch: {n}")
                 for line, fact in zip(bundle["lines"], bundle["facts"]["lines"]):
+                    if line["fulfillment_mode"] == "digital_activation":
+                        finding = fact.get("digital", {})
+                        status = finding.get("status", "absent")
+                        digital_counts[f"status:{status}"] += 1
+                        if status in ("binding_candidate", "unknown"):
+                            pools = finding.get("pools", [])
+                            digital_counts[f"{status}:pool_{'present' if pools else 'absent'}"] += 1
+                            if pools:
+                                digital_counts[f"{status}:fresh_{any(p['fresh'] for p in pools)}"] += 1
+                                digital_counts[f"{status}:proof_{any(p['full_term_verified'] for p in pools)}"] += 1
+                                digital_counts[f"{status}:capacity_{any(p['free'] >= finding['concurrent_demand'] for p in pools)}"] += 1
+                                digital_counts[f"{status}:on_time_{any(p['activation_by_request'] for p in pools)}"] += 1
                     if line["fulfillment_mode"] == "make_to_order":
                         mto["lines"] += 1
                         if any(b["finished_product_id"] == line["product_id"]
@@ -127,6 +150,7 @@ def run(database_url):
             conn.rollback()
     result = summarize(decisions)
     result["make_to_order_diagnostics"] = dict(sorted(mto.items()))
+    result["digital_diagnostics"] = dict(sorted(digital_counts.items()))
     result["source_sha256"] = {
         name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()
         for name in ("calibration_config.yaml", "phase1c_historical_credit_index.json",
@@ -148,8 +172,10 @@ def main():
     print(json.dumps({"historical_deals": report["historical_deals"],
                       "status_counts": report["status_counts"],
                       "evidence_gap_counts": report["evidence_gap_counts"],
+                      "evidence_gap_by_mode": report["evidence_gap_by_mode"],
                       "fulfillment_counts": report["fulfillment_counts"],
-                      "make_to_order_diagnostics": report["make_to_order_diagnostics"]}, sort_keys=True))
+                      "make_to_order_diagnostics": report["make_to_order_diagnostics"],
+                      "digital_diagnostics": report["digital_diagnostics"]}, sort_keys=True))
 
 
 if __name__ == "__main__":
