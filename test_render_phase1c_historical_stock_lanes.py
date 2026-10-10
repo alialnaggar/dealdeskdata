@@ -30,6 +30,9 @@ class HistoricalStockLaneTests(unittest.TestCase):
         stocks = [p for name, content in files.items() if "stock_source" in name
                   for p in json.loads(content)["products"]]
         self.assertEqual(len(stocks), 48)
+        workshop = config["fulfillment_production_calibration"]["proposed_parameters"]["production_capacity"]["workshop_location"]
+        self.assertTrue(all(p["location_id"] == workshop for p in stocks
+                            if p["state_at_generation"] == "component"))
         self.assertEqual(Counter(p["state_at_generation"] for p in stocks),
                          {"healthy": 7, "tight": 3, "below_reorder": 1,
                           "zero_available": 1, "component": 36})
