@@ -69,6 +69,18 @@ class GeneratedRowTests(unittest.TestCase):
         errors = validate_rows(rows, CONTRACT, trusted_deal_evidence={"DOC-1": ref})["errors"]
         self.assertTrue(any("issued after submission" in error for error in errors))
 
+    def test_customer_document_requires_matching_trusted_deal_scope(self):
+        rows = example()
+        ref = {"evidence_ref": "DOC-1", "evidence_type": "customer_document",
+               "source_class": "synthetic_sales_input", "issued_at": "2026-08-31T12:00:00Z"}
+        rows["deals"][0]["evidence_refs_json"] = [ref]
+        trusted = {**ref, "deal_id": "DEAL-1"}
+        self.assertEqual(validate_rows(rows, CONTRACT,
+                                       trusted_deal_evidence={"DOC-1": trusted})["errors"], [])
+        trusted["deal_id"] = "OTHER-DEAL"
+        errors = validate_rows(rows, CONTRACT, trusted_deal_evidence={"DOC-1": trusted})["errors"]
+        self.assertTrue(any("not authorized for this deal" in error for error in errors))
+
     def test_bad_installation_condition_is_rejected(self):
         rows = example()
         rows["compatibility_rules"][0]["condition_json"] = {
