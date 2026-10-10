@@ -24,7 +24,7 @@
 | Row and relationship checks | `suppliers.order_calendar_json`, `compatibility_rules.condition_json` | Execute typed row checks on all generated rows, dependency and installation predicates, and supplier lead/dispatch calendars. The pilot validator now closes the location, requirements, and per-mode line-configuration checks on 36 deals / 65 lines; dependency coverage remains open. |
 | Runtime output | `agent_execution_log.output_json` | `validate_phase1c_runtime_outputs.py` now checks unique attempts, outcome-free inputs, typed output envelopes, agent identity and manifest evidence IDs. Populate and validate actual specialist runs; never fabricate execution logs as source data. |
 
-The two remaining calibration-level review items are the provisional **36 components / 156 products** mix (structural BOM coverage exists, detailed sourcing/fit does not) and comparable **catalogue price dates, currencies, units and tax bases**. The ledger now has **14 field marks** open. No final threshold, source claim, distribution tolerance or release target is frozen by this sheet.
+The two remaining calibration-level review items are the provisional **36 components / 156 products** mix (structural BOM coverage exists, detailed sourcing/fit does not) and comparable **catalogue price dates, currencies, units and tax bases**. The ledger now has **seven field marks** open after evidence-backed disposition of seven historical-source and distribution marks. No final threshold, source claim, distribution tolerance or release target is frozen by this sheet.
 
 ## Immediate build order
 
@@ -160,3 +160,22 @@ infeasible. Total missing delivery findings across physical lines fell from
 24 `blocked`, 102 `needs_commitment`, 124 `needs_evidence`, and 139
 `needs_revision`. The weekly pipeline cadence and outcome mix remain
 subject to calibration review; no historical label is frozen.
+
+## Field-ledger disposition — 10 October 2026
+
+Seven of the 14 previous `review_before_generation` marks now have a
+`resolved_by` entry in `phase1c_column_rules.yaml`: customer industry and
+country quotas; independent credit commitment evidence; frozen nonfuture
+AR replay; no-PO inbound supplier proof; achieved historical product
+popularity; and complete SHA-pinned run snapshots. The column checker still
+covers all 266 columns in 24 tables and deliberately reports
+`ready_for_generation=false` with seven open marks.
+
+The remaining marks are `products.attributes_json`, `products.list_price`,
+`products.standard_cost`, `suppliers.order_calendar_json`,
+`compatibility_rules.condition_json`, `deals.evidence_refs_json`, and
+`agent_execution_log.output_json`. The first three and the two calibration
+reviews need an explicit synthetic-scope or sourced-fit/price decision;
+actual agent outputs must come from execution, never generated as source
+rows. The independent 100-test and 36-case evaluation release still needs
+construction and its own answer-key review.
