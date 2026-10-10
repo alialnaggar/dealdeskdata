@@ -54,7 +54,6 @@ def evaluate_compatibility(lines, deal, rules):
     fixture grammar carries destination region directly. This function handles
     the other four typed predicate families.
     """
-    product_ids = {line["product_id"] for line in lines}
     findings = []
     for rule in rules:
         rule_type = rule["rule_type"]
@@ -70,13 +69,17 @@ def evaluate_compatibility(lines, deal, rules):
             else:
                 source = rule.get("source_product_id")
                 target = rule.get("target_product_id")
-                if source not in product_ids:
+                relevant_scopes = [scope for scope in scopes
+                                   if any(line["product_id"] == source for line in scope)]
+                if not relevant_scopes:
                     status, detail = "not_applicable", "source product is not in the deal"
                 elif rule_type == "requires_product":
-                    status = "pass" if target in product_ids else "fail"
+                    status = ("pass" if all(any(line["product_id"] == target for line in scope)
+                                            for scope in relevant_scopes) else "fail")
                     detail = "required product is present" if status == "pass" else "required product is missing"
                 else:
-                    status = "fail" if target in product_ids else "pass"
+                    status = ("fail" if any(any(line["product_id"] == target for line in scope)
+                                           for scope in relevant_scopes) else "pass")
                     detail = "excluded product is present" if status == "fail" else "excluded product is absent"
         elif rule_type == "attribute_constraint":
             attribute = condition.get("attribute")
