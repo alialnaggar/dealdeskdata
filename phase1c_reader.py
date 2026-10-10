@@ -508,9 +508,11 @@ def _supply_findings(bundle, as_of):
                         has_material_evidence, bool(plan["steps"]), horizon_limited,
                         has_capacity_window)
                     fact["production_status"] = status
+                    fact["fulfillment_status"] = (
+                        "infeasible" if status == "infeasible_without_replenishment"
+                        else "unknown")
                     if unknown_reason:
                         fact["production_unknown_reason"] = unknown_reason
-                        fact["fulfillment_status"] = "unknown"
                 if best:
                     fact["fulfillment_status"] = "feasible_uncommitted"
                     lane = lanes.get(best[1])
